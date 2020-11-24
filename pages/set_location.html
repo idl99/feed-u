@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>jQuery Mobile Page</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- the three things that jQuery Mobile needs to work -->
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+</head>
+<body>
+	<!-- This is page 1-->
+	<div data-role="page" id="page1">
+		<div data-role="header" data-position="fixed">
+			<a href="#" data-icon="back" class="ui-btn-left">Back</a>
+			<h1>Header Bar</h1>
+		</div>
+		<div>
+			<h2> Map Here</h2>
+		</div>
+		<div data-role="tabs" id="tabs">
+			<div data-role="navbar">
+				<ul>
+					<li><a href="#saved_locations" data-ajax="false">Saved Locations</a></li>
+					<li><a href="#previous_locations" data-ajax="false">Previous Locations</a></li>
+				</ul>
+			</div>
+			<div id="saved_locations">
+				<ul data-role="listview" data-inset="true">
+					<li><a href="#">Delkanda, Nugegoda</a></li>
+					<li><a href="#">Nedimala, Dehiwala</a></li>
+					<li><a href="#">Kandalanda, Homagama</a></li>
+					<li><a href="#">Attidiya, Dehiwala</a></li>
+				</ul>
+			</div>
+			<div id="previous_locations">
+				<ul data-role="listview" data-inset="true">
+					<li><a href="#">Makumbura, Kottawa</a></li>
+					<li><a href="#">Piliyandala, Kottawa</a></li>
+					<li><a href="#">Nawala, Rajagiriya</a></li>
+					<li><a href="#">Nugegoda, Nugegoda</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="ui-content" id="order_time">
+			<form>
+				<fieldset data-role="controlgroup" data-iconpos="right">
+					<input type="checkbox" name="deliever_asap" id="deliever_asap">
+					<label for="deliever_asap">Deliver it ASAP</label>
+					<input type="checkbox" name="scheduled_order" id="scheduled_order">
+					<label for="scheduled_order">Scheduled Order</label>
+				</fieldset>
+			</form>
+		</div>
+		<div>
+			<button style="background-color:#FF6464; color:white">Save</button>
+		</div>
+	</div>
+</body>
+</html>
