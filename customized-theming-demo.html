@@ -1,3 +1,8 @@
+<!-- 
+    THIS IS THE DEMO ON THEMING, TAKEN FROM JQUERY MOBILE
+    TO CHECK WHETHER THE THEMING WORKS.
+-->
+
 <!DOCTYPE html>
 <html>
 
@@ -6,14 +11,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Default theme - jQuery Mobile Demos</title>
 
-    <!-- <link rel="stylesheet" href="themes/template/jquery.mobile.css" /> -->
-    <link rel="stylesheet" href="css/base.css" />
-
+    <!-- CDN resources -->
     <!-- <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.0/jquery.mobile.structure-1.4.0.min.css" />  -->
     <!-- <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>  -->
-    <script src="libs/jquery/jquery-1.11.1/jquery-1.11.1.min.js"></script>
-
     <!-- <script src="http://code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.js"></script>  -->
+
+    <!-- This theme is being used in the base.css stylesheet  -->
+    <!-- <link rel="stylesheet" href="themes/template/jquery.mobile.css" /> -->
+
+    <link rel="stylesheet" href="css/base.css" />
+    <script src="libs/jquery/jquery-1.11.1/jquery-1.11.1.min.js"></script>
     <script src="libs/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
 
     <script>
@@ -205,7 +212,7 @@
                     <input type="range" name="slider2" id="slider2" value="0" min="0" max="100" data-highlight="true">
                 </div>
                 <div class="ui-field-contain">
-                    <fieldset data-role="controlgroup">
+                    <fieldset data-role="controlgroup" data-iconpos="right">
                         <legend>Checkbox:</legend>
                         <input type="checkbox" name="checkbox-v-1a" id="checkbox-v-1a">
                         <label for="checkbox-v-1a">One</label>

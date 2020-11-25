@@ -1,65 +1,53 @@
+<!DOCTYPE html>
 <html>
 
 <head>
-    <meta charset="utf-8">
+    <title>Page Title</title>
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>jQuery Mobile: Theme Download</title>
 
-    <!-- THESE STYLE SHEETS ARE INCLUDED IN THE BASE STYLE SHEET -->
-    <!-- <link rel="stylesheet" href="themes/theme-roller-base.min.css" /> -->
-    <!-- <link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" /> -->
-    <!-- <link rel="stylesheet" ../libs/jquery.mobile-1.4.5/jquery.mobile.structure-1.4.5.min.css" /> -->
-
+    <link rel="stylesheet" href="css/base.css" />
     <script src="libs/jquery/jquery-1.11.1/jquery-1.11.1.min.js"></script>
     <script src="libs/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
-    <link rel="stylesheet" href="css/base.css">
 </head>
 
 <body>
-    <div data-role="page" data-theme="a">
-        <div data-role="header" data-position="inline">
-            <h1>It Worked!</h1>
-        </div>
-        <div data-role="content" data-theme="a">
-            <p>Your theme was successfully downloaded. You can use this page as a reference for how to link it up!</p>
-            <pre>
-<strong>&lt;link rel=&quot;stylesheet&quot; href=&quot;themes/theme-roller-base.min.css&quot; /&gt;</strong>
-<strong>&lt;link rel=&quot;stylesheet&quot; href=&quot;themes/jquery.mobile.icons.min.css&quot; /&gt;</strong>
-&lt;link rel=&quot;stylesheet&quot; href=&quot;http://code.jquery.com/mobile/1.4.5/jquery.mobile.structure-1.4.5.min.css&quot; /&gt;
-&lt;script src=&quot;http://code.jquery.com/jquery-1.11.1.min.js&quot;&gt;&lt;/script&gt;
-&lt;script src=&quot;http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js&quot;&gt;&lt;/script&gt;
-			</pre>
-            <p>This is content color swatch "A" and a preview of a <a href="#" class="ui-link">link</a>.</p>
 
-            <!-- SLIDER
-            <form class="full-width-slider">
-                    <label for="slider-12" class="ui-hidden-accessible">Slider:</label>
-                    <input type="range" name="slider-12" id="slider-12" min="0" max="100" value="50"
-                    data-highlight="true">
-            </form> -->
+    <div data-role="page">
 
-            <!-- Checkbox -->
-            <form>
-                    <fieldset data-role="controlgroup" data-iconpos="right">
-                            <legend>Icon right:</legend>
-                            <input type="checkbox" name="checkbox-h-6a" id="checkbox-h-6a">
-                            <label for="checkbox-h-6a">One</label>
-                            <input type="checkbox" name="checkbox-h-6b" id="checkbox-h-6b">
-                            <label for="checkbox-h-6b">Two</label>
-                            <input type="checkbox" name="checkbox-h-6c" id="checkbox-h-6c">
-                            <label for="checkbox-h-6c">Three</label>
-                        </fieldset>
-            </form>
+        <div data-role="header">
+            <h1>Page Title</h1>
+        </div><!-- /header -->
 
-            <fieldset data-role="controlgroup" data-type="horizontal" data-role="fieldcontain">
-                <legend>Cache settings:</legend>
-                <input type="radio" name="radio-choice-a1" id="radio-choice-a1" value="on" checked="checked" />
-                <label for="radio-choice-a1">On</label>
-                <input type="radio" name="radio-choice-a1" id="radio-choice-b1" value="off" />
-                <label for="radio-choice-b1">Off</label>
-            </fieldset>
-        </div>
-    </div>
+        <div role="main" class="ui-content">
+            <p>Page content goes here.</p>
+            <div class="ui-field-contain">
+                <fieldset data-role="controlgroup" data-iconpos="right">
+                    <legend>Checkbox:</legend>
+                    <input type="checkbox" name="checkbox-v-1a" id="checkbox-v-1a">
+                    <label for="checkbox-v-1a">One</label>
+                    <input type="checkbox" name="checkbox-v-1b" id="checkbox-v-1b">
+                    <label for="checkbox-v-1b">Two</label>
+                    <input type="checkbox" name="checkbox-v-1c" id="checkbox-v-1c">
+                    <label for="checkbox-v-1c">Three</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-iconpos="left">
+                    <legend>Checkbox:</legend>
+                    <input type="checkbox" name="checkbox-v-2a" id="checkbox-v-2a">
+                    <label for="checkbox-v-2a">One</label>
+                    <input type="checkbox" name="checkbox-v-2b" id="checkbox-v-2b">
+                    <label for="checkbox-v-2b">Two</label>
+                    <input type="checkbox" name="checkbox-v-2c" id="checkbox-v-2c">
+                    <label for="checkbox-v-2c">Three</label>
+                </fieldset>
+            </div>
+        </div><!-- /content -->
+
+        <div data-role="footer">
+            <h4>Page Footer</h4>
+        </div><!-- /footer -->
+    </div><!-- /page -->
+
 </body>
 
 </html>
