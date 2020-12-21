@@ -9,6 +9,28 @@
 <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
 <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4fxzjh0_9j9aIXCecrSeDxBztKU5Lzao&callback=initMap"
+      defer
+    ></script>
+<style>
+	
+      #map {
+        height: 200px;
+        width: 100%;
+		margin: 0;
+        padding: 0;
+       }
+	</style>
+<script>
+		function initMap() {
+		  const map = new google.maps.Map(document.getElementById("map"), {
+			zoom: 15,
+			center: { lat: 51.517582, lng: -0.141525 },
+		  });
+		}
+
+    </script>
 </head>
 <body>
 	<!-- This is page 1-->
@@ -17,7 +39,7 @@
 			<a href="#" data-icon="back" class="ui-btn-left">Back</a>
 			<h1>Header Bar</h1>
 		</div>
-		<div>
+		<div id="map">
 			<h2> Map Here</h2>
 		</div>
 		<div data-role="tabs" id="tabs">
@@ -55,7 +77,8 @@
 			</form>
 		</div>
 		<div>
-			<button style="background-color:#FF6464; color:white">Save</button>
+			<!--<button style="background-color:#FF6464; color:white">Save</button>-->
+			<button class="ui-btn">Save</button>
 		</div>
 	</div>
 </body>
