@@ -1,0 +1,139 @@
+<!-- Author: Ihan Lelwala | 2016030 | Team 41 - Feed U -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Feed U - Landing Page</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/base.css" />
+    <script src="../libs/jquery/jquery-1.11.1/jquery-1.11.1.min.js"></script>
+    <script src="../libs/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+    <style>
+        body {
+            font-family: "Poppins";
+        }
+
+        #landing {
+            background-image: url("../assets/backgrounds/landing-page-mock.jpg");
+            background-color: #cccccc;
+            background-size: cover;
+            background-repeat: no-repeat;
+            min-height: inherit;
+            text-shadow: none;
+        }
+
+        #landing-header {
+            background-color: transparent;
+            border-color: initial;
+            border: none;
+        }
+
+        .ui-content {
+            /* full size */
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            /* center items within page */
+            display: flex;
+            color: white;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding-top: 3em;
+        }
+
+        #tagline {
+            color: red;
+            text-align: center;
+            width: 75%;
+            font-size: 3vh;
+        }
+
+        #background-filter {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            backdrop-filter: blur(1.5px);
+        }
+
+
+        /* @media only screen and (min-width: 667px) { */
+        @media screen and (orientation:landscape) {
+            #tagline {
+                /* width: 80%; */
+                font-size: 3vw;
+            }
+
+            .landing-text {
+                font-size: 3vw;
+            }
+
+            #landing-location-search-input {
+                width: 66%;
+            }
+        }
+
+        /* @media only screen and (min-height: 1024px) { */
+        @media screen and (orientation:portrait) {
+            #tagline {
+                width: 100%;
+                font-size: 4vh;
+            }
+
+            .landing-text {
+                font-size: 4vh;
+            }
+
+            #landing-location-search-input {
+                width: 80%;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div data-role="page" id="landing">
+
+        <div id="background-filter"></div>
+
+        <div data-role="header" id="landing-header">
+            <h1 style="visibility: hidden;">Page Title</h1>
+            <div class="ui-btn-right">
+                <a href="#" class="ui-btn ui-btn-b ui-btn-inline ui-mini ui-corner-all ui-btn-active">SCAN QR</a>
+                <a href="#" class="ui-btn ui-btn-b ui-btn-inline ui-mini ui-corner-all ui-btn-active">SIGN IN</a>
+            </div>
+        </div>
+
+        <div role="main" class="ui-content">
+            <span id="tagline">"From one home to <span style="color: white">another</span> with<span>❤️</span>"</span>
+            <span class="landing-text" style="margin: 7vh 0vw 1vh 0vw;">GET STARTED</span>
+            <div id="landing-location-search-input" style="margin: 3vh 0vw">
+                <input type="search" name="search-1" id="search-1" value="">
+            </div>
+            <span class="landing-text" style="margin: 3vh 0vw;">OR</span>
+            <a href="#" class="ui-link landing-text" style="text-decoration: none;">TAP HERE</a>
+            <span class="landing-text" style="margin: 2vh 0vw; font-size: 1em;">TO LOOK AROUND</span>
+        </div><!-- /content -->
+
+        <!-- /footer -->
+        <!-- <div data-role="footer">
+            <h4>Page Footer</h4>
+        </div> -->
+    </div><!-- /page -->
+
+</body>
+
+</html>
