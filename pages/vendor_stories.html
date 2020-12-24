@@ -16,7 +16,7 @@
         body {
             font-family: "Poppins";
         }
-		#page_container {
+		#page {
 			background-color: #303030; 
 		}
 		#main_container {
@@ -24,28 +24,46 @@
 			display: flex; 
 			flex-direction: column;
 		}
+		.header {
+			display: flex;
+		}
 		img {
 			position: absolute; 
 			margin-top: 3.5%; 
 			margin-left: 3.5%;
 		}
+		.vendor_details {
+			margin-left: 16%; 
+			color: white; 
+			font-size: 12px;
+		}
+		.close_btn {
+			margin-top: 3.5%; 
+			margin-left: 50%;
+		}
+		.story {
+			position: absolute; 
+			top: 50%; 
+			left: 50%; 
+			transform: translate(-50%, -50%)
+		}
 	</style>
 </head>
 
 <body>
-<div data-role="page" id="page_container" >
+<div data-role="page" id="page" >
     <div role="main" class="ui-content" id="main_container">
-		<div style="display: flex;">
+		<div class="header">
 			<img src="../assets/stories_images/story.png" alt="Story Outline">
-			<div style="margin-left: 16%; color: white; font-size: 12px;">
+			<div class="vendor_details">
 				<p>Home Cooking<br>1 hour ago</p>
 			</div>
-			<svg style="margin-top: 3.5%; margin-left: 50%;" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<svg class="close_btn" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 				<rect width="24" height="24" rx="4" fill="white"/>
 				<path d="M21.75 0H2.25C1.00781 0 0 1.15179 0 2.57143V21.4286C0 22.8482 1.00781 24 2.25 24H21.75C22.9922 24 24 22.8482 24 21.4286V2.57143C24 1.15179 22.9922 0 21.75 0ZM17.8312 15.5625C18.0562 15.8196 18.0562 16.2375 17.8312 16.4946L15.9328 18.6643C15.7078 18.9214 15.3422 18.9214 15.1172 18.6643L12 15.0696L8.88281 18.6643C8.65781 18.9214 8.29219 18.9214 8.06719 18.6643L6.16875 16.4946C5.94375 16.2375 5.94375 15.8196 6.16875 15.5625L9.31406 12L6.16875 8.4375C5.94375 8.18036 5.94375 7.7625 6.16875 7.50536L8.06719 5.33571C8.29219 5.07857 8.65781 5.07857 8.88281 5.33571L12 8.93036L15.1172 5.33571C15.3422 5.07857 15.7078 5.07857 15.9328 5.33571L17.8312 7.50536C18.0562 7.7625 18.0562 8.18036 17.8312 8.4375L14.6859 12L17.8312 15.5625Z" fill="#EB5757"/>
 			</svg>
 		</div>
-		<div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%)">
+		<div class="story">
 			<iframe width="375" height="375" src="https://giphy.com/embed/IdaOuMzxgUkpAhmmwy" allowfullscreen></iframe>
 		</div>
 	</div>
