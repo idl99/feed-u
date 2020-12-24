@@ -1,3 +1,5 @@
+// https://www.digitalocean.com/community/tutorials/nodejs-serving-static-files-in-express
+
 const express = require('express');
 const app = express();
 const PORT = 3000;
