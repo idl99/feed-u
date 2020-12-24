@@ -15,6 +15,23 @@
     <script src="../libs/jquery/jquery-1.11.1/jquery-1.11.1.min.js"></script>
     <script src="../libs/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
 
+    <script>
+        $(document).ready(function () {
+
+            // Navigate on click submit button
+            // https://jquerymobile.com/upgrade-guide/1.4/#navigation
+            $('#location-input-submit-btn').click(function (event) {
+
+                // IF I WANT TO HANDLE USING ENTER KEY EVENT i can figure out using this
+                // var enterKeyWasPressed = event.keyCode == 13;
+
+                // TODO replace with correct page once it has been implemented
+                $("body").pagecontainer("change", "navigation-test.html");
+            });
+
+        });
+    </script>
+
     <style>
         body {
             font-family: "Poppins";
@@ -120,8 +137,19 @@
         <div role="main" class="ui-content">
             <span id="tagline">"From one home to <span style="color: white">another</span> with<span>❤️</span>"</span>
             <span class="landing-text" style="margin: 7vh 0vw 1vh 0vw;">GET STARTED</span>
-            <div id="landing-location-search-input" style="margin: 3vh 0vw">
-                <input type="search" name="search-1" id="search-1" value="">
+
+            <!-- Search input with action button -->
+            <div id="landing-location-search-input" style="position: relative; margin: 3vh 0vw">
+                <input type="text" name="search-1" id="search-1" placeholder="Enter your location" value="">
+                <!-- 
+                    Submit icon. Layout to the right of search input
+                    Refer https://stackoverflow.com/a/14839925/7803975 on positioning of icon
+                -->
+                <div id="location-input-submit-btn" class="ui-nodisc-icon ui-alt-icon"
+                    style="position: absolute; right: -5px; top: 3px;">
+                        <a href="#"
+                        class="ui-btn ui-shadow ui-corner-all ui-icon-arrow-r ui-btn-icon-notext ui-btn-inline">Check</a>
+                </div>
             </div>
             <span class="landing-text" style="margin: 3vh 0vw;">OR</span>
             <a href="#" class="ui-link landing-text" style="text-decoration: none;">TAP HERE</a>
