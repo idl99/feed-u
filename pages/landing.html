@@ -13,6 +13,16 @@
 
     <link rel="stylesheet" href="../css/base.css" />
     <script src="../libs/jquery/jquery-1.11.1/jquery-1.11.1.min.js"></script>
+
+    <!-- <script>
+        // https://api.jquerymobile.com/mobileinit/
+        // https://api.jquerymobile.com/global-config/
+        $(document).on("mobileinit", function () {
+            //apply overrides here
+            console.log($.mobile)
+        });
+    </script> -->
+
     <script src="../libs/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
 
     <script>
@@ -31,92 +41,6 @@
 
         });
     </script>
-
-    <style>
-        body {
-            font-family: "Poppins";
-        }
-
-        #landing {
-            background-image: url("../assets/backgrounds/landing-page-mock.jpg");
-            background-color: #cccccc;
-            background-size: cover;
-            background-repeat: no-repeat;
-            min-height: inherit;
-            text-shadow: none;
-        }
-
-        #landing-header {
-            background-color: transparent;
-            border-color: initial;
-            border: none;
-        }
-
-        .ui-content {
-            /* full size */
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            /* center items within page */
-            display: flex;
-            color: white;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding-top: 3em;
-        }
-
-        #tagline {
-            color: red;
-            text-align: center;
-            width: 75%;
-            font-size: 3vh;
-        }
-
-        #background-filter {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            backdrop-filter: blur(1.5px);
-        }
-
-
-        /* @media only screen and (min-width: 667px) { */
-        @media screen and (orientation:landscape) {
-            #tagline {
-                /* width: 80%; */
-                font-size: 3vw;
-            }
-
-            .landing-text {
-                font-size: 3vw;
-            }
-
-            #landing-location-search-input {
-                width: 66%;
-            }
-        }
-
-        /* @media only screen and (min-height: 1024px) { */
-        @media screen and (orientation:portrait) {
-            #tagline {
-                width: 100%;
-                font-size: 4vh;
-            }
-
-            .landing-text {
-                font-size: 4vh;
-            }
-
-            #landing-location-search-input {
-                width: 80%;
-            }
-        }
-    </style>
 
 </head>
 
