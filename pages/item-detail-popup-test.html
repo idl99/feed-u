@@ -13,20 +13,89 @@
         <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
     
         <style>
+            body {
+                font-family: "Poppins";
+            }
+            .container {
+                display: flex;
+                flex-direction: column;
+            }
+            .poi_container {
+                display: flex;
+                flex: 1 1 auto;
+                justify-content: top;
+                height: 65px;          
+                width: 335px;
+                margin-bottom: 5%;
+            }
+            .poi_image {
+                float: left;
+            }
+            .poi_content {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                float: right;
+                margin-left: 5%;
+            }
+            .status_bar {
+                display: flex;
+                align-items: top;
+                margin-top: 2%;
+                font-size: 12px;
+            }
+            .rating_bar {
+                display: flex;
+                align-items: center;
+                height: 20px;
+                width: 70px;
+                font-size: 11px;
+                background: #F2F2F2;
+                border-radius: 25px;
+            }
+            .item_image{
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                width: 80%;
+            }
+            .row:after {
+                content: "";
+                display: table;
+                clear: both;
+            }
+            .customize_options{
+                float: left;
+                width: 33.33%;
+                padding: 5px;
+                height: 300px;
+            }
+            td,th{
+                text-align: left;
+                padding: 8px;
+            }
             .pop-outer{
-                background-color: rgba(0,0,0,0.5);
+                /* background-color: rgba(0,0,0,0.5);
                 position: fixed;
                 top: 0;
                 left: 0;
                 width: 100%;
-                height: 100%;
+                height: 100%; */
+
+                /* display: flex;
+                flex-direction: column;
+                width: 100%;
+                float: right;
+                margin-left: 5%; */
+                width: 70%;
+                margin: 0 auto;
             }
             .pop-inner{
-                background-color: #fff;
+                /* background-color: #fff;
                 width: 500px;
                 height: 300px;
                 padding: 25px;
-                margin: 15% auto;
+                margin: 15% auto; */
             }
         </style>
         <script>
@@ -41,12 +110,105 @@
         </script>
     </head>
     <body>
-        <button class="open">Burgers Ahoy Oneda Thopita?!?!</button>
+        <button class="open">
+            <!----vendors items contents---------------------------------->
+            <div class="container">
+                <div class="poi_container">
+                    <img src="../assets/vendor_list_view_images/burgers_ahouy.jpg" class="poi_image">
+                    <div class="poi_content">
+                        <div>Burgers Ahouy!</div>
+                        <div style="font-size: 12px; margin-top: 2%;">
+                            <svg width="5" height="5" viewBox="0 0 5 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle r="2.5" transform="matrix(1 0 0 -1 2.5 2.5)" fill="#C4C4C4"/>
+                            </svg>
+                            Burgers
+                            <svg style="margin-left: 2%;" width="5" height="5" viewBox="0 0 5 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle r="2.5" transform="matrix(1 0 0 -1 2.5 2.5)" fill="#C4C4C4"/>
+                            </svg>
+                            American
+                        </div>
+                        <div class="status_bar">
+                            <div class="rating_bar">
+                                <p><svg width="12" height="11" viewBox="0 0 12 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z" fill="#F2C94C"/>
+                                </svg> 4.6<p>(100)</p></p>
+                            </div>
+                            <div style="display: flex; align-items: center; margin-left: 2%;">25 - 30 mins</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!---------end of vendors items contents---------------------->
+        </button>
+        <!-------------item details contents------->
         <div style="display: none;" class="pop-outer">
             <div class="pop-inner">
                 <button class="close"> X </button>
-                <h2>Ehenan Kaapan Menna !!!</h2>
+                <img src="../assets/vendor_list_view_images/burgers_ahouy.jpg" class="item_image">
+                <h2>Crispy Chicken Burger</h2>
                 <p> This is a custom test conducted on checking the functionality for a pop up using Jquery</p>
+
+                <table style="width:100%">
+                    <tr>
+                        <th>Choice of Size</th>
+                        <th>Spicy Level</th>
+                        <th>Salt Level</th>
+                    </tr>
+                    <tr>
+                        <td><input type="radio">Large</td>
+                        <td><input type="radio">Poddak withara</td>
+                        <td><input type="radio">No</td>
+                    </tr>
+                    <tr>
+                        <td><input type="radio">Regular</td>
+                        <td><input type="radio">The normal srilankan</td>
+                        <td><input type="radio">Little Salt</td>
+                    </tr>
+                    <tr>
+                        <td><input type="radio">Small</td>
+                        <td><input type="radio">Asamodagam Time</td>
+                        <td><input type="radio">Extra</td>
+                    </tr>
+                </table>
+
+
+                <!-- <div class="row">
+                
+                    <div class="customize_options">
+                        <form action="">
+                            <p>Choice of Size</p>
+                            <input type="radio" id="large" name="large" value="large">
+                            <label for="male">Large</label><br>
+                            <input type="radio" id="regular" name="regular" value="regular">
+                            <label for="female">Regular</label><br>
+                            <input type="radio" id="small" name="small" value="small">
+                            <label for="other">Small</label>
+                        </form>
+                    </div>
+                    <div class="customize_options"></div>
+                        <form action="">
+                            <p>Choice of Size</p>
+                            <input type="radio" id="large" name="large" value="large">
+                            <label for="male">Large</label><br>
+                            <input type="radio" id="regular" name="regular" value="regular">
+                            <label for="female">Regular</label><br>
+                            <input type="radio" id="small" name="small" value="small">
+                            <label for="other">Small</label>
+                        </form>
+                    </div>
+                    <div class="customize_options"></div>
+                        <form action="">
+                            <p>Choice of Size</p>
+                            <input type="radio" id="large" name="large" value="large">
+                            <label for="male">Large</label><br>
+                            <input type="radio" id="regular" name="regular" value="regular">
+                            <label for="female">Regular</label><br>
+                            <input type="radio" id="small" name="small" value="small">
+                            <label for="other">Small</label>
+                        </form>
+                    </div>
+                </div> -->
+
             </div>
         </div>
     </body>
