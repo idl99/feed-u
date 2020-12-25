@@ -59,21 +59,30 @@
                 margin-right: auto;
                 width: 80%;
             }
-            .row:after {
-                content: "";
-                display: table;
-                clear: both;
+            .customize_container{
+                display: flex;
             }
-            .customize_options{
-                float: left;
-                width: 33.33%;
-                padding: 5px;
-                height: 300px;
+            .customize_container > div{
+                margin: 10px;
+                padding: 20px;
+                font-size: 12px;
             }
-            td,th{
+            /* .row {
+                display: flex;
+            } */
+            /* .customize_options{
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                float: right;
+                margin-left: 5%;
+
+            } */
+
+            /* td,th{
                 text-align: left;
                 padding: 8px;
-            }
+            } */
             .pop-outer{
                 /* background-color: rgba(0,0,0,0.5);
                 position: fixed;
@@ -148,7 +157,43 @@
                 <h2>Crispy Chicken Burger</h2>
                 <p> This is a custom test conducted on checking the functionality for a pop up using Jquery</p>
 
-                <table style="width:100%">
+                <div class="customize_container">
+                    <div>
+                        <form action="">
+                            <p>Choice of Size</p>
+                            <input type="radio" id="large" name="large" value="large">
+                            <label for="male">Large</label><br>
+                            <input type="radio" id="regular" name="regular" value="regular">
+                            <label for="female">Regular</label><br>
+                            <input type="radio" id="small" name="small" value="small">
+                            <label for="other">Small</label>
+                        </form>
+                    </div>
+                    <div>
+                        <form action="">
+                            <p>Choice of Size</p>
+                            <input type="radio" id="large" name="large" value="large">
+                            <label for="male">Large</label><br>
+                            <input type="radio" id="regular" name="regular" value="regular">
+                            <label for="female">Regular</label><br>
+                            <input type="radio" id="small" name="small" value="small">
+                            <label for="other">Small</label>
+                        </form>
+                    </div>
+                    <div>
+                        <form action="">
+                            <p>Choice of Size</p>
+                            <input type="radio" id="large" name="large" value="large">
+                            <label for="male">Large</label><br>
+                            <input type="radio" id="regular" name="regular" value="regular">
+                            <label for="female">Regular</label><br>
+                            <input type="radio" id="small" name="small" value="small">
+                            <label for="other">Small</label>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- <table style="width:100%">
                     <tr>
                         <th>Choice of Size</th>
                         <th>Spicy Level</th>
@@ -169,11 +214,10 @@
                         <td><input type="radio">Asamodagam Time</td>
                         <td><input type="radio">Extra</td>
                     </tr>
-                </table>
+                </table> -->
 
 
                 <!-- <div class="row">
-                
                     <div class="customize_options">
                         <form action="">
                             <p>Choice of Size</p>
