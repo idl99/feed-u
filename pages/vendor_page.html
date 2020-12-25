@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Feed U - Vendor Page</title>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+		
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+	
+	<style>
+        body {
+            font-family: "Poppins";
+        }
+		.container {
+			display: flex; 
+			flex-direction: column;
+		}
+        .poi_container {
+            display: flex; 
+            flex: 1 1 auto;
+            margin-bottom: 2.5%;
+        }
+        .poi_text_content {
+            display: flex; 
+            width: 100%;
+        }
+        .poi_details {
+            display: flex; 
+            flex-direction: 
+            column; margin-left: 5%;
+        }
+        .poi_title_description {
+            width: 92%; 
+            text-align: justify; 
+            text-justify: inter-word;
+        }
+        #poi_title {
+            margin: 0;
+            font-size: 14px; 
+        }
+        #poi_description {
+            margin-top: 4%; 
+            margin-bottom: 4%;
+            margin-left: 0;  
+            margin-right: 0;
+            font-size: 11px; 
+        }
+		.poi_ratings_bar {
+			display: flex;
+			align-items: center;
+			height: 20px;
+			width: 70px;
+			font-size: 11px;
+			background: #F2F2F2;
+			border-radius: 25px;
+		}
+        #poi_ratings_image {
+            margin-top: 2%;
+        }
+        #poi_ratings_text {
+            margin-left: 3%;
+        }
+        .poi_price_tag {
+            width: 60%;
+        }
+        #poi_price {
+            text-align: right;
+            font-size: 14px; 
+            margin: 0;
+        }
+	</style>
+
+</head>
+
+<body>
+	<div data-role="page" id="Page1" >
+        <div data-role="header" data-position="fixed">
+			<a href="#" data-icon="back" class="ui-btn-left">Back</a>
+			<h1>Header Bar</h1>
+        </div>
+		<div role="main" class="ui-content" >
+            <div style="position: relative; margin-bottom: 1em;">
+                <img style="display:block; width: 100%; height: auto; margin: 0;" src="../assets/vendor_page_images/burgers_ahouy.jpg">
+                <div style="
+                    position: absolute;
+                    bottom: 0;
+                    padding-top: 0.25em;
+                    padding-bottom: 0.25em;
+                    font-weight: 100;
+                    background: rgba(0, 0, 0, 0.5); /* Black see-through */
+                    color: #f1f1f1;
+                    width: 100%;
+                    opacity:1;
+                    text-align: left;">
+                    <div style="display: flex; justify-content: space-between;">
+                        <div style="margin-left: 1em;">
+                            <span style="font-size: 18px;">Burgers Ahouy!</span><br>
+                            <span style="font-size: 12px;">COLOMBO 3 (25 - 30 MIN)</span>
+                        </div>
+                        <div style="margin-right: 1em;">
+                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M17.5552 9.72095C19.3297 7.80275 22.1053 7.56537 23.9298 9.19405L23.93 9.19419C26.1205 11.1535 26.2444 14.7096 24.2702 16.844L24.27 16.8442L16.2078 25.5653C16.2078 25.5654 16.2077 25.5654 16.2076 25.5655C16.1359 25.643 16.06 25.6666 15.9982 25.6666C15.9364 25.6666 15.8605 25.643 15.7888 25.5655C15.7887 25.5654 15.7887 25.5654 15.7886 25.5653L7.72684 16.8447C5.75589 14.7101 5.87998 11.1532 8.07089 9.19393C9.89576 7.56503 12.675 7.8034 14.4447 9.72022L14.4459 9.72143L15.2667 10.6075L16.0003 11.3995L16.7339 10.6075L17.5547 9.72143L17.5552 9.72095Z" stroke="white" stroke-width="2"/>
+                            </svg>                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="font-size: 12px;">
+                <svg width="5" height="5" viewBox="0 0 5 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle r="2.5" transform="matrix(1 0 0 -1 2.5 2.5)" fill="#C4C4C4"/>
+                </svg>
+                Burgers
+                <svg style="margin-left: 2%;" width="5" height="5" viewBox="0 0 5 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle r="2.5" transform="matrix(1 0 0 -1 2.5 2.5)" fill="#C4C4C4"/>
+                </svg>
+                American
+            </div>
+            <div style="display: flex;
+			align-items: center;
+			font-size: 11px;">
+                <p><svg id="poi_ratings_image" width="12" height="11" viewBox="0 0 12 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z" fill="#F2C94C"/>
+                    </svg>&nbsp;&nbsp;4.6&nbsp;<p>(47)</p><p style="margin-left: 1.25em;">View Comments</p>
+                </p>
+            </div>
+
+			<div class="container">
+                <div class="poi_container">
+                    <div>
+                        <img src="../assets/vendor_page_images/tom_yum_soup.jpg">
+                    </div>
+                    <div class="poi_text_content">
+                        <div class="poi_details">
+                            <div class="poi_title_description">
+                                <p id="poi_title">Tom Yum Soup</p>
+                                <p id="poi_description">Picked from the fresh vegetables and fish from the with special Chicken Broth.</p>
+                            </div>
+                            <div class="poi_ratings_bar">
+                                <p id="poi_ratings_text"><svg id="poi_ratings_image" width="12" height="11" viewBox="0 0 12 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z" fill="#F2C94C"/>
+                                    </svg>&nbsp;&nbsp;4.6&nbsp;<p>(47)</p>
+                                </p>
+                            </div>   
+                        </div>
+                        <div class="poi_price_tag">
+                            <p id="poi_price">LKR 800</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="poi_container">
+                    <div>
+                        <img src="../assets/vendor_page_images/crispy_chicken_burger.jpg">
+                    </div>
+                    <div class="poi_text_content">
+                        <div class="poi_details">
+                            <div class="poi_title_description">
+                                <p id="poi_title">Crispy Chicken Burger</p>
+                                <p id="poi_description">Crispy, Chicky, Crispy Chicken Burger. It’s pretty much self-explanatory.</p>
+                            </div>
+                            <div class="poi_ratings_bar">
+                                <p id="poi_ratings_text"><svg id="poi_ratings_image" width="12" height="11" viewBox="0 0 12 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z" fill="#F2C94C"/>
+                                    </svg>&nbsp;&nbsp;4.0&nbsp;<p>(10)</p>
+                                </p>
+                            </div>   
+                        </div>
+                        <div class="poi_price_tag">
+                            <p id="poi_price">LKR 450</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="poi_container">
+                    <div>
+                        <img src="../assets/vendor_page_images/hawaiian_burger.jpg">
+                    </div>
+                    <div class="poi_text_content">
+                        <div class="poi_details">
+                            <div class="poi_title_description">
+                                <p id="poi_title">Hawaiian Burger</p>
+                                <p id="poi_description">Yes! Pineapples go on burgers too. Don’t let others tell you otherwise.</p>
+                            </div>
+                            <div class="poi_ratings_bar">
+                                <p id="poi_ratings_text"><svg id="poi_ratings_image" width="12" height="11" viewBox="0 0 12 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z" fill="#F2C94C"/>
+                                    </svg>&nbsp;&nbsp;4.8&nbsp;<p>(45)</p>
+                                </p>
+                            </div>   
+                        </div>
+                        <div class="poi_price_tag">
+                            <p id="poi_price">LKR 600</p>
+                        </div>
+                    </div>
+                </div>
+			</div>
+        </div>
+        <div data-role="footer" data-position="fixed">
+            <h4 style="text-align:center;">I'm the footer</h4>
+            <div style="display: flex;">
+                
+            </div>
+        </div>
+	</div>
+</body>
+</html>
