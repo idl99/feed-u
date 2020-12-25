@@ -14,34 +14,7 @@
     <link rel="stylesheet" href="../css/base.css" />
     <script src="../libs/jquery/jquery-1.11.1/jquery-1.11.1.min.js"></script>
 
-    <!-- <script>
-        // https://api.jquerymobile.com/mobileinit/
-        // https://api.jquerymobile.com/global-config/
-        $(document).on("mobileinit", function () {
-            //apply overrides here
-            console.log($.mobile)
-        });
-    </script> -->
-
     <script src="../libs/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
-
-    <script>
-        $(document).ready(function () {
-
-            // Navigate on click submit button
-            // https://jquerymobile.com/upgrade-guide/1.4/#navigation
-            $('#location-input-submit-btn').click(function (event) {
-
-                // IF I WANT TO HANDLE USING ENTER KEY EVENT i can figure out using this
-                // var enterKeyWasPressed = event.keyCode == 13;
-
-                // TODO replace with correct page once it has been implemented
-                $("body").pagecontainer("change", "navigation-test.html");
-            });
-
-        });
-    </script>
-
 </head>
 
 <body>
@@ -63,8 +36,9 @@
             <span class="landing-text" style="margin: 7vh 0vw 1vh 0vw;">GET STARTED</span>
 
             <!-- Search input with action button -->
-            <div id="landing-location-search-input" style="position: relative; margin: 3vh 0vw">
-                <input type="text" name="search-1" id="search-1" placeholder="Enter your location" value="">
+            <div id="landing-location-search" style="position: relative; margin: 3vh 0vw">
+                <input type="text" name="landing-location-search-input" id="landing-location-search-input"
+                    placeholder="Enter your location">
                 <!-- 
                     Submit icon. Layout to the right of search input
                     Refer https://stackoverflow.com/a/14839925/7803975 on positioning of icon
@@ -84,6 +58,31 @@
         <!-- <div data-role="footer">
             <h4>Page Footer</h4>
         </div> -->
+
+        <script>
+            // Javascript code relevant to this page can go in here
+            // Reference https://jquerymobile.com/upgrade-guide/1.4/#navigation
+            // Navigate on click submit button
+
+            var log = function (pageName = "default") {
+                console.log(`Hello from ${pageName} page`)
+            }
+
+            $('#location-input-submit-btn').click(function (event) {
+
+                var location = $("#landing-location-search-input").val()
+                // console.log(location)
+
+                // https://stackoverflow.com/questions/24173871/what-is-the-mobile-pagecontainer-selector
+                // https://api.jquerymobile.com/pagecontainer/
+                $(":mobile-pagecontainer").pagecontainer("change", "home.html", {
+                    data: {
+                        location
+                    }
+                });
+            });
+        </script>
+
     </div><!-- /page -->
 
 </body>
