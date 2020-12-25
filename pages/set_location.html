@@ -1,26 +1,32 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="utf-8">
-<title>jQuery Mobile Page</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!-- the three things that jQuery Mobile needs to work -->
-<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
-<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-<script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4fxzjh0_9j9aIXCecrSeDxBztKU5Lzao&callback=initMap"
-      defer
-    ></script>
-<style>
-	
-      #map {
-        height: 200px;
-        width: 100%;
-		margin: 0;
-        padding: 0;
-       }
+<head>
+	<meta charset="utf-8">
+	<title>Feed U - Set Location Page</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4fxzjh0_9j9aIXCecrSeDxBztKU5Lzao&callback=initMap"
+		defer></script>
+	<style>
+		body {
+			font-family: "Poppins" !important;
+		}
+
+		#map {
+			height: 200px;
+			width: 100%;
+			margin: 0;
+			padding: 0;
+		}
 	</style>
 	<script>
 		function initMap() {
@@ -28,7 +34,7 @@
 				zoom: 15,
 				center: { lat: 51.517582, lng: -0.141525 },
 			});
-		  
+
 			/*marker = new google.maps.Marker({
 				map, draggable: true,
 				animation: google.maps.Animation.DROP,
@@ -37,7 +43,7 @@
 		  
 			marker.addListener("click", toggleBounce);*/
 		}
-		
+
 		/*function toggleBounce() {
 			if (marker.getAnimation() !== null) {
 				marker.setAnimation(null);
@@ -45,10 +51,10 @@
 				marker.setAnimation(google.maps.Animation.BOUNCE);
 			}
 		}*/
-    </script>
+	</script>
 </head>
+
 <body>
-	<!-- This is page 1-->
 	<div data-role="page" id="page1">
 		<div data-role="header" data-position="fixed">
 			<a href="#" data-icon="back" class="ui-btn-left">Back</a>
@@ -97,4 +103,5 @@
 		</div>
 	</div>
 </body>
+
 </html>
