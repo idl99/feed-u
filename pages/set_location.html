@@ -18,7 +18,7 @@
 		defer></script>
 	<style>
 		body {
-			font-family: "Poppins" !important;
+			font-family: "Poppins";
 		}
 
 		#map {
@@ -26,6 +26,15 @@
 			width: 100%;
 			margin: 0;
 			padding: 0;
+		}
+
+		#saved-locations {
+			display: none;
+		}
+
+		#list-item {
+			text-align: center;
+			font-size: 16px;
 		}
 	</style>
 	<script>
@@ -66,24 +75,36 @@
 		<div data-role="tabs" id="tabs">
 			<div data-role="navbar">
 				<ul>
-					<li><a href="#saved_locations" data-ajax="false">Saved Locations</a></li>
-					<li><a href="#previous_locations" data-ajax="false">Previous Locations</a></li>
+					<li><a href="#saved-locations" data-ajax="false">Saved Locations</a></li>
+					<li><a href="#previous-locations" data-ajax="false">Previous Locations</a></li>
 				</ul>
 			</div>
-			<div id="saved_locations">
-				<ul data-role="listview" data-inset="true">
-					<li><a href="#">Delkanda, Nugegoda</a></li>
-					<li><a href="#">Nedimala, Dehiwala</a></li>
-					<li><a href="#">Kandalanda, Homagama</a></li>
-					<li><a href="#">Attidiya, Dehiwala</a></li>
+			<div id="saved-locations">
+				<ul data-role="listview">
+					<li id="list-item">
+						<div style="display: flex; justify-content: space-between;">
+							<div style="padding-left: 5.25em;">Delkanda, Nugegoda</div>
+							<div>
+								<svg width="16" height="14" viewBox="0 0 16 14" fill="none"
+									xmlns="http://www.w3.org/2000/svg">
+									<path
+										d="M5.43431 13.725L0.234305 7.62349C-0.0781016 7.25692 -0.0781016 6.66256 0.234305 6.29596L1.36565 4.96843C1.67806 4.60182 2.18462 4.60182 2.49703 4.96843L6 9.07869L13.503 0.274927C13.8154 -0.0916425 14.3219 -0.0916425 14.6344 0.274927L15.7657 1.60246C16.0781 1.96903 16.0781 2.56338 15.7657 2.92998L6.56569 13.7251C6.25325 14.0916 5.74672 14.0916 5.43431 13.725Z"
+										fill="#EB5757" />
+								</svg>
+							</div>
+						</div>
+					</li>
+					<li id="list-item">Nedimala, Dehiwala</li>
+					<li id="list-item">Kandalanda, Homagama</li>
+					<li id="list-item">Attidiya, Dehiwala</li>
 				</ul>
 			</div>
-			<div id="previous_locations">
-				<ul data-role="listview" data-inset="true">
-					<li><a href="#">Makumbura, Kottawa</a></li>
-					<li><a href="#">Piliyandala, Kottawa</a></li>
-					<li><a href="#">Nawala, Rajagiriya</a></li>
-					<li><a href="#">Nugegoda, Nugegoda</a></li>
+			<div id="previous-locations">
+				<ul data-role="listview">
+					<li id="list-item">Makumbura, Kottawa</li>
+					<li id="list-item">Piliyandala, Kottawa</li>
+					<li id="list-item">Nawala, Rajagiriya</li>
+					<li id="list-item">Nugegoda, Nugegoda</li>
 				</ul>
 			</div>
 		</div>
