@@ -96,8 +96,7 @@
                 width: 100%;
                 float: right;
                 margin-left: 5%; */
-                width: 70%;
-                margin: 0 auto;
+                
             }
             .pop-inner{
                 /* background-color: #fff;
@@ -105,57 +104,207 @@
                 height: 300px;
                 padding: 25px;
                 margin: 15% auto; */
+                width: 294px;
+                height: 645px;
+                /* top: 50%;
+                left: 50%; */
+                padding: 2em 2em 2em 2em;
+                margin: 0;
             }
         </style>
         <script>
-            $(document).ready(function(){
-                $(".open").click(function(){
+            $(document).ready(function () {
+                $(".open").click(function () {
                     $('.pop-outer').fadeIn('slow');
                 });
-                $(".close").click(function(){
+                $(".close").click(function () {
                     $('.pop-outer').fadeOut('slow');
                 });
             });
         </script>
-    </head>
-    <body>
-        <button class="open">
-            <!----vendors items contents---------------------------------->
-            <div class="container">
-                <div class="poi_container">
-                    <img src="../assets/vendor_list_view_images/burgers_ahouy.jpg" class="poi_image">
-                    <div class="poi_content">
-                        <div>Burgers Ahouy!</div>
-                        <div style="font-size: 12px; margin-top: 2%;">
-                            <svg width="5" height="5" viewBox="0 0 5 5" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle r="2.5" transform="matrix(1 0 0 -1 2.5 2.5)" fill="#C4C4C4"/>
-                            </svg>
-                            Burgers
-                            <svg style="margin-left: 2%;" width="5" height="5" viewBox="0 0 5 5" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle r="2.5" transform="matrix(1 0 0 -1 2.5 2.5)" fill="#C4C4C4"/>
-                            </svg>
-                            American
-                        </div>
-                        <div class="status_bar">
-                            <div class="rating_bar">
-                                <p><svg width="12" height="11" viewBox="0 0 12 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z" fill="#F2C94C"/>
-                                </svg> 4.6<p>(100)</p></p>
+        </head>
+        
+        <body>
+            <button class="open">
+                <!----vendors items contents---------------------------------->
+                <div class="container">
+                    <div class="poi_container">
+                        <img src="../assets/vendor_list_view_images/burgers_ahouy.jpg" class="poi_image">
+                        <div class="poi_content">
+                            <div>Burgers Ahouy!</div>
+                            <div style="font-size: 12px; margin-top: 2%;">
+                                <svg width="5" height="5" viewBox="0 0 5 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle r="2.5" transform="matrix(1 0 0 -1 2.5 2.5)" fill="#C4C4C4" />
+                                </svg>
+                                Burgers
+                                <svg style="margin-left: 2%;" width="5" height="5" viewBox="0 0 5 5" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <circle r="2.5" transform="matrix(1 0 0 -1 2.5 2.5)" fill="#C4C4C4" />
+                                </svg>
+                                American
                             </div>
-                            <div style="display: flex; align-items: center; margin-left: 2%;">25 - 30 mins</div>
+                            <div class="status_bar">
+                                <div class="rating_bar">
+                                    <p><svg width="12" height="11" viewBox="0 0 12 11" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
+                                                fill="#F2C94C" />
+                                        </svg> 4.6
+                                    <p>(100)</p>
+                                    </p>
+                                </div>
+                                <div style="display: flex; align-items: center; margin-left: 2%;">25 - 30 mins</div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <!---------end of vendors items contents---------------------->
-        </button>
-        <!-------------item details contents------->
-        <div style="display: none;" class="pop-outer">
+                <!---------end of vendors items contents---------------------->
+            </button>
+            <!-------------item details contents------->
+        
+        
+            <a href="#popupNYC" data-rel="popup" data-position-to="window" data-transition="fade"><img class="popphoto"
+                    src="../assets/vendor_page_images/tom_yum_soup.jpg" alt="New York, USA" style="width:30%"></a>
+        
+            <div data-role="popup" id="popupNYC" data-corners="true">
+                    <a href="#" data-rel="back"
+                    class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+        
+        
+                <div role="main" class="ui-content">
+                    <div style="position: relative; margin-bottom: 1em; 
+                            background-color: white;
+                            color: black;">
+                        <img style="display:block; width: 100%; height: auto; margin: 0;"
+                            src="../assets/vendor_page_images/tom_yum_soup.jpg">
+                        <div style="
+                                    position: absolute;
+                                    bottom: 0;
+                                    padding-top: 0.25em;
+                                    padding-bottom: 0.25em;
+                                    font-weight: 100;
+                                    background: rgba(0, 0, 0, 0.5); /* Black see-through */
+                                    color: #f1f1f1;
+                                    width: 100%;
+                                    opacity:1;
+                                    text-align: left;">
+                            <div style="display: flex; justify-content: space-between;">
+                                <div style="margin-left: 1em;">
+                                    <span style="font-size: 18px;">Crispy Chicken Burger</span><br>
+        
+                                </div>
+
+                                <!-- rating bar next to item name -->
+
+                                <div class="rating_bar">
+                                    <p><svg width="12" height="11" viewBox="0 0 12 11" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
+                                                fill="#F2C94C" />
+                                        </svg> 4.8
+                                    <p>(99)</p>
+                                    </p>
+                                </div>
+
+                                <!-- ---end of rating bar------- -->
+
+                                <!-- <div style="margin-right: 1em;">
+                                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M17.5552 9.72095C19.3297 7.80275 22.1053 7.56537 23.9298 9.19405L23.93 9.19419C26.1205 11.1535 26.2444 14.7096 24.2702 16.844L24.27 16.8442L16.2078 25.5653C16.2078 25.5654 16.2077 25.5654 16.2076 25.5655C16.1359 25.643 16.06 25.6666 15.9982 25.6666C15.9364 25.6666 15.8605 25.643 15.7888 25.5655C15.7887 25.5654 15.7887 25.5654 15.7886 25.5653L7.72684 16.8447C5.75589 14.7101 5.87998 11.1532 8.07089 9.19393C9.89576 7.56503 12.675 7.8034 14.4447 9.72022L14.4459 9.72143L15.2667 10.6075L16.0003 11.3995L16.7339 10.6075L17.5547 9.72143L17.5552 9.72095Z"
+                                            stroke="white" stroke-width="2" />
+                                    </svg>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <p>This soup is a special dish prepared by world renowned chef Gonagala Ramsey, made to a secret recipe that has been passed on from his Chinese ancestors.</p> -->
+                    <div class="customize_container">
+                        <div>
+                            <form action="">
+                                <p>Choice of Size</p>
+                                <input type="radio" id="large" name="large" value="large">
+                                <label for="male">Large</label><br>
+                                <input type="radio" id="regular" name="regular" value="regular">
+                                <label for="female">Regular</label><br>
+                                <input type="radio" id="small" name="small" value="small">
+                                <label for="other">Small</label>
+                            </form>
+                        </div>
+                        <div>
+                            <form action="">
+                                <p>Choice of Size</p>
+                                <input type="radio" id="large" name="large" value="large">
+                                <label for="male">Large</label><br>
+                                <input type="radio" id="regular" name="regular" value="regular">
+                                <label for="female">Regular</label><br>
+                                <input type="radio" id="small" name="small" value="small">
+                                <label for="other">Small</label>
+                            </form>
+                        </div>
+                        <div>
+                            <form action="">
+                                <p>Choice of Size</p>
+                                <input type="radio" id="large" name="large" value="large">
+                                <label for="male">Large</label><br>
+                                <input type="radio" id="regular" name="regular" value="regular">
+                                <label for="female">Regular</label><br>
+                                <input type="radio" id="small" name="small" value="small">
+                                <label for="other">Small</label>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- <h3>Special Instructions</h3> -->
+                    <form>
+                             <label for="text-6">Special Instructions</label>
+                             <input type="text" name="text-6" id="text-6" value="" placeholder="Add a note (extra salt, no onions, etc.)">
+                    </form>
+                    <a href="#" class="ui-btn ui-btn-inline">-</a>
+                    <button class="ui-btn ui-btn-inline">+</button>
+                </div>
+
+
+
+
+
+        <!-- <div style="display: none;" class="pop-outer">
             <div class="pop-inner">
                 <button class="close"> X </button>
-                <img src="../assets/vendor_list_view_images/burgers_ahouy.jpg" class="item_image">
-                <h2>Crispy Chicken Burger</h2>
-                <p> This is a custom test conducted on checking the functionality for a pop up using Jquery</p>
+
+                <div role="main" class="ui-content">
+                    <div style="position: relative; margin-bottom: 1em;">
+                        <img style="display:block; width: 100%; height: auto; margin: 0;"
+                            src="../assets/vendor_page_images/crispy_chicken_burger.jpg">
+                        <div style="
+                            position: absolute;
+                            bottom: 0;
+                            padding-top: 0.25em;
+                            padding-bottom: 0.25em;
+                            font-weight: 100;
+                            background: rgba(0, 0, 0, 0.5); /* Black see-through */
+                            color: #f1f1f1;
+                            width: 100%;
+                            opacity:1;
+                            text-align: left;">
+                            <div style="display: flex; justify-content: space-between;">
+                                <div style="margin-left: 1em;">
+                                    <span style="font-size: 18px;">Crispy Chicken Burger</span><br>
+                                  
+                                </div>
+                                <div style="margin-right: 1em;">
+                                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M17.5552 9.72095C19.3297 7.80275 22.1053 7.56537 23.9298 9.19405L23.93 9.19419C26.1205 11.1535 26.2444 14.7096 24.2702 16.844L24.27 16.8442L16.2078 25.5653C16.2078 25.5654 16.2077 25.5654 16.2076 25.5655C16.1359 25.643 16.06 25.6666 15.9982 25.6666C15.9364 25.6666 15.8605 25.643 15.7888 25.5655C15.7887 25.5654 15.7887 25.5654 15.7886 25.5653L7.72684 16.8447C5.75589 14.7101 5.87998 11.1532 8.07089 9.19393C9.89576 7.56503 12.675 7.8034 14.4447 9.72022L14.4459 9.72143L15.2667 10.6075L16.0003 11.3995L16.7339 10.6075L17.5547 9.72143L17.5552 9.72095Z"
+                                            stroke="white" stroke-width="2" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                 <div class="customize_container">
                     <div>
@@ -191,7 +340,7 @@
                             <label for="other">Small</label>
                         </form>
                     </div>
-                </div>
+                </div> -->
 
                 <!-- <table style="width:100%">
                     <tr>
