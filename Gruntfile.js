@@ -6,6 +6,7 @@ module.exports = function (grunt) {
             main: {
                 files: [{
                     expand: true,
+                    cwd: 'src/',
                     src: ['pages/*'],
                     dest: 'dist/'
                 }]
@@ -15,14 +16,16 @@ module.exports = function (grunt) {
             dist: {
                 files: [{
                     expand: true,
-                    src: ['styles/*.sass'],
-                    dest: 'dist/',
+                    cwd: 'src/styles',
+                    src: ['*.sass'],
+                    dest: 'dist/css/',
                     ext: '.css'
                 }]
             }
         },
         browserify: { // Bundles the JS
             build: {
+                cwd: 'src/',
                 src: 'scripts/index.js',
                 dest: 'dist/bundle.js'
             }
