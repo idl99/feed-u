@@ -30,8 +30,8 @@ module.exports = function (grunt) {
         },
         browserify: { // Bundles the JS
             build: {
-                cwd: 'src/',
-                src: 'scripts/index.js',
+                // cwd: 'src/', // DO NOT USE THIS OPTION HERE. IT WILL MESS UP THE BUILD
+                src: './src/scripts/index.js',
                 dest: 'dist/bundle.js'
             }
         }
