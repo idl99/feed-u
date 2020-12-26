@@ -1,0 +1,84 @@
+<!-- Author: Ihan Lelwala | 2016030 | Team 41 - Feed U -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Feed U - Landing Page</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="../css/base.css" />
+
+    <!-- 
+        If you are using any code that references DOM (like jQuery)
+        or if you do not want this script to block the DOM from loading
+        defer executing this script till DOM is loaded 
+        Refer https://javascript.info/script-async-defer for more
+    -->
+    <script src="../bundle.js"></script>
+</head>
+
+<body>
+
+    <div data-role="page" id="landing">
+
+        <div id="background-filter"></div>
+
+        <div data-role="header" id="landing-header">
+            <h1 style="visibility: hidden;">Page Title</h1>
+            <div class="ui-btn-right">
+                <a href="#" class="ui-btn ui-btn-b ui-btn-inline ui-mini ui-corner-all ui-btn-active">SCAN QR</a>
+                <a href="#" class="ui-btn ui-btn-b ui-btn-inline ui-mini ui-corner-all ui-btn-active">SIGN IN</a>
+            </div>
+        </div>
+
+        <div role="main" class="ui-content">
+            <span id="tagline">"From one home to <span style="color: white">another</span> with<span>❤️</span>"</span>
+            <span class="landing-text" style="margin: 7vh 0vw 1vh 0vw;">GET STARTED</span>
+
+            <!-- Search input with action button -->
+            <div id="landing-location-search" style="position: relative; margin: 3vh 0vw">
+                <input type="text" name="landing-location-search-input" id="landing-location-search-input"
+                    placeholder="Enter your location">
+                <!-- 
+                    Submit icon. Layout to the right of search input
+                    Refer https://stackoverflow.com/a/14839925/7803975 on positioning of icon
+                -->
+                <div id="location-input-submit-btn" class="ui-nodisc-icon ui-alt-icon"
+                    style="position: absolute; right: -5px; top: 3px;">
+                        <a href="#"
+                        class="ui-btn ui-shadow ui-corner-all ui-icon-arrow-r ui-btn-icon-notext ui-btn-inline">Check</a>
+                </div>
+            </div>
+            <span class="landing-text" style="margin: 3vh 0vw;">OR</span>
+            <a href="#" class="ui-link landing-text" style="text-decoration: none;">TAP HERE</a>
+            <span class="landing-text" style="margin: 2vh 0vw; font-size: 1em;">TO LOOK AROUND</span>
+        </div><!-- /content -->
+
+        <!-- /footer -->
+        <!-- <div data-role="footer">
+            <h4>Page Footer</h4>
+        </div> -->
+
+        <!-- PAGE SPECIFIC JAVASCRIPT CODE CAN GO HERE -->
+        <script>
+
+            $('#location-input-submit-btn').click(function (event) {
+
+                // refer https://jquerymobile.com/upgrade-guide/1.4/#navigation on how to navigate
+
+                var location = $("#landing-location-search-input").val()
+
+                // navigate user to Home screen when user submits their location
+                // refer https://stackoverflow.com/questions/24173871/what-is-the-mobile-pagecontainer-selector and
+                // https://api.jquerymobile.com/pagecontainer/ for more
+                $(":mobile-pagecontainer").pagecontainer("change", "home.html");
+            });
+        </script>
+
+    </div><!-- /page -->
+
+</body>
+
+</html>
