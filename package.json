@@ -3,8 +3,29 @@
   "version": "1.0.0",
   "description": "serves the static files for feed-u",
   "main": "server.js",
+  "browserify": {
+    "transform": [
+      "browserify-shim"
+    ]
+  },
+  "browser": {
+    "jquery": "./libs/jquery/jquery-1.11.1/jquery-1.11.1.min.js",
+    "jquery-mobile": "./libs/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"
+  },
+  "browserify-shim": {
+    "jquery": "$",
+    "jquery-mobile": {
+      "exports": "$.mobile",
+      "depends": [
+        "jquery:$"
+      ]
+    }
+  },
   "scripts": {
-    "start": "node server.js",
+    "server": "node server.js",
+    "compile-css": "sass --watch styles/:css/",
+    "bundle-js": "watchify scripts/index.js -o dist/bundle.js",
+    "dev": "npm-run-all --parallel server compile-css bundle-js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,5 +40,10 @@
   "homepage": "https://github.com/idl99/feed-u#readme",
   "dependencies": {
     "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "browserify": "~2.36.1",
+    "browserify-shim": "~3.0.0",
+    "npm-run-all": "^4.1.5"
   }
 }
