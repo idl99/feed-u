@@ -17,7 +17,7 @@ To run a file server to serve the static files, please follow the instructions b
 
 2. Run the following command to run the server
     ```
-    node index.js
+    node server.js
     ```
 
 
