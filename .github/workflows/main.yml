@@ -25,6 +25,13 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       
+      # https://github.com/actions/virtual-environments/issues/599#issuecomment-605558600
+      # This task uses /opt/hostedtoolcache as an installation path where all users can able to write.
+      # In doing so i hope to be able to install NPM dependencies globally on the runner
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '12'
+      
       - name: build # This step will build the project and compile the dist files
         run: |
           npm install -g sass browserify grunt-cli
