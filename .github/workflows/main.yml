@@ -27,6 +27,7 @@ jobs:
       
       - name: build # This step will build the project and compile the dist files
         run: |
+          npm install -g sass browserify grunt-cli
           npm install
           npm run build
 
