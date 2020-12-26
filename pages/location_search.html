@@ -26,8 +26,57 @@
 			width: 100%;
 		}
 
-		#button-text {
-			text-align:center;
+		.user-location-details-container {
+			display: flex;
+			flex-direction: column;
+		}
+
+		.location-details-header {
+			display: flex;
+			justify-content: space-between;
+		}
+
+		#favourite-icon {
+			padding-top: 0.75em;
+			padding-right: 0.50em;
+		}
+
+		.selected-location-details-container {
+			display: flex;
+		}
+
+		.selected-location-details {
+			display: flex;
+			flex-direction: column;
+			padding-left: 0.5em;
+		}
+
+		#selected-street {
+			margin: 0;
+		}
+
+		#selected-town {
+			margin: 0;
+		}
+
+		.additional-location-details-container {
+			display: flex;
+			justify-content:
+				space-between;
+			margin-top: 1em;
+		}
+
+		#house-no {
+			width: 75%;
+		}
+
+		#landmark {
+			margin-left: 0.5em;
+			width: 100%;
+		}
+
+		#set-location-button-text {
+			text-align: center;
 		}
 	</style>
 	<script>
@@ -47,6 +96,15 @@
 			});
 
 			marker.addListener("click", toggleBounce);
+
+			marker.addListener('dragend', function (ev) {
+				console.log('Latitude: ' + marker.getPosition().lat() + ', Longitude: ' + marker.getPosition().lng());
+				var geoCode = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + marker.getPosition().lat() + '%2C' + marker.getPosition().lng() + '&language=en';
+
+				$.getJSON(geoCode).done(function (location) {
+					console.log(location)
+				})
+			});
 		}
 
 		function toggleBounce() {
@@ -72,33 +130,33 @@
 			<div id="map">
 				<h2> Map Here</h2>
 			</div>
-			<div style="display: flex; flex-direction: column;">
-				<div style="display: flex; justify-content: space-between;">
+			<div class="user-location-details-container">
+				<div class="location-details-header">
 					<p>Confirm Address</p>
-					<svg style="padding-top: 0.75em; padding-right: 0.50em;" width="24" height="22" viewBox="0 0 24 22"
-						fill="none" xmlns="http://www.w3.org/2000/svg">
+					<svg id="favourite-icon" width="24" height="22" viewBox="0 0 24 22" fill="none"
+						xmlns="http://www.w3.org/2000/svg">
 						<path
 							d="M13.2908 2.51167L13.2906 2.51191L12.3672 3.50877L12.0003 3.90474L11.6335 3.50877L10.7101 2.51191L10.7096 2.51131C8.51745 0.137042 5.00299 -0.211336 2.66349 1.87701L13.2908 2.51167ZM13.2908 2.51167C15.4879 0.136741 18.9979 -0.211161 21.3372 1.87701L13.2908 2.51167ZM21.7627 11.3741L21.7628 11.374C24.216 8.72171 24.0681 4.31917 21.3375 1.87727L21.7627 11.3741ZM21.7627 11.3741L12.6926 21.1854C12.3046 21.6049 11.6914 21.6049 11.3034 21.1854L2.23352 11.3743M21.7627 11.3741L2.23352 11.3743M2.23352 11.3743L2.23332 11.3741C-0.215481 8.72166 -0.067406 4.31891 2.66343 1.87707L2.23352 11.3743Z"
 							fill="white" stroke="#EB5757" />
 					</svg>
 				</div>
-				<div style="display: flex;">
+				<div class="selected-location-details-container">
 					<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<circle cx="20" cy="20" r="19" stroke="#27AE60" stroke-width="2" />
 						<path
 							d="M17.5556 22.8566V30.2014L19.2376 31.7492C19.6005 32.083 20.4003 32.083 20.7631 31.7492L22.4444 30.2014V22.8566C21.6508 22.9466 20.8357 23 20 23C19.1643 23 18.3492 22.9466 17.5556 22.8566ZM20 8C13.9248 8 9 11.022 9 14.75C9 18.478 13.9248 21.5 20 21.5C26.0752 21.5 31 18.478 31 14.75C31 11.022 26.0752 8 20 8ZM20 11.5625C17.1354 11.5625 14.8056 12.9922 14.8056 14.75C14.8056 15.0603 14.3946 15.3125 13.8889 15.3125C13.3832 15.3125 12.9722 15.0603 12.9722 14.75C12.9722 12.372 16.1256 10.4375 20 10.4375C20.5057 10.4375 20.9167 10.6897 20.9167 11C20.9167 11.3103 20.5057 11.5625 20 11.5625Z"
 							fill="#27AE60" />
 					</svg>
-					<div style="display: flex; flex-direction: column; padding-left: 0.5em;">
-						<p style="margin: 0;">Nugegoda Road, Delkanda</p>
-						<p style="margin: 0;">Nugegoda</p>
+					<div class="selected-location-details">
+						<p id="selected-street">Nugegoda Road, Delkanda</p>
+						<p id="selected-town">Nugegoda</p>
 					</div>
 				</div>
-				<div style="display: flex; justify-content: space-between; margin-top: 1em;">
-					<div style="width: 75%;">
+				<div class="additional-location-details-container">
+					<div id="house-no">
 						<input type="text" name="house-no" id="house-no" value="" placeholder="House No.">
 					</div>
-					<div style="margin-left: 0.5em; width: 100%;">
+					<div id="landmark">
 						<input type="text" name="land-mark" id="land-mark" value="" placeholder="Landmark">
 					</div>
 				</div>
@@ -106,7 +164,7 @@
 		</div>
 		<button data-role="footer" data-position="fixed">
 			<!--<button style="background-color:#FF6464; color:white">Save</button>-->
-			<h4 id="button-text">Set Location</h4>
+			<h4 id="set-location-button-text">Set Location</h4>
 		</button>
 	</div>
 </body>
