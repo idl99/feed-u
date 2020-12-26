@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Item Detail Popup</title>
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+ 
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+      
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+        <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    
+        <style>
+            body {
+                font-family: "Poppins";
+            }
+            .container {
+                display: flex;
+                flex-direction: column;
+            }
+            .poi_container {
+                display: flex;
+                flex: 1 1 auto;
+                justify-content: top;
+                height: 65px;          
+                width: 335px;
+                margin-bottom: 5%;
+            }
+            .poi_image {
+                float: left;
+            }
+            .poi_content {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                float: right;
+                margin-left: 5%;
+            }
+            .status_bar {
+                display: flex;
+                align-items: top;
+                margin-top: 2%;
+                font-size: 12px;
+            }
+            .rating_bar {
+                display: flex;
+                align-items: center;
+                height: 20px;
+                width: 70px;
+                font-size: 11px;
+                background: #F2F2F2;
+                border-radius: 25px;
+                color: black;
+            }
+            .item_image{
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                width: 80%;
+            }
+            .customize_container{
+                display: flex;
+                justify-content: flex-start;
+                overflow: auto;
+            }
+            .customize_container > div{
+                margin: 10px;
+                font-size: 12px;
+            }
+            /* .row {
+                display: flex;
+            } */
+            /* .customize_options{
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                float: right;
+                margin-left: 5%;
+
+            } */
+
+            /* td,th{
+                text-align: left;
+                padding: 8px;
+            } */
+            .pop-outer{
+                /* background-color: rgba(0,0,0,0.5);
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%; */
+
+                /* display: flex;
+                flex-direction: column;
+                width: 100%;
+                float: right;
+                margin-left: 5%; */
+        
+                
+            }
+            .pop-inner{
+                /* background-color: #fff;
+                width: 500px;
+                height: 300px;
+                padding: 25px;
+                margin: 15% auto; */
+                max-width: 294px;
+                max-height: 645px;
+                /* top: 50%;
+                left: 50%; */
+                padding: 2em 2em 2em 2em;
+                margin: 0;
+                
+            }
+        </style>
+        <script>
+            $(document).ready(function () {
+                $(".open").click(function () {
+                    $('.pop-outer').fadeIn('slow');
+                });
+                $(".close").click(function () {
+                    $('.pop-outer').fadeOut('slow');
+                });
+            });
+        </script>
+        </head>
+        
+        <body>
+            <button class="open">
+                <!----vendors items contents---------------------------------->
+                <div class="container">
+                    <div class="poi_container">
+                        <img src="../assets/vendor_list_view_images/burgers_ahouy.jpg" class="poi_image">
+                        <div class="poi_content">
+                            <div>Burgers Ahouy!</div>
+                            <div style="font-size: 12px; margin-top: 2%;">
+                                <svg width="5" height="5" viewBox="0 0 5 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle r="2.5" transform="matrix(1 0 0 -1 2.5 2.5)" fill="#C4C4C4" />
+                                </svg>
+                                Burgers
+                                <svg style="margin-left: 2%;" width="5" height="5" viewBox="0 0 5 5" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <circle r="2.5" transform="matrix(1 0 0 -1 2.5 2.5)" fill="#C4C4C4" />
+                                </svg>
+                                American
+                            </div>
+                            <div class="status_bar">
+                                <div class="rating_bar">
+                                    <p><svg width="12" height="11" viewBox="0 0 12 11" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
+                                                fill="#F2C94C" />
+                                        </svg> 4.6
+                                    <p>(100)</p>
+                                    </p>
+                                </div>
+                                <div style="display: flex; align-items: center; margin-left: 2%;">25 - 30 mins</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!---------end of vendors items contents---------------------->
+            </button>
+            <!-------------item details contents------->
+        
+        
+            <a href="#popupNYC" data-rel="popup" data-position-to="window" data-transition="fade"><img class="popphoto"
+                    src="../assets/vendor_page_images/tom_yum_soup.jpg" alt="New York, USA" style="width:30%"></a>
+        
+            <div data-role="popup" id="popupNYC" data-corners="true">
+                    <a href="#" data-rel="back"
+                    class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+        
+        
+                <div role="main" class="ui-content">
+                    <div style="position: relative; margin-bottom: 1em; 
+                            background-color: white;
+                            color: black;">
+                        <img style="display:block; width: 100%; height: auto; margin: 0;"
+                            src="../assets/vendor_page_images/tom_yum_soup.jpg">
+                        <div style="
+                                    position: absolute;
+                                    bottom: 0;
+                                    padding-top: 0.25em;
+                                    padding-bottom: 0.25em;
+                                    font-weight: 100;
+                                    background: rgba(0, 0, 0, 0.5); /* Black see-through */
+                                    color: #f1f1f1;
+                                    width: 100%;
+                                    opacity:1;
+                                    text-align: left;">
+                            <div style="display: flex; justify-content: space-between;">
+                                <div style="margin-left: 1em;">
+                                    <span style="font-size: 18px;">Tom Yum Soup</span><br>
+        
+                                </div>
+
+                                <!-- rating bar next to item name -->
+
+                                <div class="rating_bar">
+                                    <p><svg width="12" height="11" viewBox="0 0 12 11" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
+                                                fill="#F2C94C" />
+                                        </svg> 4.8
+                                    <p>(99)</p>
+                                    </p>
+                                </div>
+
+                                <!-- ---end of rating bar------- -->
+
+                                <!-- <div style="margin-right: 1em;">
+                                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M17.5552 9.72095C19.3297 7.80275 22.1053 7.56537 23.9298 9.19405L23.93 9.19419C26.1205 11.1535 26.2444 14.7096 24.2702 16.844L24.27 16.8442L16.2078 25.5653C16.2078 25.5654 16.2077 25.5654 16.2076 25.5655C16.1359 25.643 16.06 25.6666 15.9982 25.6666C15.9364 25.6666 15.8605 25.643 15.7888 25.5655C15.7887 25.5654 15.7887 25.5654 15.7886 25.5653L7.72684 16.8447C5.75589 14.7101 5.87998 11.1532 8.07089 9.19393C9.89576 7.56503 12.675 7.8034 14.4447 9.72022L14.4459 9.72143L15.2667 10.6075L16.0003 11.3995L16.7339 10.6075L17.5547 9.72143L17.5552 9.72095Z"
+                                            stroke="white" stroke-width="2" />
+                                    </svg>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                    <p style="text-align: justify; text-justify: inter-word;">This soup is a special dish prepared by world renowned chef Gonagala Ramsey, made to a secret recipe that has been passed on from his Chinese ancestors.</p>
+                    <div class="customize_container">
+                        <div>
+                            <form>
+                                <p>Choice of Size</p>
+                                <input type="radio" id="large" name="large" value="large">
+                                <label for="large">Large</label><br>
+                                <input type="radio" id="regular" name="regular" value="regular">
+                                <label for="regular">Regular</label><br>
+                                <input type="radio" id="small" name="small" value="small">
+                                <label for="small">Small</label>
+                            </form>
+                        </div>
+                        <div>
+                            <form>
+                                <p>Choice of Size</p>
+                                <input type="radio" id="large2" name="large2" value="large2">
+                                <label for="large2">Large</label><br>
+                                <input type="radio" id="regular2" name="regular2" value="regular2">
+                                <label for="regular2">Regular</label><br>
+                                <input type="radio" id="small2" name="small2" value="small2">
+                                <label for="small2">Small</label>
+                            </form>
+                        </div>
+                        <div>
+                            <form>
+                                <p>Choice of Size</p>
+                                <input type="radio" id="large1" name="large1" value="large1">
+                                <label for="large1">Large</label><br>
+                                <input type="radio" id="regular1" name="regular1" value="regular1">
+                                <label for="regular1">Regular</label><br>
+                                <input type="radio" id="small1" name="small1" value="small1">
+                                <label for="small1">Small</label>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- <h3>Special Instructions</h3> -->
+                    <div>
+                             <p style="margin: 0; padding: 0;">Special Instructions</p>
+                             <input type="text" name="text-6" id="text-6" value="" placeholder="Add a note (extra salt, no onions, etc.)">
+                    </div>
+                    <div style="display: flex; justify-content: center; padding: 1em 1em 1em 1em;">
+                    <div style="display: flex; justify-content: center; display: flex; justify-content: space-evenly; background-color: #F2F2F2; border-radius: 100px; width: 50%;">
+                            <p >-</p>
+                            <p>1</p>
+                            <p >+</p>
+                    </div>
+                    </div>
+                    <p>Comments</p>
+                </div>
+
+
+        <!-- <div style="display: none;" class="pop-outer">
+            <div class="pop-inner">
+                <button class="close"> X </button>
+
+                <div role="main" class="ui-content">
+                    <div style="position: relative; margin-bottom: 1em;">
+                        <img style="display:block; width: 100%; height: auto; margin: 0;"
+                            src="../assets/vendor_page_images/crispy_chicken_burger.jpg">
+                        <div style="
+                            position: absolute;
+                            bottom: 0;
+                            padding-top: 0.25em;
+                            padding-bottom: 0.25em;
+                            font-weight: 100;
+                            background: rgba(0, 0, 0, 0.5); /* Black see-through */
+                            color: #f1f1f1;
+                            width: 100%;
+                            opacity:1;
+                            text-align: left;">
+                            <div style="display: flex; justify-content: space-between;">
+                                <div style="margin-left: 1em;">
+                                    <span style="font-size: 18px;">Crispy Chicken Burger</span><br>
+                                  
+                                </div>
+                                <div style="margin-right: 1em;">
+                                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M17.5552 9.72095C19.3297 7.80275 22.1053 7.56537 23.9298 9.19405L23.93 9.19419C26.1205 11.1535 26.2444 14.7096 24.2702 16.844L24.27 16.8442L16.2078 25.5653C16.2078 25.5654 16.2077 25.5654 16.2076 25.5655C16.1359 25.643 16.06 25.6666 15.9982 25.6666C15.9364 25.6666 15.8605 25.643 15.7888 25.5655C15.7887 25.5654 15.7887 25.5654 15.7886 25.5653L7.72684 16.8447C5.75589 14.7101 5.87998 11.1532 8.07089 9.19393C9.89576 7.56503 12.675 7.8034 14.4447 9.72022L14.4459 9.72143L15.2667 10.6075L16.0003 11.3995L16.7339 10.6075L17.5547 9.72143L17.5552 9.72095Z"
+                                            stroke="white" stroke-width="2" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                <div class="customize_container">
+                    <div>
+                        <form action="">
+                            <p>Choice of Size</p>
+                            <input type="radio" id="large" name="large" value="large">
+                            <label for="male">Large</label><br>
+                            <input type="radio" id="regular" name="regular" value="regular">
+                            <label for="female">Regular</label><br>
+                            <input type="radio" id="small" name="small" value="small">
+                            <label for="other">Small</label>
+                        </form>
+                    </div>
+                    <div>
+                        <form action="">
+                            <p>Choice of Size</p>
+                            <input type="radio" id="large" name="large" value="large">
+                            <label for="male">Large</label><br>
+                            <input type="radio" id="regular" name="regular" value="regular">
+                            <label for="female">Regular</label><br>
+                            <input type="radio" id="small" name="small" value="small">
+                            <label for="other">Small</label>
+                        </form>
+                    </div>
+                    <div>
+                        <form action="">
+                            <p>Choice of Size</p>
+                            <input type="radio" id="large" name="large" value="large">
+                            <label for="male">Large</label><br>
+                            <input type="radio" id="regular" name="regular" value="regular">
+                            <label for="female">Regular</label><br>
+                            <input type="radio" id="small" name="small" value="small">
+                            <label for="other">Small</label>
+                        </form>
+                    </div>
+                </div> -->
+
+                <!-- <table style="width:100%">
+                    <tr>
+                        <th>Choice of Size</th>
+                        <th>Spicy Level</th>
+                        <th>Salt Level</th>
+                    </tr>
+                    <tr>
+                        <td><input type="radio">Large</td>
+                        <td><input type="radio">Poddak withara</td>
+                        <td><input type="radio">No</td>
+                    </tr>
+                    <tr>
+                        <td><input type="radio">Regular</td>
+                        <td><input type="radio">The normal srilankan</td>
+                        <td><input type="radio">Little Salt</td>
+                    </tr>
+                    <tr>
+                        <td><input type="radio">Small</td>
+                        <td><input type="radio">Asamodagam Time</td>
+                        <td><input type="radio">Extra</td>
+                    </tr>
+                </table> -->
+
+
+                <!-- <div class="row">
+                    <div class="customize_options">
+                        <form action="">
+                            <p>Choice of Size</p>
+                            <input type="radio" id="large" name="large" value="large">
+                            <label for="male">Large</label><br>
+                            <input type="radio" id="regular" name="regular" value="regular">
+                            <label for="female">Regular</label><br>
+                            <input type="radio" id="small" name="small" value="small">
+                            <label for="other">Small</label>
+                        </form>
+                    </div>
+                    <div class="customize_options"></div>
+                        <form action="">
+                            <p>Choice of Size</p>
+                            <input type="radio" id="large" name="large" value="large">
+                            <label for="male">Large</label><br>
+                            <input type="radio" id="regular" name="regular" value="regular">
+                            <label for="female">Regular</label><br>
+                            <input type="radio" id="small" name="small" value="small">
+                            <label for="other">Small</label>
+                        </form>
+                    </div>
+                    <div class="customize_options"></div>
+                        <form action="">
+                            <p>Choice of Size</p>
+                            <input type="radio" id="large" name="large" value="large">
+                            <label for="male">Large</label><br>
+                            <input type="radio" id="regular" name="regular" value="regular">
+                            <label for="female">Regular</label><br>
+                            <input type="radio" id="small" name="small" value="small">
+                            <label for="other">Small</label>
+                        </form>
+                    </div>
+                </div> -->
+
+            </div>
+        </div>
+    </body>
+</html>
+ 
