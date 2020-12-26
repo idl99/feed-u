@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Item Detail Popup</title>
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+ 
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+      
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+        <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    
+        <style>
+            body {
+                font-family: "Poppins";
+            }
+            .container {
+                display: flex;
+                flex-direction: column;
+            }
+            .poi_container {
+                display: flex;
+                flex: 1 1 auto;
+                justify-content: top;
+                height: 65px;          
+                width: 335px;
+                margin-bottom: 5%;
+            }
+            .poi_image {
+                float: left;
+            }
+            .poi_content {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                float: right;
+                margin-left: 5%;
+            }
+            .status_bar {
+                display: flex;
+                align-items: top;
+                margin-top: 2%;
+                font-size: 12px;
+            }
+            .rating_bar {
+                display: flex;
+                align-items: center;
+                height: 20px;
+                width: 70px;
+                font-size: 11px;
+                background: #F2F2F2;
+                border-radius: 25px;
+                color: black;
+            }
+            .item_image{
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                width: 80%;
+            }
+            .customize_container{
+                display: flex;
+                justify-content: flex-start;
+                overflow: auto;
+            }
+            .customize_container > div{
+                margin: 10px;
+                font-size: 12px;
+            }
+            .pop-outer{
+            }
+            .pop-inner{
+                max-width: 294px;
+                max-height: 645px;
+                padding: 2em 2em 2em 2em;
+                margin: 0;
+                
+            }
+        </style>
+        <script>
+            $(document).ready(function () {
+                $(".open").click(function () {
+                    $('.pop-outer').fadeIn('slow');
+                });
+                $(".close").click(function () {
+                    $('.pop-outer').fadeOut('slow');
+                });
+            });
+        </script>
+        </head>
+        <body>
+            <button class="open">
+                <!----vendors items contents---------------------------------->
+                <div class="container">
+                    <div class="poi_container">
+                        <img src="../assets/vendor_list_view_images/burgers_ahouy.jpg" class="poi_image">
+                        <div class="poi_content">
+                            <div>Burgers Ahouy!</div>
+                            <div style="font-size: 12px; margin-top: 2%;">
+                                <svg width="5" height="5" viewBox="0 0 5 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle r="2.5" transform="matrix(1 0 0 -1 2.5 2.5)" fill="#C4C4C4" />
+                                </svg>
+                                Burgers
+                                <svg style="margin-left: 2%;" width="5" height="5" viewBox="0 0 5 5" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <circle r="2.5" transform="matrix(1 0 0 -1 2.5 2.5)" fill="#C4C4C4" />
+                                </svg>
+                                American
+                            </div>
+                            <div class="status_bar">
+                                <div class="rating_bar">
+                                    <p><svg width="12" height="11" viewBox="0 0 12 11" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
+                                                fill="#F2C94C" />
+                                        </svg> 4.6
+                                    <p>(100)</p>
+                                    </p>
+                                </div>
+                                <div style="display: flex; align-items: center; margin-left: 2%;">25 - 30 mins</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!---------end of vendors items contents---------------------->
+            </button>
+            <!-------------item details contents-------> 
+            <a href="#popupNYC" data-rel="popup" data-position-to="window" data-transition="fade"><img class="popphoto"
+                    src="../assets/vendor_page_images/tom_yum_soup.jpg" alt="New York, USA" style="width:30%"></a>
+        
+            <div data-role="popup" id="popupNYC" data-corners="true">
+                    <a href="#" data-rel="back"
+                    class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+                <div role="main" class="ui-content">
+                    <div style="position: relative; margin-bottom: 1em; 
+                            background-color: white;
+                            color: black;">
+                        <img style="display:block; width: 100%; height: auto; margin: 0;"
+                            src="../assets/vendor_page_images/tom_yum_soup.jpg">
+                        <div style="
+                                    position: absolute;
+                                    bottom: 0;
+                                    padding-top: 0.25em;
+                                    padding-bottom: 0.25em;
+                                    font-weight: 100;
+                                    background: rgba(0, 0, 0, 0.5); /* Black see-through */
+                                    color: #f1f1f1;
+                                    width: 100%;
+                                    opacity:1;
+                                    text-align: left;">
+                            <div style="display: flex; justify-content: space-between;">
+                                <div style="margin-left: 1em;">
+                                    <span style="font-size: 18px;">Tom Yum Soup</span><br>
+                                </div>
+                                <!-- rating bar next to item name -->
+                                <div class="rating_bar">
+                                    <p><svg width="12" height="11" viewBox="0 0 12 11" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
+                                                fill="#F2C94C" />
+                                        </svg> 4.8
+                                    <p>(99)</p>
+                                    </p>
+                                </div>
+                                <!-- ---end of rating bar------- -->
+                            </div>
+                        </div>
+                    </div>
+                    <p style="text-align: justify; text-justify: inter-word;">This soup is a special dish prepared by world renowned chef Gonagala Ramsey, made to a secret recipe that has been passed on from his Chinese ancestors.</p>
+                    <!-- Customization options container -->
+                    <div class="customize_container">
+                        <div>
+                            <form>
+                                <p>Choice of Size</p>
+                                <input type="radio" id="large" name="large" value="large">
+                                <label for="large">Large</label><br>
+                                <input type="radio" id="regular" name="regular" value="regular">
+                                <label for="regular">Regular</label><br>
+                                <input type="radio" id="small" name="small" value="small">
+                                <label for="small">Small</label>
+                            </form>
+                        </div>
+                        <div>
+                            <form>
+                                <p>Choice of Size</p>
+                                <input type="radio" id="large2" name="large2" value="large2">
+                                <label for="large2">Large</label><br>
+                                <input type="radio" id="regular2" name="regular2" value="regular2">
+                                <label for="regular2">Regular</label><br>
+                                <input type="radio" id="small2" name="small2" value="small2">
+                                <label for="small2">Small</label>
+                            </form>
+                        </div>
+                        <div>
+                            <form>
+                                <p>Choice of Size</p>
+                                <input type="radio" id="large1" name="large1" value="large1">
+                                <label for="large1">Large</label><br>
+                                <input type="radio" id="regular1" name="regular1" value="regular1">
+                                <label for="regular1">Regular</label><br>
+                                <input type="radio" id="small1" name="small1" value="small1">
+                                <label for="small1">Small</label>
+                            </form>
+                        </div>
+                    </div>
+                    <div>
+                    <!--end of customization container ----->
+                             <p style="margin: 0; padding: 0;">Special Instructions</p>
+                             <input type="text" name="text-6" id="text-6" value="" placeholder="Add a note (extra salt, no onions, etc.)">
+                    </div>
+                    <div style="display: flex; justify-content: center; padding: 1em 1em 1em 1em;">
+                    <div style="display: flex; justify-content: center; display: flex; justify-content: space-evenly; background-color: #F2F2F2; border-radius: 100px; width: 50%;">
+                            <p >-</p>
+                            <p>1</p>
+                            <p >+</p>
+                    </div>
+                    </div>
+                    <p>Comments</p>
+                </div>
+                <div style="display: flex; justify-content: center;">
+                    <button style="width: 100%; text-align: center; background: #EB5757; color: white; margin: 0px; padding: 0px; border-radius: 0%;"><h4> Add to Cart</h4></button>
+                   </div>
+            </div>
+        </div>
+    </body>
+</html>
+ 
