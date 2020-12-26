@@ -2,7 +2,7 @@
   "name": "feed-u",
   "version": "1.0.0",
   "description": "serves the static files for feed-u",
-  "main": "server.js",
+  "main": "./script/index.js",
   "browserify": {
     "transform": [
       "browserify-shim"
