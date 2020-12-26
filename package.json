@@ -2,10 +2,32 @@
   "name": "feed-u",
   "version": "1.0.0",
   "description": "serves the static files for feed-u",
-  "main": "index.js",
+  "main": "./script/index.js",
+  "browserify": {
+    "transform": [
+      "browserify-shim"
+    ]
+  },
+  "browser": {
+    "jquery": "./vendor/jquery/jquery-1.11.1/jquery-1.11.1.min.js",
+    "jquery-mobile": "./vendor/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"
+  },
+  "browserify-shim": {
+    "jquery": "$",
+    "jquery-mobile": {
+      "exports": "$.mobile",
+      "depends": [
+        "jquery:$"
+      ]
+    }
+  },
   "scripts": {
-    "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "server": "node server.js",
+    "compile-css": "sass --watch ./src/styles/:./src/css/",
+    "bundle-js": "watchify ./src/scripts/index.js -o ./src/bundle.js",
+    "dev": "npm-run-all --parallel server compile-css bundle-js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "grunt"
   },
   "repository": {
     "type": "git",
@@ -19,5 +41,15 @@
   "homepage": "https://github.com/idl99/feed-u#readme",
   "dependencies": {
     "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "browserify": "~2.36.1",
+    "browserify-shim": "~3.0.0",
+    "grunt": "^1.3.0",
+    "grunt-browserify": "^5.3.0",
+    "grunt-contrib-clean": "^2.0.0",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-sass": "^2.0.0",
+    "npm-run-all": "^4.1.5"
   }
 }
