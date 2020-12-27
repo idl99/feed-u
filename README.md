@@ -1,30 +1,53 @@
 # Feed U
 
-## Static File Server
-
-To run a file server to serve the static files, please follow the instructions below.
-
-### Prerequisites
+## Prerequisites
 - Node.js
 
-### Installation
+## Setup
 
-1. Run the following to install the dependencies
-
-    ```
-    npm install
-    ```
-
-2. Run the following command to run the server
-    ```
-    node index.js
-    ```
-
-
-## Styling
-
-To have SASS watch for changes in stylesheets and compile to CSS
+Run the following to install project-level dependencies
 
 ```
-sass --watch styles/:css/
+npm install
 ```
+
+and the following to install global dependencies
+
+```
+npm install -g sass browserify watchify grunt-cli
+```
+
+<table>
+    <tr>
+        <th> Dependency
+        <th> Description
+    </tr>
+    <tr>
+        <td> SASS
+        <td> CSS preprocessor
+    <tr>
+        <td> Browserify
+        <td> a tool that bundles static files together
+    </tr>
+    <tr>
+        <td> Watchify
+        <td> runs browserify in watch mode
+    </tr>
+    <tr>
+        <td> Grunt
+        <td> task runner that builds the project
+    </tr>
+<table>
+
+
+## Run
+
+To run the project, simply run the following command
+
+```
+npm run dev
+```
+
+The above command will run an Express (Node.js) app to serve static files, SASS CLI in watch mode to compile CSS, and Browserify in watch mode (Watchify) to bundle JS files.
+
+Each of those commands may be executed separately using ```npm run server```, ```npm run compile-css```, and ```npm run bundle-js``` respectively.

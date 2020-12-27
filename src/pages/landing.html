@@ -8,40 +8,15 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="../css/base.css" />
-    <script src="../libs/jquery/jquery-1.11.1/jquery-1.11.1.min.js"></script>
 
-    <!-- <script>
-        // https://api.jquerymobile.com/mobileinit/
-        // https://api.jquerymobile.com/global-config/
-        $(document).on("mobileinit", function () {
-            //apply overrides here
-            console.log($.mobile)
-        });
-    </script> -->
-
-    <script src="../libs/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
-
-    <script>
-        $(document).ready(function () {
-
-            // Navigate on click submit button
-            // https://jquerymobile.com/upgrade-guide/1.4/#navigation
-            $('#location-input-submit-btn').click(function (event) {
-
-                // IF I WANT TO HANDLE USING ENTER KEY EVENT i can figure out using this
-                // var enterKeyWasPressed = event.keyCode == 13;
-
-                // TODO replace with correct page once it has been implemented
-                $("body").pagecontainer("change", "navigation-test.html");
-            });
-
-        });
-    </script>
-
+    <!-- 
+        If you are using any code that references DOM (like jQuery)
+        or if you do not want this script to block the DOM from loading
+        defer executing this script till DOM is loaded 
+        Refer https://javascript.info/script-async-defer for more
+    -->
+    <script src="../bundle.js"></script>
 </head>
 
 <body>
@@ -63,8 +38,9 @@
             <span class="landing-text" style="margin: 7vh 0vw 1vh 0vw;">GET STARTED</span>
 
             <!-- Search input with action button -->
-            <div id="landing-location-search-input" style="position: relative; margin: 3vh 0vw">
-                <input type="text" name="search-1" id="search-1" placeholder="Enter your location" value="">
+            <div id="landing-location-search" style="position: relative; margin: 3vh 0vw">
+                <input type="text" name="landing-location-search-input" id="landing-location-search-input"
+                    placeholder="Enter your location">
                 <!-- 
                     Submit icon. Layout to the right of search input
                     Refer https://stackoverflow.com/a/14839925/7803975 on positioning of icon
@@ -84,6 +60,23 @@
         <!-- <div data-role="footer">
             <h4>Page Footer</h4>
         </div> -->
+
+        <!-- PAGE SPECIFIC JAVASCRIPT CODE CAN GO HERE -->
+        <script>
+
+            $('#location-input-submit-btn').click(function (event) {
+
+                // refer https://jquerymobile.com/upgrade-guide/1.4/#navigation on how to navigate
+
+                var location = $("#landing-location-search-input").val()
+
+                // navigate user to Home screen when user submits their location
+                // refer https://stackoverflow.com/questions/24173871/what-is-the-mobile-pagecontainer-selector and
+                // https://api.jquerymobile.com/pagecontainer/ for more
+                $(":mobile-pagecontainer").pagecontainer("change", "home.html");
+            });
+        </script>
+
     </div><!-- /page -->
 
 </body>
