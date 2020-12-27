@@ -22,12 +22,9 @@
     }
   },
   "scripts": {
-    "server": "node server.js",
-    "compile-css": "sass --watch ./src/styles/:./src/css/",
-    "bundle-js": "watchify ./src/scripts/index.js -o ./src/bundle.js",
-    "dev": "npm-run-all --parallel server compile-css bundle-js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "grunt"
+    "build": "grunt build",
+    "dev": "grunt dev"
   },
   "repository": {
     "type": "git",
@@ -39,9 +36,7 @@
     "url": "https://github.com/idl99/feed-u/issues"
   },
   "homepage": "https://github.com/idl99/feed-u#readme",
-  "dependencies": {
-    "express": "^4.17.1"
-  },
+  "dependencies": {},
   "devDependencies": {
     "browserify": "~2.36.1",
     "browserify-shim": "~3.0.0",
