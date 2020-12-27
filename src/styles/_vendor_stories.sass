@@ -1,0 +1,53 @@
+body
+    font-family: "Poppins"
+
+    #vendor-stories
+        background-color: #303030
+        text-shadow: none
+
+        #main-container
+            display: flex
+            flex-direction: column
+            position: absolute
+            top: 0
+            left: 0
+            right: 0
+            bottom: 0
+
+            .vendor-details-container
+                display: flex
+
+                .vendor-details
+                    font-size: 12px
+                    color: white
+                    display: flex
+                    flex-direction: row
+                    width: 100%
+                    justify-content: space-between
+
+                    .story-header
+                        display: flex
+                        flex-direction: row
+
+                        #vendor-image
+                            margin-right: 1em
+
+                        #vendor-text
+                            display: flex
+                            flex-direction: column
+
+            .story-playback
+                margin-top: 2em
+                position: absolute
+                top: 46%
+                left: 50%
+                transform: translate(-50%, -50%)
+
+                #video-playback-iframe
+                    width: 100vw
+                    height: 60vh
+                    border: none
+
+        @media screen and (min-width: 768px) and (min-height: 768px)
+            .vendor-details
+                padding: 1em 1em 0em 1em

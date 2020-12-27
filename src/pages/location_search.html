@@ -7,81 +7,16 @@
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<link rel="preconnect" href="https://fonts.gstatic.com">
-	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../css/base.css" />
 
-	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
-	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-	<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+	<script src="../bundle.js"></script>
 
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4fxzjh0_9j9aIXCecrSeDxBztKU5Lzao&callback=initMap"
 		defer></script>
-	<style>
-		body {
-			font-family: "Poppins";
-		}
 
-		#map {
-			height: 50vh;
-			width: 100%;
-		}
-
-		.user-location-details-container {
-			display: flex;
-			flex-direction: column;
-		}
-
-		.location-details-header {
-			display: flex;
-			justify-content: space-between;
-		}
-
-		#favourite-icon {
-			padding-top: 0.75em;
-			padding-right: 0.50em;
-		}
-
-		.selected-location-details-container {
-			display: flex;
-		}
-
-		.selected-location-details {
-			display: flex;
-			flex-direction: column;
-			padding-left: 0.5em;
-		}
-
-		#selected-street {
-			margin: 0;
-		}
-
-		#selected-town {
-			margin: 0;
-		}
-
-		.additional-location-details-container {
-			display: flex;
-			justify-content:
-				space-between;
-			margin-top: 1em;
-		}
-
-		#house-no {
-			width: 75%;
-		}
-
-		#landmark {
-			margin-left: 0.5em;
-			width: 100%;
-		}
-
-		#set-location-button-text {
-			text-align: center;
-		}
-	</style>
 	<script>
 		function initMap() {
-			const map = new google.maps.Map(document.getElementById("map"), {
+			const map = new google.maps.Map(document.getElementById("map-selection"), {
 				zoom: 14,
 				center: { lat: 51.517582, lng: -0.141525 },
 			});
@@ -118,7 +53,7 @@
 </head>
 
 <body>
-	<div data-role="page" id="page1">
+	<div data-role="page" id="location_search">
 		<div data-role="header" data-position="fixed">
 			<a href="#" data-icon="back" class="ui-btn-left">Back</a>
 			<h1>Header Bar</h1>
@@ -127,7 +62,7 @@
 			<form class="ui-filterable">
 				<input id="filterBasic-input" data-type="search">
 			</form>
-			<div id="map">
+			<div id="map-selection">
 				<h2> Map Here</h2>
 			</div>
 			<div class="user-location-details-container">
