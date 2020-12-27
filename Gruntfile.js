@@ -33,6 +33,7 @@ module.exports = function (grunt) {
         sync: {
             // Keeps directories in sync and
             // compared to grunt-contrib-copy, sync only copies newly changed files
+            // Refer https://www.webfoobar.com/node/78 for more
             main: {
                 files: [
                     { expand: true, cwd: 'src/', src: ['pages/*'], dest: 'dist' },
