@@ -6,91 +6,25 @@
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<link rel="preconnect" href="https://fonts.gstatic.com">
-	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../css/base.css" />
 
-	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
-	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-	<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+	<script src="../bundle.js"></script>
 
-	<style>
-		body {
-			font-family: "Poppins";
-		}
-
-		#page {
-			background-color: #303030;
-			text-shadow: none;
-		}
-
-		#main_container {
-			display: flex;
-			flex-direction: column;
-			position: absolute;
-			top: 0;
-			left: 0;
-			right: 0;
-			bottom: 0;
-		}
-
-		.header {
-			display: flex;
-		}
-
-		img {
-			margin-right: 1em;
-		}
-
-		.vendor_details {
-			font-size: 12px;
-			color: white;
-			display: flex;
-			flex-direction: row;
-			width: 100%;
-			justify-content: space-between;
-		}
-
-		.story {
-			margin-top: 2em;
-			position: absolute;
-			top: 46%;
-			left: 50%;
-			transform: translate(-50%, -50%);
-		}
-
-		#video-playback-iframe {
-			width: 100vw;
-			height: 60vh;
-			border: none;
-		}
-
-		@media screen and (min-width: 768px) and (min-height: 768px) {
-			.vendor_details {
-				padding: 1em 1em 0em 1em;
-			}
-		}
-
-		/* @media screen and (orientation:portrait) {
-			.vendor_details {
-			}
-		} */
-	</style>
 </head>
 
 <body>
-	<div data-role="page" id="page">
-		<div role="main" class="ui-content" id="main_container">
-			<div class="header">
-				<div class="vendor_details">
-					<div class="story-restaurant-details-text" style="display: flex; flex-direction: row;">
-						<img src="../assets/stories_images/story.png" alt="Story Outline">
-						<div style="display: flex; flex-direction: column;">
+	<div data-role="page" id="vendor-stories">
+		<div role="main" class="ui-content" id="main-container">
+			<div class="vendor-details-container">
+				<div class="vendor-details">
+					<div class="story-header">
+						<img id="vendor-image" src="../assets/stories_images/story.png" alt="Story Outline">
+						<div id="vendor-text">
 							<span>Home Cooking</span>
 							<span>1 hour ago</span>
 						</div>
 					</div>
-					<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-						xmlns="http://www.w3.org/2000/svg">
+					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<rect width="24" height="24" rx="4" fill="white" />
 						<path
 							d="M21.75 0H2.25C1.00781 0 0 1.15179 0 2.57143V21.4286C0 22.8482 1.00781 24 2.25 24H21.75C22.9922 24 24 22.8482 24 21.4286V2.57143C24 1.15179 22.9922 0 21.75 0ZM17.8312 15.5625C18.0562 15.8196 18.0562 16.2375 17.8312 16.4946L15.9328 18.6643C15.7078 18.9214 15.3422 18.9214 15.1172 18.6643L12 15.0696L8.88281 18.6643C8.65781 18.9214 8.29219 18.9214 8.06719 18.6643L6.16875 16.4946C5.94375 16.2375 5.94375 15.8196 6.16875 15.5625L9.31406 12L6.16875 8.4375C5.94375 8.18036 5.94375 7.7625 6.16875 7.50536L8.06719 5.33571C8.29219 5.07857 8.65781 5.07857 8.88281 5.33571L12 8.93036L15.1172 5.33571C15.3422 5.07857 15.7078 5.07857 15.9328 5.33571L17.8312 7.50536C18.0562 7.7625 18.0562 8.18036 17.8312 8.4375L14.6859 12L17.8312 15.5625Z"
@@ -98,7 +32,7 @@
 					</svg>
 				</div>
 			</div>
-			<div class="story">
+			<div class="story-playback">
 				<iframe id="video-playback-iframe" src="https://giphy.com/embed/IdaOuMzxgUkpAhmmwy"
 					allowfullscreen></iframe>
 			</div>
