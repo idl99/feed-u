@@ -5371,4 +5371,126 @@ body .container .rating_bar {
   border-radius: 25px;
 }
 
+body {
+  font-family: "Poppins";
+}
+body #vendor-stories {
+  background-color: #303030;
+  text-shadow: none;
+}
+body #vendor-stories #main-container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+body #vendor-stories #main-container .vendor-details-container {
+  display: flex;
+}
+body #vendor-stories #main-container .vendor-details-container .vendor-details {
+  font-size: 12px;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+}
+body #vendor-stories #main-container .vendor-details-container .vendor-details .story-header {
+  display: flex;
+  flex-direction: row;
+}
+body #vendor-stories #main-container .vendor-details-container .vendor-details .story-header #vendor-image {
+  margin-right: 1em;
+}
+body #vendor-stories #main-container .vendor-details-container .vendor-details .story-header #vendor-text {
+  display: flex;
+  flex-direction: column;
+}
+body #vendor-stories #main-container .story-playback {
+  margin-top: 2em;
+  position: absolute;
+  top: 46%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+body #vendor-stories #main-container .story-playback #video-playback-iframe {
+  width: 100vw;
+  height: 60vh;
+  border: none;
+}
+@media screen and (min-width: 768px) and (min-height: 768px) {
+  body #vendor-stories .vendor-details {
+    padding: 1em 1em 0em 1em;
+  }
+}
+
+body {
+  font-family: "Poppins";
+}
+body #map-selection {
+  height: 50vh;
+  width: 100%;
+}
+body .user-location-details-container {
+  display: flex;
+  flex-direction: column;
+}
+body .user-location-details-container .location-details-header {
+  display: flex;
+  justify-content: space-between;
+}
+body .user-location-details-container .location-details-header #favourite-icon {
+  padding-top: 0.75em;
+  padding-right: 0.5em;
+}
+body .user-location-details-container .selected-location-details-container {
+  display: flex;
+}
+body .user-location-details-container .selected-location-details-container .selected-location-details {
+  display: flex;
+  flex-direction: column;
+  padding-left: 0.5em;
+}
+body .user-location-details-container .selected-location-details-container .selected-location-details #selected-street {
+  margin: 0;
+}
+body .user-location-details-container .selected-location-details-container .selected-location-details #selected-town {
+  margin: 0;
+}
+body .user-location-details-container .additional-location-details-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1em;
+}
+body .user-location-details-container .additional-location-details-container #house-no {
+  width: 75%;
+}
+body .user-location-details-container .additional-location-details-container #landmark {
+  margin-left: 0.5em;
+  width: 100%;
+}
+body #set-location-button-text {
+  text-align: center;
+}
+
+body {
+  font-family: "Poppins";
+}
+body #map {
+  height: 200px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+body #saved-locations {
+  display: none;
+}
+body #saved-locations #list-item {
+  text-align: center;
+  font-size: 16px;
+}
+
 /*# sourceMappingURL=base.css.map */
