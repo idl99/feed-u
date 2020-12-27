@@ -14,7 +14,7 @@ npm install
 and the following to install global dependencies
 
 ```
-npm install -g sass browserify watchify grunt-cli
+npm install -g sass browserify grunt-cli
 ```
 
 <table>
@@ -28,10 +28,6 @@ npm install -g sass browserify watchify grunt-cli
     <tr>
         <td> Browserify
         <td> a tool that bundles static files together
-    </tr>
-    <tr>
-        <td> Watchify
-        <td> runs browserify in watch mode
     </tr>
     <tr>
         <td> Grunt
@@ -48,6 +44,6 @@ To run the project, simply run the following command
 npm run dev
 ```
 
-The above command will run an Express (Node.js) app to serve static files, SASS CLI in watch mode to compile CSS, and Browserify in watch mode (Watchify) to bundle JS files.
-
-Each of those commands may be executed separately using ```npm run server```, ```npm run compile-css```, and ```npm run bundle-js``` respectively.
+The above command will execute a Grunt task that 
+- sets up a static file server which supports live reloads
+- watches for file changes and rebuilds the project (compile SASS, bundle JS, sync dist folder etc.)
