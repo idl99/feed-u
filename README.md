@@ -14,7 +14,7 @@ npm install
 and the following to install global dependencies
 
 ```
-npm install -g sass browserify watchify
+npm install -g sass browserify watchify grunt-cli
 ```
 
 <table>
@@ -32,6 +32,10 @@ npm install -g sass browserify watchify
     <tr>
         <td> Watchify
         <td> runs browserify in watch mode
+    </tr>
+    <tr>
+        <td> Grunt
+        <td> task runner that builds the project
     </tr>
 <table>
 
