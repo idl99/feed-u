@@ -5257,9 +5257,6 @@ html .ui-field-contain > label + .ui-flipswitch, html .ui-popup .ui-field-contai
   padding: 0.2em;
 }
 
-body {
-  font-family: "Poppins";
-}
 body #landing {
   background-image: url("../assets/backgrounds/landing-page-mock.jpg");
   background-color: #cccccc;
@@ -5330,9 +5327,6 @@ body #landing #background-filter {
   }
 }
 
-body {
-  font-family: "Poppins";
-}
 body .container {
   display: flex;
   flex-direction: column;
@@ -5491,6 +5485,10 @@ body #saved-locations {
 body #saved-locations #list-item {
   text-align: center;
   font-size: 16px;
+}
+
+body {
+  font-family: "Poppins";
 }
 
 /*# sourceMappingURL=base.css.map */
