@@ -14,7 +14,35 @@
 
 <body>
 	<div data-role="page" id="home">
+		<script>
+			function onStoryClick(event) {
+				console.log('Clicked a story. Opening the story.')
+
+				// refer https://jquerymobile.com/upgrade-guide/1.4/#navigation on how to navigate
+
+				// navigate user to Home screen when user submits their location
+				// refer https://stackoverflow.com/questions/24173871/what-is-the-mobile-pagecontainer-selector and
+				// https://api.jquerymobile.com/pagecontainer/ for more
+				$(":mobile-pagecontainer").pagecontainer("change", "vendor_stories.html", { transition: "slide" });
+			};
+		</script>
 		<div role="main" class="ui-content">
+			<p>Stories</p>
+			<div style="display: flex; justify-content: flex-start; overflow: auto;">
+				<img id="the-story" src="../assets/stories_images/story.png"
+					style="margin-left: 0.25em; margin-right: 0.25em;" onclick="onStoryClick()">
+				<img src="../assets/stories_images/story.png" style="margin-left: 0.25em; margin-right: 0.25em;">
+				<img src="../assets/stories_images/story.png" style="margin-left: 0.25em; margin-right: 0.25em;">
+				<img src="../assets/stories_images/story.png" style="margin-left: 0.25em; margin-right: 0.25em;">
+				<img src="../assets/stories_images/story.png" style="margin-left: 0.25em; margin-right: 0.25em;">
+				<img src="../assets/stories_images/story.png" style="margin-left: 0.25em; margin-right: 0.25em;">
+				<img src="../assets/stories_images/story.png" style="margin-left: 0.25em; margin-right: 0.25em;">
+				<img src="../assets/stories_images/story.png" style="margin-left: 0.25em; margin-right: 0.25em;">
+				<img src="../assets/stories_images/story.png" style="margin-left: 0.25em; margin-right: 0.25em;">
+				<img src="../assets/stories_images/story.png" style="margin-left: 0.25em; margin-right: 0.25em;">
+				<img src="../assets/stories_images/story.png" style="margin-left: 0.25em; margin-right: 0.25em;">
+			</div>
+			<p>Categories</p>
 			<!-- Adding listview for sorting(there's an alignment issue)-->
 			<!-- <div class="container" data-role="listview" data-filter="true" data-filter-placeholder="Search fruits..."> -->
 			<div class="container">
