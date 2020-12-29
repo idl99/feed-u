@@ -11,8 +11,11 @@
         <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
         <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
         <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+        <link rel="stylesheet" href="../css/base.css" />
+        <script src="../bundle.js"></script>
     
-        <style>
+        <!-- <style>
             body {
                 font-family: "Poppins";
             }
@@ -78,7 +81,7 @@
                 margin: 0;
                 
             }
-        </style>
+        </style> -->
         <script>
             $(document).ready(function () {
                 $(".open").click(function () {
@@ -91,6 +94,76 @@
         </script>
         </head>
         <body>
+            <style>
+                body {
+                    font-family: "Poppins";
+                }
+                .container {
+                    display: flex;
+                    flex-direction: column;
+                }
+                .poi_container {
+                    display: flex;
+                    flex: 1 1 auto;
+                    justify-content: top;
+                    height: 65px;          
+                    width: 335px;
+                    margin-bottom: 5%;
+                }
+                .poi_image {
+                    float: left;
+                }
+                .poi_content {
+                    display: flex;
+                    flex-direction: column;
+                    width: 100%;
+                    float: right;
+                    margin-left: 5%;
+                }
+                .status_bar {
+                    display: flex;
+                    align-items: top;
+                    margin-top: 2%;
+                    font-size: 12px;
+                }
+                .rating_bar {
+                    display: flex;
+                    align-items: center;
+                    height: 20px;
+                    width: 70px;
+                    font-size: 11px;
+                    background: #F2F2F2;
+                    border-radius: 25px;
+                    color: black;
+                }
+                .item_image{
+                    display: block;
+                    margin-left: auto;
+                    margin-right: auto;
+                    width: 80%;
+                }
+                .customize_container{
+                    display: flex;
+                    justify-content: flex-start;
+                    overflow: auto;
+                }
+                .customize_container > div{
+                    margin: 10px;
+                    font-size: 12px;
+                }
+                .pop-outer{
+                }
+                .pop-inner{
+                    max-width: 294px;
+                    max-height: 645px;
+                    padding: 2em 2em 2em 2em;
+                    margin: 0;
+                    
+                }
+            </style>
+
+
+            <!-- end of styles -->
             <button class="open">
                 <!----vendors items contents---------------------------------->
                 <div class="container">
@@ -225,6 +298,14 @@
                     <button style="width: 100%; text-align: center; background: #EB5757; color: white; margin: 0px; padding: 0px; border-radius: 0%;"><h4> Add to Cart</h4></button>
                    </div>
             </div>
+            <script>
+                const {user, cart} = app;
+                const details = cart.summary();
+                console.log(details);
+
+                $("#checkout-restaurant-name").text(summary.restaurant.name);
+
+            </script>
         </div>
     </body>
 </html>
