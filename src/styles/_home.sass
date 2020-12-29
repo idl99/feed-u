@@ -1,4 +1,14 @@
+// We don't need to include the underscore when referring to a partial
+@use 'variables'
+
 body
+
+    @media screen and ( min-width: variables.$dimens_ipad)
+        .ui-panel-dismiss
+            display: none // This disables the ability to dismiss the panel on larger screens
+
+        #navigation-menu-hamburger
+            display: none // Hide the hamburger icon on larger screens to make the panel non-collapsible
 
     .container
         display: flex
