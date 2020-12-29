@@ -475,8 +475,8 @@
 			var vendors = datastore.getAllVendors(); // TODO refactor this once mock data is removed
 
 			// render items in order summary
-			vendors.forEach(({ vendorImageLocation, vendorName, vendorCatergories, vendorRatings, deliveryTime }) => {
-				var markupP1 = `<div class="poi_container">
+			vendors.forEach(({ vendorId, vendorImageLocation, vendorName, vendorCatergories, vendorRatings, deliveryTime }) => {
+				var markupP1 = `<div class="poi_container" vendor-id="${vendorId}">
 					<img src=${vendorImageLocation} class="poi_image">
 					<div class="poi_content">
 						<div>${vendorName}</div>
@@ -548,6 +548,13 @@
 					})
 				}
 			})
+
+			// Handle Vendor POI click event
+			$(".poi_container").click(function () {
+				var vendorId = $(this).attr("vendor-id"); // which vendor card was clicked
+				console.log("Vendor Id is ", vendorId)
+
+			});
 
 			$("#home-footer").on("click", function (event) {
 				$(":mobile-pagecontainer").pagecontainer("change", "checkout.html");
