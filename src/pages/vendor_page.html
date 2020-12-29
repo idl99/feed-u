@@ -6,93 +6,88 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
-    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-
-    <style>
-        body {
-            font-family: "Poppins";
-        }
-
-        .container {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .poi_container {
-            display: flex;
-            flex: 1 1 auto;
-            margin-bottom: 2.5%;
-        }
-
-        .poi_text_content {
-            display: flex;
-            width: 100%;
-        }
-
-        .poi_details {
-            display: flex;
-            flex-direction:
-                column;
-            margin-left: 5%;
-        }
-
-        .poi_title_description {
-            width: 92%;
-            text-align: justify;
-            text-justify: inter-word;
-        }
-
-        #poi_title {
-            margin: 0;
-            font-size: 14px;
-        }
-
-        #poi_description {
-            margin-top: 4%;
-            margin-bottom: 4%;
-            margin-left: 0;
-            margin-right: 0;
-            font-size: 11px;
-        }
-
-        .poi_ratings_bar {
-            display: flex;
-            align-items: center;
-            height: 20px;
-            width: 70px;
-            font-size: 11px;
-            background: #F2F2F2;
-            border-radius: 25px;
-        }
-
-        #poi_ratings_image {
-            margin-top: 2%;
-        }
-
-        #poi_ratings_text {
-            margin-left: 3%;
-        }
-
-        .poi_price_tag {
-            width: 60%;
-        }
-
-        #poi_price {
-            text-align: right;
-            font-size: 14px;
-            margin: 0;
-        }
-    </style>
+    <link rel="stylesheet" href="../css/base.css" />
+    <script src="../bundle.js"></script>
 
 </head>
 
 <body>
     <div data-role="page" id="Page1">
+        <style>
+            body {
+                font-family: "Poppins";
+            }
+
+            .container {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .item_poi_container {
+                display: flex;
+                flex: 1 1 auto;
+                margin-bottom: 2.5%;
+            }
+
+            .poi_text_content {
+                display: flex;
+                width: 100%;
+            }
+
+            .poi_details {
+                display: flex;
+                flex-direction:
+                    column;
+                margin-left: 5%;
+            }
+
+            .poi_title_description {
+                width: 92%;
+                text-align: justify;
+                text-justify: inter-word;
+            }
+
+            #poi_title {
+                margin: 0;
+                font-size: 14px;
+            }
+
+            #poi_description {
+                margin-top: 4%;
+                margin-bottom: 4%;
+                margin-left: 0;
+                margin-right: 0;
+                font-size: 11px;
+            }
+
+            .poi_ratings_bar {
+                display: flex;
+                align-items: center;
+                height: 20px;
+                width: 70px;
+                font-size: 11px;
+                background: #F2F2F2;
+                border-radius: 25px;
+            }
+
+            #poi_ratings_image {
+                margin-top: 2%;
+            }
+
+            #poi_ratings_text {
+                margin-left: 3%;
+            }
+
+            .poi_price_tag {
+                width: 60%;
+            }
+
+            #poi_price {
+                text-align: right;
+                font-size: 14px;
+                margin: 0;
+            }
+        </style>
         <div data-role="header" data-position="fixed">
             <a href="#" data-icon="back" class="ui-btn-left">Back</a>
             <h1>Header Bar</h1>
@@ -155,7 +150,7 @@
             </div>
 
             <div class="container">
-                <div class="poi_container">
+                <!-- <div class="poi_container">
                     <div>
                         <img src="../assets/vendor_page_images/tom_yum_soup.jpg">
                     </div>
@@ -181,8 +176,8 @@
                             <p id="poi_price">LKR 800</p>
                         </div>
                     </div>
-                </div>
-                <div class="poi_container">
+                </div> -->
+                <!-- <div class="poi_container">
                     <div>
                         <img src="../assets/vendor_page_images/crispy_chicken_burger.jpg">
                     </div>
@@ -235,7 +230,7 @@
                             <p id="poi_price">LKR 600</p>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
         <div data-role="footer" data-position="fixed">
@@ -244,6 +239,51 @@
 
             </div>
         </div>
+        <script>
+            const { datastore } = app;
+            console.log(datastore.getSpecificVendor('v1'));
+            console.log(datastore.getSpecificItem('v1i1'));
+
+            var vendor = datastore.getSpecificVendor('v1'); // TODO refactor this once mock data is removed
+
+            // render items in order summary
+            vendor.items.forEach(({ itemId, itemImageLocation, itemTitle, itemDescription, itemRatings, itemPrice }) => {
+                var markup = `<div class="item_poi_container" item-id="${itemId}">
+                    <div>
+                        <img src=${itemImageLocation}>
+                    </div>
+                    <div class="poi_text_content">
+                        <div class="poi_details">
+                            <div class="poi_title_description">
+                                <p id="poi_title">${itemTitle}</p>
+                                <p id="poi_description">${itemDescription}</p>
+                            </div>
+                            <div class="poi_ratings_bar">
+                                <p id="poi_ratings_text"><svg id="poi_ratings_image" width="12" height="11"
+                                        viewBox="0 0 12 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
+                                            fill="#F2C94C" />
+                                    </svg>&nbsp;&nbsp;${itemRatings.itemRatingValue}&nbsp;
+                                <p>(${itemRatings.itemNoOfRatings})</p>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="poi_price_tag">
+                            <p id="poi_price">LKR ${itemPrice}</p>
+                        </div>
+                    </div>
+                </div>`;
+                $('.container').append(markup)
+            });
+
+            // Handle Vendor POI click event
+            $(".item_poi_container").click(function () {
+                var itemId = $(this).attr("item-id"); // which vendor card was clicked
+                console.log("Item Id is ", itemId)
+
+            });
+        </script>
     </div>
 </body>
 
