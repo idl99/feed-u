@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+       
         <title>Item Detail Popup</title>
         
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,9 +12,6 @@
         <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
         <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
         <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-
-        <link rel="stylesheet" href="../css/base.css" />
-        <script src="../bundle.js"></script>
     
         <!-- <style>
             body {
@@ -161,8 +159,6 @@
                     
                 }
             </style>
-
-
             <!-- end of styles -->
             <button class="open">
                 <!----vendors items contents---------------------------------->
@@ -170,7 +166,7 @@
                     <div class="poi_container">
                         <img src="../assets/vendor_list_view_images/burgers_ahouy.jpg" class="poi_image">
                         <div class="poi_content">
-                            <div>Burgers Ahouy!</div>
+                            <div id="vendor-name">Burgers Ahouy!</div>
                             <div style="font-size: 12px; margin-top: 2%;">
                                 <svg width="5" height="5" viewBox="0 0 5 5" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <circle r="2.5" transform="matrix(1 0 0 -1 2.5 2.5)" fill="#C4C4C4" />
@@ -213,8 +209,7 @@
                             color: black;">
                         <img style="display:block; width: 100%; height: auto; margin: 0;"
                             src="../assets/vendor_page_images/tom_yum_soup.jpg">
-                        <div style="
-                                    position: absolute;
+                        <div style="position: absolute;
                                     bottom: 0;
                                     padding-top: 0.25em;
                                     padding-bottom: 0.25em;
@@ -243,7 +238,7 @@
                             </div>
                         </div>
                     </div>
-                    <p style="text-align: justify; text-justify: inter-word;">This soup is a special dish prepared by world renowned chef Gonagala Ramsey, made to a secret recipe that has been passed on from his Chinese ancestors.</p>
+                    <p id="item-description" style="text-align: justify; text-justify: inter-word;">This soup is a special dish prepared by world renowned chef Gonagala Ramsey, made to a secret recipe that has been passed on from his Chinese ancestors.</p>
                     <!-- Customization options container -->
                     <div class="customize_container">
                         <div>
@@ -259,7 +254,7 @@
                         </div>
                         <div>
                             <form>
-                                <p>Choice of Size</p>
+                                <p>Level of Spice</p>
                                 <input type="radio" id="large2" name="large2" value="large2">
                                 <label for="large2">Large</label><br>
                                 <input type="radio" id="regular2" name="regular2" value="regular2">
@@ -270,7 +265,7 @@
                         </div>
                         <div>
                             <form>
-                                <p>Choice of Size</p>
+                                <p>Level of Salt</p>
                                 <input type="radio" id="large1" name="large1" value="large1">
                                 <label for="large1">Large</label><br>
                                 <input type="radio" id="regular1" name="regular1" value="regular1">
@@ -283,7 +278,7 @@
                     <div>
                     <!--end of customization container ----->
                              <p style="margin: 0; padding: 0;">Special Instructions</p>
-                             <input type="text" name="text-6" id="text-6" value="" placeholder="Add a note (extra salt, no onions, etc.)">
+                             <input type="text" name="sp-instr" id="sp-instr" value="" placeholder="Add a note (extra salt, no onions, etc.)">
                     </div>
                     <div style="display: flex; justify-content: center; padding: 1em 1em 1em 1em;">
                     <div style="display: flex; justify-content: center; display: flex; justify-content: space-evenly; background-color: #F2F2F2; border-radius: 100px; width: 50%;">
@@ -295,16 +290,31 @@
                     <p>Comments</p>
                 </div>
                 <div style="display: flex; justify-content: center;">
-                    <button style="width: 100%; text-align: center; background: #EB5757; color: white; margin: 0px; padding: 0px; border-radius: 0%;"><h4> Add to Cart</h4></button>
+                    <button id="addToCartBtn" style="width: 100%; text-align: center; background: #EB5757; color: white; margin: 0px; padding: 0px; border-radius: 0%;"><h4> Add to Cart</h4></button>
                    </div>
             </div>
             <script>
-                const {user, cart} = app;
-                const details = cart.summary();
-                console.log(details);
+                // const cart = app.cart;
+                //     const info = cart.addItemToCart({
+                //         vendor: {
+                //             name: 'Burgers Ahoy!',
+                //             eta: '30 - 40 mins'
+                //         },
+                //         item:
+                //         {
+                //             name: 'Tom Yump Soup',
+                //             price: 400,
+                //             quantity: 1,
+                //             notes: "Less spicy",
+                //         }
 
-                $("#checkout-restaurant-name").text(summary.restaurant.name);
+                //     });
 
+                $('addToCartBtn').click(function(event){
+                    app.cart.addItemToCart({
+                        ////////////
+                    })
+                })
             </script>
         </div>
     </body>
