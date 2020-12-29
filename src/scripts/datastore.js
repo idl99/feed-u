@@ -1,4 +1,4 @@
-const data = {
+const data = Object.freeze({
     vendors: [
         {
             "vendorId": "v1",
@@ -25,28 +25,41 @@ const data = {
                         "itemNoOfRatings": 47
                     },
                     "itemPrice": 800
+                },
+                // TODO remove duplicate item here
+                {
+                    "itemImageLocation": "../assets/vendor_page_images/tom_yum_soup.jpg",
+                    "itemId": "v1i2",
+                    "itemTitle": "Tom Yum Soup",
+                    "itemDescription": "Picked from the fresh vegetables and fish from the with special Chicken Broth.",
+                    "itemRatings": {
+                        "itemRatingValue": 4.6,
+                        "itemNoOfRatings": 47
+                    },
+                    "itemPrice": 800
                 }
             ],
         },
         {
-            "vendorId": "v1",
-            "vendorImageLocation": "../assets/vendor_list_view_images/burgers_ahouy.jpg",
-            "vendorName": "Burgers Ahouy!",
+            "vendorId": "v2",
+            "vendorImageLocation": "../assets/vendor_list_view_images/pizza_palpatha.jpg",
+            "vendorName": "Pizza Palpatha",
             "vendorCatergories": [
-                "Burgers",
+                "Italian",
                 "American",
-                "Mexican"
+                "Pizza"
             ],
             "vendorRatings": {
-                "vendorRatingValue": 4.6,
-                "vendorNoOfRatings": 100
+                "vendorRatingValue": 4.8,
+                "vendorNoOfRatings": 99
             },
-            "location": "Colombo 3",
-            "deliveryTime": "25-30 mins",
+            "location": "Colombo 4",
+            "deliveryTime": "33-40 mins",
             "items": [
+                // TODO remove duplicate items here
                 {
                     "itemImageLocation": "../assets/vendor_page_images/tom_yum_soup.jpg",
-                    "itemId": "v1i1",
+                    "itemId": "v2i1",
                     "itemTitle": "Tom Yum Soup",
                     "itemDescription": "Picked from the fresh vegetables and fish from the with special Chicken Broth.",
                     "itemRatings": {
@@ -58,7 +71,7 @@ const data = {
             ],
         },
     ]
-}
+});
 
 module.exports = function () {
     return {
