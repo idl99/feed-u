@@ -550,10 +550,10 @@
 			})
 
 			// Handle Vendor POI click event
+			// https://stackoverflow.com/questions/943987/add-jquery-click-handler-to-multiple-elements
 			$(".poi_container").click(function () {
 				var vendorId = $(this).attr("vendor-id"); // which vendor card was clicked
-				console.log("Vendor Id is ", vendorId)
-
+				console.log('Vendor id is ', vendorId);
 			});
 
 			$("#home-footer").on("click", function (event) {
