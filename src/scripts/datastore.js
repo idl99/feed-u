@@ -13,7 +13,7 @@ const data = {
                 "vendorNoOfRatings": 100
             },
             "location": "Colombo 3",
-            "delieveryTime": "25-30 mins",
+            "deliveryTime": "25-30 mins",
             "items": [
                 {
                     "itemImageLocation": "../assets/vendor_page_images/tom_yum_soup.jpg",
