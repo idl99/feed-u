@@ -7,7 +7,10 @@ cart.init();
 var user = require('./user')
 user.init();
 
+var datastore = require('./datastore')
+
 window.app = {
     cart,
     user,
+    datastore
 }
