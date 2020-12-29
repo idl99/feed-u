@@ -55,27 +55,27 @@
             const { user, cart } = app;
             const summary = cart.summary();
 
-            $("#checkout-restaurant-name").text(summary.vendor.name);
-            $("#checkout-eta").text(summary.vendor.eta);
+            $("#checkout-restaurant-name").text(summary.vendor.vendorName);
+            $("#checkout-eta").text(summary.vendor.deliveryTime);
             $("#checkout-delivery-location").text(user.getDetails().location.display);
 
 
             var items = new Array(5).fill([...summary.items]).flat() || []; // TODO refactor this once mock data is removed
 
             // Calculate bill total
-            var billTotal = items.reduce((sum, { price }) => {
-                return sum + price;
+            var billTotal = items.reduce((sum, { itemPrice }) => {
+                return sum + itemPrice;
             }, 0);
             var paymentMethod = 'CASH' // TODO replace
             $("#checkout-payment-method-container").text(`Paying ${billTotal} By ${paymentMethod}`);
 
             // render items in order summary
-            items.forEach(({ quantity, name, price }) => {
+            items.forEach(({ quantity, itemName, itemPrice }) => {
                 var markup =
                     `<div class="checkout-item">
                         <div class="checkout-item-quantity">${quantity} X </div>
-                        <div class="checkout-item-name">${name}</div>
-                        <div class="checkout-item-price">${price}</div>
+                        <div class="checkout-item-name">${itemName}</div>
+                        <div class="checkout-item-price">${itemPrice}</div>
                     </div>`;
                 $('#checkout-items-grid').append(markup)
             });
