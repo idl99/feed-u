@@ -14,19 +14,6 @@
 
 <body>
 	<div data-role="page" id="home" class="ui-responsive-panel">
-		<script>
-			function onStoryClick(event) {
-				console.log('Clicked a story. Opening the story.')
-
-				// refer https://jquerymobile.com/upgrade-guide/1.4/#navigation on how to navigate
-
-				// navigate user to Home screen when user submits their location
-				// refer https://stackoverflow.com/questions/24173871/what-is-the-mobile-pagecontainer-selector and
-				// https://api.jquerymobile.com/pagecontainer/ for more
-				$(":mobile-pagecontainer").pagecontainer("change", "vendor_stories.html", { transition: "slide" });
-			};
-		</script>
-
 		<!-- 
 			To keep navigation fixed when page is scrolling 
 			https://stackoverflow.com/a/16787000/7803975 -->
@@ -60,7 +47,7 @@
 			<!-- Adding listview for sorting(there's an alignment issue)-->
 			<!-- <div class="container" data-role="listview" data-filter="true" data-filter-placeholder="Search fruits..."> -->
 			<div class="container">
-				<div class="poi_container">
+				<!-- <div class="poi_container">
 					<img src="../assets/vendor_list_view_images/burgers_ahouy.jpg" class="poi_image">
 					<div class="poi_content">
 						<div>Burgers Ahouy!</div>
@@ -89,8 +76,8 @@
 							<div style="display: flex; align-items: center; margin-left: 2%;">25 - 30 mins</div>
 						</div>
 					</div>
-				</div>
-				<div class="poi_container">
+				</div> -->
+				<!-- <div class="poi_container">
 					<img src="../assets/vendor_list_view_images/pizza_palpatha.jpg" class="poi_image">
 					<div class="poi_content">
 						<div>Pizza Palpatha</div>
@@ -459,13 +446,69 @@
 							<div style="display: flex; align-items: center; margin-left: 2%;">20 - 50 mins</div>
 						</div>
 					</div>
-				</div>
+				</div> -->
 			</div>
 		</div>
 
 		<div id="home-footer" data-role="footer" data-position="fixed" data-tap-toggle="false">
 			<h4>CHECKOUT</h4>
 		</div>
+
+		<script>
+			function onStoryClick(event) {
+				console.log('Clicked a story. Opening the story.');
+
+				// refer https://jquerymobile.com/upgrade-guide/1.4/#navigation on how to navigate
+
+				// navigate user to Home screen when user submits their location
+				// refer https://stackoverflow.com/questions/24173871/what-is-the-mobile-pagecontainer-selector and
+				// https://api.jquerymobile.com/pagecontainer/ for more
+				$(":mobile-pagecontainer").pagecontainer("change", "vendor_stories.html", { transition: "slide" });
+			};
+			// The code below uses ES6 syntax since modern browsers support it (Chrome / Edge versions released after 2016)
+			// Refer https://www.w3schools.com/js/js_versions.asp for more
+
+			const { datastore } = app;
+			console.log(datastore.getSpecificVendor('v1'));
+			console.log(datastore.getSpecificItem('v1i1'));
+
+			var vendors = datastore.getAllVendors(); // TODO refactor this once mock data is removed
+
+			// render items in order summary
+			vendors.forEach(({ vendorImageLocation, vendorName, vendorCatergories, vendorRatings, deliveryTime }) => {
+				var markupP1 = `<div class="poi_container">
+					<img src=${vendorImageLocation} class="poi_image">
+					<div class="poi_content">
+						<div>${vendorName}</div>
+						<div style="font-size: 12px; margin-top: 2%;">`
+				var markupP2 = ``
+				vendorCatergories.forEach((category) => {
+					markupP2 = markupP2 + `<svg width="5" height="5" viewBox="0 0 5 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<circle r="2.5" transform="matrix(1 0 0 -1 2.5 2.5)" fill="#C4C4C4" />
+							</svg>
+							${category}`
+				});
+				var markupP3 =
+					`</div>
+						<div class="status_bar">
+							<div class="rating_bar">
+								<p><svg width="12" height="11" viewBox="0 0 12 11" fill="none"
+										xmlns="http://www.w3.org/2000/svg">
+										<path
+											d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
+											fill="#F2C94C" />
+									</svg> ${vendorRatings.vendorRatingValue}
+								<p>(${vendorRatings.vendorNoOfRatings})</p>
+								</p>
+							</div>
+							<div style="display: flex; align-items: center; margin-left: 2%;">${deliveryTime}</div>
+						</div>
+					</div>
+				</div>`
+				var markup = markupP1 + markupP2 + markupP3;
+				$('.container').append(markup)
+			});
+		</script>
 
 		<script>
 			var screenDimens = {
