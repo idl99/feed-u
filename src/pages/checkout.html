@@ -54,10 +54,9 @@
             // Refer https://www.w3schools.com/js/js_versions.asp for more
             const { user, cart } = app;
             const summary = cart.summary();
-            console.log(summary.restaurant.name);
 
-            $("#checkout-restaurant-name").text(summary.restaurant.name);
-            $("#checkout-eta").text(summary.restaurant.eta);
+            $("#checkout-restaurant-name").text(summary.vendor.name);
+            $("#checkout-eta").text(summary.vendor.eta);
             $("#checkout-delivery-location").text(user.getDetails().location.display);
 
 
