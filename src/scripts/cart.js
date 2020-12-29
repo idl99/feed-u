@@ -5,13 +5,13 @@ const CART_STORAGE_KEY = 'cart';
 // TODO remove mock data
 const INITIAL_CART_STATE = {
     vendor: {
-        name: 'Burgers Ahoy!',
-        eta: '30 - 40 mins'
+        vendorName: 'Burgers Ahoy!',
+        deliveryTime: '30 - 40 mins'
     },
     items: [
         {
-            name: 'Tom Yump Soup',
-            price: 400,
+            itemName: 'Tom Yump Soup',
+            itemPrice: 400,
             quantity: 1,
             notes: "Less spicy",
         }
@@ -37,9 +37,9 @@ module.exports = function () {
             const cart = cookie.getJSON(CART_STORAGE_KEY) || INITIAL_CART_STATE;
 
             // if vendor is set
-            if (vendor.name) {
+            if (vendor.vendorName) {
                 // check if user is tyring to add item from same vendor
-                if (vendor.name === cart.vendor.name) {
+                if (vendor.vendorName === cart.vendor.vendorName) {
                     // add item and return true for success
                     cart.items.add(item);
                     cookie.set(CART_STORAGE_KEY, cart);
@@ -47,7 +47,7 @@ module.exports = function () {
                 } else {
                     // else return false with error message indicate why
                     return `You may only order items from one vendor at a time. 
-                    You have currently chosen ${cart.vendor.name}.`
+                    You have currently chosen ${cart.vendor.vendorName}.`
                 }
             } else {
                 cart = INITIAL_CART_STATE // Reset cart
