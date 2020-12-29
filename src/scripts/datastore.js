@@ -28,6 +28,35 @@ const data = {
                 }
             ],
         },
+        {
+            "vendorId": "v1",
+            "vendorImageLocation": "../assets/vendor_list_view_images/burgers_ahouy.jpg",
+            "vendorName": "Burgers Ahouy!",
+            "vendorCatergories": [
+                "Burgers",
+                "American",
+                "Mexican"
+            ],
+            "vendorRatings": {
+                "vendorRatingValue": 4.6,
+                "vendorNoOfRatings": 100
+            },
+            "location": "Colombo 3",
+            "deliveryTime": "25-30 mins",
+            "items": [
+                {
+                    "itemImageLocation": "../assets/vendor_page_images/tom_yum_soup.jpg",
+                    "itemId": "v1i1",
+                    "itemTitle": "Tom Yum Soup",
+                    "itemDescription": "Picked from the fresh vegetables and fish from the with special Chicken Broth.",
+                    "itemRatings": {
+                        "itemRatingValue": 4.6,
+                        "itemNoOfRatings": 47
+                    },
+                    "itemPrice": 800
+                }
+            ],
+        },
     ]
 }
 
