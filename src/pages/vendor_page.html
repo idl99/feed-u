@@ -302,7 +302,7 @@
                 $(".item_poi_container").click(function () {
                     // Handle Item POI click event
                     var itemId = $(this).attr("item-id"); // which vendor card was clicked
-                    $(":mobile-pagecontainer").pagecontainer("change", "item-detail.html", {
+                    $(":mobile-pagecontainer").pagecontainer("change", "item_detail.html", {
                         data: {
                             itemId,
                             vendorId: vendor.vendorId,
@@ -311,7 +311,7 @@
                 });
             }
 
-            $('body').on('pageshow', "#vendor-page", function (event, { toPage }) {
+            $('body').on('pagebeforeshow', "#vendor-page", function (event, { toPage }) {
                 const url = toPage[0].baseURI;
                 const queryParams = utils.parseUrlForQueryParams(url);
                 const vendorDetails = datastore.getSpecificVendor(queryParams.vendorId);
