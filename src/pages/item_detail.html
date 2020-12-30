@@ -195,6 +195,11 @@
                 <h4> Add to Cart</h4>
             </button>
         </div>
+
+        <div data-role="popup" id="item-detail-popup">
+            <p id="item-detail-popup-msg">This is a completely basic popup, no options set.</p>
+        </div>
+
         <script>
 
             const { utils, datastore, cart } = app;
@@ -210,7 +215,7 @@
                 $('#item-detail-image').attr("src", itemImageLocation)
             }
 
-            $('body').on('pageshow', "#item-detail-page", function (event, { toPage }) {
+            $('body').on('pagebeforeshow', "#item-detail-page", function (event, { toPage }) {
                 // The pageshow event is deprecated from 1.4.0 and removed in 1.6.0 but then jQuery Mobile itself is deprecated
                 // and 1.6.0 will never come
 
@@ -241,10 +246,16 @@
             })
 
             $('#addToCartBtn').click(function (event) {
-                console.log('Adding items to cart...');
                 const payload = { vendor, item: { ...item, quantity } };
-                cart.addItemToCart(payload)
-                history.back();
+                const error = cart.addItemToCart(payload)
+                if (error) {
+                    console.log('Add to cart failed');
+                    $('#item-detail-popup-msg').text(error);
+                    $('#item-detail-popup').popup("open");
+                } else {
+                    console.log('Add to cart successsful');
+                    history.back();
+                }
             })
         </script>
     </div>
