@@ -57,6 +57,59 @@ const data = {
                 }
             ],
         },
+    ],
+
+    pastOrders: [
+        {
+            "pastOrderId": "ord1",
+            "vendorCoverImageLocation": "",
+            "vendorLogoImageLocation": "../assets/stories_images/story-big.png",
+            "vendorName": "Burger Ahoy!",
+            "noOfOrderedItems": 3,
+            "price": 1000,
+            "date": "Oct 10 at 12:12 PM",
+            "vendorRating": 0,
+            "vendorComment": "",
+            "orderedItems": [
+                {
+                    "itemName": "Hawaiian Burger",
+                    "quantity": 2,
+                    "rating": 0,
+                    "comment": ""
+                },
+                {
+                    "itemName": "Pudding",
+                    "quantity": 2,
+                    "rating": 0,
+                    "comment": ""
+                },
+                {
+                    "itemName": "Special Chilli Sauce",
+                    "quantity": 1,
+                    "rating": 0,
+                    "comment": ""
+                }
+            ]
+        },
+        {
+            "pastOrderId": "ord2",
+            "vendorCoverImageLocation": "",
+            "vendorLogoImageLocation": "../assets/stories_images/story-big.png",
+            "vendorName": "Burger Ahoy!",
+            "noOfOrderedItems": 1,
+            "price": 500,
+            "date": "Oct 01 at 08:30 PM",
+            "vendorRating": 4,
+            "vendorComment": "The food is great but the quantity is not enough.",
+            "orderedItems": [
+                {
+                    "itemName": "Fish and Chips Burger",
+                    "quantity": 2,
+                    "rating": 4,
+                    "comment": "Great food. Please increase on the quantity a bit."
+                },
+            ]
+        },
     ]
 }
 
@@ -75,6 +128,13 @@ module.exports = function () {
             const allVendorsItems = data.vendors.flatMap(vendor => vendor.items)
             const item = allVendorsItems.find(item => item.itemId === itemId);
             return item;
+        },
+        getAllOrders: function () {
+            return data.pastOrders;
+        },
+        getSpecificOrder: function (pastOrderId) {
+            const order = data.pastOrders.find(order => order.pastOrderId == pastOrderId);
+            return order;
         }
     }
 }()

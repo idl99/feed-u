@@ -75,35 +75,6 @@
             }
         </style>
         <div role="main" class="ui-content">
-            <script>
-                $(document).ready(function () {
-                    $('#ratings li').on('click', function () {
-                        // The rating value that is selected by the user
-                        var onRatingSelect = parseInt($(this).data('value'), 10);
-                        var ratings = $(this).parent().children('li.star-icon');
-
-                        // Remove selected stars if the user changes ratings from a higher value to lower value.
-                        for (i = 0; i < ratings.length; i++) {
-                            $(ratings[i]).removeClass('selected');
-                        }
-
-                        // Add selected stars when the user rates.
-                        for (i = 0; i < onRatingSelect; i++) {
-                            $(ratings[i]).addClass('selected');
-                        }
-
-                        // The rating value for persistence or further use.
-                        var ratingValue = parseInt($('#ratings li.selected').last().data('value'), 10);
-                        console.log(ratingValue)
-
-                    });
-                });
-
-                function onBackClick(event) {
-                    console.log('Clicked back. Opening the vendor ratings page.')
-                    $(":mobile-pagecontainer").pagecontainer("change", "vendor_rating.html");
-                };
-            </script>
             <div class="item-rating-container">
                 <div class="item-rating-page-header-section">
                     <svg onclick="onBackClick()" width="22" height="24" viewBox="0 0 22 24" fill="none"
@@ -125,7 +96,7 @@
                             fill="#EB5757" />
                     </svg>
                 </div>
-                <div class="vendor-image-container">
+                <!-- <div class="vendor-image-container">
                     <img src="../assets/stories_images/story-big.png" alt="Vendor Logo">
                 </div>
                 <p id="item-rating-description">How were the items of <br> Burgers Ahoy!?</p>
@@ -223,9 +194,104 @@
                 </div>
                 <button style="margin-top: 1em;">
                     <h4 style="padding: 0.25em 0.25em 0.25em 0.25em; margin: 0 0 0 0;">Submit</h4>
-                </button>
+                </button> -->
             </div>
         </div>
+        <!-- Script for the rendering process. -->
+        <script>
+
+            const { datastore } = app;
+            // TODO refactor this once mock data is removed
+            var order = datastore.getSpecificOrder("ord1");
+
+            // Render the vendors details.
+            var markup_1 = `
+                    <div class="vendor-image-container">
+                        <img src=${order.vendorLogoImageLocation} alt="Vendor Logo">
+                    </div>
+                    <p id="item-rating-description">How were the items of <br> ${order.vendorName}?</p>`;
+
+            $('.item-rating-container').append(markup_1)
+
+            // Render items in past order summary.
+            order.orderedItems.forEach(({ itemName, rating, comment }) => {
+
+                var markup_2 = `
+                    <div class="past-order-item">
+                        <p id="past-order-item-description">${itemName}</p>
+                        <div class="item-rating-bar">
+                            <ul id='item-ratings'>
+                                <li class='star-icon' title='Not Good' data-value='1'>
+                                    <i class='fa fa-star fa-fw'></i>
+                                </li>
+                                <li class='star-icon' title='Ok' data-value='2'>
+                                    <i class='fa fa-star fa-fw'></i>
+                                </li>
+                                <li class='star-icon' title='Good' data-value='3'>
+                                    <i class='fa fa-star fa-fw'></i>
+                                </li>
+                                <li class='star-icon' title='Very Good' data-value='4'>
+                                    <i class='fa fa-star fa-fw'></i>
+                                </li>
+                                <li class='star-icon' title='Excellent' data-value='5'>
+                                    <i class='fa fa-star fa-fw'></i>
+                                </li>
+                            </ul>
+                        </div>
+                        <p>
+                            <svg width="22" height="21" viewBox="0 0 22 21" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M7.375 16.25V15.75H6.875H2.75C1.46343 15.75 0.5 14.809 0.5 13.75V2.5C0.5 1.44101 1.46343 0.5 2.75 0.5H19.25C20.5366 0.5 21.5 1.44101 21.5 2.5V13.75C21.5 14.809 20.5366 15.75 19.25 15.75H13.0625H12.9082L12.7808 15.8369L7.41813 19.4943C7.41781 19.4945 7.41749 19.4947 7.41718 19.4949C7.41103 19.4988 7.40499 19.5007 7.39735 19.5011C7.39019 19.5015 7.38231 19.5004 7.375 19.4981V16.25Z"
+                                    stroke="#EB5757" />
+                            </svg>
+                        </p>
+                    </div>`;
+
+                $('.item-rating-container').append(markup_2)
+            });
+
+            // Render the final button to submit the final ratings.
+            var markup_3 = `
+                <button style="margin-top: 1em;">
+                    <h4 style="padding: 0.25em 0.25em 0.25em 0.25em; margin: 0 0 0 0;">Submit</h4>
+                </button>`;
+            $('.item-rating-container').append(markup_3);
+
+        </script>
+        <!-- Script for item click functions. -->
+        <script>
+
+            $(document).ready(function () {
+                $('#item-ratings li').on('click', function () {
+                    // The rating value that is selected by the user
+                    var ratedItem = $(this).parent().parent().parent().children('#past-order-item-description').text();
+                    var onRatingSelect = parseInt($(this).data('value'), 10);
+                    var ratings = $(this).parent().children('li.star-icon');
+
+                    // Remove selected stars if the user changes ratings from a higher value to lower value.
+                    for (i = 0; i < ratings.length; i++) {
+                        $(ratings[i]).removeClass('selected');
+                    }
+
+                    // Add selected stars when the user rates.
+                    for (i = 0; i < onRatingSelect; i++) {
+                        $(ratings[i]).addClass('selected');
+                    }
+
+                    // The rating value for persistence or further use.
+                    var ratingValue = parseInt($('#item-ratings li.selected').last().data('value'), 10);
+                    console.log(('Rated ' + ratedItem + ' with'), ratingValue, 'stars.');
+
+                });
+            });
+
+            function onBackClick(event) {
+                console.log('Clicked back. Opening the vendor ratings page.')
+                $(":mobile-pagecontainer").pagecontainer("change", "vendor_rating.html");
+            };
+
+        </script>
     </div>
 </body>
 

@@ -37,35 +37,6 @@
                 color: #F2C94C;
             }
         </style>
-        <script>
-            $(document).ready(function () {
-                $('#ratings li').on('click', function () {
-                    // The rating value that is selected by the user
-                    var onRatingSelect = parseInt($(this).data('value'), 10);
-                    var ratings = $(this).parent().children('li.star-icon');
-
-                    // Remove selected stars if the user changes ratings from a higher value to lower value.
-                    for (i = 0; i < ratings.length; i++) {
-                        $(ratings[i]).removeClass('selected');
-                    }
-
-                    // Add selected stars when the user rates.
-                    for (i = 0; i < onRatingSelect; i++) {
-                        $(ratings[i]).addClass('selected');
-                    }
-
-                    // The rating value for persistence or further use.
-                    var ratingValue = parseInt($('#ratings li.selected').last().data('value'), 10);
-                    console.log(ratingValue)
-
-                });
-            });
-
-            function onContinueClick(event) {
-                console.log('Clicked continue. Opening the item ratings page.')
-                $(":mobile-pagecontainer").pagecontainer("change", "item_rating.html");
-            };
-        </script>
         <div role="main" class="ui-content">
             <div class="vendor-rating-page-container">
                 <div class="popup-close-btn">
@@ -75,7 +46,7 @@
                             fill="#EB5757" />
                     </svg>
                 </div>
-                <div class="vendor-image-container">
+                <!-- <div class="vendor-image-container">
                     <img src="../assets/stories_images/story-big.png" alt="Vendor Logo">
                 </div>
                 <p id="vendor-rating-description">How was Burgers Ahoy!?</p>
@@ -104,9 +75,84 @@
                 </div>
                 <button class="continue-btn" onclick="onContinueClick()">
                     <h4 id="continue-btn-txt">Continue</h4>
-                </button>
+                </button> -->
             </div>
         </div>
+        <!-- Script for the rendering process. -->
+        <script>
+
+            const { datastore } = app;
+            // TODO refactor this once mock data is removed
+            var order = datastore.getSpecificOrder("ord1");
+
+            // Render the vendors details.
+            var markup = `
+            <div class="vendor-image-container">
+                    <img src=${order.vendorLogoImageLocation} alt="Vendor Logo">
+                </div>
+                <p id="vendor-rating-description">How was ${order.vendorName}!?</p>
+                <p id="vendor-rating-description">They’ll get your feedback, along with your name and photo</p>
+                <div class="vendor-rating-bar">
+                    <ul id='ratings'>
+                        <li class='star-icon' title='Not Good' data-value='1'>
+                            <i class='fa fa-star fa-fw'></i>
+                        </li>
+                        <li class='star-icon' title='Ok' data-value='2'>
+                            <i class='fa fa-star fa-fw'></i>
+                        </li>
+                        <li class='star-icon' title='Good' data-value='3'>
+                            <i class='fa fa-star fa-fw'></i>
+                        </li>
+                        <li class='star-icon' title='Very Good' data-value='4'>
+                            <i class='fa fa-star fa-fw'></i>
+                        </li>
+                        <li class='star-icon' title='Excellent' data-value='5'>
+                            <i class='fa fa-star fa-fw'></i>
+                        </li>
+                    </ul>
+                </div>
+                <div class="vendor-comments">
+                    Leave your thoughts about the vendor here
+                </div>
+                <button class="continue-btn" onclick="onContinueClick()">
+                    <h4 id="continue-btn-txt">Continue</h4>
+                </button>`;
+
+            $('.vendor-rating-page-container').append(markup)
+
+        </script>
+        <!-- Script for item click functions. -->
+        <script>
+
+            $(document).ready(function () {
+                $('#ratings li').on('click', function () {
+                    // The rating value that is selected by the user
+                    var onRatingSelect = parseInt($(this).data('value'), 10);
+                    var ratings = $(this).parent().children('li.star-icon');
+
+                    // Remove selected stars if the user changes ratings from a higher value to lower value.
+                    for (i = 0; i < ratings.length; i++) {
+                        $(ratings[i]).removeClass('selected');
+                    }
+
+                    // Add selected stars when the user rates.
+                    for (i = 0; i < onRatingSelect; i++) {
+                        $(ratings[i]).addClass('selected');
+                    }
+
+                    // The rating value for persistence or further use.
+                    var ratingValue = parseInt($('#ratings li.selected').last().data('value'), 10);
+                    console.log(ratingValue)
+
+                });
+            });
+
+            function onContinueClick(event) {
+                console.log('Clicked continue. Opening the item ratings page.')
+                $(":mobile-pagecontainer").pagecontainer("change", "item_rating.html");
+            };
+
+        </script>
     </div>
 </body>
 
