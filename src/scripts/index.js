@@ -9,8 +9,11 @@ user.init();
 
 var datastore = require('./datastore')
 
+var utils = require('./utils')
+
 window.app = {
     cart,
     user,
-    datastore
+    datastore,
+    utils
 }

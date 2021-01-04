@@ -8,7 +8,8 @@ module.exports = function () {
             cookie.set(USER, {
                 location: {
                     display: "Nugegoda, Delkanda",
-                }
+                },
+                points: 547,
             })
         },
         getDetails: function () {

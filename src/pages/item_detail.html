@@ -1,26 +1,263 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>Feed U - Item Detail Page</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link rel="stylesheet" href="../css/base.css" />
-
+    <link rel="stylesheet" href="../css/base.css">
     <script src="../bundle.js"></script>
-
 </head>
 
 <body>
-    <div data-role="page" id="item-detail">
-        <a href="#popupParis" data-rel="popup" data-position-to="window" data-transition="fade"><img class="popphoto"
-                src="../_assets/img/paris.jpg" alt="Paris, France" style="width:30%"></a>
-        <div data-role="popup" id="popupParis" data-overlay-theme="b" data-theme="b" data-corners="false">
-            <a href="#" data-rel="back"
-                class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a><img
-                class="popphoto" src="../_assets/img/paris.jpg" style="max-height:512px;" alt="Paris, France">
+
+    <div data-role="page" id="item-detail-page">
+        <style>
+            body {
+                font-family: "Poppins";
+            }
+
+            .container {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .poi_container {
+                display: flex;
+                flex: 1 1 auto;
+                justify-content: top;
+                height: 65px;
+                width: 335px;
+                margin-bottom: 5%;
+            }
+
+            .poi_image {
+                float: left;
+            }
+
+            .poi_content {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                float: right;
+                margin-left: 5%;
+            }
+
+            .status_bar {
+                display: flex;
+                align-items: top;
+                margin-top: 2%;
+                font-size: 12px;
+            }
+
+            .rating_bar {
+                display: flex;
+                align-items: center;
+                height: 20px;
+                width: 70px;
+                font-size: 11px;
+                background: #F2F2F2;
+                border-radius: 25px;
+                color: black;
+            }
+
+            .item_image {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                width: 80%;
+            }
+
+            .customize_container {
+                display: flex;
+                justify-content: flex-start;
+                overflow: auto;
+            }
+
+            .customize_container>div {
+                margin: 10px;
+                font-size: 12px;
+            }
+
+            .pop-outer {}
+
+            .pop-inner {
+                max-width: 294px;
+                max-height: 645px;
+                padding: 2em 2em 2em 2em;
+                margin: 0;
+
+            }
+        </style>
+        <div data-role="header" data-add-back-btn="true">
+            <span class="ui-title"></span>
         </div>
+        <div role="main" class="ui-content">
+            <div style="position: relative; margin-bottom: 1em; 
+                                background-color: white;
+                                color: black;">
+                <img id="item-detail-image" style="display:block; width: 100%; height: auto; margin: 0;"
+                    src="../assets/vendor_page_images/tom_yum_soup.jpg">
+                <div style="position: absolute;
+                                        bottom: 0;
+                                        padding-top: 0.25em;
+                                        padding-bottom: 0.25em;
+                                        font-weight: 100;
+                                        background: rgba(0, 0, 0, 0.5); /* Black see-through */
+                                        color: #f1f1f1;
+                                        width: 100%;
+                                        opacity:1;
+                                        text-align: left;">
+                    <div style="display: flex; justify-content: space-between;">
+                        <div style="margin-left: 1em;">
+                            <span id="item-detail-name" style="font-size: 18px;">Item Name</span><br>
+                        </div>
+                        <!-- rating bar next to item name -->
+                        <div class="rating_bar">
+                            <p><svg width="12" height="11" viewBox="0 0 12 11" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
+                                        fill="#F2C94C" />
+                                </svg>
+                                <span id="item-detail-rating-value">0.0</span>
+                            <p id="item-detail-no-of-ratings">(0)</p>
+                            </p>
+                        </div>
+                        <!-- ---end of rating bar------- -->
+                    </div>
+                </div>
+            </div>
+            <p id="item-description" style="text-align: justify; text-justify: inter-word;">This soup is a special
+                dish
+                prepared by world renowned chef Gonagala Ramsey, made to a secret recipe that has been passed on
+                from
+                his Chinese ancestors.</p>
+            <!-- Customization options container -->
+            <div class="customize_container">
+                <div>
+                    <form>
+                        <p>Choice of Size</p>
+                        <input type="radio" id="small" name="item-customization-size" value="small">
+                        <label for="small">Small</label><br>
+                        <input type="radio" id="regular" name="item-customization-size" value="regular">
+                        <label for="regular">Regular</label><br>
+                        <input type="radio" id="large" name="item-customization-size" value="large">
+                        <label for="large">Large</label>
+                    </form>
+                </div>
+                <div>
+                    <form>
+                        <p>Level of Salt</p>
+                        <input type="radio" id="large1" name="item-customization-salt" value="large1">
+                        <label for="large1">No Salt</label><br>
+                        <input type="radio" id="regular1" name="item-customization-salt" value="regular1">
+                        <label for="regular1">Less</label><br>
+                        <input type="radio" id="small1" name="item-customization-salt" value="small1">
+                        <label for="small1">Normal</label>
+                    </form>
+                </div>
+                <div>
+                    <form>
+                        <p>Level of Spice</p>
+                        <input type="radio" id="large2" name="item-customization-spice" value="large2">
+                        <label for="large2">None</label><br>
+                        <input type="radio" id="regular2" name="item-customization-spice" value="regular2">
+                        <label for="regular2">Mild</label><br>
+                        <input type="radio" id="small2" name="item-customization-spice" value="small2">
+                        <label for="small2">Hot</label>
+                    </form>
+                </div>
+            </div>
+            <div>
+                <!--end of customization container ----->
+                     <p style="margin: 0; padding: 0;">Special Instructions</p>
+                     <input type="text" name="sp-instr" id="sp-instr" value=""
+                    placeholder="Add a note (extra salt, no onions, etc.)">
+            </div>
+            <div style="display: flex; justify-content: center; padding: 1em 1em 1em 1em;">
+                <div
+                    style="display: flex; justify-content: center; display: flex; justify-content: space-evenly; background-color: #F2F2F2; border-radius: 100px; width: 50%;">
+                    <p id="item-detail-decr-item-qty">-</p>
+                    <p id="item-detail-item-qty">1</p>
+                    <p id="item-detail-incr-item-qty">+</p>
+                </div>
+            </div>
+            <p>Comments</p>
+            <div style="display: flex; justify-content: center;">
+
+            </div>
+        </div>
+        <div data-role="footer">
+            <button id="addToCartBtn"
+                style="width: 100%; text-align: center; background: #EB5757; color: white; margin: 0px; padding: 0px; border-radius: 0%;">
+                <h4> Add to Cart</h4>
+            </button>
+        </div>
+
+        <div data-role="popup" id="item-detail-popup">
+            <p id="item-detail-popup-msg">This is a completely basic popup, no options set.</p>
+        </div>
+
+        <script>
+
+            const { utils, datastore, cart } = app;
+            var item = {};
+            var vendor = {};
+            var quantity = 1;
+
+            function setItemDetails({ itemTitle, itemDescription, itemRatings, itemImageLocation }) {
+                $('#item-detail-name').text(itemTitle)
+                $('#item-description').text(itemDescription)
+                $('#item-detail-rating-value').text(itemRatings.itemRatingValue)
+                $('#item-detail-no-of-ratings').text(`(${itemRatings.itemNoOfRatings})`)
+                $('#item-detail-image').attr("src", itemImageLocation)
+            }
+
+            $('body').on('pagebeforeshow', "#item-detail-page", function (event, { toPage }) {
+                // The pageshow event is deprecated from 1.4.0 and removed in 1.6.0 but then jQuery Mobile itself is deprecated
+                // and 1.6.0 will never come
+
+                // console.log($(':mobile-pagecontainer').pagecontainer("getActivePage"))
+                const url = toPage[0].baseURI;
+                const queryParams = utils.parseUrlForQueryParams(url);
+                const itemDetails = datastore.getSpecificItem(queryParams.itemId);
+                const vendorDetails = datastore.getSpecificVendor(queryParams.vendorId);
+                item = itemDetails;
+                vendor = vendorDetails;
+                setItemDetails(itemDetails);
+            });
+
+            $('#item-detail-incr-item-qty').click(function (event) {
+                if (quantity < 9) {
+                    // Can only add upto 9 nos. of an item
+                    quantity += 1;
+                    $('#item-detail-item-qty').text(quantity)
+                }
+            })
+
+            $('#item-detail-decr-item-qty').click(function (event) {
+                if (quantity > 1) {
+                    // Have to at least add 1 nos. of an item
+                    quantity -= 1;
+                    $('#item-detail-item-qty').text(quantity)
+                }
+            })
+
+            $('#addToCartBtn').click(function (event) {
+                const payload = { vendor, item: { ...item, quantity } };
+                const error = cart.addItemToCart(payload)
+                if (error) {
+                    console.log('Add to cart failed');
+                    $('#item-detail-popup-msg').text(error);
+                    $('#item-detail-popup').popup("open");
+                } else {
+                    console.log('Add to cart successsful');
+                    history.back();
+                }
+            })
+        </script>
     </div>
 
 </body>
