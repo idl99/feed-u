@@ -3,13 +3,16 @@ var cookie = require('js-cookie');
 const USER = "user";
 
 const DEFAULT_USER = {
+    profile: {
+        name: "John Doe",
+        points: 547,
+    },
     payment: {
         stripe_customer_id: 'cus_IhWwxopENtlI1P'
     },
     location: {
         display: "Nugegoda, Delkanda",
     },
-    points: 547,
 }
 
 module.exports = function () {
