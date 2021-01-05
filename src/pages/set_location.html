@@ -16,14 +16,7 @@
 	<style>
 
 	</style>
-	<script>
-		function initMap() {
-			const map = new google.maps.Map(document.getElementById("map"), {
-				zoom: 15,
-				center: { lat: 51.517582, lng: -0.141525 },
-			});
-		}
-	</script>
+
 </head>
 
 <body>
@@ -32,7 +25,7 @@
 			<a href="#" data-icon="back" class="ui-btn-left">Back</a>
 			<h1>Header Bar</h1>
 		</div>
-		<div id="map">
+		<div id="set-location-map">
 			<h2> Map Here</h2>
 		</div>
 		<div data-role="tabs" id="tabs">
@@ -86,6 +79,21 @@
 			<button class="ui-btn">Save</button>
 		</div>
 	</div>
+	<script>
+
+		$("#set-location-map").click(function () {
+			// Handle the map click event.
+			$(":mobile-pagecontainer").pagecontainer("change", "location_search.html",);
+		});
+
+		function initMap() {
+			console.log("Init 1");
+			const map = new google.maps.Map(document.getElementById("set-location-map"), {
+				zoom: 15,
+				center: { lat: 51.517582, lng: -0.141525 },
+			});
+		}
+	</script>
 </body>
 
 </html>
