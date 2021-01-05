@@ -37,22 +37,10 @@
 			</div>
 			<div id="saved-locations">
 				<ul data-role="listview">
-					<li id="list-item">
-						<div style="display: flex; justify-content: space-between;">
-							<div style="padding-left: 5.25em;">Delkanda, Nugegoda</div>
-							<div>
-								<svg width="16" height="14" viewBox="0 0 16 14" fill="none"
-									xmlns="http://www.w3.org/2000/svg">
-									<path
-										d="M5.43431 13.725L0.234305 7.62349C-0.0781016 7.25692 -0.0781016 6.66256 0.234305 6.29596L1.36565 4.96843C1.67806 4.60182 2.18462 4.60182 2.49703 4.96843L6 9.07869L13.503 0.274927C13.8154 -0.0916425 14.3219 -0.0916425 14.6344 0.274927L15.7657 1.60246C16.0781 1.96903 16.0781 2.56338 15.7657 2.92998L6.56569 13.7251C6.25325 14.0916 5.74672 14.0916 5.43431 13.725Z"
-										fill="#EB5757" />
-								</svg>
-							</div>
-						</div>
-					</li>
-					<li id="list-item">Nedimala, Dehiwala</li>
-					<li id="list-item">Kandalanda, Homagama</li>
-					<li id="list-item">Attidiya, Dehiwala</li>
+					<li class="set-location-list-item ui-icon-check ui-btn-icon-right">Delkanda, Nugegoda</li>
+					<li class="set-location-list-item">Nedimala, Dehiwala</li>
+					<li class="set-location-list-item">Kandalanda, Homagama</li>
+					<li class="set-location-list-item">Attidiya, Dehiwala</li>
 				</ul>
 			</div>
 			<div id="previous-locations">
@@ -85,6 +73,11 @@
 			// Handle the map click event.
 			$(":mobile-pagecontainer").pagecontainer("change", "location_search.html",);
 		});
+
+		$('.set-location-list-item').click(function (eventObject) {
+			$('.set-location-list-item.ui-icon-check.ui-btn-icon-right').removeClass("ui-icon-check ui-btn-icon-right");
+			$(this).addClass("ui-icon-check ui-btn-icon-right");
+		})
 
 		function initMap() {
 			console.log("Init 1");
