@@ -90,9 +90,10 @@
                 $('#payment-methods-list').listview("refresh");
 
                 $('.payment-methods-remove-card-btn').click(function () {
+                    const cardElement = $(this);
                     const cardId = cardElement.attr("payment-method-id");
                     payment.removeCard(cardId, (response) => {
-                        $(this).parent().parent().remove();
+                        cardElement.parent().parent().remove();
                     }, () => { })
                 })
             }
