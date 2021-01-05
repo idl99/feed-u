@@ -1,3 +1,5 @@
+const user = require('./user');
+
 const data = Object.freeze({
     vendors: [
         {
@@ -70,6 +72,25 @@ const data = Object.freeze({
                 }
             ],
         },
+
+    ],
+    leaderboard: [
+        {
+            name: "Ihan Lelwala",
+            points: 250
+        },
+        {
+            name: "Vinula Uthsara",
+            points: 300
+        },
+        {
+            name: "Thenuka Perera",
+            points: 260
+        },
+        {
+            name: "Deshan Koswatte",
+            points: 280
+        },
     ]
 });
 
@@ -88,6 +109,12 @@ module.exports = function () {
             const allVendorsItems = data.vendors.flatMap(vendor => vendor.items)
             const item = allVendorsItems.find(item => item.itemId === itemId);
             return item;
+        },
+        getLeaderboard: function () {
+            const { name, points } = user.getDetails().profile;
+            const loggedInUser = { name, points };
+            const leaderboardWithLoggedInUser = [...data.leaderboard, loggedInUser];
+            return leaderboardWithLoggedInUser.sort((user1, user2) => user2.points - user1.points)
         }
     }
 }()
