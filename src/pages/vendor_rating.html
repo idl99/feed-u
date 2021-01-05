@@ -81,9 +81,9 @@
         <!-- Script for the rendering process. -->
         <script>
 
-            const { datastore } = app;
+            const { user } = app;
             // TODO refactor this once mock data is removed
-            var order = datastore.getSpecificOrder("ord1");
+            var order = user.getSpecificOrder("ord1");
 
             // Render the vendors details.
             var markup = `
@@ -112,7 +112,7 @@
                     </ul>
                 </div>
                 <div class="vendor-comments">
-                    Leave your thoughts about the vendor here
+                    <textarea placeholder="Leave your thoughts about the vendor here"></textarea>
                 </div>
                 <button class="continue-btn" onclick="onContinueClick()">
                     <h4 id="continue-btn-txt">Continue</h4>

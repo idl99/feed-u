@@ -31,6 +31,12 @@
             }
 
             #item-rating-description {
+                margin-bottom: 0;
+                text-align: center;
+            }
+
+            #vendor-name {
+                margin-top: 0;
                 text-align: center;
             }
 
@@ -73,6 +79,15 @@
             .item-rating-bar ul>li.star-icon.selected>i.fa {
                 color: #F2C94C;
             }
+
+            .ratings-submit-btn {
+                margin-top: 1em;
+            }
+
+            #ratings-submit-btn-text {
+                padding: 0.25em 0.25em 0.25em 0.25em;
+                margin: 0 0 0 0;
+            }
         </style>
         <div role="main" class="ui-content">
             <div class="item-rating-container">
@@ -96,127 +111,31 @@
                             fill="#EB5757" />
                     </svg>
                 </div>
-                <!-- <div class="vendor-image-container">
-                    <img src="../assets/stories_images/story-big.png" alt="Vendor Logo">
+                <div class="vendor-image-container">
+                    <img id="vendor-logo" src="../assets/stories_images/story-big.png" alt="Vendor Logo">
                 </div>
-                <p id="item-rating-description">How were the items of <br> Burgers Ahoy!?</p>
-                <div class="past-order-items">
-                    <div class="past-order-item">
-                        <p id="past-order-item-description">Hawaiian Burger</p>
-                        <div class="item-rating-bar">
-                            <ul id='ratings'>
-                                <li class='star-icon' title='Not Good' data-value='1'>
-                                    <i class='fa fa-star fa-fw'></i>
-                                </li>
-                                <li class='star-icon' title='Ok' data-value='2'>
-                                    <i class='fa fa-star fa-fw'></i>
-                                </li>
-                                <li class='star-icon' title='Good' data-value='3'>
-                                    <i class='fa fa-star fa-fw'></i>
-                                </li>
-                                <li class='star-icon' title='Very Good' data-value='4'>
-                                    <i class='fa fa-star fa-fw'></i>
-                                </li>
-                                <li class='star-icon' title='Excellent' data-value='5'>
-                                    <i class='fa fa-star fa-fw'></i>
-                                </li>
-                            </ul>
-                        </div>
-                        <p>
-                            <svg width="22" height="21" viewBox="0 0 22 21" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M7.375 16.25V15.75H6.875H2.75C1.46343 15.75 0.5 14.809 0.5 13.75V2.5C0.5 1.44101 1.46343 0.5 2.75 0.5H19.25C20.5366 0.5 21.5 1.44101 21.5 2.5V13.75C21.5 14.809 20.5366 15.75 19.25 15.75H13.0625H12.9082L12.7808 15.8369L7.41813 19.4943C7.41781 19.4945 7.41749 19.4947 7.41718 19.4949C7.41103 19.4988 7.40499 19.5007 7.39735 19.5011C7.39019 19.5015 7.38231 19.5004 7.375 19.4981V16.25Z"
-                                    stroke="#EB5757" />
-                            </svg>
-                        </p>
-                    </div>
-                    <div class="past-order-item">
-                        <p id="past-order-item-description">Pudding</p>
-                        <div class="item-rating-bar">
-                            <ul id='ratings'>
-                                <li class='star-icon' title='Not Good' data-value='1'>
-                                    <i class='fa fa-star fa-fw'></i>
-                                </li>
-                                <li class='star-icon' title='Ok' data-value='2'>
-                                    <i class='fa fa-star fa-fw'></i>
-                                </li>
-                                <li class='star-icon' title='Good' data-value='3'>
-                                    <i class='fa fa-star fa-fw'></i>
-                                </li>
-                                <li class='star-icon' title='Very Good' data-value='4'>
-                                    <i class='fa fa-star fa-fw'></i>
-                                </li>
-                                <li class='star-icon' title='Excellent' data-value='5'>
-                                    <i class='fa fa-star fa-fw'></i>
-                                </li>
-                            </ul>
-                        </div>
-                        <p>
-                            <svg width="22" height="21" viewBox="0 0 22 21" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M7.375 16.25V15.75H6.875H2.75C1.46343 15.75 0.5 14.809 0.5 13.75V2.5C0.5 1.44101 1.46343 0.5 2.75 0.5H19.25C20.5366 0.5 21.5 1.44101 21.5 2.5V13.75C21.5 14.809 20.5366 15.75 19.25 15.75H13.0625H12.9082L12.7808 15.8369L7.41813 19.4943C7.41781 19.4945 7.41749 19.4947 7.41718 19.4949C7.41103 19.4988 7.40499 19.5007 7.39735 19.5011C7.39019 19.5015 7.38231 19.5004 7.375 19.4981V16.25Z"
-                                    fill="#EB5757" stroke="#EB5757" />
-                            </svg>
-                        </p>
-                    </div>
-                    <div class="past-order-item">
-                        <p id="past-order-item-description">Special Chilli Sauce</p>
-                        <div class="item-rating-bar">
-                            <ul id='ratings'>
-                                <li class='star-icon' title='Not Good' data-value='1'>
-                                    <i class='fa fa-star fa-fw'></i>
-                                </li>
-                                <li class='star-icon' title='Ok' data-value='2'>
-                                    <i class='fa fa-star fa-fw'></i>
-                                </li>
-                                <li class='star-icon' title='Good' data-value='3'>
-                                    <i class='fa fa-star fa-fw'></i>
-                                </li>
-                                <li class='star-icon' title='Very Good' data-value='4'>
-                                    <i class='fa fa-star fa-fw'></i>
-                                </li>
-                                <li class='star-icon' title='Excellent' data-value='5'>
-                                    <i class='fa fa-star fa-fw'></i>
-                                </li>
-                            </ul>
-                        </div>
-                        <p>
-                            <svg width="22" height="21" viewBox="0 0 22 21" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M7.375 16.25V15.75H6.875H2.75C1.46343 15.75 0.5 14.809 0.5 13.75V2.5C0.5 1.44101 1.46343 0.5 2.75 0.5H19.25C20.5366 0.5 21.5 1.44101 21.5 2.5V13.75C21.5 14.809 20.5366 15.75 19.25 15.75H13.0625H12.9082L12.7808 15.8369L7.41813 19.4943C7.41781 19.4945 7.41749 19.4947 7.41718 19.4949C7.41103 19.4988 7.40499 19.5007 7.39735 19.5011C7.39019 19.5015 7.38231 19.5004 7.375 19.4981V16.25Z"
-                                    stroke="#EB5757" />
-                            </svg>
-                        </p>
-                    </div>
-                </div>
-                <button style="margin-top: 1em;">
-                    <h4 style="padding: 0.25em 0.25em 0.25em 0.25em; margin: 0 0 0 0;">Submit</h4>
-                </button> -->
+                <p id="item-rating-description">How were the items of</p>
+                <p id="vendor-name"></p>
+                <button class="ratings-submit-btn" onclick="onSubmitBtnClick()">
+                    <h4 id="ratings-submit-btn-text">Submit</h4>
+                </button>
             </div>
         </div>
         <!-- Script for the rendering process. -->
         <script>
 
-            const { datastore } = app;
+            const { user } = app;
             // TODO refactor this once mock data is removed
-            var order = datastore.getSpecificOrder("ord1");
+            var order = user.getSpecificOrder("ord1");
 
             // Render the vendors details.
-            var markup_1 = `
-                    <div class="vendor-image-container">
-                        <img src=${order.vendorLogoImageLocation} alt="Vendor Logo">
-                    </div>
-                    <p id="item-rating-description">How were the items of <br> ${order.vendorName}?</p>`;
-
-            $('.item-rating-container').append(markup_1)
+            $("#vendor-logo").attr("src", order.vendorLogoImageLocation);
+            $('#vendor-name').text(order.vendorName + "?");
 
             // Render items in past order summary.
             order.orderedItems.forEach(({ itemName, rating, comment }) => {
 
-                var markup_2 = `
+                var markup = `
                     <div class="past-order-item">
                         <p id="past-order-item-description">${itemName}</p>
                         <div class="item-rating-bar">
@@ -248,15 +167,8 @@
                         </p>
                     </div>`;
 
-                $('.item-rating-container').append(markup_2)
+                $(markup).insertBefore("button");
             });
-
-            // Render the final button to submit the final ratings.
-            var markup_3 = `
-                <button style="margin-top: 1em;">
-                    <h4 style="padding: 0.25em 0.25em 0.25em 0.25em; margin: 0 0 0 0;">Submit</h4>
-                </button>`;
-            $('.item-rating-container').append(markup_3);
 
         </script>
         <!-- Script for item click functions. -->
@@ -289,6 +201,28 @@
             function onBackClick(event) {
                 console.log('Clicked back. Opening the vendor ratings page.')
                 $(":mobile-pagecontainer").pagecontainer("change", "vendor_rating.html");
+            };
+
+            function onSubmitBtnClick(event) {
+
+                console.log('Clicked submit. Submitting the ratings to the data store.')
+                // Parent element of all the items.
+                var itemNamesAndRatings = $('.past-order-item');
+
+                const { user } = app;
+
+                item_names = [itemNamesAndRatings.length];
+                ratings = [itemNamesAndRatings.length];
+
+                // Extract the item name and rating for each item.
+                for (var i = 0; i < itemNamesAndRatings.length; i++) {
+                    item_names[i] = ($(itemNamesAndRatings[i]).first('p').text()).replace(/(\r\n|\n|\r)/gm, "").replace(/\s/g, '');
+                    ratings[i] = ($(itemNamesAndRatings[i]).find('#item-ratings li.selected').last().data('value'));
+                }
+
+                // TODO refactor this once mock data is removed
+                console.log("Updating Items", item_names, "with ratings", ratings);
+                user.updateSpecificOrder("ord1", 4, "shit only", item_names, ratings, [])
             };
 
         </script>
