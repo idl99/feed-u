@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Feed U - Payment Methods</title>
 
     <link rel="stylesheet" href="../css/base.css" />
     <script src=../bundle.js></script>
@@ -17,7 +17,7 @@
             <h4>Payment Methods</h4>
             <a href="./add_new_payment_method.html" style="align-self: flex-end;">Add New</a>
             <div id="payment-methods-container">
-                <ul data-role="listview" id="payment-methods-list">
+                <ul data-role="listview" id="payment-methods-list" style="margin: 1em 0em;">
                     <li>
                         <div>
                             <svg width="22" height="18" viewBox="0 0 22 18" fill="none"
@@ -46,7 +46,6 @@
         <div id="payment-methods-footer" data-role="footer" data-toggle-on-tap="false" data-position="fixed"></div>
         <script>
             const { user, payment } = app;
-            const { stripe_customer_id } = user.getPaymentDetails();
 
             const PAYMENT_METHODS_CARDS_ICONS_SVG = {
                 default:
@@ -70,28 +69,35 @@
                     </svg>`,
             }
 
-            var getCardMarkup = (brand, last4digits) => {
+            var getCardMarkup = (id, brand, last4digits) => {
                 return `<li>
                             <div>
                                 ${PAYMENT_METHODS_CARDS_ICONS_SVG[brand] || PAYMENT_METHODS_CARDS_ICONS_SVG['default']}
                                 <span>**** ${last4digits}</span>
+                                <div payment-method-id="${id}" class="ui-btn-icon-right ui-icon-minus payment-methods-remove-card-btn"></div>
                             </div > 
                         </li>`;
             }
 
-            payment.getAllCardsForCustomer(stripe_customer_id,
-                (response) => {
-                    const { data } = response;
-                    console.log(data);
+            const renderCards = (response) => {
+                const { data } = response;
 
-                    data.forEach(({ card }) => {
-                        const markup = getCardMarkup(card.brand, card.last4);
-                        $("#payment-methods-list").append(markup)
-                    });
+                data.forEach(({ id, card }) => {
+                    const markup = getCardMarkup(id, card.brand, card.last4);
+                    $("#payment-methods-list").append(markup)
+                });
 
-                    $('#payment-methods-list').listview("refresh");
-                },
-                () => { })
+                $('#payment-methods-list').listview("refresh");
+
+                $('.payment-methods-remove-card-btn').click(function () {
+                    const cardId = cardElement.attr("payment-method-id");
+                    payment.removeCard(cardId, (response) => {
+                        $(this).parent().parent().remove();
+                    }, () => { })
+                })
+            }
+
+            payment.getAllCardsForCustomer(renderCards, () => { })
         </script>
 
     </div>
