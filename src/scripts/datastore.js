@@ -111,8 +111,8 @@ module.exports = function () {
             return item;
         },
         getLeaderboard: function () {
-            const { name, points } = user.getDetails().profile;
-            const loggedInUser = { name, points };
+            const { points } = user.getDetails().profile;
+            const loggedInUser = { name: "You", points };
             const leaderboardWithLoggedInUser = [...data.leaderboard, loggedInUser];
             return leaderboardWithLoggedInUser.sort((user1, user2) => user2.points - user1.points)
         }
