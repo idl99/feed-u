@@ -46,7 +46,7 @@
 			<p>Categories</p>
 			<!-- Adding listview for sorting(there's an alignment issue)-->
 			<!-- <div class="container" data-role="listview" data-filter="true" data-filter-placeholder="Search fruits..."> -->
-			<div class="container">
+			<div id="home-container" class="container">
 				<!-- <div class="poi_container">
 					<img src="../assets/vendor_list_view_images/burgers_ahouy.jpg" class="poi_image">
 					<div class="poi_content">
@@ -469,14 +469,12 @@
 			// Refer https://www.w3schools.com/js/js_versions.asp for more
 
 			const { datastore } = app;
-			console.log(datastore.getSpecificVendor('v1'));
-			console.log(datastore.getSpecificItem('v1i1'));
 
 			var vendors = datastore.getAllVendors(); // TODO refactor this once mock data is removed
 
 			// render items in order summary
-			vendors.forEach(({ vendorImageLocation, vendorName, vendorCatergories, vendorRatings, deliveryTime }) => {
-				var markupP1 = `<div class="poi_container">
+			vendors.forEach(({ vendorId, vendorImageLocation, vendorName, vendorCatergories, vendorRatings, deliveryTime }) => {
+				var markupP1 = `<div class="poi_container" vendor-id="${vendorId}">
 					<img src=${vendorImageLocation} class="poi_image">
 					<div class="poi_content">
 						<div>${vendorName}</div>
@@ -506,7 +504,7 @@
 					</div>
 				</div>`
 				var markup = markupP1 + markupP2 + markupP3;
-				$('.container').append(markup)
+				$('#home-container').append(markup)
 			});
 		</script>
 
@@ -548,6 +546,17 @@
 					})
 				}
 			})
+
+			// Handle Vendor POI click event
+			// https://stackoverflow.com/questions/943987/add-jquery-click-handler-to-multiple-elements
+			$(".poi_container").click(function () {
+				var vendorId = $(this).attr("vendor-id"); // which vendor card was clicked
+				$(":mobile-pagecontainer").pagecontainer("change", "vendor_page.html", {
+					data: {
+						vendorId
+					}
+				});
+			});
 
 			$("#home-footer").on("click", function (event) {
 				$(":mobile-pagecontainer").pagecontainer("change", "checkout.html");

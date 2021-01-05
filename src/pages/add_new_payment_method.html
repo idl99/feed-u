@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="../css/base.css" />
+    <script src="../bundle.js"></script>
+</head>
+
+<body>
+
+    <div data-role="page" id="add-new-payment-method-page">
+        <div data-role="header" data-position="fixed" data-add-back-btn="true " data-toggle-on-tap="false">
+            <span class="ui-title"></span>
+        </div>
+        <div role="main" class="ui-content">
+            <h4>Add New Payment Method</h4>
+            <ul class="ui-nodisc-icon ui-alt-icon" data-role="listview">
+                <li><a class="add-new-payment-method-card-option">Credit Card</a></li>
+                <li><a class="add-new-payment-method-card-option">Debit Card</a></li>
+                <li><a href="#">PayPal</a></li>
+                <li><a href="#">Apple Pay</a></li>
+            </ul>
+        </div>
+
+        <!-- Stripe Checkout -->
+        <script src="https://js.stripe.com/v3/"></script>
+
+        <script>
+
+            const { user, payment } = app
+            const { stripe_customer_id } = user.getPaymentDetails();
+
+            var stripeJS = Stripe('pk_test_51I3c8WBYsXgRXg4sHaDeNTSCG8lvZNnN4c8tUydiuqUwArCXylLnE8poGx5UapOqEhR2cEGlHLM1V8J8ecat0SEB00fopbAHm7');
+
+            // Redirect the user to the Stripe checkout flow
+            // Refer https://stripe.com/docs/payments/save-and-reuse#redirect-checkout for more
+            const redirectToStripeCheckout = (checkoutSessionResponse) => {
+                const { id } = checkoutSessionResponse;
+                stripeJS.redirectToCheckout({
+                    sessionId: id,
+                }).then(function (err) {
+                    // this handler will get triggered if the redirect fails
+                    console.log(err);
+                })
+            }
+
+            const handleCheckoutSessionCreationError = (err) => {
+                console.log(err);
+                console.log(err.responseJSON);
+            }
+
+            // https://stackoverflow.com/questions/14468659/jquery-mobile-document-ready-vs-page-events
+            $('#add-new-payment-method-page').on('pagecreate', function (event) {
+                console.log('Add new payment method page created');
+
+                // Refer https://stripe.com/docs/testing for dummy card details
+                $('.add-new-payment-method-card-option').click(function (event) {
+                    const checkoutSessionOptions = {
+                        customer: stripe_customer_id,
+                        success_url: 'https://idl99.github.io/feed-u/pages/landing.html?session_id={CHECKOUT_SESSION_ID}',
+                        cancel_url: 'https://idl99.github.io/feed-u/pages/landing.html',
+                    };
+                    payment.createSessionToSaveCardDetails(checkoutSessionOptions, redirectToStripeCheckout, handleCheckoutSessionCreationError)
+                });
+            })
+
+        </script>
+
+    </div>
+
+</body>
+
+</html>
