@@ -78,12 +78,16 @@
                 </button> -->
             </div>
         </div>
-        <!-- Script for the rendering process. -->
         <script>
 
             const { user } = app;
             // TODO refactor this once mock data is removed
-            var order = user.getSpecificOrder("ord1");
+            var pastOrderId = "ord1";
+            var order = user.getSpecificOrder(pastOrderId);
+
+            var vendorRating = 0;
+            // var vendorComment = '';
+            // enableContinueButton();
 
             // Render the vendors details.
             var markup = `
@@ -120,10 +124,6 @@
 
             $('.vendor-rating-page-container').append(markup)
 
-        </script>
-        <!-- Script for item click functions. -->
-        <script>
-
             $(document).ready(function () {
                 $('#ratings li').on('click', function () {
                     // The rating value that is selected by the user
@@ -141,15 +141,34 @@
                     }
 
                     // The rating value for persistence or further use.
-                    var ratingValue = parseInt($('#ratings li.selected').last().data('value'), 10);
-                    console.log(ratingValue)
+                    vendorRating = parseInt($('#ratings li.selected').last().data('value'), 10);
 
+                    // enableContinueButton();
                 });
             });
+
+            // function enableContinueButton() {
+
+            //     if (vendorRating === 0) {
+            //         console.log("disable here");
+            //         $('.continue-btn').attr("disabled", true);
+            //     } else {
+            //         console.log("enable here");
+            //         $('.continue-btn').removeAttr('disabled');
+            //     }
+            // }
 
             function onContinueClick(event) {
                 console.log('Clicked continue. Opening the item ratings page.')
                 $(":mobile-pagecontainer").pagecontainer("change", "item_rating.html");
+                // console.log('Clicked continue. Opening the item ratings page.')
+                // $(":mobile-pagecontainer").pagecontainer("change", "item_rating.html", {
+                //     data: {
+                //         pastOrderId,
+                //         vendorRating,
+                //         vendorComment,
+                //     }
+                // });
             };
 
         </script>
