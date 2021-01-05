@@ -46,56 +46,11 @@
                             fill="#EB5757" />
                     </svg>
                 </div>
-                <!-- <div class="vendor-image-container">
-                    <img src="../assets/stories_images/story-big.png" alt="Vendor Logo">
+                <div class="vendor-image-container">
+                    <img id="item-vendor-logo" src="../assets/stories_images/story-big.png" alt="Vendor Logo">
                 </div>
-                <p id="vendor-rating-description">How was Burgers Ahoy!?</p>
                 <p id="vendor-rating-description">They’ll get your feedback, along with your name and photo</p>
-                <div class="vendor-rating-bar">
-                    <ul id='ratings'>
-                        <li class='star-icon' title='Not Good' data-value='1'>
-                            <i class='fa fa-star fa-fw'></i>
-                        </li>
-                        <li class='star-icon' title='Ok' data-value='2'>
-                            <i class='fa fa-star fa-fw'></i>
-                        </li>
-                        <li class='star-icon' title='Good' data-value='3'>
-                            <i class='fa fa-star fa-fw'></i>
-                        </li>
-                        <li class='star-icon' title='Very Good' data-value='4'>
-                            <i class='fa fa-star fa-fw'></i>
-                        </li>
-                        <li class='star-icon' title='Excellent' data-value='5'>
-                            <i class='fa fa-star fa-fw'></i>
-                        </li>
-                    </ul>
-                </div>
-                <div class="vendor-comments">
-                    Leave your thoughts about the vendor here
-                </div>
-                <button class="continue-btn" onclick="onContinueClick()">
-                    <h4 id="continue-btn-txt">Continue</h4>
-                </button> -->
-            </div>
-        </div>
-        <script>
-
-            const { user } = app;
-            // TODO refactor this once mock data is removed
-            var pastOrderId = "ord1";
-            var order = user.getSpecificOrder(pastOrderId);
-
-            var vendorRating = 0;
-            var vendorComment = '';
-            enableContinueButton();
-
-            // Render the vendors details.
-            var markup = `
-            <div class="vendor-image-container">
-                    <img src=${order.vendorLogoImageLocation} alt="Vendor Logo">
-                </div>
-                <p id="vendor-rating-description">How was ${order.vendorName}!?</p>
-                <p id="vendor-rating-description">They’ll get your feedback, along with your name and photo</p>
+                <p id="vendor-description"></p>
                 <div class="vendor-rating-bar">
                     <ul id='ratings'>
                         <li class='star-icon' title='Not Good' data-value='1'>
@@ -120,9 +75,25 @@
                 </div>
                 <button class="continue-btn" onclick="onContinueClick()" disabled>
                     <h4 id="continue-btn-txt">Continue</h4>
-                </button>`;
+                </button>
 
-            $('.vendor-rating-page-container').append(markup)
+            </div>
+        </div>
+        <script>
+
+            const { user } = app;
+            // TODO refactor this once mock data is removed
+            var pastOrderId = "ord1";
+            var order = user.getSpecificOrder(pastOrderId);
+
+            var vendorRating = 0;
+            var vendorComment = '';
+            enableContinueButton();
+
+            // Render the vendors details.
+            $('#item-vendor-logo').attr('src', order.vendorLogoImageLocation);
+            var tempText = 'How was ' + order.vendorName + '?';
+            $('#vendor-description').text(tempText);
 
             $(document).ready(function () {
                 $('#ratings li').on('click', function () {
