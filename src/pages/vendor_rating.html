@@ -90,12 +90,13 @@
             var vendorComment = '';
             enableContinueButton();
 
-            // Render the vendors details.
-            $('#item-vendor-logo').attr('src', order.vendorLogoImageLocation);
-            var tempText = 'How was ' + order.vendorName + '?';
-            $('#vendor-description').text(tempText);
+            $('#vendor-rating').on('pagebeforeshow', function (event, { toPage }) {
 
-            $(document).ready(function () {
+                // Render the vendors details.
+                $('#item-vendor-logo').attr('src', order.vendorLogoImageLocation);
+                var tempText = 'How was ' + order.vendorName + '?';
+                $('#vendor-description').text(tempText);
+
                 $('#ratings li').on('click', function () {
                     // The rating value that is selected by the user
                     var onRatingSelect = parseInt($(this).data('value'), 10);
@@ -116,6 +117,7 @@
 
                     enableContinueButton();
                 });
+
             });
 
             function enableContinueButton() {

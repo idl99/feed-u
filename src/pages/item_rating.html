@@ -131,29 +131,29 @@
             var vendorRating;
             var vendorComment;
 
-            $('body').on('pagebeforeshow', "#vendor-rating", function (event, { toPage }) {
-                const url = toPage[0].baseURI;
+            $('#item-rating').on('pagecreate', function (event) {
+                console.log('In item rating');
+                const url = event.target.baseURI;
                 const queryParams = utils.parseUrlForQueryParams(url);
                 pastOrderId = queryParams.pastOrderId;
                 console.log('here');
                 vendorRating = queryParams.vendorRating;
                 vendorComment = queryParams.vendorComment;
-            });
 
-            console.log("vendor rating", vendorRating);
-            console.log("vendor comment", vendorComment);
+                console.log("vendor rating", vendorRating);
+                console.log("vendor comment", vendorComment);
 
-            // TODO refactor this once mock data is removed
-            var order = user.getSpecificOrder(pastOrderId);
+                // TODO refactor this once mock data is removed
+                var order = user.getSpecificOrder(pastOrderId);
 
-            // Render the vendors details.
-            $('#vendor-logo').attr('src', order.vendorLogoImageLocation);
-            $('#vendor-name').text(order.vendorName + "?");
+                // Render the vendors details.
+                $('#vendor-logo').attr('src', order.vendorLogoImageLocation);
+                $('#vendor-name').text(order.vendorName + "?");
 
-            // Render items in past order summary.
-            order.orderedItems.forEach(({ itemName, rating, comment }) => {
+                // Render items in past order summary.
+                order.orderedItems.forEach(({ itemName, rating, comment }) => {
 
-                var markup = `
+                    var markup = `
                     <div class="past-order-item">
                         <p id="past-order-item-description">${itemName}</p>
                         <div class="item-rating-bar">
@@ -185,12 +185,11 @@
                         </p>
                     </div>`;
 
-                $(markup).insertBefore($('.ratings-submit-btn'));
-            });
+                    $(markup).insertBefore($('.ratings-submit-btn'));
+                });
 
-            enableSubmitButton();
+                enableSubmitButton();
 
-            $(document).ready(function () {
                 $('#item-ratings li').on('click', function () {
                     // The rating value that is selected by the user
                     var ratedItem = $(this).parent().parent().parent().children('#past-order-item-description').text();
@@ -213,7 +212,33 @@
 
                     enableSubmitButton();
                 });
+
             });
+
+            // $(document).ready(function () {
+            //     $('#item-ratings li').on('click', function () {
+            //         // The rating value that is selected by the user
+            //         var ratedItem = $(this).parent().parent().parent().children('#past-order-item-description').text();
+            //         var onRatingSelect = parseInt($(this).data('value'), 10);
+            //         var ratings = $(this).parent().children('li.star-icon');
+
+            //         // Remove selected stars if the user changes ratings from a higher value to lower value.
+            //         for (i = 0; i < ratings.length; i++) {
+            //             $(ratings[i]).removeClass('selected');
+            //         }
+
+            //         // Add selected stars when the user rates.
+            //         for (i = 0; i < onRatingSelect; i++) {
+            //             $(ratings[i]).addClass('selected');
+            //         }
+
+            //         // The rating value for persistence or further use.
+            //         var ratingValue = parseInt($('#item-ratings li.selected').last().data('value'), 10);
+            //         console.log(('Rated ' + ratedItem + ' with'), ratingValue, 'stars.');
+
+            //         enableSubmitButton();
+            //     });
+            // });
 
             function enableSubmitButton() {
                 // Enable the submit button if all the items are rated.
@@ -235,14 +260,15 @@
             }
 
             function onBackClick(event) {
-                console.log('Clicked back. Opening the vendor ratings page.')
-                $(":mobile-pagecontainer").pagecontainer("change", "vendor_rating.html", {
-                    data: {
-                        pastOrderId,
-                        vendorRating,
-                        vendorComment,
-                    }
-                });
+                // console.log('Clicked back. Opening the vendor ratings page.')
+                // $(":mobile-pagecontainer").pagecontainer("change", "vendor_rating.html", {
+                //     data: {
+                //         pastOrderId,
+                //         vendorRating,
+                //         vendorComment,
+                //     }
+                // });
+                window.history.back();
             };
 
             function onSubmitBtnClick(event) {
