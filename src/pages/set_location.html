@@ -37,18 +37,20 @@
 			</div>
 			<div id="saved-locations">
 				<ul data-role="listview">
-					<li class="set-location-list-item ui-icon-check ui-btn-icon-right">Delkanda, Nugegoda</li>
-					<li class="set-location-list-item">Nedimala, Dehiwala</li>
-					<li class="set-location-list-item">Kandalanda, Homagama</li>
-					<li class="set-location-list-item">Attidiya, Dehiwala</li>
+					<li class="set-location-saved-location-list-item ui-icon-check ui-btn-icon-right">Delkanda, Nugegoda
+					</li>
+					<li class="set-location-saved-location-list-item">Nedimala, Dehiwala</li>
+					<li class="set-location-saved-location-list-item">Kandalanda, Homagama</li>
+					<li class="set-location-saved-location-list-item">Attidiya, Dehiwala</li>
 				</ul>
 			</div>
 			<div id="previous-locations">
 				<ul data-role="listview">
-					<li id="list-item">Makumbura, Kottawa</li>
-					<li id="list-item">Piliyandala, Kottawa</li>
-					<li id="list-item">Nawala, Rajagiriya</li>
-					<li id="list-item">Nugegoda, Nugegoda</li>
+					<li class="set-location-previous-location-list-item ui-icon-check ui-btn-icon-right">Makumbura,
+						Kottawa</li>
+					<li class="set-location-previous-location-list-item">Piliyandala, Kottawa</li>
+					<li class="set-location-previous-location-list-item">Nawala, Rajagiriya</li>
+					<li class="set-location-previous-location-list-item">Nugegoda, Nugegoda</li>
 				</ul>
 			</div>
 		</div>
@@ -74,8 +76,13 @@
 			$(":mobile-pagecontainer").pagecontainer("change", "location_search.html",);
 		});
 
-		$('.set-location-list-item').click(function (eventObject) {
-			$('.set-location-list-item.ui-icon-check.ui-btn-icon-right').removeClass("ui-icon-check ui-btn-icon-right");
+		$('.set-location-saved-location-list-item').click(function (eventObject) {
+			$('.set-location-saved-location-list-item.ui-icon-check.ui-btn-icon-right').removeClass("ui-icon-check ui-btn-icon-right");
+			$(this).addClass("ui-icon-check ui-btn-icon-right");
+		})
+
+		$('.set-location-previous-location-list-item').click(function (eventObject) {
+			$('.set-location-previous-location-list-item.ui-icon-check.ui-btn-icon-right').removeClass("ui-icon-check ui-btn-icon-right");
 			$(this).addClass("ui-icon-check ui-btn-icon-right");
 		})
 
