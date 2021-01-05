@@ -6,12 +6,16 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="preconnect" href="https://fonts.gstatic.com">
+	<link rel="stylesheet" href="../css/base.css" />
+
+	<script src="../bundle.js"></script>
+
+    <!-- <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script> -->
 </head>
 
 <body>
@@ -39,35 +43,55 @@
         }
     </style>
 
-    <div role="main" class="ui-content">
-
-        <div data-role="page" id="Page1">
-            <div data-role="header" data-position="fixed">
-                <a href="#" data-icon="back" class="ui-btn-left">Back</a>
-                <h1>Header Bar</h1>
+<div role="main" class="ui-content">
+    <div data-role="page" id="Page1">
+        <div data-role="header" data-position="fixed">
+            <a href="#" data-icon="back" class="ui-btn-left">Back</a>
+            <h1>Header Bar</h1>
+        </div>
+        <h1>Leaderboard</h1>
+        <div class="leaderboard-items">
+            <div class="leaderboard-item">
+                
+                <h3>Pos.</h3>
+                <h3>Name</h3>
+                <h3>Points</h3>
             </div>
-            <h1>Leaderboard</h1>
-            <div class="leaderboard-items">
-                <div class="leaderboard-item">
-                    <h3>Pos.</h3>
-                    <h3>Name</h3>
-                    <h3>Points</h3>
-                </div>
+            <div id="list-users">
+            </div>
+    <script>
+        const {datastore} = app;
+        var leaderboard = datastore.getLeaderboard();
+        leaderboard.forEach(({name, points})=> {
+
+        var markupV1 = `<div class="leaderboard-item">
+            <p>1</p>
+            <p>${name}</p>
+            <p>${points}</p>`
+            $('#list-users').append(markupV1)
+        });
+        
+
+
+        
+
+    </script>
+
+
+
+   
+            
+<!--             
                 <div class="leaderboard-item">
                     <p>1</p>
                     <p>Vinula Uthsara</p>
                     <p>964</p>
-                </div>
+                </div> -->
             </div>
             <h3> Total Points : 547</h3>
             <h3> Points to next rank : 235</h3>
         </div>
     </div>
-    
-
-
-
-
 </body>
 
 </html>
