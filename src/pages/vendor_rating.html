@@ -87,7 +87,7 @@
 
             var vendorRating = 0;
             // var vendorComment = '';
-            // enableContinueButton();
+            enableContinueButton();
 
             // Render the vendors details.
             var markup = `
@@ -118,7 +118,7 @@
                 <div class="vendor-comments">
                     <textarea placeholder="Leave your thoughts about the vendor here"></textarea>
                 </div>
-                <button class="continue-btn" onclick="onContinueClick()">
+                <button class="continue-btn" onclick="onContinueClick()" disabled>
                     <h4 id="continue-btn-txt">Continue</h4>
                 </button>`;
 
@@ -143,20 +143,20 @@
                     // The rating value for persistence or further use.
                     vendorRating = parseInt($('#ratings li.selected').last().data('value'), 10);
 
-                    // enableContinueButton();
+                    enableContinueButton();
                 });
             });
 
-            // function enableContinueButton() {
+            function enableContinueButton() {
 
-            //     if (vendorRating === 0) {
-            //         console.log("disable here");
-            //         $('.continue-btn').attr("disabled", true);
-            //     } else {
-            //         console.log("enable here");
-            //         $('.continue-btn').removeAttr('disabled');
-            //     }
-            // }
+                if (vendorRating === 0) {
+                    console.log("disable here");
+                    $('.continue-btn').attr("disabled", true);
+                } else {
+                    console.log("enable here");
+                    $('.continue-btn').removeAttr('disabled');
+                }
+            }
 
             function onContinueClick(event) {
                 console.log('Clicked continue. Opening the item ratings page.')
