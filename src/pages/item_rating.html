@@ -124,20 +124,24 @@
         <script>
 
             const { user, utils } = app;
-            var pastOrderId = 'ord1';
-            var vendorRating = 3;
-            var vendorComment = 'Good for nothing';
+            // var pastOrderId = 'ord1';
+            // var vendorRating = 3;
+            // var vendorComment = 'Good for nothing';
+            var pastOrderId;
+            var vendorRating;
+            var vendorComment;
 
-            // $('body').on('pagebeforeshow', "#vendor-rating", function (event, { toPage }) {
-            //     const url = toPage[0].baseURI;
-            //     const queryParams = utils.parseUrlForQueryParams(url);
-            //     pastOrderId = queryParams.pastOrderId;
-            //     vendorRating = queryParams.vendorRating;
-            //     vendorComment = queryParams.vendorComment;
-            // });
+            $('body').on('pagebeforeshow', "#vendor-rating", function (event, { toPage }) {
+                const url = toPage[0].baseURI;
+                const queryParams = utils.parseUrlForQueryParams(url);
+                pastOrderId = queryParams.pastOrderId;
+                console.log('here');
+                vendorRating = queryParams.vendorRating;
+                vendorComment = queryParams.vendorComment;
+            });
 
-            // console.log("vendor rating", vendorRating);
-            // console.log("vendor comment", vendorComment);
+            console.log("vendor rating", vendorRating);
+            console.log("vendor comment", vendorComment);
 
             // TODO refactor this once mock data is removed
             var order = user.getSpecificOrder(pastOrderId);
@@ -232,7 +236,13 @@
 
             function onBackClick(event) {
                 console.log('Clicked back. Opening the vendor ratings page.')
-                $(":mobile-pagecontainer").pagecontainer("change", "vendor_rating.html");
+                $(":mobile-pagecontainer").pagecontainer("change", "vendor_rating.html", {
+                    data: {
+                        pastOrderId,
+                        vendorRating,
+                        vendorComment,
+                    }
+                });
             };
 
             function onSubmitBtnClick(event) {

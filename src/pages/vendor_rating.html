@@ -86,7 +86,7 @@
             var order = user.getSpecificOrder(pastOrderId);
 
             var vendorRating = 0;
-            // var vendorComment = '';
+            var vendorComment = '';
             enableContinueButton();
 
             // Render the vendors details.
@@ -159,16 +159,16 @@
             }
 
             function onContinueClick(event) {
-                console.log('Clicked continue. Opening the item ratings page.')
-                $(":mobile-pagecontainer").pagecontainer("change", "item_rating.html");
                 // console.log('Clicked continue. Opening the item ratings page.')
-                // $(":mobile-pagecontainer").pagecontainer("change", "item_rating.html", {
-                //     data: {
-                //         pastOrderId,
-                //         vendorRating,
-                //         vendorComment,
-                //     }
-                // });
+                // $(":mobile-pagecontainer").pagecontainer("change", "item_rating.html");
+                console.log('Clicked continue. Opening the item ratings page.')
+                $(":mobile-pagecontainer").pagecontainer("change", "item_rating.html", {
+                    data: {
+                        pastOrderId,
+                        vendorRating,
+                        vendorComment,
+                    }
+                });
             };
 
         </script>
