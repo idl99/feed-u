@@ -11,9 +11,12 @@ var datastore = require('./datastore')
 
 var utils = require('./utils')
 
+var payment = require('./payment')
+
 window.app = {
     cart,
     user,
     datastore,
-    utils
+    utils,
+    payment,
 }
