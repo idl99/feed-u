@@ -15,6 +15,61 @@
 <body>
     <div data-role="page" id="past-orders">
         <style>
+            .past-order {
+                display: flex;
+                flex-direction: column;
+            }
+
+            #past-order-vendor-name {
+                margin-top: 0.5em;
+            }
+
+            #past-order-no-items-price {
+                margin-top: 0.25em;
+            }
+
+            #past-order-time-separator {
+                color: #BDBDBD;
+                font-size: 8px;
+            }
+
+            #view-receipt {
+                margin-top: 0.25em;
+                margin-bottom: 0.75em;
+            }
+
+            .past-order-item {
+                display: flex;
+            }
+
+            .past-order-item-count {
+                width: max-content;
+                height: max-content;
+                border-style: solid;
+                border-color: #EB5757;
+                border-radius: 0.5em;
+                padding: 0.25em 0.5em 0.25em 0.5em;
+                text-align: center;
+            }
+
+            .past-order-item-name {
+                display: flex;
+                align-items: center;
+                margin-left: 0.75em;
+            }
+
+            #show-more {
+                margin-top: 1em;
+            }
+
+            #reorder-btn {
+                border-radius: 0;
+                background-color: #EB5757;
+                color: white;
+                text-shadow: none;
+                margin-top: 1em;
+            }
+
             .past-order-rating-bar {
                 display: flex;
                 flex-direction: column;
@@ -42,6 +97,10 @@
             .past-order-rating-bar ul>li.star-icon.selected>i.fa {
                 color: #F2C94C;
             }
+
+            #rate-your-order-txt {
+                margin-bottom: 1em;
+            }
         </style>
         <div data-role="header" id="past-orders-header" data-add-back-btn="true" data-position="fixed"
             data-tap-toggle="false">
@@ -50,35 +109,28 @@
         <div role="main" class="ui-content">
             <div class="past-orders-container">
                 <h1>Past Orders</h1>
-                <div style="display: flex; flex-direction: column;">
-                    <img src="../assets/past_orders/past_order_cover_image.jpg" alt="Past Order Cover Image">
-                    <span style="margin-top: 0.5em;">Burgers Ahoy!</span>
-                    <span style="margin-top: 0.25em;">3 items for LKR 1000.00 <i class="fa fa-circle"
-                            style="color: #BDBDBD; font-size: 8px;"></i> Oct 10 at 12:12
+                <div class="past-order">
+                    <img id="past-order-cover-img" src="../assets/past_orders/past_order_cover_image.jpg"
+                        alt="Past Order Cover Image">
+                    <span id="past-order-vendor-name">Burgers Ahoy!</span>
+                    <span id="past-order-no-items-price">3 items for LKR 1000.00 <i class="fa fa-circle"
+                            id="past-order-time-separator"></i> Oct 10 at 12:12
                         PM</span>
-                    <a style="margin-top: 0.25em; margin-bottom: 0.75em;">View Receipt</a>
-                    <div style="display: flex;">
-                        <div
-                            style="width: max-content; height: max-content; border-style: solid; border-color: #EB5757; border-radius: 0.5em; padding: 0.25em 0.5em 0.25em 0.5em; text-align: center;">
-                            2</div>
-                        <div style="display: flex; align-items: center; margin-left: 0.75em;">Hawaiian Burger</div>
+                    <a id="view-receipt">View Receipt</a>
+                    <div class="past-order-item">
+                        <div class="past-order-item-count">2</div>
+                        <div class="past-order-item-name">Hawaiian Burger</div>
                     </div>
                     <div style="display: flex; margin-top: 0.50em;">
-                        <div
-                            style="width: max-content; height: max-content; border-style: solid; border-color: #EB5757; border-radius: 0.5em; padding: 0.25em 0.5em 0.25em 0.5em; text-align: center;">
-                            2</div>
-                        <div style="display: flex; align-items: center; margin-left: 0.75em;">Pudding</div>
+                        <div class="past-order-item-count">2</div>
+                        <div class="past-order-item-name">Pudding</div>
                     </div>
                     <div style="display: flex; margin-top: 0.50em;">
-                        <div
-                            style="width: max-content; height: max-content; border-style: solid; border-color: #EB5757; border-radius: 0.5em; padding: 0.25em 0.5em 0.25em 0.5em; text-align: center;">
-                            1</div>
-                        <div style="display: flex; align-items: center; margin-left: 0.75em;">Special Chilli Sauce</div>
+                        <div class="past-order-item-count"> 1</div>
+                        <div class="past-order-item-name">Special Chilli Sauce</div>
                     </div>
-                    <span style="margin-top: 1em;">Show more <i class="fa fa-angle-down"></i>
-                    </span>
-                    <button
-                        style="border-radius: 0; background-color: #EB5757; color: white; text-shadow: none; margin-top: 1em;">Reorder</button>
+                    <span id="show-more">Show more <i class="fa fa-angle-down"></i></span>
+                    <button id="reorder-btn">Reorder</button>
                     <div class="past-order-rating-bar">
                         <ul id="past-order-ratings">
                             <li class='star-icon' title='Not Good' data-value='1'>
@@ -97,7 +149,7 @@
                                 <i class='fa fa-star-o fa-fw'></i>
                             </li>
                         </ul>
-                        <span style="margin-bottom: 1em;">Rate your order</span>
+                        <span id="rate-your-order-txt">Rate your order</span>
                     </div>
                 </div>
             </div>
