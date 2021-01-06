@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Feed U - Past Orders Page</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="../css/base.css" />
+
+    <script src="../bundle.js"></script>
+
+</head>
+
+<body>
+    <div data-role="page" id="past-orders">
+        <style>
+            .past-order-rating-bar {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .past-order-rating-bar ul {
+                list-style-type: none;
+                padding: 0;
+
+                -moz-user-select: none;
+                -webkit-user-select: none;
+            }
+
+            .past-order-rating-bar ul>li.star-icon {
+                display: inline-block;
+
+            }
+
+            .past-order-rating-bar ul>li.star-icon>i.fa {
+                font-size: 2em;
+                color: #EB5757;
+            }
+
+            .past-order-rating-bar ul>li.star-icon.selected>i.fa {
+                color: #F2C94C;
+            }
+        </style>
+        <div data-role="header" id="past-orders-header" data-add-back-btn="true" data-position="fixed"
+            data-tap-toggle="false">
+            <h4>Header</h4>
+        </div>
+        <div role="main" class="ui-content">
+            <div class="past-orders-container">
+                <h1>Past Orders</h1>
+                <div style="display: flex; flex-direction: column;">
+                    <img src="../assets/past_orders/past_order_cover_image.jpg" alt="Past Order Cover Image">
+                    <span style="margin-top: 0.5em;">Burgers Ahoy!</span>
+                    <span style="margin-top: 0.25em;">3 items for LKR 1000.00 <i class="fa fa-circle"
+                            style="color: #BDBDBD; font-size: 8px;"></i> Oct 10 at 12:12
+                        PM</span>
+                    <a style="margin-top: 0.25em; margin-bottom: 0.75em;">View Receipt</a>
+                    <div style="display: flex;">
+                        <div
+                            style="width: max-content; height: max-content; border-style: solid; border-color: #EB5757; border-radius: 0.5em; padding: 0.25em 0.5em 0.25em 0.5em; text-align: center;">
+                            2</div>
+                        <div style="display: flex; align-items: center; margin-left: 0.75em;">Hawaiian Burger</div>
+                    </div>
+                    <div style="display: flex; margin-top: 0.50em;">
+                        <div
+                            style="width: max-content; height: max-content; border-style: solid; border-color: #EB5757; border-radius: 0.5em; padding: 0.25em 0.5em 0.25em 0.5em; text-align: center;">
+                            2</div>
+                        <div style="display: flex; align-items: center; margin-left: 0.75em;">Pudding</div>
+                    </div>
+                    <div style="display: flex; margin-top: 0.50em;">
+                        <div
+                            style="width: max-content; height: max-content; border-style: solid; border-color: #EB5757; border-radius: 0.5em; padding: 0.25em 0.5em 0.25em 0.5em; text-align: center;">
+                            1</div>
+                        <div style="display: flex; align-items: center; margin-left: 0.75em;">Special Chilli Sauce</div>
+                    </div>
+                    <span style="margin-top: 1em;">Show more <i class="fa fa-angle-down"></i>
+                    </span>
+                    <button
+                        style="border-radius: 0; background-color: #EB5757; color: white; text-shadow: none; margin-top: 1em;">Reorder</button>
+                    <div class="past-order-rating-bar">
+                        <ul id="past-order-ratings">
+                            <li class='star-icon' title='Not Good' data-value='1'>
+                                <i class='fa fa-star-o fa-fw'></i>
+                            </li>
+                            <li class='star-icon' title='Ok' data-value='2'>
+                                <i class='fa fa-star-o fa-fw'></i>
+                            </li>
+                            <li class='star-icon' title='Good' data-value='3'>
+                                <i class='fa fa-star-o fa-fw'></i>
+                            </li>
+                            <li class='star-icon' title='Very Good' data-value='4'>
+                                <i class='fa fa-star-o fa-fw'></i>
+                            </li>
+                            <li class='star-icon' title='Excellent' data-value='5'>
+                                <i class='fa fa-star-o fa-fw'></i>
+                            </li>
+                        </ul>
+                        <span style="margin-bottom: 1em;">Rate your order</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
