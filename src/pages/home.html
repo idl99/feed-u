@@ -37,8 +37,11 @@
 				<span id="checkout-delivery-location"
 					style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
 					Delivery Location </span>
-				<a id="navigate-to-set-location"
-					class="ui-btn ui-shadow ui-corner-all ui-icon-navigation ui-btn-icon-notext"
+				<!-- 
+					TODO if we set href here to set_location page it doesn't work. works for any other page.
+					Also, manual jQuery AJAX navigation works.
+				-->
+				<a class="link-set-location-page ui-btn ui-shadow ui-corner-all ui-icon-navigation ui-btn-icon-notext"
 					style="margin-left: 5px;"></a>
 			</div>
 			<p>Stories</p>
@@ -468,6 +471,11 @@
 		</div>
 
 		<script>
+			$(".link-set-location-page").click(function (event) {
+				event.preventDefault();
+				$.mobile.navigate("set_location.html");
+			})
+
 			function onStoryClick(event) {
 				console.log('Clicked a story. Opening the story.');
 
