@@ -25,10 +25,6 @@
 				// https://api.jquerymobile.com/pagecontainer/ for more
 				$(":mobile-pagecontainer").pagecontainer("change", "home.html");
 			};
-			$(document).on("swipeleft", ".ui-content", function (event) {
-				console.log("here")
-				$(":mobile-pagecontainer").pagecontainer("change", "set_location.html", { transition: "slide" });
-			});
 		</script>
 		<div role="main" class="ui-content" id="main-container">
 			<div class="vendor-details-container">

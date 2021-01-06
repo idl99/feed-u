@@ -5434,7 +5434,7 @@ body {
   font-family: "Poppins";
 }
 body #location-search-map {
-  height: 50vh;
+  height: 52vh;
   width: 100%;
 }
 body .user-location-details-container {
@@ -5446,8 +5446,11 @@ body .user-location-details-container .location-details-header {
   justify-content: space-between;
 }
 body .user-location-details-container .location-details-header #favourite-icon {
-  padding-top: 0.75em;
-  padding-right: 0.5em;
+  display: flex;
+  align-items: center;
+  margin-top: -0.4em;
+  font-size: x-large;
+  color: #EB5757;
 }
 body .user-location-details-container .selected-location-details-container {
   display: flex;
@@ -5483,7 +5486,7 @@ body {
   font-family: "Poppins";
 }
 body #set-location-map {
-  height: 200px;
+  height: 33vh;
   width: 100%;
   margin: 0;
   padding: 0;
