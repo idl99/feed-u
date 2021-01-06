@@ -28,6 +28,22 @@
 		</div>
 
 		<div role="main" class="ui-content">
+			<div style="display: flex; justify-content: center; align-items: center;">
+				<span style="margin-right: 5px;">Deliver Now | </span>
+				<!-- 
+                        https://css-tricks.com/flexbox-truncated-text/ 
+                        TODO fix for longer display names
+                    -->
+				<span id="checkout-delivery-location"
+					style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+					Delivery Location </span>
+				<!-- 
+					TODO if we set href here to set_location page it doesn't work. works for any other page.
+					Also, manual jQuery AJAX navigation works.
+				-->
+				<a class="link-set-location-page ui-btn ui-shadow ui-corner-all ui-icon-navigation ui-btn-icon-notext"
+					style="margin-left: 5px;"></a>
+			</div>
 			<p>Stories</p>
 			<div style="display: flex; justify-content: flex-start; overflow: auto;">
 				<img id="the-story" src="../assets/stories_images/story.png"
@@ -455,6 +471,11 @@
 		</div>
 
 		<script>
+			$(".link-set-location-page").click(function (event) {
+				event.preventDefault();
+				$.mobile.navigate("set_location.html");
+			})
+
 			function onStoryClick(event) {
 				console.log('Clicked a story. Opening the story.');
 
@@ -490,14 +511,8 @@
 					`</div>
 						<div class="status_bar">
 							<div class="rating_bar">
-								<p><svg width="12" height="11" viewBox="0 0 12 11" fill="none"
-										xmlns="http://www.w3.org/2000/svg">
-										<path
-											d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
-											fill="#F2C94C" />
-									</svg> ${vendorRatings.vendorRatingValue}
-								<p>(${vendorRatings.vendorNoOfRatings})</p>
-								</p>
+								<span><i class='fa fa-star fa-fw' style="color: #F2C94C;"></i> ${vendorRatings.vendorRatingValue} <small style="display: inline-block; vertical-align: middle; line-height: 2em; font-size: 8px;">(${vendorRatings.vendorNoOfRatings})</small>
+								</span>
 							</div>
 							<div style="display: flex; align-items: center; margin-left: 2%;">${deliveryTime}</div>
 						</div>
@@ -545,7 +560,7 @@
 						evaluatePanelOpen();
 					})
 				}
-			})
+			});
 
 			// Handle Vendor POI click event
 			// https://stackoverflow.com/questions/943987/add-jquery-click-handler-to-multiple-elements
@@ -560,7 +575,7 @@
 
 			$("#home-footer").on("click", function (event) {
 				$(":mobile-pagecontainer").pagecontainer("change", "checkout.html");
-			})
+			});
 		</script>
 	</div>
 

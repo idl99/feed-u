@@ -14,8 +14,7 @@
 
 <body>
 	<div data-role="page" id="location_search">
-		<div data-role="header" data-position="fixed">
-			<a href="#" data-icon="back" class="ui-btn-left">Back</a>
+		<div data-role="header" data-position="fixed" data-add-back-btn="true">
 			<h1>Header Bar</h1>
 		</div>
 		<div class="ui-content" style="padding-top: 0%;">
@@ -28,12 +27,7 @@
 			<div class="user-location-details-container">
 				<div class="location-details-header">
 					<p>Confirm Address</p>
-					<svg id="favourite-icon" width="24" height="22" viewBox="0 0 24 22" fill="none"
-						xmlns="http://www.w3.org/2000/svg">
-						<path
-							d="M13.2908 2.51167L13.2906 2.51191L12.3672 3.50877L12.0003 3.90474L11.6335 3.50877L10.7101 2.51191L10.7096 2.51131C8.51745 0.137042 5.00299 -0.211336 2.66349 1.87701L13.2908 2.51167ZM13.2908 2.51167C15.4879 0.136741 18.9979 -0.211161 21.3372 1.87701L13.2908 2.51167ZM21.7627 11.3741L21.7628 11.374C24.216 8.72171 24.0681 4.31917 21.3375 1.87727L21.7627 11.3741ZM21.7627 11.3741L12.6926 21.1854C12.3046 21.6049 11.6914 21.6049 11.3034 21.1854L2.23352 11.3743M21.7627 11.3741L2.23352 11.3743M2.23352 11.3743L2.23332 11.3741C-0.215481 8.72166 -0.067406 4.31891 2.66343 1.87707L2.23352 11.3743Z"
-							fill="white" stroke="#EB5757" />
-					</svg>
+					<i id="favourite-icon" class="fa fa-heart-o"></i>
 				</div>
 				<div class="selected-location-details-container">
 					<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -57,51 +51,57 @@
 				</div>
 			</div>
 		</div>
-		<button data-role="footer" data-position="fixed">
-			<!--<button style="background-color:#FF6464; color:white">Save</button>-->
-			<h4 id="set-location-button-text">Set Location</h4>
-		</button>
-	</div>
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4fxzjh0_9j9aIXCecrSeDxBztKU5Lzao&callback=initMap"
-		defer></script>
+		<div data-role="footer" data-position="fixed">
+			<h1>Set Location</h1>
+		</div>
+		<script
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4fxzjh0_9j9aIXCecrSeDxBztKU5Lzao&callback=initMap"
+			defer></script>
 
-	<script>
-		function initMap() {
-			console.log("Init 2");
-			const map = new google.maps.Map(document.getElementById("location-search-map"), {
-				zoom: 14,
-				center: { lat: 51.517582, lng: -0.141525 },
-			});
-			const image =
-				"../assets/map_images/map_pin.png";
+		<script>
 
-			marker = new google.maps.Marker({
-				map, draggable: true,
-				animation: google.maps.Animation.DROP,
-				position: { lat: 51.517582, lng: -0.141525 },
-				icon: image,
+			$('#favourite-icon').on('click', function () {
+				$(this).toggleClass('fa-heart');
+				$(this).toggleClass('fa-heart-o');
 			});
 
-			marker.addListener("click", toggleBounce);
+			function initMap() {
+				const map = new google.maps.Map(document.getElementById("location-search-map"), {
+					zoom: 14,
+					center: { lat: 51.517582, lng: -0.141525 },
+				});
+				const image =
+					"../assets/map_images/map_pin.png";
 
-			marker.addListener('dragend', function (ev) {
-				console.log('Latitude: ' + marker.getPosition().lat() + ', Longitude: ' + marker.getPosition().lng());
-				var geoCode = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + marker.getPosition().lat() + '%2C' + marker.getPosition().lng() + '&language=en';
+				marker = new google.maps.Marker({
+					map, draggable: true,
+					animation: google.maps.Animation.DROP,
+					position: { lat: 51.517582, lng: -0.141525 },
+					icon: image,
+				});
 
-				$.getJSON(geoCode).done(function (location) {
-					console.log(location)
-				})
-			});
-		}
+				marker.addListener("click", toggleBounce);
 
-		function toggleBounce() {
-			if (marker.getAnimation() !== null) {
-				marker.setAnimation(null);
-			} else {
-				marker.setAnimation(google.maps.Animation.BOUNCE);
+				marker.addListener('dragend', function (ev) {
+					console.log('Latitude: ' + marker.getPosition().lat() + ', Longitude: ' + marker.getPosition().lng());
+					var geoCode = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + marker.getPosition().lat() + '%2C' + marker.getPosition().lng() + '&language=en';
+
+					$.getJSON(geoCode).done(function (location) {
+						console.log(location)
+					})
+				});
 			}
-		}
-	</script>
+
+			function toggleBounce() {
+				if (marker.getAnimation() !== null) {
+					marker.setAnimation(null);
+				} else {
+					marker.setAnimation(google.maps.Animation.BOUNCE);
+				}
+			}
+		</script>
+	</div>
+
 </body>
 
 </html>
