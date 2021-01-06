@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Feed U - Item Ratings Popup</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="../css/base.css" />
+
+    <script src="../bundle.js"></script>
+
+</head>
+
+<body>
+    <div data-role="page" id="item-rating">
+        <style>
+            .item-rating-page-container {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .item-rating-page-header-section {
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .vendor-image-container {
+                display: flex;
+                justify-content: center;
+            }
+
+            #item-rating-description {
+                text-align: center;
+            }
+
+            .past-order-items {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .past-order-item {
+                display: flex;
+                justify-content: space-around;
+            }
+
+            #past-order-item-description {
+                width: 33.3%;
+            }
+
+            .item-rating-bar {
+                width: 40%;
+            }
+
+            .item-rating-bar ul {
+                list-style-type: none;
+                padding: 0;
+
+                -moz-user-select: none;
+                -webkit-user-select: none;
+            }
+
+            .item-rating-bar ul>li.star-icon {
+                display: inline-block;
+
+            }
+
+            .item-rating-bar ul>li.star-icon>i.fa {
+                font-size: 1em;
+                color: #ccc;
+            }
+
+            .item-rating-bar ul>li.star-icon.selected>i.fa {
+                color: #F2C94C;
+            }
+        </style>
+        <div role="main" class="ui-content">
+            <script>
+                $(document).ready(function () {
+                    $('#ratings li').on('click', function () {
+                        // The rating value that is selected by the user
+                        var onRatingSelect = parseInt($(this).data('value'), 10);
+                        var ratings = $(this).parent().children('li.star-icon');
+
+                        // Remove selected stars if the user changes ratings from a higher value to lower value.
+                        for (i = 0; i < ratings.length; i++) {
+                            $(ratings[i]).removeClass('selected');
+                        }
+
+                        // Add selected stars when the user rates.
+                        for (i = 0; i < onRatingSelect; i++) {
+                            $(ratings[i]).addClass('selected');
+                        }
+
+                        // The rating value for persistence or further use.
+                        var ratingValue = parseInt($('#ratings li.selected').last().data('value'), 10);
+                        console.log(ratingValue)
+
+                    });
+                });
+
+                function onBackClick(event) {
+                    console.log('Clicked back. Opening the vendor ratings page.')
+                    $(":mobile-pagecontainer").pagecontainer("change", "vendor_rating.html");
+                };
+            </script>
+            <div class="item-rating-container">
+                <div class="item-rating-page-header-section">
+                    <svg onclick="onBackClick()" width="22" height="24" viewBox="0 0 22 24" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0)">
+                            <path
+                                d="M12.6451 20.8641L11.5549 21.9047C11.0933 22.3454 10.3469 22.3454 9.8902 21.9047L0.343764 12.7969C-0.117843 12.3563 -0.117843 11.6438 0.343764 11.2079L9.8902 2.09536C10.3518 1.65474 11.0982 1.65474 11.5549 2.09536L12.6451 3.13599C13.1116 3.5813 13.1018 4.30786 12.6255 4.7438L6.70805 10.125H20.8215C21.4746 10.125 22 10.6266 22 11.25V12.75C22 13.3735 21.4746 13.875 20.8215 13.875H6.70805L12.6255 19.2563C13.1067 19.6922 13.1165 20.4188 12.6451 20.8641Z"
+                                fill="#EB5757" />
+                        </g>
+                        <defs>
+                            <clipPath id="clip0">
+                                <rect width="22" height="24" fill="white" />
+                            </clipPath>
+                        </defs>
+                    </svg>
+                    <svg width="22" height="21" viewBox="0 0 22 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M19.9375 0H2.0625C0.923828 0 0 1.00781 0 2.25V18.75C0 19.9922 0.923828 21 2.0625 21H19.9375C21.0762 21 22 19.9922 22 18.75V2.25C22 1.00781 21.0762 0 19.9375 0ZM16.3453 13.6172C16.5516 13.8422 16.5516 14.2078 16.3453 14.4328L14.6051 16.3312C14.3988 16.5562 14.0637 16.5562 13.8574 16.3312L11 13.1859L8.14258 16.3312C7.93633 16.5562 7.60117 16.5562 7.39492 16.3312L5.65469 14.4328C5.44844 14.2078 5.44844 13.8422 5.65469 13.6172L8.53789 10.5L5.65469 7.38281C5.44844 7.15781 5.44844 6.79219 5.65469 6.56719L7.39492 4.66875C7.60117 4.44375 7.93633 4.44375 8.14258 4.66875L11 7.81406L13.8574 4.66875C14.0637 4.44375 14.3988 4.44375 14.6051 4.66875L16.3453 6.56719C16.5516 6.79219 16.5516 7.15781 16.3453 7.38281L13.4621 10.5L16.3453 13.6172Z"
+                            fill="#EB5757" />
+                    </svg>
+                </div>
+                <div class="vendor-image-container">
+                    <img src="../assets/stories_images/story-big.png" alt="Vendor Logo">
+                </div>
+                <p id="item-rating-description">How were the items of <br> Burgers Ahoy!?</p>
+                <div class="past-order-items">
+                    <div class="past-order-item">
+                        <p id="past-order-item-description">Hawaiian Burger</p>
+                        <div class="item-rating-bar">
+                            <ul id='ratings'>
+                                <li class='star-icon' title='Not Good' data-value='1'>
+                                    <i class='fa fa-star fa-fw'></i>
+                                </li>
+                                <li class='star-icon' title='Ok' data-value='2'>
+                                    <i class='fa fa-star fa-fw'></i>
+                                </li>
+                                <li class='star-icon' title='Good' data-value='3'>
+                                    <i class='fa fa-star fa-fw'></i>
+                                </li>
+                                <li class='star-icon' title='Very Good' data-value='4'>
+                                    <i class='fa fa-star fa-fw'></i>
+                                </li>
+                                <li class='star-icon' title='Excellent' data-value='5'>
+                                    <i class='fa fa-star fa-fw'></i>
+                                </li>
+                            </ul>
+                        </div>
+                        <p>
+                            <svg width="22" height="21" viewBox="0 0 22 21" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M7.375 16.25V15.75H6.875H2.75C1.46343 15.75 0.5 14.809 0.5 13.75V2.5C0.5 1.44101 1.46343 0.5 2.75 0.5H19.25C20.5366 0.5 21.5 1.44101 21.5 2.5V13.75C21.5 14.809 20.5366 15.75 19.25 15.75H13.0625H12.9082L12.7808 15.8369L7.41813 19.4943C7.41781 19.4945 7.41749 19.4947 7.41718 19.4949C7.41103 19.4988 7.40499 19.5007 7.39735 19.5011C7.39019 19.5015 7.38231 19.5004 7.375 19.4981V16.25Z"
+                                    stroke="#EB5757" />
+                            </svg>
+                        </p>
+                    </div>
+                    <div class="past-order-item">
+                        <p id="past-order-item-description">Pudding</p>
+                        <div class="item-rating-bar">
+                            <ul id='ratings'>
+                                <li class='star-icon' title='Not Good' data-value='1'>
+                                    <i class='fa fa-star fa-fw'></i>
+                                </li>
+                                <li class='star-icon' title='Ok' data-value='2'>
+                                    <i class='fa fa-star fa-fw'></i>
+                                </li>
+                                <li class='star-icon' title='Good' data-value='3'>
+                                    <i class='fa fa-star fa-fw'></i>
+                                </li>
+                                <li class='star-icon' title='Very Good' data-value='4'>
+                                    <i class='fa fa-star fa-fw'></i>
+                                </li>
+                                <li class='star-icon' title='Excellent' data-value='5'>
+                                    <i class='fa fa-star fa-fw'></i>
+                                </li>
+                            </ul>
+                        </div>
+                        <p>
+                            <svg width="22" height="21" viewBox="0 0 22 21" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M7.375 16.25V15.75H6.875H2.75C1.46343 15.75 0.5 14.809 0.5 13.75V2.5C0.5 1.44101 1.46343 0.5 2.75 0.5H19.25C20.5366 0.5 21.5 1.44101 21.5 2.5V13.75C21.5 14.809 20.5366 15.75 19.25 15.75H13.0625H12.9082L12.7808 15.8369L7.41813 19.4943C7.41781 19.4945 7.41749 19.4947 7.41718 19.4949C7.41103 19.4988 7.40499 19.5007 7.39735 19.5011C7.39019 19.5015 7.38231 19.5004 7.375 19.4981V16.25Z"
+                                    fill="#EB5757" stroke="#EB5757" />
+                            </svg>
+                        </p>
+                    </div>
+                    <div class="past-order-item">
+                        <p id="past-order-item-description">Special Chilli Sauce</p>
+                        <div class="item-rating-bar">
+                            <ul id='ratings'>
+                                <li class='star-icon' title='Not Good' data-value='1'>
+                                    <i class='fa fa-star fa-fw'></i>
+                                </li>
+                                <li class='star-icon' title='Ok' data-value='2'>
+                                    <i class='fa fa-star fa-fw'></i>
+                                </li>
+                                <li class='star-icon' title='Good' data-value='3'>
+                                    <i class='fa fa-star fa-fw'></i>
+                                </li>
+                                <li class='star-icon' title='Very Good' data-value='4'>
+                                    <i class='fa fa-star fa-fw'></i>
+                                </li>
+                                <li class='star-icon' title='Excellent' data-value='5'>
+                                    <i class='fa fa-star fa-fw'></i>
+                                </li>
+                            </ul>
+                        </div>
+                        <p>
+                            <svg width="22" height="21" viewBox="0 0 22 21" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M7.375 16.25V15.75H6.875H2.75C1.46343 15.75 0.5 14.809 0.5 13.75V2.5C0.5 1.44101 1.46343 0.5 2.75 0.5H19.25C20.5366 0.5 21.5 1.44101 21.5 2.5V13.75C21.5 14.809 20.5366 15.75 19.25 15.75H13.0625H12.9082L12.7808 15.8369L7.41813 19.4943C7.41781 19.4945 7.41749 19.4947 7.41718 19.4949C7.41103 19.4988 7.40499 19.5007 7.39735 19.5011C7.39019 19.5015 7.38231 19.5004 7.375 19.4981V16.25Z"
+                                    stroke="#EB5757" />
+                            </svg>
+                        </p>
+                    </div>
+                </div>
+                <button style="margin-top: 1em;">
+                    <h4 style="padding: 0.25em 0.25em 0.25em 0.25em; margin: 0 0 0 0;">Submit</h4>
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
