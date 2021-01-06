@@ -70,8 +70,8 @@
             var items = summary.items;
 
             // Calculate bill total
-            var billTotal = items.reduce((sum, { itemPrice }) => {
-                return sum + itemPrice;
+            var billTotal = items.reduce((sum, { quantity, itemPrice }) => {
+                return sum + quantity * itemPrice;
             }, 0);
             var paymentMethod = 'CASH' // TODO replace
             $("#checkout-payment-method-container").text(`Paying ${billTotal} By ${paymentMethod}`);
@@ -83,7 +83,7 @@
                         `<div class="checkout-item">
                         <div class="checkout-item-quantity">${quantity} X </div>
                         <div class="checkout-item-name">${itemTitle}</div>
-                        <div class="checkout-item-price">${itemPrice}</div>
+                        <div class="checkout-item-price">${itemPrice * quantity}</div>
                     </div>`;
                     return markup;
                 });
