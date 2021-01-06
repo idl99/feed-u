@@ -63,8 +63,9 @@
                     $('.add-new-payment-method-card-option').click(function (event) {
                         const checkoutSessionOptions = {
                             customer: stripe_customer_id,
-                            success_url: 'https://idl99.github.io/feed-u/pages/landing.html?session_id={CHECKOUT_SESSION_ID}',
-                            cancel_url: 'https://idl99.github.io/feed-u/pages/landing.html',
+                            // https://stripe.com/docs/payments/checkout/custom-success-page
+                            success_url: 'https://idl99.github.io/feed-u/pages/payment_methods.html?session_id={CHECKOUT_SESSION_ID}',
+                            cancel_url: 'https://idl99.github.io/feed-u/pages/add_new_payment_method.html',
                         };
                         payment.createSessionToSaveCardDetails(checkoutSessionOptions, redirectToStripeCheckout, handleCheckoutSessionCreationError)
                     });
