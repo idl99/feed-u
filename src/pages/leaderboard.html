@@ -23,17 +23,20 @@
 
         .leaderboard-item {
             padding: 18px;
-            font-size: 17px;
+            font-size: 15px;
             text-align: center;
         }
 
-        #leaderboard-title {
-            display: grid;
+        .leaderboard-title {
+            /* display: grid;
             grid-row-gap: 10px;
             grid-template-columns: auto auto auto;
             padding: 5px;
             justify-content: space-between;
-            font-size: 20px;
+            font-size: 20px; */
+            padding: 10px;
+            font-size: 18px;
+            text-align: center;
         }
 
         .total-points{
@@ -54,7 +57,7 @@
             background-color: #EB5757;
             color: white;
             width: 350px;
-            height: 55px;
+            height: 45px;
             padding: 5px;
             justify-content: left;
             text-shadow: none;
@@ -69,9 +72,9 @@
             <h1>Leaderboard</h1>
             <!-- Grid titles -->
             <div class="leaderboard-items" id="list-users">
-                <div class="leaderboard-item">Pos.</div>
-                <div class="leaderboard-item">Name</div>
-                <div class="leaderboard-item">Points</div>
+                <div class="leaderboard-title">Pos.</div>
+                <div class="leaderboard-title">Name</div>
+                <div class="leaderboard-title">Points</div>
             </div>
             <!-- Getting user data from datastore.js and rendering to divs on grid -->
             <script>
@@ -87,15 +90,16 @@
                     $('#list-users').append(markupL)
                 });
             </script>
+            <br>
             <!-- Total points -->
             <div class="total-points">
-                <div class="leaderboard-item">Total Points</div>
-                <div class="leaderboard-item">547</div>
+                <div class="leaderboard-title">Total Points</div>
+                <div class="leaderboard-title">547</div>
             </div>
             <!-- Points to next rank -->
             <div class="points-to-next-rank">
-                <div class="leaderboard-item">Points to next rank</div>
-                <div class="leaderboard-item"> 235</div>
+                <div class="leaderboard-title">Points to next rank</div>
+                <div class="leaderboard-title"> 235</div>
             </div>
         </div>
     </div>
