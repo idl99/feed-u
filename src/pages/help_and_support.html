@@ -1,3 +1,4 @@
+<!-- Author : Vinula Uthsara Buthgamumudalige | 2016088 | W1673611 -->
 <!DOCTYPE html>
 <html>
 
@@ -31,7 +32,7 @@
             margin-inline-end: 1px;
         }
     </style>
-    
+
     <div role="main" class="ui-content">
         <div data-role="page" id="Page1">
             <div data-role="header" data-position="fixed">
@@ -59,17 +60,34 @@
                 <h3><i class="fa fa-commenting" aria-hidden="true"></i>
                     Give us feedback</h3>
                 <!-- Text fields with place holders -->
-                     <input type="text" name="feedback-type" id="feedback-type" value="" placeholder="Feedback Type">
+
+                <input type="text" name="feedback-type" id="feedback-type" value="" placeholder="Feedback Type">
+                <!-- <select id="foo" name="foo" style="display: flex; align-items: flex-start; ">
+                    <option value="sort" disabled selected="selected" >Feedback Type</option>
+                    <option value="a">A</option>
+                    <option value="b">B</option>
+                    <option value="c">C</option>
+                    <option value="custom">Custom</option>
+                </select> -->
+
                 <!-- requires drop down for selecting type of feedback -->
                 <input type="text" name="title" id="title" value="" placeholder="Title">
                 <input type="text" name="feedback-msg" id="feedback-msg" value="" placeholder="Feedback Message">
                 <br>
                 <!--Submit feedback button-->
                 <button id="addToCartBtn"
-                    style="width: 100%; text-align: center; background: #27AE60; color: white; margin: 0px; padding: 0px; border-radius: 0%;">
+                    style="width: 100%; text-align: center; background: #27AE60; color: white; margin: 0px; padding: 0px; border-radius: 0%; text-shadow: none;">
                     <h4> Submit Feedback</h4>
                 </button>
             </div>
+            <script>
+                $('#foo').change(function () {
+                    if ($(this).val() === 'custom') {
+                        $(this).replaceWith('<input name="foo" type="text" />');
+                    }
+                });
+            </script>
         </div>
+
     </div>
 </body>
