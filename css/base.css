@@ -5433,7 +5433,7 @@ body #vendor-stories #main-container .story-playback #video-playback-iframe {
 body {
   font-family: "Poppins";
 }
-body #map-selection {
+body #location-search-map {
   height: 50vh;
   width: 100%;
 }
@@ -5482,7 +5482,7 @@ body #set-location-button-text {
 body {
   font-family: "Poppins";
 }
-body #map {
+body #set-location-map {
   height: 200px;
   width: 100%;
   margin: 0;
@@ -5508,7 +5508,7 @@ body #saved-locations #list-item {
   display: flex;
   justify-content: center;
 }
-.vendor-rating-page-container #vendor-rating-description {
+.vendor-rating-page-container #vendor-rating-description, .vendor-rating-page-container #vendor-description {
   text-align: center;
 }
 .vendor-rating-page-container .vendor-rating-bar {
@@ -5520,6 +5520,8 @@ body #saved-locations #list-item {
   margin-right: 0.5em;
 }
 .vendor-rating-page-container .vendor-comments {
+  display: flex;
+  justify-content: center;
   margin-top: 1em;
 }
 .vendor-rating-page-container .continue-btn {

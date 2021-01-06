@@ -26,46 +26,52 @@
             </ul>
         </div>
 
-        <!-- Stripe Checkout -->
-        <script src="https://js.stripe.com/v3/"></script>
-
         <script>
 
             const { user, payment } = app
             const { stripe_customer_id } = user.getPaymentDetails();
 
-            var stripeJS = Stripe('pk_test_51I3c8WBYsXgRXg4sHaDeNTSCG8lvZNnN4c8tUydiuqUwArCXylLnE8poGx5UapOqEhR2cEGlHLM1V8J8ecat0SEB00fopbAHm7');
-
-            // Redirect the user to the Stripe checkout flow
-            // Refer https://stripe.com/docs/payments/save-and-reuse#redirect-checkout for more
-            const redirectToStripeCheckout = (checkoutSessionResponse) => {
-                const { id } = checkoutSessionResponse;
-                stripeJS.redirectToCheckout({
-                    sessionId: id,
-                }).then(function (err) {
-                    // this handler will get triggered if the redirect fails
-                    console.log(err);
-                })
-            }
-
-            const handleCheckoutSessionCreationError = (err) => {
-                console.log(err);
-                console.log(err.responseJSON);
-            }
-
             // https://stackoverflow.com/questions/14468659/jquery-mobile-document-ready-vs-page-events
             $('#add-new-payment-method-page').on('pagecreate', function (event) {
+
                 console.log('Add new payment method page created');
 
-                // Refer https://stripe.com/docs/testing for dummy card details
-                $('.add-new-payment-method-card-option').click(function (event) {
-                    const checkoutSessionOptions = {
-                        customer: stripe_customer_id,
-                        success_url: 'https://idl99.github.io/feed-u/pages/landing.html?session_id={CHECKOUT_SESSION_ID}',
-                        cancel_url: 'https://idl99.github.io/feed-u/pages/landing.html',
-                    };
-                    payment.createSessionToSaveCardDetails(checkoutSessionOptions, redirectToStripeCheckout, handleCheckoutSessionCreationError)
-                });
+                $.getScript("https://js.stripe.com/v3/", function () { // Code dependent on Stripe goes in here
+
+                    var stripeJS = Stripe('pk_test_51I3c8WBYsXgRXg4sHaDeNTSCG8lvZNnN4c8tUydiuqUwArCXylLnE8poGx5UapOqEhR2cEGlHLM1V8J8ecat0SEB00fopbAHm7');
+
+                    /**
+                     * Redirects the user to the Stripe checkout flow
+                     * Refer https://stripe.com/docs/payments/save-and-reuse#redirect-checkout for more
+                    */
+                    const redirectToStripeCheckout = (checkoutSessionResponse) => {
+                        const { id } = checkoutSessionResponse;
+                        stripeJS.redirectToCheckout({
+                            sessionId: id,
+                        }).then(function (err) {
+                            // this handler will get triggered if the redirect fails
+                            console.log(err);
+                        })
+                    }
+
+                    const handleCheckoutSessionCreationError = (err) => {
+                        console.log(err);
+                        console.log(err.responseJSON);
+                    }
+
+                    // Refer https://stripe.com/docs/testing for dummy card details
+                    $('.add-new-payment-method-card-option').click(function (event) {
+                        const checkoutSessionOptions = {
+                            customer: stripe_customer_id,
+                            // https://stripe.com/docs/payments/checkout/custom-success-page
+                            success_url: 'https://idl99.github.io/feed-u/pages/payment_methods.html?session_id={CHECKOUT_SESSION_ID}',
+                            cancel_url: 'https://idl99.github.io/feed-u/pages/add_new_payment_method.html',
+                        };
+                        payment.createSessionToSaveCardDetails(checkoutSessionOptions, redirectToStripeCheckout, handleCheckoutSessionCreationError)
+                    });
+
+                })
+
             })
 
         </script>

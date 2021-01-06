@@ -272,41 +272,28 @@ const data = Object.freeze({
                         "itemNoOfRatings": 47
                     },
                     "itemPrice": 800
-                },
-                // TODO remove duplicate item here
-                {
-                    "itemImageLocation": "../assets/vendor_page_images/tom_yum_soup.jpg",
-                    "itemId": "v1i2",
-                    "itemTitle": "Tom Yum Soup",
-                    "itemDescription": "Picked from the fresh vegetables and fish from the with special Chicken Broth.",
-                    "itemRatings": {
-                        "itemRatingValue": 4.6,
-                        "itemNoOfRatings": 47
-                    },
-                    "itemPrice": 800
                 }
             ],
         },
         {
-            "vendorId": "v2",
-            "vendorImageLocation": "../assets/vendor_list_view_images/pizza_palpatha.jpg",
-            "vendorName": "Pizza Palpatha",
+            "vendorId": "v1",
+            "vendorImageLocation": "../assets/vendor_list_view_images/burgers_ahouy.jpg",
+            "vendorName": "Burgers Ahouy!",
             "vendorCatergories": [
-                "Italian",
+                "Burgers",
                 "American",
-                "Pizza"
+                "Mexican"
             ],
             "vendorRatings": {
-                "vendorRatingValue": 4.8,
-                "vendorNoOfRatings": 99
+                "vendorRatingValue": 4.6,
+                "vendorNoOfRatings": 100
             },
-            "location": "Colombo 4",
-            "deliveryTime": "33-40 mins",
+            "location": "Colombo 3",
+            "deliveryTime": "25-30 mins",
             "items": [
-                // TODO remove duplicate items here
                 {
                     "itemImageLocation": "../assets/vendor_page_images/tom_yum_soup.jpg",
-                    "itemId": "v2i1",
+                    "itemId": "v1i1",
                     "itemTitle": "Tom Yum Soup",
                     "itemDescription": "Picked from the fresh vegetables and fish from the with special Chicken Broth.",
                     "itemRatings": {
@@ -317,7 +304,6 @@ const data = Object.freeze({
                 }
             ],
         },
-
     ],
     leaderboard: [
         {
@@ -387,36 +373,75 @@ window.app = {
     payment,
 }
 },{"./cart":2,"./datastore":3,"./payment":5,"./user":6,"./utils":7,"jquery":9,"jquery-mobile":8}],5:[function(require,module,exports){
-// // Stripe API (Node.js)
-// const Stripe = require('stripe');
-// const stripeAPI = Stripe('sk_test_51I3c8WBYsXgRXg4suIS6WCRMMcfMsNgopWokzuqiKXSo6pmVX00zIk7Up6ukdjZLEY6YfpclJ1lAUCBKpl6Y4fe600CfNE584P');
-
 const $ = require('jquery');
+const loggedInUser = require('./user').getPaymentDetails();
 
 const SECRET_KEY = 'sk_test_51I3c8WBYsXgRXg4suIS6WCRMMcfMsNgopWokzuqiKXSo6pmVX00zIk7Up6ukdjZLEY6YfpclJ1lAUCBKpl6Y4fe600CfNE584P';
+
+const postToStripeAPI = function ({ url, data, success, error }) {
+    return $.ajax({
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', `Bearer ${SECRET_KEY}`);
+        },
+        url: "https://api.stripe.com/v1/" + url,
+        type: "POST",
+        data,
+        dataType: "json",
+        success,
+        error,
+    })
+}
+
+const getFromStripeAPI = function ({ url, queryParams, success, error }) {
+    return $.ajax({
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', `Bearer ${SECRET_KEY}`);
+        },
+        url: "https://api.stripe.com/v1/" + url,
+        type: "GET",
+        data: queryParams,
+        dataType: "json",
+        success,
+        error,
+    })
+}
 
 module.exports = function () {
     return {
         createSessionToSaveCardDetails: function (options, success, error) {
-            return $.ajax({
-                type: "POST",
-                dataType: "json",
-                url: "https://api.stripe.com/v1/checkout/sessions",
-                beforeSend: function (xhr) {
-                    xhr.setRequestHeader('Authorization', `Bearer ${SECRET_KEY}`);
-                },
+            return postToStripeAPI({
+                url: 'checkout/sessions',
                 data: {
                     payment_method_types: ['card'],
                     mode: 'setup', // only setup the payment method, without charging any initial payment
                     ...options
                 },
-                success: (response) => success(response),
-                error: error,
+                success,
+                error
             })
+        },
+        getAllCardsForCustomer: function (success, error) {
+            // https://stripe.com/docs/api/payment_methods/list?lang=curl
+            return getFromStripeAPI({
+                url: 'payment_methods',
+                queryParams: {
+                    customer: loggedInUser.stripe_customer_id,
+                    type: 'card'
+                },
+                success,
+                error
+            });
+        },
+        removeCard: function (cardId, success, error) {
+            return postToStripeAPI({
+                url: `payment_methods/${cardId}/detach`,
+                success,
+                error
+            });
         }
     }
 }()
-},{"jquery":9}],6:[function(require,module,exports){
+},{"./user":6,"jquery":9}],6:[function(require,module,exports){
 var cookie = require('js-cookie');
 
 const USER = "user";
@@ -434,6 +459,61 @@ const DEFAULT_USER = {
     },
 }
 
+const orders = {
+    pastOrders: [
+        {
+            "pastOrderId": "ord1",
+            "vendorCoverImageLocation": "",
+            "vendorLogoImageLocation": "../assets/stories_images/story-big.png",
+            "vendorName": "Burgers Ahoy!",
+            "noOfOrderedItems": 3,
+            "price": 1000,
+            "date": "Oct 10 at 12:12 PM",
+            "vendorRating": 0,
+            "vendorComment": "",
+            "orderedItems": [
+                {
+                    "itemName": "Hawaiian Burger",
+                    "quantity": 2,
+                    "rating": 0,
+                    "comment": ""
+                },
+                {
+                    "itemName": "Pudding",
+                    "quantity": 2,
+                    "rating": 0,
+                    "comment": ""
+                },
+                {
+                    "itemName": "Special Chilli Sauce",
+                    "quantity": 1,
+                    "rating": 0,
+                    "comment": ""
+                }
+            ]
+        },
+        {
+            "pastOrderId": "ord2",
+            "vendorCoverImageLocation": "",
+            "vendorLogoImageLocation": "../assets/stories_images/story-big.png",
+            "vendorName": "Burgers Ahoy!",
+            "noOfOrderedItems": 1,
+            "price": 500,
+            "date": "Oct 01 at 08:30 PM",
+            "vendorRating": 4,
+            "vendorComment": "The food is great but the quantity is not enough.",
+            "orderedItems": [
+                {
+                    "itemName": "Fish and Chips Burger",
+                    "quantity": 2,
+                    "rating": 4,
+                    "comment": "Great food. Please increase on the quantity a bit."
+                },
+            ]
+        },
+    ]
+}
+
 module.exports = function () {
     return {
         init: function () {
@@ -444,20 +524,55 @@ module.exports = function () {
         },
         getPaymentDetails: function () {
             return cookie.getJSON(USER).payment
+        },
+        getAllOrders: function () {
+            return orders.pastOrders;
+        },
+        getSpecificOrder: function (pastOrderId) {
+            const order = orders.pastOrders.find(order => order.pastOrderId == pastOrderId);
+            return order;
+        },
+        updateSpecificOrder: function (pastOrderId, updatedVendorRating, updatedVendorComment,
+            updatedItemNames, updateItemRatings, updatedItemComments) {
+
+            const order = orders.pastOrders.find(order => order.pastOrderId == pastOrderId);
+            // Update the vendor rating and comment.
+            order.vendorRating = updatedVendorRating
+            order.vendorComment = updatedVendorComment
+
+            // Update the item raings and comments.
+            var updatedOrderItems = [];
+            for (var i = 0; i < updatedItemNames.length; i++) {
+                order.orderedItems.map(item => {
+                    if (item.itemName.replace(/\s/g, "") === updatedItemNames[i]) {
+                        updatedOrderItems.push({
+                            "itemName": item.itemName,
+                            "quantity": item.quantity,
+                            "rating": updateItemRatings[i],
+                            "comment": "",
+                            // "comment": updatedItemComments[i] // TODO - Comments part Thenuka
+                        });
+                    }
+                });
+            }
+            order.orderedItems = updatedOrderItems;
+
+            var test = orders.pastOrders.find(order => order.pastOrderId == pastOrderId);
+            console.log("Updated Order:", test);
         }
     }
 }()
+
 },{"js-cookie":1}],7:[function(require,module,exports){
 module.exports = function () {
     return {
         parseUrlForQueryParams: function (url) {
             const queryParamString = url.split('?')[1]
-            const queryParams = queryParamString.split('&').reduce((acc, param) => {
+            return queryParamString && queryParamString.split('&').reduce((acc, param) => {
                 const key_value = param.split("=");
                 acc[key_value[0]] = key_value[1]
                 return acc;
-            }, {})
-            return queryParams;
+            }, {}) || {};
         }
     }
 }();
