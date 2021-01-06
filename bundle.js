@@ -1,7 +1,467 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
+/*!
+ * JavaScript Cookie v2.2.1
+ * https://github.com/js-cookie/js-cookie
+ *
+ * Copyright 2006, 2015 Klaus Hartl & Fagner Brack
+ * Released under the MIT license
+ */
+;(function (factory) {
+	var registeredInModuleLoader;
+	if (typeof define === 'function' && define.amd) {
+		define(factory);
+		registeredInModuleLoader = true;
+	}
+	if (typeof exports === 'object') {
+		module.exports = factory();
+		registeredInModuleLoader = true;
+	}
+	if (!registeredInModuleLoader) {
+		var OldCookies = window.Cookies;
+		var api = window.Cookies = factory();
+		api.noConflict = function () {
+			window.Cookies = OldCookies;
+			return api;
+		};
+	}
+}(function () {
+	function extend () {
+		var i = 0;
+		var result = {};
+		for (; i < arguments.length; i++) {
+			var attributes = arguments[ i ];
+			for (var key in attributes) {
+				result[key] = attributes[key];
+			}
+		}
+		return result;
+	}
+
+	function decode (s) {
+		return s.replace(/(%[0-9A-Z]{2})+/g, decodeURIComponent);
+	}
+
+	function init (converter) {
+		function api() {}
+
+		function set (key, value, attributes) {
+			if (typeof document === 'undefined') {
+				return;
+			}
+
+			attributes = extend({
+				path: '/'
+			}, api.defaults, attributes);
+
+			if (typeof attributes.expires === 'number') {
+				attributes.expires = new Date(new Date() * 1 + attributes.expires * 864e+5);
+			}
+
+			// We're using "expires" because "max-age" is not supported by IE
+			attributes.expires = attributes.expires ? attributes.expires.toUTCString() : '';
+
+			try {
+				var result = JSON.stringify(value);
+				if (/^[\{\[]/.test(result)) {
+					value = result;
+				}
+			} catch (e) {}
+
+			value = converter.write ?
+				converter.write(value, key) :
+				encodeURIComponent(String(value))
+					.replace(/%(23|24|26|2B|3A|3C|3E|3D|2F|3F|40|5B|5D|5E|60|7B|7D|7C)/g, decodeURIComponent);
+
+			key = encodeURIComponent(String(key))
+				.replace(/%(23|24|26|2B|5E|60|7C)/g, decodeURIComponent)
+				.replace(/[\(\)]/g, escape);
+
+			var stringifiedAttributes = '';
+			for (var attributeName in attributes) {
+				if (!attributes[attributeName]) {
+					continue;
+				}
+				stringifiedAttributes += '; ' + attributeName;
+				if (attributes[attributeName] === true) {
+					continue;
+				}
+
+				// Considers RFC 6265 section 5.2:
+				// ...
+				// 3.  If the remaining unparsed-attributes contains a %x3B (";")
+				//     character:
+				// Consume the characters of the unparsed-attributes up to,
+				// not including, the first %x3B (";") character.
+				// ...
+				stringifiedAttributes += '=' + attributes[attributeName].split(';')[0];
+			}
+
+			return (document.cookie = key + '=' + value + stringifiedAttributes);
+		}
+
+		function get (key, json) {
+			if (typeof document === 'undefined') {
+				return;
+			}
+
+			var jar = {};
+			// To prevent the for loop in the first place assign an empty array
+			// in case there are no cookies at all.
+			var cookies = document.cookie ? document.cookie.split('; ') : [];
+			var i = 0;
+
+			for (; i < cookies.length; i++) {
+				var parts = cookies[i].split('=');
+				var cookie = parts.slice(1).join('=');
+
+				if (!json && cookie.charAt(0) === '"') {
+					cookie = cookie.slice(1, -1);
+				}
+
+				try {
+					var name = decode(parts[0]);
+					cookie = (converter.read || converter)(cookie, name) ||
+						decode(cookie);
+
+					if (json) {
+						try {
+							cookie = JSON.parse(cookie);
+						} catch (e) {}
+					}
+
+					jar[name] = cookie;
+
+					if (key === name) {
+						break;
+					}
+				} catch (e) {}
+			}
+
+			return key ? jar[key] : jar;
+		}
+
+		api.set = set;
+		api.get = function (key) {
+			return get(key, false /* read as raw */);
+		};
+		api.getJSON = function (key) {
+			return get(key, true /* read as json */);
+		};
+		api.remove = function (key, attributes) {
+			set(key, '', extend(attributes, {
+				expires: -1
+			}));
+		};
+
+		api.defaults = {};
+
+		api.withConverter = init;
+
+		return api;
+	}
+
+	return init(function () {});
+}));
+
+},{}],2:[function(require,module,exports){
+var cookie = require('js-cookie')
+
+const CART_STORAGE_KEY = 'cart';
+
+// TODO remove mock data
+// const INITIAL_CART_STATE = {
+//     vendor: {
+//         vendorName: 'Burgers Ahoy!',
+//         deliveryTime: '30 - 40 mins'
+//     },
+//     items: [
+//         {
+//             itemName: 'Tom Yump Soup',
+//             itemPrice: 400,
+//             quantity: 1,
+//             notes: "Less spicy",
+//         }
+//     ]
+// };
+
+const INITIAL_CART_STATE = Object.freeze({
+    vendor: {
+    },
+    items: [
+    ]
+});
+
+
+module.exports = function () {
+
+    // IN EACH FUNCTION, DO NOT FORGET TO RETRIEVE THE CART INFO FROM LOCAL STORAGE
+    // AND ALSO TO SAVE IT AT THE END
+
+    return {
+        // this object is the public API accessible to other modules
+        init: function () {
+            // empty cart at initialization with no restaurant set
+            if (!cookie.getJSON(CART_STORAGE_KEY)) {
+                cookie.set(CART_STORAGE_KEY, INITIAL_CART_STATE);
+            }
+        },
+        summary: function () {
+            return cookie.getJSON(CART_STORAGE_KEY);
+        },
+        addItemToCart: function ({ vendor, item }) {
+            const cart = cookie.getJSON(CART_STORAGE_KEY);
+
+            // if vendor is set
+            if (cart.vendor.vendorName) {
+                // check if user is tyring to add item from same vendor
+                if (cart.vendor.vendorName === vendor.vendorName) {
+                    // add item and return true for success
+                    cart.items.push(item);
+                    cookie.set(CART_STORAGE_KEY, cart);
+                    return null;
+                } else {
+                    // else return false with error message indicate why
+                    return `You may only order items from one vendor at a time. 
+                    You have currently chosen ${cart.vendor.vendorName}.`
+                }
+            } else {
+                // Reset cart
+                // VERY IMPORTANT: using JSON serialization follow with JSON deserialization for deep copy
+                // otherwise there is a bug where when you add a new item and try clearing the cart it won't work, 
+                // because the INITIAL_CART_STATE object has gotten updated by a reference passed to another named variable
+                // Refer https://stackoverflow.com/a/61422332/7803975 for more
+                const newCart = JSON.parse(JSON.stringify(INITIAL_CART_STATE)) // Reset cart
+                newCart.vendor = vendor; // Initialize vendor details
+                newCart.items.push(item) // Add item to cart
+                cookie.set(CART_STORAGE_KEY, newCart);
+            }
+        },
+        clearCart: function () {
+            console.log('Clearing cart...');
+            cookie.set(CART_STORAGE_KEY, INITIAL_CART_STATE);
+        },
+    }
+}()
+},{"js-cookie":1}],3:[function(require,module,exports){
+const user = require('./user');
+
+const data = Object.freeze({
+    vendors: [
+        {
+            "vendorId": "v1",
+            "vendorImageLocation": "../assets/vendor_list_view_images/burgers_ahouy.jpg",
+            "vendorName": "Burgers Ahouy!",
+            "vendorCatergories": [
+                "Burgers",
+                "American"
+            ],
+            "vendorRatings": {
+                "vendorRatingValue": 4.6,
+                "vendorNoOfRatings": 100
+            },
+            "location": "Colombo 3",
+            "deliveryTime": "25-30 mins",
+            "items": [
+                {
+                    "itemImageLocation": "../assets/vendor_page_images/tom_yum_soup.jpg",
+                    "itemId": "v1i1",
+                    "itemTitle": "Tom Yum Soup",
+                    "itemDescription": "Picked from the fresh vegetables and fish from the with special Chicken Broth.",
+                    "itemRatings": {
+                        "itemRatingValue": 4.6,
+                        "itemNoOfRatings": 47
+                    },
+                    "itemPrice": 800
+                },
+                // TODO remove duplicate item here
+                {
+                    "itemImageLocation": "../assets/vendor_page_images/tom_yum_soup.jpg",
+                    "itemId": "v1i2",
+                    "itemTitle": "Tom Yum Soup",
+                    "itemDescription": "Picked from the fresh vegetables and fish from the with special Chicken Broth.",
+                    "itemRatings": {
+                        "itemRatingValue": 4.6,
+                        "itemNoOfRatings": 47
+                    },
+                    "itemPrice": 800
+                }
+            ],
+        },
+        {
+            "vendorId": "v2",
+            "vendorImageLocation": "../assets/vendor_list_view_images/pizza_palpatha.jpg",
+            "vendorName": "Pizza Palpatha",
+            "vendorCatergories": [
+                "Italian",
+                "American",
+                "Pizza"
+            ],
+            "vendorRatings": {
+                "vendorRatingValue": 4.8,
+                "vendorNoOfRatings": 99
+            },
+            "location": "Colombo 4",
+            "deliveryTime": "33-40 mins",
+            "items": [
+                // TODO remove duplicate items here
+                {
+                    "itemImageLocation": "../assets/vendor_page_images/tom_yum_soup.jpg",
+                    "itemId": "v2i1",
+                    "itemTitle": "Tom Yum Soup",
+                    "itemDescription": "Picked from the fresh vegetables and fish from the with special Chicken Broth.",
+                    "itemRatings": {
+                        "itemRatingValue": 4.6,
+                        "itemNoOfRatings": 47
+                    },
+                    "itemPrice": 800
+                }
+            ],
+        },
+
+    ],
+    leaderboard: [
+        {
+            name: "Ihan Lelwala",
+            points: 250
+        },
+        {
+            name: "Vinula Uthsara",
+            points: 300
+        },
+        {
+            name: "Thenuka Perera",
+            points: 260
+        },
+        {
+            name: "Deshan Koswatte",
+            points: 280
+        },
+    ]
+});
+
+module.exports = function () {
+    return {
+        getAllVendors: function () {
+            return data.vendors;
+        },
+        getSpecificVendor: function (vendorId) {
+            // returns vendor details for provided vendorId
+            const vendor = data.vendors.find(vendor => vendor.vendorId === vendorId);
+            return vendor;
+        },
+        getSpecificItem: function (itemId) {
+            // return item details for provided itemId
+            const allVendorsItems = data.vendors.flatMap(vendor => vendor.items)
+            const item = allVendorsItems.find(item => item.itemId === itemId);
+            return item;
+        },
+        getLeaderboard: function () {
+            const { points } = user.getDetails().profile;
+            const loggedInUser = { name: "You", points };
+            const leaderboardWithLoggedInUser = [...data.leaderboard, loggedInUser];
+            return leaderboardWithLoggedInUser.sort((user1, user2) => user2.points - user1.points)
+        }
+    }
+}()
+},{"./user":6}],4:[function(require,module,exports){
 var $ = require('jquery')
 $.mobile = require('jquery-mobile')
-},{"jquery":3,"jquery-mobile":2}],2:[function(require,module,exports){
+
+var cart = require('./cart');
+cart.init();
+
+var user = require('./user')
+user.init();
+
+var datastore = require('./datastore')
+
+var utils = require('./utils')
+
+var payment = require('./payment')
+
+window.app = {
+    cart,
+    user,
+    datastore,
+    utils,
+    payment,
+}
+},{"./cart":2,"./datastore":3,"./payment":5,"./user":6,"./utils":7,"jquery":9,"jquery-mobile":8}],5:[function(require,module,exports){
+// // Stripe API (Node.js)
+// const Stripe = require('stripe');
+// const stripeAPI = Stripe('sk_test_51I3c8WBYsXgRXg4suIS6WCRMMcfMsNgopWokzuqiKXSo6pmVX00zIk7Up6ukdjZLEY6YfpclJ1lAUCBKpl6Y4fe600CfNE584P');
+
+const $ = require('jquery');
+
+const SECRET_KEY = 'sk_test_51I3c8WBYsXgRXg4suIS6WCRMMcfMsNgopWokzuqiKXSo6pmVX00zIk7Up6ukdjZLEY6YfpclJ1lAUCBKpl6Y4fe600CfNE584P';
+
+module.exports = function () {
+    return {
+        createSessionToSaveCardDetails: function (options, success, error) {
+            return $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: "https://api.stripe.com/v1/checkout/sessions",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Authorization', `Bearer ${SECRET_KEY}`);
+                },
+                data: {
+                    payment_method_types: ['card'],
+                    mode: 'setup', // only setup the payment method, without charging any initial payment
+                    ...options
+                },
+                success: (response) => success(response),
+                error: error,
+            })
+        }
+    }
+}()
+},{"jquery":9}],6:[function(require,module,exports){
+var cookie = require('js-cookie');
+
+const USER = "user";
+
+const DEFAULT_USER = {
+    profile: {
+        name: "John Doe",
+        points: 547,
+    },
+    payment: {
+        stripe_customer_id: 'cus_IhWwxopENtlI1P'
+    },
+    location: {
+        display: "Nugegoda, Delkanda",
+    },
+}
+
+module.exports = function () {
+    return {
+        init: function () {
+            cookie.set(USER, DEFAULT_USER)
+        },
+        getDetails: function () {
+            return cookie.getJSON(USER)
+        },
+        getPaymentDetails: function () {
+            return cookie.getJSON(USER).payment
+        }
+    }
+}()
+},{"js-cookie":1}],7:[function(require,module,exports){
+module.exports = function () {
+    return {
+        parseUrlForQueryParams: function (url) {
+            const queryParamString = url.split('?')[1]
+            const queryParams = queryParamString.split('&').reduce((acc, param) => {
+                const key_value = param.split("=");
+                acc[key_value[0]] = key_value[1]
+                return acc;
+            }, {})
+            return queryParams;
+        }
+    }
+}();
+},{}],8:[function(require,module,exports){
 (function (global){(function (){
 (function browserifyShim(module, exports, define, browserify_shim__define__module__export__) {
 
@@ -21,7 +481,7 @@ if(this._resizeData){if(a.x===this._resizeData.windowCoordinates.x&&a.y===this._
 }).call(global, undefined, undefined, undefined, function defineExport(ex) { module.exports = ex; });
 
 }).call(this)}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"jquery":3}],3:[function(require,module,exports){
+},{"jquery":9}],9:[function(require,module,exports){
 (function (global){(function (){
 (function browserifyShim(module, exports, define, browserify_shim__define__module__export__) {
 /*! jQuery v1.11.1 | (c) 2005, 2014 jQuery Foundation, Inc. | jquery.org/license */
@@ -34,4 +494,4 @@ if(k&&j[k]&&(e||j[k].data)||void 0!==d||"string"!=typeof b)return k||(k=i?a[h]=c
 }).call(global, undefined, undefined, undefined, function defineExport(ex) { module.exports = ex; });
 
 }).call(this)}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}]},{},[1]);
+},{}]},{},[4]);

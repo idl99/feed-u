@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
 /*!
 * jQuery Mobile 1.4.5
 * Git HEAD hash: 68e55e78b292634d3991c795f06f5e37a512decc <> Date: Fri Oct 31 2014 17:33:30 UTC
@@ -5327,6 +5328,14 @@ body #landing #background-filter {
   }
 }
 
+@media screen and (min-width: 1024px) {
+  body .ui-panel-dismiss {
+    display: none;
+  }
+  body #navigation-menu-hamburger {
+    display: none;
+  }
+}
 body .container {
   display: flex;
   flex-direction: column;
@@ -5485,6 +5494,76 @@ body #saved-locations {
 body #saved-locations #list-item {
   text-align: center;
   font-size: 16px;
+}
+
+.vendor-rating-page-container {
+  display: flex;
+  flex-direction: column;
+}
+.vendor-rating-page-container .popup-close-btn {
+  display: flex;
+  justify-content: flex-end;
+}
+.vendor-rating-page-container .vendor-image-container {
+  display: flex;
+  justify-content: center;
+}
+.vendor-rating-page-container #vendor-rating-description {
+  text-align: center;
+}
+.vendor-rating-page-container .vendor-rating-bar {
+  display: flex;
+  justify-content: center;
+}
+.vendor-rating-page-container .vendor-rating-bar .vendor-rating-icon {
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+}
+.vendor-rating-page-container .vendor-comments {
+  margin-top: 1em;
+}
+.vendor-rating-page-container .continue-btn {
+  margin-top: 1em;
+}
+.vendor-rating-page-container .continue-btn #continue-btn-txt {
+  padding: 0.25em 0.25em 0.25em 0.25em;
+  margin: 0 0 0 0;
+}
+
+#checkout {
+  display: flex;
+  min-height: inherit;
+}
+#checkout .ui-content {
+  flex-grow: 1;
+}
+#checkout #checkout-restaurant-details-container {
+  display: grid;
+  row-gap: 2vh;
+  justify-items: center;
+  margin: 1vh 1vw;
+}
+#checkout #checkout-order-summary {
+  display: flex;
+  flex-direction: column;
+  margin: 3vh 3vw;
+}
+#checkout #checkout-order-summary #checkout-items-grid {
+  margin: 1em 0em;
+  display: grid;
+  grid-row-gap: 20px;
+}
+#checkout #checkout-order-summary #checkout-items-grid .checkout-item {
+  display: grid;
+  grid-template-columns: 1fr 6fr 3fr;
+  align-content: stretch;
+  overflow-wrap: anywhere;
+}
+#checkout #checkout-order-summary #checkout-items-grid .checkout-item .checkout-item-quantity {
+  text-align: left;
+}
+#checkout #checkout-order-summary #checkout-items-grid .checkout-item .checkout-item-price {
+  text-align: right;
 }
 
 body {
