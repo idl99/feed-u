@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Feed U - Past Orders Page</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="../css/base.css" />
+
+    <script src="../bundle.js"></script>
+
+</head>
+
+<body>
+    <div data-role="page" id="past-orders">
+        <style>
+            .past-order {
+                display: flex;
+                flex-direction: column;
+            }
+
+            #past-order-vendor-name {
+                margin-top: 0.5em;
+            }
+
+            #past-order-no-items-price {
+                margin-top: 0.25em;
+            }
+
+            #past-order-time-separator {
+                color: #BDBDBD;
+                font-size: 8px;
+            }
+
+            #view-receipt {
+                margin-top: 0.25em;
+                margin-bottom: 0.75em;
+            }
+
+            .past-order-item {
+                display: flex;
+            }
+
+            .past-order-item-count {
+                width: max-content;
+                height: max-content;
+                border-style: solid;
+                border-color: #EB5757;
+                border-radius: 0.5em;
+                padding: 0.25em 0.5em 0.25em 0.5em;
+                text-align: center;
+            }
+
+            .past-order-item-name {
+                display: flex;
+                align-items: center;
+                margin-left: 0.75em;
+            }
+
+            #show-more {
+                margin-top: 1em;
+            }
+
+            #reorder-btn {
+                border-radius: 0;
+                background-color: #EB5757;
+                color: white;
+                text-shadow: none;
+                margin-top: 1em;
+            }
+
+            .past-order-rating-bar {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .past-order-rating-bar ul {
+                list-style-type: none;
+                padding: 0;
+
+                -moz-user-select: none;
+                -webkit-user-select: none;
+            }
+
+            .past-order-rating-bar ul>li.star-icon {
+                display: inline-block;
+
+            }
+
+            .past-order-rating-bar ul>li.star-icon>i.fa {
+                font-size: 2em;
+                color: #EB5757;
+            }
+
+            .past-order-rating-bar ul>li.star-icon.selected>i.fa {
+                color: #F2C94C;
+            }
+
+            #rate-your-order-txt {
+                margin-bottom: 1em;
+            }
+        </style>
+        <div data-role="header" id="past-orders-header" data-add-back-btn="true" data-position="fixed"
+            data-tap-toggle="false">
+            <h4>Header</h4>
+        </div>
+        <div role="main" class="ui-content">
+            <div class="past-orders-container">
+                <h1>Past Orders</h1>
+                <div class="past-order">
+                    <img id="past-order-cover-img" src="../assets/past_orders/past_order_cover_image.jpg"
+                        alt="Past Order Cover Image">
+                    <span id="past-order-vendor-name">Burgers Ahoy!</span>
+                    <span id="past-order-no-items-price">3 items for LKR 1000.00 <i class="fa fa-circle"
+                            id="past-order-time-separator"></i> Oct 10 at 12:12
+                        PM</span>
+                    <a id="view-receipt">View Receipt</a>
+                    <div class="past-order-item">
+                        <div class="past-order-item-count">2</div>
+                        <div class="past-order-item-name">Hawaiian Burger</div>
+                    </div>
+                    <div style="display: flex; margin-top: 0.50em;">
+                        <div class="past-order-item-count">2</div>
+                        <div class="past-order-item-name">Pudding</div>
+                    </div>
+                    <div style="display: flex; margin-top: 0.50em;">
+                        <div class="past-order-item-count"> 1</div>
+                        <div class="past-order-item-name">Special Chilli Sauce</div>
+                    </div>
+                    <span id="show-more">Show more <i class="fa fa-angle-down"></i></span>
+                    <button id="reorder-btn">Reorder</button>
+                    <div class="past-order-rating-bar">
+                        <ul id="past-order-ratings">
+                            <li class='star-icon' title='Not Good' data-value='1'>
+                                <i class='fa fa-star-o fa-fw'></i>
+                            </li>
+                            <li class='star-icon' title='Ok' data-value='2'>
+                                <i class='fa fa-star-o fa-fw'></i>
+                            </li>
+                            <li class='star-icon' title='Good' data-value='3'>
+                                <i class='fa fa-star-o fa-fw'></i>
+                            </li>
+                            <li class='star-icon' title='Very Good' data-value='4'>
+                                <i class='fa fa-star-o fa-fw'></i>
+                            </li>
+                            <li class='star-icon' title='Excellent' data-value='5'>
+                                <i class='fa fa-star-o fa-fw'></i>
+                            </li>
+                        </ul>
+                        <span id="rate-your-order-txt">Rate your order</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
