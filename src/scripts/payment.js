@@ -1,5 +1,4 @@
 const $ = require('jquery');
-const loggedInUser = require('./user').getPaymentDetails();
 
 const SECRET_KEY = 'sk_test_51I3c8WBYsXgRXg4suIS6WCRMMcfMsNgopWokzuqiKXSo6pmVX00zIk7Up6ukdjZLEY6YfpclJ1lAUCBKpl6Y4fe600CfNE584P';
 
@@ -46,6 +45,8 @@ module.exports = function () {
             })
         },
         getAllCardsForCustomer: function (success, error) {
+            const loggedInUser = require('./user').getPaymentDetails();
+
             // https://stripe.com/docs/api/payment_methods/list?lang=curl
             return getFromStripeAPI({
                 url: 'payment_methods',
@@ -65,6 +66,8 @@ module.exports = function () {
             });
         },
         createCheckoutSession(options, success, error) {
+            const loggedInUser = require('./user').getPaymentDetails();
+
             return postToStripeAPI({
                 url: 'checkout/sessions',
                 success,
