@@ -18,6 +18,9 @@
             .past-order {
                 display: flex;
                 flex-direction: column;
+                margin-bottom: 2em;
+                /* box-shadow: 4px 4px 7px 2px rgba(0,0,0,0.4); */
+                box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.4);
             }
 
             #past-order-vendor-name {
@@ -35,11 +38,12 @@
 
             #view-receipt {
                 margin-top: 0.25em;
-                margin-bottom: 0.75em;
+                margin-bottom: 0.25em;
             }
 
             .past-order-item {
                 display: flex;
+                margin-top: 0.50em;
             }
 
             .past-order-item-count {
@@ -108,16 +112,16 @@
         </div>
         <div role="main" class="ui-content">
             <div class="past-orders-container">
-                <h1>Past Orders</h1>
-                <div class="past-order">
+                <h1 id="past-orders-heading">Past Orders</h1>
+                <!-- <div class="past-order">
                     <img id="past-order-cover-img" src="../assets/past_orders/past_order_cover_image.jpg"
                         alt="Past Order Cover Image">
                     <span id="past-order-vendor-name">Burgers Ahoy!</span>
                     <span id="past-order-no-items-price">3 items for LKR 1000.00 <i class="fa fa-circle"
                             id="past-order-time-separator"></i> Oct 10 at 12:12
                         PM</span>
-                    <a id="view-receipt">View Receipt</a>
-                    <div class="past-order-item">
+                    <a id="view-receipt">View Receipt</a> -->
+                <!-- <div class="past-order-item">
                         <div class="past-order-item-count">2</div>
                         <div class="past-order-item-name">Hawaiian Burger</div>
                     </div>
@@ -150,10 +154,76 @@
                             </li>
                         </ul>
                         <span id="rate-your-order-txt">Rate your order</span>
-                    </div>
-                </div>
+                    </div> -->
             </div>
         </div>
+    </div>
+    <script>
+
+        const { user } = app;
+
+        var pastOrders = user.getAllOrders();
+
+        // render items in order summary
+        const pastOrderCards = pastOrders.map(({ pastOrderId, vendorCoverImageLocation, vendorName, noOfOrderedItems, price, date, vendorRating, orderedItems }) => {
+            var markup1 =
+                `<div class="past-order">
+                        <img id="past-order-cover-img" src=${vendorCoverImageLocation}
+                            alt="Past Order Cover Image">
+                        <span id="past-order-vendor-name">${vendorName}</span>
+                        <span id="past-order-no-items-price">${noOfOrderedItems} items for LKR ${price}.00 <i class="fa fa-circle"
+                                id="past-order-time-separator"></i> ${date}
+                        </span>
+                        <a id="view-receipt">View Receipt</a>`;
+
+
+            var markup2;
+            const pastOrderItems = orderedItems.map(({ itemName, quantity }) => {
+                markup2 =
+                    `<div class="past-order-item">
+                            <div class="past-order-item-count">${quantity}</div>
+                            <div class="past-order-item-name">${itemName}</div>
+                        </div>`;
+                return markup2;
+            });
+
+            // Concatenate the items markup
+            const allItemMarkup = pastOrderItems.reduce((markup2, card) => markup2 + card);
+
+            var markup3 =
+                `<span id="show-more">Show more <i class="fa fa-angle-down"></i></span>
+                        <button id="reorder-btn">${(vendorRating > 0) ? 'Closed' : 'Reorder'}</button>
+                        <div class="past-order-rating-bar">
+                            <ul id="past-order-ratings">
+                                <li class='star-icon' title='Not Good' data-value='1'>
+                                    <i class='fa fa-star-o fa-fw'></i>
+                                </li>
+                                <li class='star-icon' title='Ok' data-value='2'>
+                                    <i class='fa fa-star-o fa-fw'></i>
+                                </li>
+                                <li class='star-icon' title='Good' data-value='3'>
+                                    <i class='fa fa-star-o fa-fw'></i>
+                                </li>
+                                <li class='star-icon' title='Very Good' data-value='4'>
+                                    <i class='fa fa-star-o fa-fw'></i>
+                                </li>
+                                <li class='star-icon' title='Excellent' data-value='5'>
+                                    <i class='fa fa-star-o fa-fw'></i>
+                                </li>
+                            </ul>
+                            <span id="rate-your-order-txt">Rate your order</span>
+                        </div>
+                    </div>`;
+
+            return markup1 + allItemMarkup + markup3;
+        });
+
+        // Concatenate the past order cards markup
+        const allpastOrdersMarkup = pastOrderCards.reduce((markup, card) => markup + card);
+
+        $(allpastOrdersMarkup).insertAfter($('#past-orders-heading'));
+
+    </script>
     </div>
 </body>
 

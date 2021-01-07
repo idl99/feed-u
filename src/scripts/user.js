@@ -19,7 +19,7 @@ const orders = {
     pastOrders: [
         {
             "pastOrderId": "ord1",
-            "vendorCoverImageLocation": "",
+            "vendorCoverImageLocation": "../assets/past_orders/past_order_cover_image.jpg",
             "vendorLogoImageLocation": "../assets/stories_images/story-big.png",
             "vendorName": "Burgers Ahoy!",
             "noOfOrderedItems": 3,
@@ -50,7 +50,7 @@ const orders = {
         },
         {
             "pastOrderId": "ord2",
-            "vendorCoverImageLocation": "",
+            "vendorCoverImageLocation": "../assets/past_orders/past_order_cover_image.jpg",
             "vendorLogoImageLocation": "../assets/stories_images/story-big.png",
             "vendorName": "Burgers Ahoy!",
             "noOfOrderedItems": 1,
