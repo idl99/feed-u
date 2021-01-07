@@ -90,6 +90,8 @@
                     $("#payment-methods-list").append(markup)
                 });
 
+                // Refresh the list view so that jQuery Mobile can add enhancements
+                // to the newly added list views elmements
                 $('#payment-methods-list').listview("refresh");
 
                 $('.payment-methods-remove-card-btn').click(function () {
