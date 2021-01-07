@@ -125,11 +125,14 @@
         </div>
         <script>
 
+            // Initialize the user store in order to retrieve the past order items.
             const { user, utils } = app;
+            // Variables that are used in the script.
             var pastOrderId;
             var vendorRating;
             var vendorComment;
 
+            // Retrieve the pastOrderId, vendorRating and vendorComment from the previous page vendor_rating.html.
             $('#item-rating').on('pagecreate', function (event) {
                 console.log('In item rating');
                 const url = event.target.baseURI;
@@ -186,6 +189,7 @@
                     $(markup).insertBefore($('.ratings-submit-btn'));
                 });
 
+                // Disables the submit button initially.
                 enableSubmitButton();
 
                 $('#item-ratings li').on('click', function () {
@@ -208,13 +212,14 @@
                     var ratingValue = parseInt($('#item-ratings li.selected').last().data('value'), 10);
                     console.log(('Rated ' + ratedItem + ' with'), ratingValue, 'stars.');
 
+                    // Check whether the user has completed the rating process for the items at each user selection.
                     enableSubmitButton();
                 });
 
             });
 
+            // Enables or disables the submit button as the user completes the rating process for items.
             function enableSubmitButton() {
-                // Enable the submit button if all the items are rated.
                 const allItemsRated = $('.past-order-item-rating').toArray().every(function (ratedItemDiv) {
                     if ($(ratedItemDiv).find('#item-ratings li.selected').last().data('value') === undefined) {
                         return false;
@@ -232,10 +237,12 @@
                 }
             }
 
+            // Returns to the vendor_rating page from this page.
             function onBackClick(event) {
                 window.history.back();
             };
 
+            // Proceeds to submit the ratings for both the vendor and items.
             function onSubmitBtnClick(event) {
 
                 console.log('Clicked submit. Submitting the ratings to the data store.')
@@ -257,6 +264,7 @@
                 $(":mobile-pagecontainer").pagecontainer("change", "past_orders.html");
             };
 
+            // Close the item rating page if the close button is clicked.
             $('#close-btn').on('click', function () {
                 $(":mobile-pagecontainer").pagecontainer("change", "past_orders.html");
             });
