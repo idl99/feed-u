@@ -167,7 +167,7 @@
         // render items in order summary
         const pastOrderCards = pastOrders.map(({ pastOrderId, vendorCoverImageLocation, vendorName, noOfOrderedItems, price, date, vendorRating, orderedItems }) => {
             var markup1 =
-                `<div class="past-order">
+                `<div class="past-order" past-order-id="${pastOrderId}"">
                         <img id="past-order-cover-img" src=${vendorCoverImageLocation}
                             alt="Past Order Cover Image">
                         <span id="past-order-vendor-name">${vendorName}</span>
@@ -222,6 +222,15 @@
         const allpastOrdersMarkup = pastOrderCards.reduce((markup, card) => markup + card);
 
         $(allpastOrdersMarkup).insertAfter($('#past-orders-heading'));
+
+        $('.past-order').on('click', function () {
+            var pastOrderId = $(this).attr("past-order-id");
+            $(":mobile-pagecontainer").pagecontainer("change", "vendor_rating.html", {
+                data: {
+                    pastOrderId
+                }
+            });
+        });
 
     </script>
     </div>

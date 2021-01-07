@@ -25,9 +25,10 @@
                 justify-content: space-between;
             }
 
-            .vendor-image-container {
+            .item-vendor-image-container {
                 display: flex;
                 justify-content: center;
+                margin-top: 4em;
             }
 
             #item-rating-description {
@@ -40,12 +41,12 @@
                 text-align: center;
             }
 
-            .past-order-items {
+            .past-order-item-ratings {
                 display: flex;
                 flex-direction: column;
             }
 
-            .past-order-item {
+            .past-order-item-rating {
                 display: flex;
                 justify-content: space-around;
             }
@@ -105,14 +106,15 @@
                             </clipPath>
                         </defs>
                     </svg>
-                    <svg width="22" height="21" viewBox="0 0 22 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg id="close-btn" width="22" height="21" viewBox="0 0 22 21" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
                         <path
                             d="M19.9375 0H2.0625C0.923828 0 0 1.00781 0 2.25V18.75C0 19.9922 0.923828 21 2.0625 21H19.9375C21.0762 21 22 19.9922 22 18.75V2.25C22 1.00781 21.0762 0 19.9375 0ZM16.3453 13.6172C16.5516 13.8422 16.5516 14.2078 16.3453 14.4328L14.6051 16.3312C14.3988 16.5562 14.0637 16.5562 13.8574 16.3312L11 13.1859L8.14258 16.3312C7.93633 16.5562 7.60117 16.5562 7.39492 16.3312L5.65469 14.4328C5.44844 14.2078 5.44844 13.8422 5.65469 13.6172L8.53789 10.5L5.65469 7.38281C5.44844 7.15781 5.44844 6.79219 5.65469 6.56719L7.39492 4.66875C7.60117 4.44375 7.93633 4.44375 8.14258 4.66875L11 7.81406L13.8574 4.66875C14.0637 4.44375 14.3988 4.44375 14.6051 4.66875L16.3453 6.56719C16.5516 6.79219 16.5516 7.15781 16.3453 7.38281L13.4621 10.5L16.3453 13.6172Z"
                             fill="#EB5757" />
                     </svg>
                 </div>
-                <div class="vendor-image-container">
-                    <img id="vendor-logo" src="../assets/stories_images/story-big.png" alt="Vendor Logo">
+                <div class="item-vendor-image-container">
+                    <img id="item-vendor-logo" src="../assets/stories_images/story-big.png" alt="Vendor Logo">
                 </div>
                 <p id="item-rating-description">How were the items of</p>
                 <p id="vendor-name"></p>
@@ -124,9 +126,6 @@
         <script>
 
             const { user, utils } = app;
-            // var pastOrderId = 'ord1';
-            // var vendorRating = 3;
-            // var vendorComment = 'Good for nothing';
             var pastOrderId;
             var vendorRating;
             var vendorComment;
@@ -135,26 +134,25 @@
                 console.log('In item rating');
                 const url = event.target.baseURI;
                 const queryParams = utils.parseUrlForQueryParams(url);
+
                 pastOrderId = queryParams.pastOrderId;
-                console.log('here');
                 vendorRating = queryParams.vendorRating;
                 vendorComment = queryParams.vendorComment;
 
-                console.log("vendor rating", vendorRating);
+                console.log("Past order Id:", pastOrderId, "Vendor rating:", vendorRating, "Vendor comment:", vendorComment);
                 console.log("vendor comment", vendorComment);
 
-                // TODO refactor this once mock data is removed
                 var order = user.getSpecificOrder(pastOrderId);
 
                 // Render the vendors details.
-                $('#vendor-logo').attr('src', order.vendorLogoImageLocation);
+                $('#item-vendor-logo').attr('src', order.vendorLogoImageLocation);
                 $('#vendor-name').text(order.vendorName + "?");
 
                 // Render items in past order summary.
                 order.orderedItems.forEach(({ itemName, rating, comment }) => {
 
                     var markup = `
-                    <div class="past-order-item">
+                    <div class="past-order-item-rating">
                         <p id="past-order-item-description">${itemName}</p>
                         <div class="item-rating-bar">
                             <ul id='item-ratings'>
@@ -215,34 +213,9 @@
 
             });
 
-            // $(document).ready(function () {
-            //     $('#item-ratings li').on('click', function () {
-            //         // The rating value that is selected by the user
-            //         var ratedItem = $(this).parent().parent().parent().children('#past-order-item-description').text();
-            //         var onRatingSelect = parseInt($(this).data('value'), 10);
-            //         var ratings = $(this).parent().children('li.star-icon');
-
-            //         // Remove selected stars if the user changes ratings from a higher value to lower value.
-            //         for (i = 0; i < ratings.length; i++) {
-            //             $(ratings[i]).removeClass('selected');
-            //         }
-
-            //         // Add selected stars when the user rates.
-            //         for (i = 0; i < onRatingSelect; i++) {
-            //             $(ratings[i]).addClass('selected');
-            //         }
-
-            //         // The rating value for persistence or further use.
-            //         var ratingValue = parseInt($('#item-ratings li.selected').last().data('value'), 10);
-            //         console.log(('Rated ' + ratedItem + ' with'), ratingValue, 'stars.');
-
-            //         enableSubmitButton();
-            //     });
-            // });
-
             function enableSubmitButton() {
                 // Enable the submit button if all the items are rated.
-                const allItemsRated = $('.past-order-item').toArray().every(function (ratedItemDiv) {
+                const allItemsRated = $('.past-order-item-rating').toArray().every(function (ratedItemDiv) {
                     if ($(ratedItemDiv).find('#item-ratings li.selected').last().data('value') === undefined) {
                         return false;
                     } else {
@@ -251,23 +224,15 @@
                 })
 
                 if (allItemsRated) {
-                    console.log("enable here");
+                    console.log("Enabled");
                     $('.ratings-submit-btn').removeAttr('disabled');
                 } else {
-                    console.log("disable here");
+                    console.log("Disabled");
                     $('.ratings-submit-btn').attr("disabled", true);
                 }
             }
 
             function onBackClick(event) {
-                // console.log('Clicked back. Opening the vendor ratings page.')
-                // $(":mobile-pagecontainer").pagecontainer("change", "vendor_rating.html", {
-                //     data: {
-                //         pastOrderId,
-                //         vendorRating,
-                //         vendorComment,
-                //     }
-                // });
                 window.history.back();
             };
 
@@ -275,7 +240,7 @@
 
                 console.log('Clicked submit. Submitting the ratings to the data store.')
                 // Parent element of all the items.
-                var itemNamesAndRatings = $('.past-order-item');
+                var itemNamesAndRatings = $('.past-order-item-rating');
 
                 item_names = [itemNamesAndRatings.length];
                 ratings = [itemNamesAndRatings.length];
@@ -286,10 +251,15 @@
                     ratings[i] = ($(itemNamesAndRatings[i]).find('#item-ratings li.selected').last().data('value'));
                 }
 
-                // TODO refactor this once mock data is removed
                 console.log("Updating Items", item_names, "with ratings", ratings);
-                user.updateSpecificOrder(pastOrderId, vendorRating, vendorComment, item_names, ratings, [])
+                user.updateSpecificOrder(pastOrderId, vendorRating, vendorComment, item_names, ratings, []);
+
+                $(":mobile-pagecontainer").pagecontainer("change", "past_orders.html");
             };
+
+            $('#close-btn').on('click', function () {
+                $(":mobile-pagecontainer").pagecontainer("change", "past_orders.html");
+            });
 
         </script>
     </div>
