@@ -9,10 +9,6 @@ const DEFAULT_USER = {
     },
     payment: {
         stripe_customer_id: 'cus_IhWwxopENtlI1P',
-        selected_payment_method: {
-            type: "cash",
-            label: "Cash"
-        }
     },
     location: {
         display: "Nugegoda, Delkanda",
