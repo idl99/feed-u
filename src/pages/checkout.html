@@ -78,8 +78,10 @@
             var billTotal = items.reduce((sum, { quantity, itemPrice }) => {
                 return sum + quantity * itemPrice;
             }, 0);
-            var paymentMethod = 'CASH' // TODO replace
-            $("#checkout-payment-method-container").text(`Paying ${billTotal} By ${paymentMethod}`);
+            var selectedPaymentMethod = user.getPaymentDetails().selected_payment_method // TODO replace
+            $("#checkout-payment-method-container").html(
+                `Paying ${billTotal} By <a href="payment_methods.html"> ${selectedPaymentMethod.label} </a>`,
+            );
 
             // render items in order summary
             if (items.length > 0) {
