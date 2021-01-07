@@ -13,12 +13,15 @@ var utils = require('./utils')
 
 var payment = require('./payment')
 
+var stripe = require('@stripe/stripe-js');
+
 window.app = {
     cart,
     user,
     datastore,
     utils,
     payment,
+    stripe
 }
 
 /**
