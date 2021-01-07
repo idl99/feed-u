@@ -87,6 +87,42 @@
                 font-size: 14px;
                 margin: 0;
             }
+
+            a:link {
+                text-decoration: none;
+                color: black;
+            }
+
+            /* visited link */
+            a:visited {
+                text-decoration: none;
+                color: black;
+            }
+
+            /* mouse over link */
+            a:hover {
+                text-decoration: none;
+                color: black;
+            }
+
+            /* selected link */
+            a:active {
+                text-decoration: none;
+                color: black;
+            }
+
+            .pop-up-container {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                padding-left: 10px;
+                padding-right: 10px;
+                /* padding-top: 10px; */
+                padding-bottom: 10px;
+                height: 100%;
+                overflow: auto; 
+                
+            }
         </style>
         <div data-role="header" data-position="fixed" data-add-back-btn="true">
             <!-- <a href="#" data-icon="back" class="ui-btn-left">Back</a> -->
@@ -151,28 +187,62 @@
                 </p>
             </div>
             <!-- Gamification process section  -->
-            <div
-                style="border:1px solid gray; border-width: thin; display: flex; flex-direction: column; padding-left: 10px; padding-right: 10px; padding-top: 10px; padding-bottom: 10px;">
-                <div style="display: flex; justify-content: space-evenly;">
-                    <div style="display: flex; align-items: center;"><i class="fa fa-adjust" aria-hidden="true"
-                            style="color: #EB5757;"></i></div>
-            
-                    <div style="display:flex; flex-direction: column; margin-left: 1em;">
-                        <h5 style="margin: 0;">3 orders earns a LKR 350 reward <br>LKR 750 minimum</h5>
-                    </div>
-            
-                    <div style="display: flex; align-items: center; margin-left: 1em;"><i class="fa fa-angle-right"
-                            aria-hidden="true" style="color: #EB5757;"></i></div>
-                </div>
-                <!-- progress bar -->
-                <div style="display: flex; justify-content: center; margin-top: 0.5em;">
-                    <div style="background-color: #EB5757; width: 60px; height: 6px;"></div>
-                    <div style="background-color: #C4C4C4; width: 50px; height: 6px; margin-left: 0.5em;"></div>
-                    <div style="background-color: #C4C4C4; width: 50px; height: 6px; margin-left: 0.5em;"></div>
-                    <div style="background-color: #C4C4C4; width: 50px; height: 6px; margin-left: 0.5em;"></div>
-                    <!-- <i class="fa fa-stop" aria-hidden="true" style="color: #EB5757;"></i> -->
-                </div>
+            <!-- <a href="#popupParis" data-rel="popup" data-position-to="window" data-transition="fade"><img class="popphoto" src="../_assets/img/paris.jpg" alt="Paris, France" style="width:30%"></a> -->
+
+            <div data-role="popup" id="popupParis" data-overlay-theme="b" data-theme="b" data-corners="false" style="padding: 1em;">
+                    <a href="#" data-rel="back"
+                    class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a><img
+                    class="popphoto" src="../_assets/img/paris.jpg" style="height: 70vh; " alt="">
+
+                <!-- <div class="pop-up-container"> -->
+
+                    <p> Rewards Offered </p>
+                    <hr>
+                    <h3>How obtain a reward</h3>
+                    <p>3 orders earns a LKR 350 reward</p>
+                    <h3>Reward At</h3>
+                    <p>Burgers Ahoy!</p>
+                    <h3>Details</h3>
+                    <p>Rewards expire 60 days after you earn them. They can be used only once, on a single order, and
+                        cannot be combined with any other offer.
+
+                        If a restaurant cancels this programme after you started earning rewards, you’ll have 30 days to
+                        finish earning the reward and 60 days to use any rewards you’ve earned at that restaurant.</p>
+
+                        <button id="okBtn"
+                        style="width: 100%; text-align: center; background: #EB5757; color: white; margin: 0px; padding: 0px; border-radius: 0%; text-shadow: none;">
+                        <h4> OK</h4>
+                    </button>
+
+                <!-- </div> -->
             </div>
+
+
+            <a href="#popupParis" data-rel="popup" data-position-to="window" data-transition="fade"><img
+                    class="popphoto" src="../_assets/img/paris.jpg" alt="" style="width:30%;">
+                <div
+                    style="border:1px solid gray; border-width: thin; display: flex; flex-direction: column; padding-left: 10px; padding-right: 10px; padding-top: 10px; padding-bottom: 10px;">
+                    <div style="display: flex; justify-content: space-evenly;">
+                        <div style="display: flex; align-items: center;"><i class="fa fa-adjust" aria-hidden="true"
+                                style="color: #EB5757;"></i></div>
+
+                        <div style="display:flex; flex-direction: column; margin-left: 1em;">
+                            <h5 style="margin: 0;">3 orders earns a LKR 350 reward <br>LKR 750 minimum</h5>
+                        </div>
+
+                        <div style="display: flex; align-items: center; margin-left: 1em;"><i class="fa fa-angle-right"
+                                aria-hidden="true" style="color: #EB5757;"></i></div>
+                    </div>
+                    <!-- progress bar -->
+                    <div style="display: flex; justify-content: center; margin-top: 0.5em;">
+                        <div style="background-color: #EB5757; width: 60px; height: 6px;"></div>
+                        <div style="background-color: #C4C4C4; width: 50px; height: 6px; margin-left: 0.5em;"></div>
+                        <div style="background-color: #C4C4C4; width: 50px; height: 6px; margin-left: 0.5em;"></div>
+                        <div style="background-color: #C4C4C4; width: 50px; height: 6px; margin-left: 0.5em;"></div>
+                        <!-- <i class="fa fa-stop" aria-hidden="true" style="color: #EB5757;"></i> -->
+                    </div>
+                </div>
+            </a>
             <br>
             <div id="vendor-page-container" class="container">
                 <!-- <div class="poi_container">
