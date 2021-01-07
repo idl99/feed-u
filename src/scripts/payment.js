@@ -63,6 +63,17 @@ module.exports = function () {
                 success,
                 error
             });
+        },
+        createCheckoutSession(options, success, error) {
+            return postToStripeAPI({
+                url: 'checkout/sessions',
+                success,
+                error,
+                data: {
+                    customer: loggedInUser.stripe_customer_id,
+                    ...options,
+                }
+            })
         }
     }
 }()
