@@ -5,7 +5,7 @@ const USER = "user";
 const DEFAULT_USER = {
     profile: {
         name: "John Doe",
-        points: 547,
+        points: 270,
     },
     payment: {
         stripe_customer_id: 'cus_IhWwxopENtlI1P'

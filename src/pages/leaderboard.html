@@ -35,26 +35,26 @@
             text-align: center;
         }
 
-        .total-points{
+        .total-points {
             display: grid;
-            grid-column-gap: 20px;
-            grid-template-columns: auto auto auto;
+            grid-column-gap: 6.5em;
+            grid-template-columns: auto auto;
             width: 350px;
             height: 50px;
-            padding: 5px;
+            /* padding: 5px; */
             justify-content: left;
             text-shadow: none;
         }
 
-        .points-to-next-rank{
+        .points-to-next-rank {
             display: grid;
-            grid-column-gap: 20px;
-            grid-template-columns: auto auto auto;
+            grid-column-gap: 3em;
+            grid-template-columns: auto auto;
             background-color: #EB5757;
             color: white;
             width: 350px;
             height: 45px;
-            padding: 5px;
+            /* padding: 5px; */
             justify-content: left;
             text-shadow: none;
         }
@@ -77,27 +77,54 @@
                 const { datastore } = app;
                 var leaderboard = datastore.getLeaderboard();
                 var i = 1;
+                var totPoints = 0;
                 leaderboard.forEach(({ name, points }) => {
                     var markupL1 = `<div class="leaderboard-item">${i}</div>`
                     var markupL2 = `<div class="leaderboard-item">${name}</div>`
                     var markupL3 = `<div class="leaderboard-item">${points}</div>`
                     var markupL = markupL1 + markupL2 + markupL3;
                     i++;
+                    // totPoints += points
+
                     $('#list-users').append(markupL)
+
                 });
             </script>
             <br>
+            <br>
             <!-- Total points -->
             <div class="total-points">
-                <div class="leaderboard-title">Total Points</div>
-                <div class="leaderboard-title">547</div>
+                <div class="leaderboard-title">Total Points : </div>
+                <div class="leaderboard-title" id="tot-pnt"></div>
             </div>
+            <!-- Script for getting points of currrent logged in user -->
+            <script>
+                const { user } = app;
+                const userPoints = user.getDetails().profile.points;
+                $('#tot-pnt').text(userPoints)            
+            </script>
             <!-- Points to next rank -->
             <div class="points-to-next-rank">
-                <div class="leaderboard-title">Points to next rank</div>
-                <div class="leaderboard-title"> 235</div>
+                <div class="leaderboard-title">Points to next rank :</div>
+                <div class="leaderboard-title" id="pnts-to-next"></div>
             </div>
+             <!-- Script for getting points to next user -->
+            <script>
+                // const { datastore } = app;
+                var aboveUserPoints = 0;
+                var eachUserPoints = datastore.getLeaderboard();
+                console.log(eachUserPoints)
+                eachUserPoints.forEach(({points}) => {
+                    if(userPoints<points){
+                        aboveUserPoints = points;
+                    }
+                });
+                var pointsToNext = aboveUserPoints - userPoints;
+                $('#pnts-to-next').text(pointsToNext) 
+            </script>
+
         </div>
     </div>
 </body>
+
 </html>
