@@ -8,7 +8,7 @@ const DEFAULT_USER = {
         points: 547,
     },
     payment: {
-        stripe_customer_id: 'cus_IhWwxopENtlI1P'
+        stripe_customer_id: 'cus_IhWwxopENtlI1P',
     },
     location: {
         display: "Nugegoda, Delkanda",
@@ -19,7 +19,7 @@ const orders = {
     pastOrders: [
         {
             "pastOrderId": "ord1",
-            "vendorCoverImageLocation": "",
+            "vendorCoverImageLocation": "../assets/past_orders/past_order_cover_image.jpg",
             "vendorLogoImageLocation": "../assets/stories_images/story-big.png",
             "vendorName": "Burgers Ahoy!",
             "noOfOrderedItems": 3,
@@ -50,7 +50,7 @@ const orders = {
         },
         {
             "pastOrderId": "ord2",
-            "vendorCoverImageLocation": "",
+            "vendorCoverImageLocation": "../assets/past_orders/past_order_cover_image.jpg",
             "vendorLogoImageLocation": "../assets/stories_images/story-big.png",
             "vendorName": "Burgers Ahoy!",
             "noOfOrderedItems": 1,
@@ -74,6 +74,12 @@ module.exports = function () {
     return {
         init: function () {
             cookie.set(USER, DEFAULT_USER)
+        },
+        updateLocation: function ({ updatedLocation }) {
+            const user = cookie.getJSON(USER);
+            user.location.display = updatedLocation;
+            cookie.set(USER, user);
+            return null;
         },
         getDetails: function () {
             return cookie.getJSON(USER)

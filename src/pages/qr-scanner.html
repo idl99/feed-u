@@ -11,170 +11,134 @@
 
 <body>
 
-    <style>
-        html {
-            height: 100%;
-        }
-
-        body {
-            font-family: sans-serif;
-            padding: 0 10px;
-            height: 100%;
-            background: black;
-            margin: 0;
-        }
-
-        h1 {
-            color: white;
-            margin: 0;
-            padding: 15px;
-        }
-
-        #container {
-            text-align: center;
-            margin: 0;
-        }
-
-        #qr-canvas {
-            margin: auto;
-            width: calc(100% - 20px);
-            max-width: 400px;
-        }
-
-        #btn-scan-qr {
-            cursor: pointer;
-        }
-
-        #btn-scan-qr img {
-            height: 10em;
-            padding: 15px;
-            margin: 15px;
-            background: white;
-        }
-
-        /* #qr-result {
-            font-size: 1.2em;
-            margin: 20px auto;
-            padding: 20px;
-            max-width: 700px;
-            background-color: white;
-        } */
-
-        /* CSS for the pre-defined scanned QR page starts here */
-
-        .coupon {
-            border: 5px dotted #bbb;
-            /* Dotted border */
-            width: 30%;
-            border-radius: 15px;
-            /* Rounded border */
-            margin: 0 auto;
-            /* Center the coupon */
-            /* max-width: 600px; */
-        }
-
-        .container {
-            padding: 2px 16px;
-            background-color: #f1f1f1;
-            text-align: center;
-        }
-
-        .promo {
-            background: #ccc;
-            padding: 3px;
-        }
-
-        .expire {
-            color: red;
-        }
-
-        .header {
-            text-align: center;
-        }
-
-        .brand-name {
-            font-size: 20px;
-        }
-    </style>
-
     <div data-role="page" id="qr-scanner-page">
-        <div class="ui-content">
-            <div id="container">
-                <h1>QR Code Scanner</h1>
 
+        <style>
+            #qr-scanner-page {
+                height: 100%;
+                background: black;
+                margin: 0;
+            }
+
+            #qr-scanner-page-content {
+                display: flex;
+                height: 100%;
+                justify-content: center;
+            }
+
+            #qr-scanner-page h1 {
+                color: white;
+                margin: 0;
+                padding: 15px;
+            }
+
+            #qr-scanner-page h4 {
+                color: white;
+                text-align: center;
+                text-shadow: none;
+            }
+
+            #container {
+                text-align: center;
+                margin: 0;
+                align-self: center;
+            }
+
+            #btn-scan-qr {
+                cursor: pointer;
+            }
+
+            #btn-scan-qr img {
+                height: 10em;
+                padding: 15px;
+                margin: 15px;
+                background: white;
+            }
+
+            #qr-overlay-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+            }
+
+            .qr-popup-container {
+                padding: 2px 16px;
+                background-color: #f1f1f1;
+                text-align: center;
+            }
+        </style>
+
+        <div style="position: absolute; z-index: 1; right: 0; margin: 0.5em 1em;">
+            <a href="home.html" class="ui-btn ui-shadow ui-corner-all ui-icon-delete ui-btn-icon-notext">Delete</a>
+        </div>
+        <div id="qr-scanner-page-content">
+            <div id="qr-overlay-container" style="width: 80%;">
+                <h1 id="qr-scan-instrucion-title">Scan the QR</h1>
                 <a id="btn-scan-qr">
-                    <img src="https://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2017/07/1499401426qr_icon.svg">
-                    <a />
-
-                    <canvas hidden="" id="qr-canvas"></canvas>
-
-                    <div id="qr-result" hidden="">
-                        <!-- <b>Dzata:</b> <span id="outputData"></span> -->
-                        <div class="coupon" data-dismissible="false" data-role="popup">
-                            <div class="container header">
-                                <div>
-                                    <span>
-                                        <a data-transition="pop" onclick="doSomething()"
-                                            class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-icon-notext ui-btn-right"
-                                            style="position: absolute; margin: 10px 10px 0 0; text-decoration: none; cursor: pointer">&times</a>
-                                    </span>
-                                </div>
-                                <h3 class="brand-name">FeedU</h3>
-                                <img src="../assets/images/qr-result.PNG" alt="Avatar"
-                                    style="width:25%;">
-                            </div>
-                            <!-- C:/Users/Acer/Documents/Mobile UI-UX/qr-result.png -->
-                            <div style="text-align: center; background-color: white;">
-                                <img src="../assets/images/undraw_gift_card.svg" alt="Avatar"
-                                    style="width:40%;">
-                            </div>
-                            <div class="container" style="background-color:white; text-align: center;">
-                                <h2><b>CONGRATULATIONS</b></h2>
-                                <p>YOU JUST W0N A 30% OFF YOUR PURCHASE</p>
-                            </div>
-                            <div class="container">
-                                <p>Use Promo Code: <span class="promo">BOH232</span></p>
-                                <p class="expire">Expires: Feb 03, 2021</p>
-                            </div>
-                        </div>
-                    </div>
+                    <img
+                        src="https://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2017/07/1499401426qr_icon.svg"></img>
+                </a>
+                <h4 id="qr-scan-instrucion-detail">Click on the QR code to start scanning. Aim the QR code at the
+                    camera.</h4>
+                <canvas hidden="" id="qr-canvas"></canvas>
+                <div id="qr-result" hidden=""></div>
             </div>
-            <script src="https://rawgit.com/sitepoint-editors/jsqrcode/master/src/qr_packed.js"></script>
-            <script>
+        </div>
+
+        <div id="qr-result-popup" class="coupon" data-dismissible="false" data-role="popup">
+            <div data-role="header">
+                <h3 class="brand-name" style="font-size: 20px;">Feed U</h3>
+                <div>
+                    <a onclick="closePopup()"
+                        class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-icon-notext ui-btn-right ui-icon-delete"></a>
+                </div>
+            </div>
+            <div style="text-align: center; background-color: white;">
+                <img src="../assets/images/undraw_gift_card.svg" alt="Avatar" style="width:40%;">
+            </div>
+            <div class="qr-popup-container" style="background-color:white; text-align: center;">
+                <h2><b>CONGRATULATIONS</b></h2>
+                <p>YOU JUST W0N A 30% OFF YOUR PURCHASE</p>
+            </div>
+            <div class="qr-popup-container">
+                <p style="background: #ccc; padding: 3px;">Use Promo Code: <span class="promo">BOH232</span></p>
+                <p style="color: red;" class="expire">Expires: Feb 03, 2021</p>
+            </div>
+        </div>
+
+        <script>
+
+            const video = document.createElement("video");
+            const canvasElement = document.getElementById("qr-canvas");
+            const canvas = canvasElement.getContext("2d");
+
+            const qrResult = document.getElementById("qr-result");
+            const btnScanQR = document.getElementById("btn-scan-qr");
+
+            let scanning = false;
+
+            $.getScript("https://rawgit.com/sitepoint-editors/jsqrcode/master/src/qr_packed.js", function () {
                 const myQRCode = window.qrcode;
-
-                const video = document.createElement("video");
-                const canvasElement = document.getElementById("qr-canvas");
-                const canvas = canvasElement.getContext("2d");
-
-                const qrResult = document.getElementById("qr-result");
-                // const outputData = document.getElementById("outputData");
-                const btnScanQR = document.getElementById("btn-scan-qr");
-
-                let scanning = false;
 
                 qrcode.callback = res => {
                     if (res) {
-                        // if (document.getElementById("qr-popup").style.display != "none") {
-                        //     document.getElementById("qr-popup").style.display = "none";
-                        // } else if (document.getElementById("qr-popup").style.display == "none") {
-                        //     document.getElementById("qr-popup").style.display = "block"
-                        // }
-                        // document.getElementById("qr-popup").style.visibility = "visible";
-                        // outputData.innerText = res;
                         scanning = false;
 
                         video.srcObject.getTracks().forEach(track => {
                             track.stop();
                         });
 
-                        qrResult.hidden = false;
+                        // qrResult.hidden = false;
+                        $('#qr-result-popup').popup("open")
                         canvasElement.hidden = true;
                         btnScanQR.hidden = false;
                     }
                 };
 
                 btnScanQR.onclick = () => {
+
                     navigator.mediaDevices
                         .getUserMedia({
                             video: {
@@ -189,6 +153,8 @@
                             video.setAttribute("playsinline",
                                 true); // required to tell iOS safari we don't want fullscreen
                             video.srcObject = stream;
+                            $('#qr-scan-instrucion-title').hide()
+                            $('#qr-scan-instrucion-detail').hide()
                             video.play();
                             tick();
                             scan();
@@ -210,37 +176,33 @@
                         setTimeout(scan, 300);
                     }
                 }
+            })
 
-                function doSomething() {
-                    console.log("Hey");
-                    window.history.back();
+            function closePopup() {
+                $('#qr-result-popup').popup("close");
+            }
+
+            $('#qr-result-popup').on("popupafterclose", function () {
+                $(':mobile-pagecontainer').pagecontainer("change", "home.html");
+            })
+
+            $('body').on("pagecontainerbeforechange", function (event, ui) {
+                var pageId = $('body').pagecontainer('getActivePage').prop('id');
+                if (pageId === 'qr-scanner-page') {
+                    video.srcObject.getTracks().forEach(track => {
+                        track.stop();
+                    });
                 }
-            </script>
-        </div>
-    </div>
+            });
 
+            $(window).on("navigate", function () {
+                console.log("navigated!");
+
+            });
+
+        </script>
+    </div>
 
 </body>
-<!-- mark-up for the pre-defined scanned QR page starts here -->
-<!-- <div style="display: none;" id="qr-popup">
-    <div class="coupon">
-        <div class="container header">
-            <h3 class="brand-name">FeedU</h3>
-            <img src="C:/Users/Acer/Documents/Mobile UI-UX/colored-bg.png" alt="Avatar" style="width:25%;">
-        </div>
-        <div style="text-align: center; background-color: white;">
-            <img src="C:/Users/Acer/Documents/Mobile UI-UX/undraw_gift_card.svg" alt="Avatar" style="width:40%;">
-        </div>
-        <div class="container" style="background-color:white; text-align: center;">
-            <h2><b>CONGRATULATIONS</b></h2>
-            <p>YOU JUST W0N A 30% OFF YOUR PURCHASE</p>
-            <p>*insert photo*</p>
-        </div>
-        <div class="container">
-            <p>Use Promo Code: <span class="promo">BOH232</span></p>
-            <p class="expire">Expires: Feb 03, 2021</p>
-        </div>
-    </div>
-</div> -->
 
 </html>

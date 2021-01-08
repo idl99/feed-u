@@ -34,7 +34,7 @@
                         https://css-tricks.com/flexbox-truncated-text/ 
                         TODO fix for longer display names
                     -->
-				<span id="checkout-delivery-location"
+				<span id="home-delivery-location"
 					style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
 					Delivery Location </span>
 				<!-- 
@@ -471,6 +471,9 @@
 		</div>
 
 		<script>
+
+			const { user } = app;
+
 			$(".link-set-location-page").click(function (event) {
 				event.preventDefault();
 				$.mobile.navigate("set_location.html");
@@ -521,9 +524,7 @@
 				var markup = markupP1 + markupP2 + markupP3;
 				$('#home-container').append(markup)
 			});
-		</script>
 
-		<script>
 			var screenDimens = {
 				iPad: 1024
 			}
@@ -550,6 +551,10 @@
 
 				var activePage = ui.toPage[0].id;
 				if (activePage === 'home') {
+					// Retrieve user location from cookie and set to label
+					$("#home-delivery-location").text(user.getDetails().location.display);
+
+					// Navigation Menu
 					evaluatePanelOpen();
 					$('body').on("pagecontainerbeforehide", function () {
 						// If we do not close the panel we will have when redirecting back to the same page
