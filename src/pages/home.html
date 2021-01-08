@@ -529,6 +529,9 @@
 		</script>
 
 		<script>
+
+			const { user } = app;
+
 			var screenDimens = {
 				iPad: 1024
 			}
@@ -555,6 +558,10 @@
 
 				var activePage = ui.toPage[0].id;
 				if (activePage === 'home') {
+					// Retrieve user location from cookie and set to label
+					$("#home-delivery-location").text(user.getDetails().location.display);
+
+					// Navigation Menu
 					evaluatePanelOpen();
 					$('body').on("pagecontainerbeforehide", function () {
 						// If we do not close the panel we will have when redirecting back to the same page
