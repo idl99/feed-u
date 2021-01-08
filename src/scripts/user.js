@@ -8,7 +8,7 @@ const DEFAULT_USER = {
         points: 547,
     },
     payment: {
-        stripe_customer_id: 'cus_IhWwxopENtlI1P'
+        stripe_customer_id: 'cus_IhWwxopENtlI1P',
     },
     location: {
         display: "Nugegoda, Delkanda",

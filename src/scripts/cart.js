@@ -40,6 +40,18 @@ module.exports = function () {
             }
         },
         summary: function () {
+            /**
+             * JSON structure of summary
+             * 
+             * items: [
+             *      {
+             *          itemTitle: "name of the item",
+             *          quantity: 1,
+             *          itemPrice: 400,
+             *      }
+             * ]
+             * 
+             */
             return cookie.getJSON(CART_STORAGE_KEY);
         },
         addItemToCart: function ({ vendor, item }) {
