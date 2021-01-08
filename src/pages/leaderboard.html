@@ -41,7 +41,6 @@
             grid-template-columns: auto auto;
             width: 350px;
             height: 50px;
-            /* padding: 5px; */
             justify-content: left;
             text-shadow: none;
         }
@@ -54,7 +53,6 @@
             color: white;
             width: 350px;
             height: 45px;
-            /* padding: 5px; */
             justify-content: left;
             text-shadow: none;
         }
@@ -72,7 +70,7 @@
                 <div class="leaderboard-title">Name</div>
                 <div class="leaderboard-title">Points</div>
             </div>
-            <!-- Getting user data from datastore.js and rendering to divs on grid -->
+            <!-- Script for getting user data from datastore.js and rendering to divs on grid -->
             <script>
                 const { datastore } = app;
                 var leaderboard = datastore.getLeaderboard();
@@ -84,8 +82,6 @@
                     var markupL3 = `<div class="leaderboard-item">${points}</div>`
                     var markupL = markupL1 + markupL2 + markupL3;
                     i++;
-                    // totPoints += points
-
                     $('#list-users').append(markupL)
 
                 });
@@ -110,7 +106,6 @@
             </div>
              <!-- Script for getting points to next user -->
             <script>
-                // const { datastore } = app;
                 var aboveUserPoints = 0;
                 var eachUserPoints = datastore.getLeaderboard();
                 console.log(eachUserPoints)
