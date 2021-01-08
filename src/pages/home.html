@@ -28,15 +28,13 @@
 		</div>
 
 		<div role="main" class="ui-content">
-			<div style="display: flex; justify-content: center; align-items: center;">
-				<span style="margin-right: 5px;">Deliver Now | </span>
+			<div class="user-delivery-location-details">
+				<span id="deliver-now-txt">Deliver Now | </span>
 				<!-- 
                         https://css-tricks.com/flexbox-truncated-text/ 
                         TODO fix for longer display names
                     -->
-				<span id="home-delivery-location"
-					style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
-					Delivery Location </span>
+				<span id="user-home-delivery-location">Delivery Location </span>
 				<!-- 
 					TODO if we set href here to set_location page it doesn't work. works for any other page.
 					Also, manual jQuery AJAX navigation works.
@@ -45,24 +43,23 @@
 					style="margin-left: 5px;"></a>
 			</div>
 			<p>Stories</p>
-			<div style="display: flex; justify-content: flex-start; overflow: auto;">
-				<img id="the-story" src="../assets/stories_images/story.png"
-					style="margin-left: 0.25em; margin-right: 0.25em;" onclick="onStoryClick()">
-				<img src="../assets/stories_images/story.png" style="margin-left: 0.25em; margin-right: 0.25em;">
-				<img src="../assets/stories_images/story.png" style="margin-left: 0.25em; margin-right: 0.25em;">
-				<img src="../assets/stories_images/story.png" style="margin-left: 0.25em; margin-right: 0.25em;">
-				<img src="../assets/stories_images/story.png" style="margin-left: 0.25em; margin-right: 0.25em;">
-				<img src="../assets/stories_images/story.png" style="margin-left: 0.25em; margin-right: 0.25em;">
-				<img src="../assets/stories_images/story.png" style="margin-left: 0.25em; margin-right: 0.25em;">
-				<img src="../assets/stories_images/story.png" style="margin-left: 0.25em; margin-right: 0.25em;">
-				<img src="../assets/stories_images/story.png" style="margin-left: 0.25em; margin-right: 0.25em;">
-				<img src="../assets/stories_images/story.png" style="margin-left: 0.25em; margin-right: 0.25em;">
-				<img src="../assets/stories_images/story.png" style="margin-left: 0.25em; margin-right: 0.25em;">
+			<div class="favourite-vendor-stories-container">
+				<img id="favourite-vendor-story" src="../assets/stories_images/story.png" onclick="onStoryClick()">
+				<img id="favourite-vendor-story" src="../assets/stories_images/story.png">
+				<img id="favourite-vendor-story" src="../assets/stories_images/story.png">
+				<img id="favourite-vendor-story" src="../assets/stories_images/story.png">
+				<img id="favourite-vendor-story" src="../assets/stories_images/story.png">
+				<img id="favourite-vendor-story" src="../assets/stories_images/story.png">
+				<img id="favourite-vendor-story" src="../assets/stories_images/story.png">
+				<img id="favourite-vendor-story" src="../assets/stories_images/story.png">
+				<img id="favourite-vendor-story" src="../assets/stories_images/story.png">
+				<img id="favourite-vendor-story" src="../assets/stories_images/story.png">
+				<img id="favourite-vendor-story" src="../assets/stories_images/story.png">
 			</div>
 			<p>Categories</p>
 			<!-- Adding listview for sorting(there's an alignment issue)-->
 			<!-- <div class="container" data-role="listview" data-filter="true" data-filter-placeholder="Search fruits..."> -->
-			<div id="home-container" class="container">
+			<div id="home-container" class="all-poi-container">
 				<!-- <div class="poi_container">
 					<img src="../assets/vendor_list_view_images/burgers_ahouy.jpg" class="poi_image">
 					<div class="poi_content">
@@ -498,26 +495,24 @@
 
 			// render items in order summary
 			vendors.forEach(({ vendorId, vendorImageLocation, vendorName, vendorCatergories, vendorRatings, deliveryTime }) => {
-				var markupP1 = `<div class="poi_container" vendor-id="${vendorId}">
-					<img src=${vendorImageLocation} class="poi_image">
-					<div class="poi_content">
+				var markupP1 = `<div class="poi-container" vendor-id="${vendorId}">
+					<img src=${vendorImageLocation} class="poi-image">
+					<div class="poi-details">
 						<div>${vendorName}</div>
-						<div style="font-size: 12px; margin-top: 2%;">`
+						<div class="poi-catergory-container">`
 				var markupP2 = ``
 				vendorCatergories.forEach((category) => {
-					markupP2 = markupP2 + `<svg width="5" height="5" viewBox="0 0 5 5" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<circle r="2.5" transform="matrix(1 0 0 -1 2.5 2.5)" fill="#C4C4C4" />
-							</svg>
-							${category}`
+					markupP2 = markupP2 + `<i class="fa fa-circle" id="poi-catergory"></i>${category}`
 				});
 				var markupP3 =
 					`</div>
-						<div class="status_bar">
-							<div class="rating_bar">
-								<span><i class='fa fa-star fa-fw' style="color: #F2C94C;"></i> ${vendorRatings.vendorRatingValue} <small style="display: inline-block; vertical-align: middle; line-height: 2em; font-size: 8px;">(${vendorRatings.vendorNoOfRatings})</small>
+						<div class="poi-rating-bar-container">
+							<div class="poi-rating-bar">
+								<span><i class='fa fa-star fa-fw' id="poi-rate-star-icon"></i> ${vendorRatings.vendorRatingValue} 
 								</span>
+								<small id="poi-no-of-rated-customers">(${vendorRatings.vendorNoOfRatings})</small>
 							</div>
-							<div style="display: flex; align-items: center; margin-left: 2%;">${deliveryTime}</div>
+							<div id="poi-delivery-time">${deliveryTime}</div>
 						</div>
 					</div>
 				</div>`
@@ -552,7 +547,7 @@
 				var activePage = ui.toPage[0].id;
 				if (activePage === 'home') {
 					// Retrieve user location from cookie and set to label
-					$("#home-delivery-location").text(user.getDetails().location.display);
+					$("#user-home-delivery-location").text(user.getDetails().location.display);
 
 					// Navigation Menu
 					evaluatePanelOpen();
@@ -569,7 +564,7 @@
 
 			// Handle Vendor POI click event
 			// https://stackoverflow.com/questions/943987/add-jquery-click-handler-to-multiple-elements
-			$(".poi_container").click(function () {
+			$(".poi-container").click(function () {
 				var vendorId = $(this).attr("vendor-id"); // which vendor card was clicked
 				$(":mobile-pagecontainer").pagecontainer("change", "vendor_page.html", {
 					data: {

@@ -36,3 +36,28 @@ $(document).on("pagecontainerbeforehide", function (event, ui) {
     window.google = undefined;
     window.Stripe = undefined;
 })
+
+// $(document).one("pagebeforecreate", function () {
+//     console.log('Adding the navigation panel to the page...');
+    // var markup = 
+    // `<div data-role="panel" id="navigation-menu" data-position-fixed="true">
+    //     <span>Navigation menu goes here</span>
+    // </div>
+
+    // <div data-role="header" data-position="fixed" id="home-header" data-tap-toggle="false">
+    //     <a id="navigation-menu-hamburger" href="#navigation-menu"
+    //         class="ui-btn ui-shadow ui-corner-all ui-icon-bars ui-btn-icon-notext ui-btn-inline">Delete</a>
+    //     <h4>LOGO</h4>
+    // </div>`;
+    // document.write(markup);
+
+    // $(function() {
+    // $( "body>[data-role='panel']" ).panel();
+    // });
+    // $.get('navigation_side_bar.html', function (data) {
+    //     //$(data).prependTo($.mobile.pageContainer); //or .prependTo("body");
+    //     $.mobile.pageContainer.prepend(data);
+    //     $("[data-role=panel]").panel().enhanceWithin(); // initialize panel
+    // }, "html");
+
+// });
