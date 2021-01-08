@@ -75,6 +75,12 @@ module.exports = function () {
         init: function () {
             cookie.set(USER, DEFAULT_USER)
         },
+        updateLocation: function ({ updatedLocation }) {
+            const user = cookie.getJSON(USER);
+            user.location.display = updatedLocation;
+            cookie.set(USER, user);
+            return null;
+        },
         getDetails: function () {
             return cookie.getJSON(USER)
         },

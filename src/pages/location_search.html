@@ -50,7 +50,7 @@
 				</div>
 			</div>
 		</div>
-		<div data-role="footer" data-position="fixed">
+		<div id="update-location" data-role="footer" data-position="fixed">
 			<h1>Set Location</h1>
 		</div>
 		<script
@@ -58,6 +58,22 @@
 			defer></script>
 
 		<script>
+
+			const { user } = app;
+
+			$('#update-location').on('click', function () {
+				var updatedLocation = $('#selected-location').text();
+				console.log("Updated location details:", updatedLocation);
+				const payload = { updatedLocation };
+                const error = user.updateLocation(payload)
+                if (error) {
+                    console.log('Failed to update the user location.');
+                } else {
+                    console.log('Successfully updated the user location.');
+                    history.back();
+                }
+			});
+
 			$('#favourite-icon').on('click', function () {
 				$(this).toggleClass('fa-heart');
 				$(this).toggleClass('fa-heart-o');
