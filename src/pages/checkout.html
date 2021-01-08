@@ -11,12 +11,13 @@
 </head>
 
 <body>
-    <div data-role="page" id="checkout">
+    <div data-role="page" id="checkout" class="feedU-page">
         <div data-role="header" id="checkout-header" data-add-back-btn="true" data-position="fixed"
             data-tap-toggle="false">
-            <h4>Header</h4>
+            <img src="../assets/logo.png"></img>
         </div>
         <div class="ui-content" data-fullscreen="true">
+            <!-- <a href="#leftpanel1" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-mini">Reveal</a> -->
             <div id="checkout-restaurant-details-container">
                 <div id="checkout-restaurant-name">Restaurant Name</div>
                 <div style="display: flex; flex-direction: row; align-items: center;">
@@ -67,8 +68,8 @@
             </div>
         </div>
         <!-- TODO disable this button -->
-        <div data-role="footer" id="checkout-place-order" data-position="fixed">
-            <h4>Place the Order</h4>
+        <div data-role="footer" data-position="fixed" data-enhanced="false">
+            <button id="checkout-place-order" class="full-width-btn">Place the Order</button>
         </div>
 
         <script>

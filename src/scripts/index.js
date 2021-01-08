@@ -36,3 +36,26 @@ $(document).on("pagecontainerbeforehide", function (event, ui) {
     window.google = undefined;
     window.Stripe = undefined;
 })
+
+/**
+ * https://github.com/jquery/demos.jquerymobile.com/blob/master/1.4.5/panel-external/index.html
+ */
+$(document).one("ready", function () {
+
+    var panelMarkup = `
+        <div data-role="panel" id="leftpanel1" data-position="left" data-display="reveal" data-theme="a">
+
+        <h3>Left Panel: Reveal</h3>
+        <p>This panel is positioned on the left with the reveal display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
+        <p>To close, click off the panel, swipe left or right, hit the Esc key, or use the button below:</p>
+        <a href="#demo-links" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left ui-btn-inline">Close panel</a>
+
+        </div>
+    `
+
+    // Add the panel to the body
+    $('body').append(panelMarkup);
+
+    // Manually initialize the panel
+    $("body>[data-role='panel']").panel();
+})
