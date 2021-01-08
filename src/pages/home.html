@@ -474,8 +474,6 @@
 
 			const { user } = app;
 
-			$("#home-delivery-location").text(user.getDetails().location.display);
-
 			$(".link-set-location-page").click(function (event) {
 				event.preventDefault();
 				$.mobile.navigate("set_location.html");
