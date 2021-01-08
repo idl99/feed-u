@@ -20,7 +20,7 @@
                 flex-direction: column;
                 margin-bottom: 2em;
                 /* box-shadow: 4px 4px 7px 2px rgba(0,0,0,0.4); */
-                box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.4);
+                box-shadow: 6px 4px 5px rgba(0, 0, 0, 0.4);
             }
 
             #past-order-vendor-name {
@@ -152,22 +152,21 @@
 
                 console.log('Reloading');
                 // Render the markup of the rating view on the bottom of the past order card.
-                
                 const stars = [];
                 for (let index = 1; index <= 5; index++) {
                     stars.push(
                         `<li class='star-icon'>
-                            ${index <= vendorRating ? 
-                                `<i class='fa fa-star fa-fw'></i>` 
-                                : `<i class='fa fa-star-o fa-fw'></i>`}
+                            ${index <= vendorRating ?
+                            `<i class='fa fa-star fa-fw'></i>`
+                            : `<i class='fa fa-star-o fa-fw'></i>`}
                         </li>
                         `
                     )
                 }
-                
+
                 var markup3 =
                     `<span id="show-more-txt">Show more <i class="fa fa-angle-down"></i></span>
-                        <button id="reorder-btn">${(vendorRating > 0) ? 'Closed' : 'Reorder'}</button>
+                        <button id="reorder-btn" ${(vendorRating > 0) ? 'disabled' : ''}>${(vendorRating > 0) ? 'Closed' : 'Reorder'}</button>
                         <div class="past-order-rating-bar">
                             <ul id="past-order-ratings">
                                 ${stars.join('')}
@@ -189,11 +188,18 @@
             // Navigate to the rating process on past order card click.
             $('.past-order-card').on('click', function () {
                 var pastOrderId = $(this).attr("past-order-id");
-                $(":mobile-pagecontainer").pagecontainer("change", "vendor_rating.html", {
-                    data: {
-                        pastOrderId
-                    }
-                });
+                var closed = $(this).find('#reorder-btn').text();
+
+                if (closed === 'Reorder') {
+                    console.log('Moving to the rating pages');
+                    $(":mobile-pagecontainer").pagecontainer("change", "vendor_rating.html", {
+                        data: {
+                            pastOrderId
+                        }
+                    });
+                } else {
+                    console.log('Cannot move into the rating pages since the order is already rated.');
+                }
             });
         });
     </script>
