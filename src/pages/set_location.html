@@ -23,7 +23,8 @@
 			<h1>Header Bar</h1>
 		</div>
 		<div id="set-location-map">
-			<h2> Map Here</h2>
+			<!-- <h2> Map Here</h2> -->
+			<button id="set-location-btn">Set Location from Google Maps</button>
 		</div>
 		<div data-role="tabs" id="tabs" style="padding: 0 0 0 0;">
 			<div data-role="navbar">
@@ -56,7 +57,6 @@
 					<input type="checkbox" name="deliever_asap" id="deliever_asap">
 					<label for="deliever_asap">Deliver it ASAP</label>
 					<input type="checkbox" name="scheduled_order" id="scheduled_order">
-					<div id="txtAge" style="display: none;">Age is something</div>
 					<label for="scheduled_order">Scheduled Order</label>
 				</fieldset>
 			</form>
@@ -64,20 +64,40 @@
 		<div id="configure-location" data-role="footer" data-position="fixed">
 			<h1>Save</h1>
 		</div>
-		<script
+		<!-- <script
 			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4fxzjh0_9j9aIXCecrSeDxBztKU5Lzao&callback=initMap"
-			defer></script>
+			defer></script> -->
 		<script>
 
-			$("#set-location-map").click(function () {
+			const { user } = app;
+
+			$('#configure-location').on('click', function () {
+				var updatedLocation = $('.set-location-saved-location-list-item.ui-icon-check.ui-btn-icon-right').text();
+				console.log(updatedLocation);
+				if (updatedLocation !== '') {
+					const payload = { updatedLocation };
+					const error = user.updateLocation(payload);
+					if (error) {
+						console.log('Failed to update the user location.');
+					} else {
+						console.log('Successfully updated the user location.');
+						$(":mobile-pagecontainer").pagecontainer("change", "home.html",);
+						// history.back();
+					}
+				} else {
+					$(":mobile-pagecontainer").pagecontainer("change", "home.html",);
+					// history.back();
+				}
+			});
+
+			$("#set-location-btn").click(function () {
 				// Handle the map click event.
 				$(":mobile-pagecontainer").pagecontainer("change", "location_search.html",);
 			});
 
-			$("#configure-location").click(function () {
-				// Handle the map click event.
-				$(":mobile-pagecontainer").pagecontainer("change", "home.html",);
-			});
+			// $("#configure-location").click(function () {
+			// 	$(":mobile-pagecontainer").pagecontainer("change", "home.html",);
+			// });
 
 			$("#deliever_asap").prop("checked", true);
 			$("#scheduled_order").prop("checked", false);
@@ -108,13 +128,13 @@
 				$(this).addClass("ui-icon-check ui-btn-icon-right");
 			});
 
-			function initMap() {
-				console.log("Init 1");
-				const map = new google.maps.Map(document.getElementById("set-location-map"), {
-					zoom: 15,
-					center: { lat: 51.517582, lng: -0.141525 },
-				});
-			}
+					// function initMap() {
+					// 	console.log("Init 1");
+					// 	const map = new google.maps.Map(document.getElementById("set-location-map"), {
+					// 		zoom: 15,
+					// 		center: { lat: 51.517582, lng: -0.141525 },
+					// 	});
+					// }
 		</script>
 	</div>
 </body>

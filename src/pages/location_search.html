@@ -65,7 +65,7 @@
 				var updatedLocation = $('#selected-location').text();
 				console.log("Updated location details:", updatedLocation);
 				const payload = { updatedLocation };
-                const error = user.updateLocation(payload)
+                const error = user.updateLocation(payload);
                 if (error) {
                     console.log('Failed to update the user location.');
                 } else {

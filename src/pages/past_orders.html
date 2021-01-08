@@ -111,8 +111,8 @@
             <h4>Header</h4>
         </div>
         <div role="main" class="ui-content">
+            <h1 id="past-orders-heading">Past Orders</h1>
             <div class="past-orders-container">
-                <h1 id="past-orders-heading">Past Orders</h1>
             </div>
         </div>
     </div>
@@ -120,12 +120,14 @@
 
         // Get all the orders through the user datastore.
         const { user } = app;
-        var pastOrders = user.getAllOrders();
 
-        // Render past orders.
-        const pastOrderCards = pastOrders.map(({ pastOrderId, vendorCoverImageLocation, vendorName, noOfOrderedItems, price, date, vendorRating, orderedItems }) => {
-            var markup1 =
-                `<div class="past-order-card" past-order-id="${pastOrderId}"">
+        $('body').on('pagebeforeshow', '#past-orders', function () {
+            var pastOrders = user.getAllOrders();
+
+            // Render past orders.
+            const pastOrderCards = pastOrders.map(({ pastOrderId, vendorCoverImageLocation, vendorName, noOfOrderedItems, price, date, vendorRating, orderedItems }) => {
+                var markup1 =
+                    `<div class="past-order-card" past-order-id="${pastOrderId}"">
                         <img id="past-order-cover-img" src=${vendorCoverImageLocation}
                             alt="Past Order Cover Image">
                         <span id="past-order-vendor-name">${vendorName}</span>
@@ -134,23 +136,24 @@
                         </span>
                         <a id="past-order-receipt">View Receipt</a>`;
 
-            // Render past order items markup.
-            var markup2;
-            const pastOrderItems = orderedItems.map(({ itemName, quantity }) => {
-                markup2 =
-                    `<div class="past-order-item">
+                // Render past order items markup.
+                var markup2;
+                const pastOrderItems = orderedItems.map(({ itemName, quantity }) => {
+                    markup2 =
+                        `<div class="past-order-item">
                             <div class="past-order-item-count">${quantity}</div>
                             <div class="past-order-item-name">${itemName}</div>
                         </div>`;
-                return markup2;
-            });
+                    return markup2;
+                });
 
-            // Concatenate the past order items markup.
-            const allItemMarkup = pastOrderItems.reduce((markup2, card) => markup2 + card);
+                // Concatenate the past order items markup.
+                const allItemMarkup = pastOrderItems.reduce((markup2, card) => markup2 + card);
 
-            // Render the markup of the rating view on the bottom of the past order card.
-            var markup3 =
-                `<span id="show-more-txt">Show more <i class="fa fa-angle-down"></i></span>
+                console.log('Reloading');
+                // Render the markup of the rating view on the bottom of the past order card.
+                var markup3 =
+                    `<span id="show-more-txt">Show more <i class="fa fa-angle-down"></i></span>
                         <button id="reorder-btn">${(vendorRating > 0) ? 'Closed' : 'Reorder'}</button>
                         <div class="past-order-rating-bar">
                             <ul id="past-order-ratings">
@@ -174,24 +177,26 @@
                         </div>
                     </div>`;
 
-            return markup1 + allItemMarkup + markup3;
-        });
+                return markup1 + allItemMarkup + markup3;
+            });
 
-        // Concatenate the past order cards and insert it to the view.
-        const allpastOrdersMarkup = pastOrderCards.reduce((markup, card) => markup + card);
+            // Concatenate the past order cards and insert it to the view.
+            const allpastOrdersMarkup = pastOrderCards.reduce((markup, card) => markup + card);
 
-        $(allpastOrdersMarkup).insertAfter($('#past-orders-heading'));
+            $('.past-orders-container').html(allpastOrdersMarkup);
 
-        // Navigate to the rating process on past order card click.
-        $('.past-order-card').on('click', function () {
-            var pastOrderId = $(this).attr("past-order-id");
-            $(":mobile-pagecontainer").pagecontainer("change", "vendor_rating.html", {
-                data: {
-                    pastOrderId
-                }
+            $('.past-orders-container').enhanceWithin();
+
+            // Navigate to the rating process on past order card click.
+            $('.past-order-card').on('click', function () {
+                var pastOrderId = $(this).attr("past-order-id");
+                $(":mobile-pagecontainer").pagecontainer("change", "vendor_rating.html", {
+                    data: {
+                        pastOrderId
+                    }
+                });
             });
         });
-
     </script>
     </div>
 </body>
