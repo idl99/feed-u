@@ -152,26 +152,25 @@
 
                 console.log('Reloading');
                 // Render the markup of the rating view on the bottom of the past order card.
+                
+                const stars = [];
+                for (let index = 1; index <= 5; index++) {
+                    stars.push(
+                        `<li class='star-icon'>
+                            ${index <= vendorRating ? 
+                                `<i class='fa fa-star fa-fw'></i>` 
+                                : `<i class='fa fa-star-o fa-fw'></i>`}
+                        </li>
+                        `
+                    )
+                }
+                
                 var markup3 =
                     `<span id="show-more-txt">Show more <i class="fa fa-angle-down"></i></span>
                         <button id="reorder-btn">${(vendorRating > 0) ? 'Closed' : 'Reorder'}</button>
                         <div class="past-order-rating-bar">
                             <ul id="past-order-ratings">
-                                <li class='star-icon' title='Not Good' data-value='1'>
-                                    <i class='fa fa-star-o fa-fw'></i>
-                                </li>
-                                <li class='star-icon' title='Ok' data-value='2'>
-                                    <i class='fa fa-star-o fa-fw'></i>
-                                </li>
-                                <li class='star-icon' title='Good' data-value='3'>
-                                    <i class='fa fa-star-o fa-fw'></i>
-                                </li>
-                                <li class='star-icon' title='Very Good' data-value='4'>
-                                    <i class='fa fa-star-o fa-fw'></i>
-                                </li>
-                                <li class='star-icon' title='Excellent' data-value='5'>
-                                    <i class='fa fa-star-o fa-fw'></i>
-                                </li>
+                                ${stars.join('')}
                             </ul>
                             <span id="rate-your-order-txt">Rate your order</span>
                         </div>
