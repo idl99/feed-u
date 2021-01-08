@@ -31,20 +31,48 @@ const data = Object.freeze({
             ],
         },
         {
-            "vendorId": "v1",
-            "vendorImageLocation": "../assets/vendor_list_view_images/burgers_ahouy.jpg",
-            "vendorName": "Burgers Ahouy!",
+            "vendorId": "v2",
+            "vendorImageLocation": "../assets/vendor_list_view_images/pizza_palpatha.jpg",
+            "vendorName": "Pizza Palpatha",
             "vendorCatergories": [
-                "Burgers",
+                "Italian",
                 "American",
-                "Mexican"
+                "Pizza"
             ],
             "vendorRatings": {
-                "vendorRatingValue": 4.6,
-                "vendorNoOfRatings": 100
+                "vendorRatingValue": 4.8,
+                "vendorNoOfRatings": 99
             },
             "location": "Colombo 3",
-            "deliveryTime": "25-30 mins",
+            "deliveryTime": "15-20 mins",
+            "items": [
+                {
+                    "itemImageLocation": "../assets/vendor_page_images/tom_yum_soup.jpg",
+                    "itemId": "v1i1",
+                    "itemTitle": "Tom Yum Soup",
+                    "itemDescription": "Picked from the fresh vegetables and fish from the with special Chicken Broth.",
+                    "itemRatings": {
+                        "itemRatingValue": 4.6,
+                        "itemNoOfRatings": 47
+                    },
+                    "itemPrice": 800
+                }
+            ],
+        },
+        {
+            "vendorId": "v3",
+            "vendorImageLocation": "../assets/vendor_list_view_images/bathui_pol_sambolai.jpg",
+            "vendorName": "Bathui Pol Sambolai",
+            "vendorCatergories": [
+                "Rice",
+                "Sri Lankan"
+            ],
+            "vendorRatings": {
+                "vendorRatingValue": 4.5,
+                "vendorNoOfRatings": 150
+            },
+            "location": "Colombo 3",
+            "deliveryTime": "5-10 mins",
             "items": [
                 {
                     "itemImageLocation": "../assets/vendor_page_images/tom_yum_soup.jpg",

@@ -15,31 +15,35 @@
 <body>
     <div data-role="page" id="past-orders">
         <style>
-            .past-order {
+            .past-order-card {
                 display: flex;
                 flex-direction: column;
+                margin-bottom: 2em;
+                /* box-shadow: 4px 4px 7px 2px rgba(0,0,0,0.4); */
+                box-shadow: 6px 4px 5px rgba(0, 0, 0, 0.4);
             }
 
             #past-order-vendor-name {
                 margin-top: 0.5em;
             }
 
-            #past-order-no-items-price {
+            #past-order-no-items-and-price {
                 margin-top: 0.25em;
             }
 
-            #past-order-time-separator {
+            #past-order-date-time-separator-icon {
                 color: #BDBDBD;
                 font-size: 8px;
             }
 
-            #view-receipt {
+            #past-order-receipt {
                 margin-top: 0.25em;
-                margin-bottom: 0.75em;
+                margin-bottom: 0.25em;
             }
 
             .past-order-item {
                 display: flex;
+                margin-top: 0.50em;
             }
 
             .past-order-item-count {
@@ -58,7 +62,7 @@
                 margin-left: 0.75em;
             }
 
-            #show-more {
+            #show-more-txt {
                 margin-top: 1em;
             }
 
@@ -107,53 +111,98 @@
             <h4>Header</h4>
         </div>
         <div role="main" class="ui-content">
+            <h1 id="past-orders-heading">Past Orders</h1>
             <div class="past-orders-container">
-                <h1>Past Orders</h1>
-                <div class="past-order">
-                    <img id="past-order-cover-img" src="../assets/past_orders/past_order_cover_image.jpg"
-                        alt="Past Order Cover Image">
-                    <span id="past-order-vendor-name">Burgers Ahoy!</span>
-                    <span id="past-order-no-items-price">3 items for LKR 1000.00 <i class="fa fa-circle"
-                            id="past-order-time-separator"></i> Oct 10 at 12:12
-                        PM</span>
-                    <a id="view-receipt">View Receipt</a>
-                    <div class="past-order-item">
-                        <div class="past-order-item-count">2</div>
-                        <div class="past-order-item-name">Hawaiian Burger</div>
-                    </div>
-                    <div style="display: flex; margin-top: 0.50em;">
-                        <div class="past-order-item-count">2</div>
-                        <div class="past-order-item-name">Pudding</div>
-                    </div>
-                    <div style="display: flex; margin-top: 0.50em;">
-                        <div class="past-order-item-count"> 1</div>
-                        <div class="past-order-item-name">Special Chilli Sauce</div>
-                    </div>
-                    <span id="show-more">Show more <i class="fa fa-angle-down"></i></span>
-                    <button id="reorder-btn">Reorder</button>
-                    <div class="past-order-rating-bar">
-                        <ul id="past-order-ratings">
-                            <li class='star-icon' title='Not Good' data-value='1'>
-                                <i class='fa fa-star-o fa-fw'></i>
-                            </li>
-                            <li class='star-icon' title='Ok' data-value='2'>
-                                <i class='fa fa-star-o fa-fw'></i>
-                            </li>
-                            <li class='star-icon' title='Good' data-value='3'>
-                                <i class='fa fa-star-o fa-fw'></i>
-                            </li>
-                            <li class='star-icon' title='Very Good' data-value='4'>
-                                <i class='fa fa-star-o fa-fw'></i>
-                            </li>
-                            <li class='star-icon' title='Excellent' data-value='5'>
-                                <i class='fa fa-star-o fa-fw'></i>
-                            </li>
-                        </ul>
-                        <span id="rate-your-order-txt">Rate your order</span>
-                    </div>
-                </div>
             </div>
         </div>
+    </div>
+    <script>
+
+        // Get all the orders through the user datastore.
+        const { user } = app;
+
+        $('body').on('pagebeforeshow', '#past-orders', function () {
+            var pastOrders = user.getAllOrders();
+
+            // Render past orders.
+            const pastOrderCards = pastOrders.map(({ pastOrderId, vendorCoverImageLocation, vendorName, noOfOrderedItems, price, date, vendorRating, orderedItems }) => {
+                var markup1 =
+                    `<div class="past-order-card" past-order-id="${pastOrderId}"">
+                        <img id="past-order-cover-img" src=${vendorCoverImageLocation}
+                            alt="Past Order Cover Image">
+                        <span id="past-order-vendor-name">${vendorName}</span>
+                        <span id="past-order-no-items-and-price">${noOfOrderedItems} items for LKR ${price}.00 <i class="fa fa-circle"
+                                id="past-order-date-time-separator-icon"></i> ${date}
+                        </span>
+                        <a id="past-order-receipt">View Receipt</a>`;
+
+                // Render past order items markup.
+                var markup2;
+                const pastOrderItems = orderedItems.map(({ itemName, quantity }) => {
+                    markup2 =
+                        `<div class="past-order-item">
+                            <div class="past-order-item-count">${quantity}</div>
+                            <div class="past-order-item-name">${itemName}</div>
+                        </div>`;
+                    return markup2;
+                });
+
+                // Concatenate the past order items markup.
+                const allItemMarkup = pastOrderItems.reduce((markup2, card) => markup2 + card);
+
+                console.log('Reloading');
+                // Render the markup of the rating view on the bottom of the past order card.
+                const stars = [];
+                for (let index = 1; index <= 5; index++) {
+                    stars.push(
+                        `<li class='star-icon'>
+                            ${index <= vendorRating ?
+                            `<i class='fa fa-star fa-fw'></i>`
+                            : `<i class='fa fa-star-o fa-fw'></i>`}
+                        </li>
+                        `
+                    )
+                }
+
+                var markup3 =
+                    `<span id="show-more-txt">Show more <i class="fa fa-angle-down"></i></span>
+                        <button id="reorder-btn" ${(vendorRating > 0) ? 'disabled' : ''}>${(vendorRating > 0) ? 'Closed' : 'Reorder'}</button>
+                        <div class="past-order-rating-bar">
+                            <ul id="past-order-ratings">
+                                ${stars.join('')}
+                            </ul>
+                            <span id="rate-your-order-txt">Rate your order</span>
+                        </div>
+                    </div>`;
+
+                return markup1 + allItemMarkup + markup3;
+            });
+
+            // Concatenate the past order cards and insert it to the view.
+            const allpastOrdersMarkup = pastOrderCards.reduce((markup, card) => markup + card);
+
+            $('.past-orders-container').html(allpastOrdersMarkup);
+
+            $('.past-orders-container').enhanceWithin();
+
+            // Navigate to the rating process on past order card click.
+            $('.past-order-card').on('click', function () {
+                var pastOrderId = $(this).attr("past-order-id");
+                var closed = $(this).find('#reorder-btn').text();
+
+                if (closed === 'Reorder') {
+                    console.log('Moving to the rating pages');
+                    $(":mobile-pagecontainer").pagecontainer("change", "vendor_rating.html", {
+                        data: {
+                            pastOrderId
+                        }
+                    });
+                } else {
+                    console.log('Cannot move into the rating pages since the order is already rated.');
+                }
+            });
+        });
+    </script>
     </div>
 </body>
 

@@ -1,9 +1,8 @@
-$primary-color: #EB5757
-$white: #ffffff
-
 @use "../themes/custom-jquery-mobile-theme.css"
 @use "../themes/jquery.mobile.icons.min.css" as jquery-mobile-icons
 @use "../../vendor/jquery.mobile-1.4.5/jquery.mobile.structure-1.4.5.min.css" as jquery-mobile-structure
+
+@use "sass:map"
 
 // IMPORT OTHER CUSTOM STYLESHEETS
 @use "landing"
@@ -18,8 +17,27 @@ $white: #ffffff
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap")
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css")
 
-body
-    font-family: variables.$font-family
+div[data-role="page"].feedU-page
+    *
+        font-family: variables.$font-family
+        text-shadow: none
+
+    .ui-header
+        background-color: map.get(variables.$feedU-theme, "primary-color")
+        display: flex
+        padding: 5px 0px
+        justify-content: center
+
+    .ui-footer
+
+        .full-width-btn
+            background-color: map.get(variables.$feedU-theme, "primary-color")
+            border: none
+            margin: 0,
+            color: map.get(variables.$feedU-theme, "background-color")
+            width: inherit
+            text-transform: uppercase
+            padding: 1em 0em
 
 // .ui-slider-handle
 //     background-color: $primary-color

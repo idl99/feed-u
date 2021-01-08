@@ -11,12 +11,13 @@
 </head>
 
 <body>
-    <div data-role="page" id="checkout">
+    <div data-role="page" id="checkout" class="feedU-page">
         <div data-role="header" id="checkout-header" data-add-back-btn="true" data-position="fixed"
             data-tap-toggle="false">
-            <h4>Header</h4>
+            <img src="../assets/logo.png"></img>
         </div>
         <div class="ui-content" data-fullscreen="true">
+            <!-- <a href="#leftpanel1" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-mini">Reveal</a> -->
             <div id="checkout-restaurant-details-container">
                 <div id="checkout-restaurant-name">Restaurant Name</div>
                 <div style="display: flex; flex-direction: row; align-items: center;">
@@ -28,11 +29,17 @@
                     <span id="checkout-delivery-location"
                         style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
                         Delivery Location </span>
-                    <a href="index.html" class="ui-btn ui-shadow ui-corner-all ui-icon-navigation ui-btn-icon-notext"
+                    <a class="link-set-location-page ui-btn ui-shadow ui-corner-all ui-icon-navigation ui-btn-icon-notext"
                         style="margin-left: 5px;"></a>
                 </div>
                 <div id="checkout-eta">ETA</div>
-                <div id="checkout-payment-method-container"> Payment Details </div>
+                <div id="checkout-payment-method-container">
+                    Paying
+                    <span id="checkout-bill-total">0</span>
+                    By
+                    <a id="checkout-payment-method" href="#checkout-payment-method-selection-popup"
+                        data-rel="popup">Cash</a>
+                </div>
             </div>
 
             <hr style="margin: 5vh 0vw" />
@@ -48,9 +55,21 @@
                 <a href="#" id="clear-cart-btn" style="color: #EB5757; margin: 4vh 0vw; text-align: center;">Clear
                     Cart</a>
             </div>
+            <div id="popup-container">
+                <div data-role="popup" id="checkout-payment-method-selection-popup">
+                    <ul id="checkout-payment-method-selection-list" data-role="listview" data-inset="true"
+                        style="min-width:210px;">
+                        <li data-role="list-divider">Choose a payment method</li>
+                        <li payment-method-type="cash" class="checkout-payment-method-selection-item">Cash</li>
+                        <li payment-method-type="one-time-card-payment" class="checkout-payment-method-selection-item">
+                            One Time Card Payment</li>
+                    </ul>
+                </div>
+            </div>
         </div>
-        <div data-role="footer" class="checkout-footer" data-position="fixed">
-            <h4>Footer</h4>
+        <!-- TODO disable this button -->
+        <div data-role="footer" data-position="fixed" data-enhanced="false">
+            <button id="checkout-place-order" class="full-width-btn">Place the Order</button>
         </div>
 
         <script>
@@ -58,14 +77,89 @@
             // });
             // The code below uses ES6 syntax since modern browsers support it (Chrome / Edge versions released after 2016)
             // Refer https://www.w3schools.com/js/js_versions.asp for more
-            const { user, cart } = app;
+            const { user, cart, stripe, payment } = app;
             const summary = cart.summary();
+
+            let selectedPaymentMethod = "cash"
+
+            const handlePlaceOrder = function (event, stripe) {
+
+                if (selectedPaymentMethod === 'one-time-card-payment') {
+                    console.log("One Time card payment option selected");
+                    payment.createCheckoutSession({
+                        success_url: "https://idl99.github.io/feed-u/pages/checkout.html",
+                        cancel_url: "https://idl99.github.io/feed-u/pages/checkout.html",
+                        line_items: cart.summary().items.map(({ itemTitle, itemPrice, quantity }) => {
+                            return {
+                                price_data: {
+                                    currency: 'lkr',
+                                    product_data: {
+                                        name: itemTitle,
+                                    },
+                                    unit_amount: itemPrice * 100,
+                                },
+                                quantity,
+                            }
+                        }),
+                        mode: "payment",
+                        payment_method_types: ["card"],
+                        client_reference_id: user.getPaymentDetails().stripe_customer_id,
+                    }).then(response => {
+                        const { id } = response
+                        stripe.redirectToCheckout({
+                            sessionId: id,
+                        })
+                    })
+                }
+            }
 
             $("#checkout-restaurant-name").text(summary.vendor.vendorName);
             $("#checkout-eta").text(summary.vendor.deliveryTime);
             $("#checkout-delivery-location").text(user.getDetails().location.display);
             summary.items.length === 0 ? $("#clear-cart-btn").hide() : $("#clear-cart-btn").show();
 
+            $(".link-set-location-page").on("click", function (event) {
+                event.preventDefault();
+                $.mobile.navigate("set_location.html");
+            })
+
+            $('.checkout-payment-method-selection-item').click(function () {
+                selectedPaymentMethod = $(this).attr("payment-method-type");
+                $('#checkout-payment-method').text($(this).text());
+            })
+
+            const initializePaymentMethods = () => {
+                // Add points option
+                const pointsOption = $(`<li payment-method-type="points" class="checkout-payment-method-selection-item">Points (${user.getDetails().profile.points})</li>`);
+                pointsOption.click(function () {
+                    selectedPaymentMethod = $(this).attr("payment-method-type");
+                    $('#checkout-payment-method').text($(this).text());
+                });
+
+                let cardOptions = [];
+                payment.getAllCardsForCustomer(function ({ data }) {
+                    cardOptions = data.map(({ card }) => {
+                        const paymentOption = $(`<li payment-method-type="card" class="checkout-payment-method-selection-item">${card.brand.toUpperCase()} - **** ${card.last4}</li>`);
+                        paymentOption.click(function () {
+                            selectedPaymentMethod = $(this).attr("payment-method-type");
+                            $('#checkout-payment-method').text($(this).text());
+                        });
+                        return paymentOption;
+                    })
+                    $("#checkout-payment-method-selection-list").append(pointsOption, cardOptions);
+                    $("#checkout-payment-method-selection-list").listview("refresh")
+                })
+            }
+
+            $("#checkout-payment-method-selection-popup").on("popupcreate", function () {
+                initializePaymentMethods();
+            });
+
+            stripe
+                .loadStripe("pk_test_51I3c8WBYsXgRXg4sHaDeNTSCG8lvZNnN4c8tUydiuqUwArCXylLnE8poGx5UapOqEhR2cEGlHLM1V8J8ecat0SEB00fopbAHm7")
+                .then(stripe => {
+                    $("#checkout-place-order").on("click", (event) => handlePlaceOrder(event, stripe))
+                })
 
             var items = summary.items;
 
@@ -73,8 +167,7 @@
             var billTotal = items.reduce((sum, { quantity, itemPrice }) => {
                 return sum + quantity * itemPrice;
             }, 0);
-            var paymentMethod = 'CASH' // TODO replace
-            $("#checkout-payment-method-container").text(`Paying ${billTotal} By ${paymentMethod}`);
+            $("#checkout-bill-total").text(billTotal)
 
             // render items in order summary
             if (items.length > 0) {
