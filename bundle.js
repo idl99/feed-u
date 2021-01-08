@@ -1,4 +1,139 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
+var V3_URL = 'https://js.stripe.com/v3';
+var V3_URL_REGEX = /^https:\/\/js\.stripe\.com\/v3\/?(\?.*)?$/;
+var EXISTING_SCRIPT_MESSAGE = 'loadStripe.setLoadParameters was called but an existing Stripe.js script already exists in the document; existing script parameters will be used';
+var findScript = function findScript() {
+  var scripts = document.querySelectorAll("script[src^=\"".concat(V3_URL, "\"]"));
+
+  for (var i = 0; i < scripts.length; i++) {
+    var script = scripts[i];
+
+    if (!V3_URL_REGEX.test(script.src)) {
+      continue;
+    }
+
+    return script;
+  }
+
+  return null;
+};
+
+var injectScript = function injectScript(params) {
+  var queryString = params && !params.advancedFraudSignals ? '?advancedFraudSignals=false' : '';
+  var script = document.createElement('script');
+  script.src = "".concat(V3_URL).concat(queryString);
+  var headOrBody = document.head || document.body;
+
+  if (!headOrBody) {
+    throw new Error('Expected document.body not to be null. Stripe.js requires a <body> element.');
+  }
+
+  headOrBody.appendChild(script);
+  return script;
+};
+
+var registerWrapper = function registerWrapper(stripe, startTime) {
+  if (!stripe || !stripe._registerWrapper) {
+    return;
+  }
+
+  stripe._registerWrapper({
+    name: 'stripe-js',
+    version: "1.11.0",
+    startTime: startTime
+  });
+};
+
+var stripePromise = null;
+var loadScript = function loadScript(params) {
+  // Ensure that we only attempt to load Stripe.js at most once
+  if (stripePromise !== null) {
+    return stripePromise;
+  }
+
+  stripePromise = new Promise(function (resolve, reject) {
+    if (typeof window === 'undefined') {
+      // Resolve to null when imported server side. This makes the module
+      // safe to import in an isomorphic code base.
+      resolve(null);
+      return;
+    }
+
+    if (window.Stripe && params) {
+      console.warn(EXISTING_SCRIPT_MESSAGE);
+    }
+
+    if (window.Stripe) {
+      resolve(window.Stripe);
+      return;
+    }
+
+    try {
+      var script = findScript();
+
+      if (script && params) {
+        console.warn(EXISTING_SCRIPT_MESSAGE);
+      } else if (!script) {
+        script = injectScript(params);
+      }
+
+      script.addEventListener('load', function () {
+        if (window.Stripe) {
+          resolve(window.Stripe);
+        } else {
+          reject(new Error('Stripe.js not available'));
+        }
+      });
+      script.addEventListener('error', function () {
+        reject(new Error('Failed to load Stripe.js'));
+      });
+    } catch (error) {
+      reject(error);
+      return;
+    }
+  });
+  return stripePromise;
+};
+var initStripe = function initStripe(maybeStripe, args, startTime) {
+  if (maybeStripe === null) {
+    return null;
+  }
+
+  var stripe = maybeStripe.apply(undefined, args);
+  registerWrapper(stripe, startTime);
+  return stripe;
+};
+
+// own script injection.
+
+var stripePromise$1 = Promise.resolve().then(function () {
+  return loadScript(null);
+});
+var loadCalled = false;
+stripePromise$1["catch"](function (err) {
+  if (!loadCalled) {
+    console.warn(err);
+  }
+});
+var loadStripe = function loadStripe() {
+  for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+    args[_key] = arguments[_key];
+  }
+
+  loadCalled = true;
+  var startTime = Date.now();
+  return stripePromise$1.then(function (maybeStripe) {
+    return initStripe(maybeStripe, args, startTime);
+  });
+};
+
+exports.loadStripe = loadStripe;
+
+},{}],2:[function(require,module,exports){
 /*!
  * JavaScript Cookie v2.2.1
  * https://github.com/js-cookie/js-cookie
@@ -163,7 +298,7 @@
 	return init(function () {});
 }));
 
-},{}],2:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 var cookie = require('js-cookie')
 
 const CART_STORAGE_KEY = 'cart';
@@ -206,6 +341,18 @@ module.exports = function () {
             }
         },
         summary: function () {
+            /**
+             * JSON structure of summary
+             * 
+             * items: [
+             *      {
+             *          itemTitle: "name of the item",
+             *          quantity: 1,
+             *          itemPrice: 400,
+             *      }
+             * ]
+             * 
+             */
             return cookie.getJSON(CART_STORAGE_KEY);
         },
         addItemToCart: function ({ vendor, item }) {
@@ -242,7 +389,7 @@ module.exports = function () {
         },
     }
 }()
-},{"js-cookie":1}],3:[function(require,module,exports){
+},{"js-cookie":2}],4:[function(require,module,exports){
 const user = require('./user');
 
 const data = Object.freeze({
@@ -276,20 +423,48 @@ const data = Object.freeze({
             ],
         },
         {
-            "vendorId": "v1",
-            "vendorImageLocation": "../assets/vendor_list_view_images/burgers_ahouy.jpg",
-            "vendorName": "Burgers Ahouy!",
+            "vendorId": "v2",
+            "vendorImageLocation": "../assets/vendor_list_view_images/pizza_palpatha.jpg",
+            "vendorName": "Pizza Palpatha",
             "vendorCatergories": [
-                "Burgers",
+                "Italian",
                 "American",
-                "Mexican"
+                "Pizza"
             ],
             "vendorRatings": {
-                "vendorRatingValue": 4.6,
-                "vendorNoOfRatings": 100
+                "vendorRatingValue": 4.8,
+                "vendorNoOfRatings": 99
             },
             "location": "Colombo 3",
-            "deliveryTime": "25-30 mins",
+            "deliveryTime": "15-20 mins",
+            "items": [
+                {
+                    "itemImageLocation": "../assets/vendor_page_images/tom_yum_soup.jpg",
+                    "itemId": "v1i1",
+                    "itemTitle": "Tom Yum Soup",
+                    "itemDescription": "Picked from the fresh vegetables and fish from the with special Chicken Broth.",
+                    "itemRatings": {
+                        "itemRatingValue": 4.6,
+                        "itemNoOfRatings": 47
+                    },
+                    "itemPrice": 800
+                }
+            ],
+        },
+        {
+            "vendorId": "v3",
+            "vendorImageLocation": "../assets/vendor_list_view_images/bathui_pol_sambolai.jpg",
+            "vendorName": "Bathui Pol Sambolai",
+            "vendorCatergories": [
+                "Rice",
+                "Sri Lankan"
+            ],
+            "vendorRatings": {
+                "vendorRatingValue": 4.5,
+                "vendorNoOfRatings": 150
+            },
+            "location": "Colombo 3",
+            "deliveryTime": "5-10 mins",
             "items": [
                 {
                     "itemImageLocation": "../assets/vendor_page_images/tom_yum_soup.jpg",
@@ -349,7 +524,7 @@ module.exports = function () {
         }
     }
 }()
-},{"./user":6}],4:[function(require,module,exports){
+},{"./user":7}],5:[function(require,module,exports){
 var $ = require('jquery')
 $.mobile = require('jquery-mobile')
 
@@ -365,16 +540,55 @@ var utils = require('./utils')
 
 var payment = require('./payment')
 
+var stripe = require('@stripe/stripe-js');
+
 window.app = {
     cart,
     user,
     datastore,
     utils,
     payment,
+    stripe
 }
-},{"./cart":2,"./datastore":3,"./payment":5,"./user":6,"./utils":7,"jquery":9,"jquery-mobile":8}],5:[function(require,module,exports){
+
+/**
+ * Remove following scripts (attached to the window) before hiding the current page to load the next.
+ * Since we are using AJAX navigation between the pages, these scripts will thrown us an error 
+ * indicating that we are trying to load the scripts multple times.
+ * The code given below prevents that issue by resetting the source code set on the window
+ * each time the respective script is loaded.
+ */
+$(document).on("pagecontainerbeforehide", function (event, ui) {
+    console.log('Page going to hide ... removing Google Maps scripts')
+    window.google = undefined;
+    window.Stripe = undefined;
+})
+
+/**
+ * https://github.com/jquery/demos.jquerymobile.com/blob/master/1.4.5/panel-external/index.html
+ */
+$(document).one("ready", function () {
+
+    var panelMarkup = `
+        <div data-role="panel" id="leftpanel1" data-position="left" data-display="reveal" data-theme="a">
+
+        <h3>Left Panel: Reveal</h3>
+        <p>This panel is positioned on the left with the reveal display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
+        <p>To close, click off the panel, swipe left or right, hit the Esc key, or use the button below:</p>
+        <a href="#demo-links" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left ui-btn-inline">Close panel</a>
+
+        </div>
+    `
+
+    // Add the panel to the body
+    $('body').append(panelMarkup);
+
+    // Manually initialize the panel
+    $("body>[data-role='panel']").panel();
+})
+
+},{"./cart":3,"./datastore":4,"./payment":6,"./user":7,"./utils":8,"@stripe/stripe-js":1,"jquery":10,"jquery-mobile":9}],6:[function(require,module,exports){
 const $ = require('jquery');
-const loggedInUser = require('./user').getPaymentDetails();
 
 const SECRET_KEY = 'sk_test_51I3c8WBYsXgRXg4suIS6WCRMMcfMsNgopWokzuqiKXSo6pmVX00zIk7Up6ukdjZLEY6YfpclJ1lAUCBKpl6Y4fe600CfNE584P';
 
@@ -421,6 +635,8 @@ module.exports = function () {
             })
         },
         getAllCardsForCustomer: function (success, error) {
+            const loggedInUser = require('./user').getPaymentDetails();
+
             // https://stripe.com/docs/api/payment_methods/list?lang=curl
             return getFromStripeAPI({
                 url: 'payment_methods',
@@ -438,10 +654,23 @@ module.exports = function () {
                 success,
                 error
             });
+        },
+        createCheckoutSession(options, success, error) {
+            const loggedInUser = require('./user').getPaymentDetails();
+
+            return postToStripeAPI({
+                url: 'checkout/sessions',
+                success,
+                error,
+                data: {
+                    customer: loggedInUser.stripe_customer_id,
+                    ...options,
+                }
+            })
         }
     }
 }()
-},{"./user":6,"jquery":9}],6:[function(require,module,exports){
+},{"./user":7,"jquery":10}],7:[function(require,module,exports){
 var cookie = require('js-cookie');
 
 const USER = "user";
@@ -452,7 +681,7 @@ const DEFAULT_USER = {
         points: 547,
     },
     payment: {
-        stripe_customer_id: 'cus_IhWwxopENtlI1P'
+        stripe_customer_id: 'cus_IhWwxopENtlI1P',
     },
     location: {
         display: "Nugegoda, Delkanda",
@@ -463,7 +692,7 @@ const orders = {
     pastOrders: [
         {
             "pastOrderId": "ord1",
-            "vendorCoverImageLocation": "",
+            "vendorCoverImageLocation": "../assets/past_orders/past_order_cover_image.jpg",
             "vendorLogoImageLocation": "../assets/stories_images/story-big.png",
             "vendorName": "Burgers Ahoy!",
             "noOfOrderedItems": 3,
@@ -494,7 +723,7 @@ const orders = {
         },
         {
             "pastOrderId": "ord2",
-            "vendorCoverImageLocation": "",
+            "vendorCoverImageLocation": "../assets/past_orders/past_order_cover_image.jpg",
             "vendorLogoImageLocation": "../assets/stories_images/story-big.png",
             "vendorName": "Burgers Ahoy!",
             "noOfOrderedItems": 1,
@@ -518,6 +747,12 @@ module.exports = function () {
     return {
         init: function () {
             cookie.set(USER, DEFAULT_USER)
+        },
+        updateLocation: function ({ updatedLocation }) {
+            const user = cookie.getJSON(USER);
+            user.location.display = updatedLocation;
+            cookie.set(USER, user);
+            return null;
         },
         getDetails: function () {
             return cookie.getJSON(USER)
@@ -563,7 +798,7 @@ module.exports = function () {
     }
 }()
 
-},{"js-cookie":1}],7:[function(require,module,exports){
+},{"js-cookie":2}],8:[function(require,module,exports){
 module.exports = function () {
     return {
         parseUrlForQueryParams: function (url) {
@@ -576,7 +811,7 @@ module.exports = function () {
         }
     }
 }();
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 (function (global){(function (){
 (function browserifyShim(module, exports, define, browserify_shim__define__module__export__) {
 
@@ -596,7 +831,7 @@ if(this._resizeData){if(a.x===this._resizeData.windowCoordinates.x&&a.y===this._
 }).call(global, undefined, undefined, undefined, function defineExport(ex) { module.exports = ex; });
 
 }).call(this)}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"jquery":9}],9:[function(require,module,exports){
+},{"jquery":10}],10:[function(require,module,exports){
 (function (global){(function (){
 (function browserifyShim(module, exports, define, browserify_shim__define__module__export__) {
 /*! jQuery v1.11.1 | (c) 2005, 2014 jQuery Foundation, Inc. | jquery.org/license */
@@ -609,4 +844,4 @@ if(k&&j[k]&&(e||j[k].data)||void 0!==d||"string"!=typeof b)return k||(k=i?a[h]=c
 }).call(global, undefined, undefined, undefined, function defineExport(ex) { module.exports = ex; });
 
 }).call(this)}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}]},{},[4]);
+},{}]},{},[5]);
