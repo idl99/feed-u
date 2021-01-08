@@ -104,20 +104,19 @@
                 <div class="leaderboard-title">Points to next rank :</div>
                 <div class="leaderboard-title" id="pnts-to-next"></div>
             </div>
-             <!-- Script for getting points to next user -->
+            <!-- Script for getting points to next user -->
             <script>
                 var aboveUserPoints = 0;
                 var eachUserPoints = datastore.getLeaderboard();
                 console.log(eachUserPoints)
-                eachUserPoints.forEach(({points}) => {
-                    if(userPoints<points){
+                eachUserPoints.forEach(({ points }) => {
+                    if (userPoints < points) {
                         aboveUserPoints = points;
                     }
                 });
                 var pointsToNext = aboveUserPoints - userPoints;
                 $('#pnts-to-next').text(pointsToNext) 
             </script>
-
         </div>
     </div>
 </body>
