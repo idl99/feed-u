@@ -37,15 +37,46 @@ $(document).on("pagecontainerbeforehide", function (event, ui) {
     window.Stripe = undefined;
 })
 
+const screenDimens = {
+    iPad: 1024
+}
+
+/**
+ * This function opens the navigation panel programatically
+ * if the screen width is above the specified size
+ * 
+ * Refer https://forum.jquery.com/topic/responsive-panel-demo-broken-how-to-keep-a-panel-open-on-a-large-window
+ */
+const evaluatePanelOpen = function () {
+    var width = $(window).width();
+    if (width >= screenDimens.iPad) {
+        console.log('Opening navigation panel');
+        $("#navigation-menu").panel("open");
+    } else {
+        $("#navigation-menu").panel("close");
+    }
+}
+
 /**
  * https://github.com/jquery/demos.jquerymobile.com/blob/master/1.4.5/panel-external/index.html
  */
-$(document).one("ready", function () {
+$(document).on("ready", function () {
     $.get("navigation_side_bar.html", function (markup) {
         // Add the panel to the body
         $('body').append(markup);
 
         // Manually initialize the panel
         $("body>[data-role='panel']").panel();
+        evaluatePanelOpen();
+
+        $('body').on("pagecontainerchange", function () {
+            // Check again when we navigate to another page
+            evaluatePanelOpen();
+        })
+
+        $(window).on("resize", function () {
+            // Check again when the window gets resized (maybe due to change in screen orientation)
+            evaluatePanelOpen();
+        })
     })
 })
