@@ -90,11 +90,30 @@
             .vendor-page-vendor-ratings-section {
                 display: flex;
                 align-items: center;
+                margin-top: 0.50em;
+                margin-bottom: 1em;
                 font-size: 11px;
+            }
+
+            .vendor-page-vendor-rating-bar {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 20px;
+                width: 70px;
+                font-size: 11px;
+                background: #F2F2F2;
+                border-radius: 25px;
             }
 
             #vendor-rate-star-icon {
                 color: #F2C94C;
+            }
+
+            #vendor-page-vendor-no-of-ratings {
+                margin-top: 0.25em;
+                margin-left: 0.25em;
+                font-size: 8px;
             }
 
             #vendor-page-vendor-comments {
@@ -230,10 +249,12 @@
 
             <div class="vendor-page-vendor-ratings-section">
                 <p>
+                <div class="vendor-page-vendor-rating-bar">
                     <i class='fa fa-star fa-fw' id="vendor-rate-star-icon"></i>
                     <span id="vendor-page-vendor-rating-value">0.0</span>
-                <p id="vendor-page-vendor-no-of-ratings">(0)</p>
-                <p id="vendor-page-vendor-comments">View Comments</p>
+                    <small id="vendor-page-vendor-no-of-ratings">(0)</small>
+                </div>
+                <a id="vendor-page-vendor-comments">View Comments</a>
                 </p>
             </div>
             <!-- Gamification process section  -->
