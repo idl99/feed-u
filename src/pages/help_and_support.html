@@ -31,6 +31,30 @@
             margin-inline-start: 1px;
             margin-inline-end: 1px;
         }
+
+        .ok-button {
+            width: 100%;
+            text-align: center;
+            background: #EB5757;
+            color: white;
+            margin:
+                0px;
+            padding: 0px;
+            border-radius: 0%;
+            text-shadow: none;
+
+        }
+
+        .submit-feedback-button {
+            width: 100%;
+            text-align: center;
+            background: #27AE60;
+            color: white;
+            margin: 0px;
+            padding: 0px;
+            border-radius: 0%;
+            text-shadow: none;
+        }
     </style>
 
     <div role="main" class="ui-content">
@@ -83,22 +107,19 @@
                     <br>
                     <h5>Thankyou for your valuable feedback</h5>
                     <a data-rel="back">
-                        <button id="okBtn"
+                        <button id="okBtn" class="ok-button"
                             style="width: 100%; text-align: center; background: #EB5757; color: white; margin: 0px; padding: 0px; border-radius: 0%; text-shadow: none;">
                             <h4> OK</h4>
                         </button>
                     </a>
                 </div>
-                <a href="#popup" data-rel="popup" data-position-to="window" data-transition="fade">    
-                <button id="addToCartBtn"
-                    style="width: 100%; text-align: center; background: #27AE60; color: white; margin: 0px; padding: 0px; border-radius: 0%; text-shadow: none;">
-                    <h4> Submit Feedback</h4>
-                </button>
+                <a href="#popup" data-rel="popup" data-position-to="window" data-transition="fade">
+                    <button id="submitFBBtn" class="submit-feedback-button"
+                        style="width: 100%; text-align: center; background: #27AE60; color: white; margin: 0px; padding: 0px; border-radius: 0%; text-shadow: none;">
+                        <h4> Submit Feedback</h4>
+                    </button>
                 </a>
             </div>
-           
-
-
             <script>
                 $('#foo').change(function () {
                     if ($(this).val() === 'custom') {
