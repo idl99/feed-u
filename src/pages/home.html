@@ -14,12 +14,6 @@
 
 <body>
 	<div data-role="page" id="home" class="ui-responsive-panel">
-		<!-- 
-			To keep navigation fixed when page is scrolling 
-			https://stackoverflow.com/a/16787000/7803975 -->
-		<div data-role="panel" id="navigation-menu" data-position-fixed="true">
-			<span>Navigation menu goes here</span>
-		</div>
 
 		<div data-role="header" data-position="fixed" id="home-header" data-tap-toggle="false">
 			<a id="navigation-menu-hamburger" href="#navigation-menu"
@@ -527,26 +521,6 @@
 				$('#home-container').append(markup)
 			});
 
-			var screenDimens = {
-				iPad: 1024
-			}
-
-			/**
-			 * This function opens the navigation panel programatically
-			 * if the screen width is above the specified size
-			 * 
-			 * Refer https://forum.jquery.com/topic/responsive-panel-demo-broken-how-to-keep-a-panel-open-on-a-large-window
-			 */
-			var evaluatePanelOpen = function () {
-				var width = $(window).width();
-				if (width >= screenDimens.iPad) {
-					console.log('Opening navigation panel');
-					$("#navigation-menu").panel("open");
-				} else {
-					$("#navigation-menu").panel("close");
-				}
-			}
-
 			$('body').on("pagecontainershow", function (event, ui) {
 				// This event will get fired each time the pagecontainershow event fires,
 				// that means it'll fire even when loading another page (other than home.html)
@@ -555,17 +529,6 @@
 				if (activePage === 'home') {
 					// Retrieve user location from cookie and set to label
 					$("#user-home-delivery-location").text(user.getDetails().location.display);
-
-					// Navigation Menu
-					evaluatePanelOpen();
-					$('body').on("pagecontainerbeforehide", function () {
-						// If we do not close the panel we will have when redirecting back to the same page
-						$("#navigation-menu").panel("close");
-					});
-					$(window).on("resize", function () {
-						// Check again when the window gets resized (maybe due to change in screen orientation)
-						evaluatePanelOpen();
-					})
 				}
 			});
 
