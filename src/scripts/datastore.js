@@ -27,6 +27,28 @@ const data = Object.freeze({
                         "itemNoOfRatings": 47
                     },
                     "itemPrice": 800
+                },
+                {
+                    "itemImageLocation": "../assets/vendor_page_images/crispy_chicken_burger.jpg",
+                    "itemId": "v1i2",
+                    "itemTitle": "Crispy Chicken Burger",
+                    "itemDescription": "Crispy, Chicky, Crispy Chicken Burger. It’s pretty much self-explanatory.",
+                    "itemRatings": {
+                        "itemRatingValue": 4.0,
+                        "itemNoOfRatings": 10
+                    },
+                    "itemPrice": 450
+                },
+                {
+                    "itemImageLocation": "../assets/vendor_page_images/hawaiian_burger.jpg",
+                    "itemId": "v1i3",
+                    "itemTitle": "Hawaiian Burger",
+                    "itemDescription": "Yes! Pineapples go on burgers too. Don’t let others tell you otherwise.",
+                    "itemRatings": {
+                        "itemRatingValue": 4.8,
+                        "itemNoOfRatings": 45
+                    },
+                    "itemPrice": 600
                 }
             ],
         },
