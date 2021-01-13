@@ -496,8 +496,14 @@
 						<div>${vendorName}</div>
 						<div class="poi-catergory-container">`
 				var markupP2 = ``
+				var i = 0;
 				vendorCatergories.forEach((category) => {
-					markupP2 = markupP2 + `<i class="fa fa-circle" id="poi-catergory"></i>${category}`
+					if (i === 0) {
+						markupP2 = markupP2 + `<i class="fa fa-circle" id="poi-catergory"></i>${category}`
+					} else {
+						markupP2 = markupP2 + `<i class="fa fa-circle" id="poi-catergory" style="margin-left: 2em;"></i>${category}`
+					}
+					i = i + 1;
 				});
 				var markupP3 =
 					`</div>
