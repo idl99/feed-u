@@ -11,8 +11,6 @@
 
 	<script src="../bundle.js"></script>
 
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4fxzjh0_9j9aIXCecrSeDxBztKU5Lzao&callback=initMap"
-		defer></script>
 	<style>
 
 	</style>
@@ -21,23 +19,23 @@
 
 <body>
 	<div data-role="page" id="set-location">
-		<div data-role="header" data-position="fixed">
-			<a href="#" data-icon="back" class="ui-btn-left">Back</a>
+		<div data-role="header" data-position="fixed" data-add-back-btn="true">
 			<h1>Header Bar</h1>
 		</div>
 		<div id="set-location-map">
-			<h2> Map Here</h2>
+			<!-- <h2> Map Here</h2> -->
+			<button id="set-location-btn">Set Location from Google Maps</button>
 		</div>
-		<div data-role="tabs" id="tabs">
+		<div data-role="tabs" id="tabs" style="padding: 0 0 0 0;">
 			<div data-role="navbar">
 				<ul>
-					<li><a href="#saved-locations" data-ajax="false">Saved Locations</a></li>
+					<li><a href="#saved-locations" data-ajax="false" class="ui-btn-active">Saved Locations</a></li>
 					<li><a href="#previous-locations" data-ajax="false">Previous Locations</a></li>
 				</ul>
 			</div>
 			<div id="saved-locations">
 				<ul data-role="listview">
-					<li class="set-location-saved-location-list-item ui-icon-check ui-btn-icon-right">Delkanda, Nugegoda
+					<li class="set-location-saved-location-list-item">Delkanda, Nugegoda
 					</li>
 					<li class="set-location-saved-location-list-item">Nedimala, Dehiwala</li>
 					<li class="set-location-saved-location-list-item">Kandalanda, Homagama</li>
@@ -46,8 +44,7 @@
 			</div>
 			<div id="previous-locations">
 				<ul data-role="listview">
-					<li class="set-location-previous-location-list-item ui-icon-check ui-btn-icon-right">Makumbura,
-						Kottawa</li>
+					<li class="set-location-previous-location-list-item">Makumbura, Kottawa</li>
 					<li class="set-location-previous-location-list-item">Piliyandala, Kottawa</li>
 					<li class="set-location-previous-location-list-item">Nawala, Rajagiriya</li>
 					<li class="set-location-previous-location-list-item">Nugegoda, Nugegoda</li>
@@ -64,36 +61,82 @@
 				</fieldset>
 			</form>
 		</div>
-		<div>
-			<!--<button style="background-color:#FF6464; color:white">Save</button>-->
-			<button class="ui-btn">Save</button>
+		<div id="configure-location" data-role="footer" data-position="fixed">
+			<h1>Save</h1>
 		</div>
-	</div>
-	<script>
+		<!-- <script
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4fxzjh0_9j9aIXCecrSeDxBztKU5Lzao&callback=initMap"
+			defer></script> -->
+		<script>
 
-		$("#set-location-map").click(function () {
-			// Handle the map click event.
-			$(":mobile-pagecontainer").pagecontainer("change", "location_search.html",);
-		});
+			const { user } = app;
 
-		$('.set-location-saved-location-list-item').click(function (eventObject) {
-			$('.set-location-saved-location-list-item.ui-icon-check.ui-btn-icon-right').removeClass("ui-icon-check ui-btn-icon-right");
-			$(this).addClass("ui-icon-check ui-btn-icon-right");
-		})
-
-		$('.set-location-previous-location-list-item').click(function (eventObject) {
-			$('.set-location-previous-location-list-item.ui-icon-check.ui-btn-icon-right').removeClass("ui-icon-check ui-btn-icon-right");
-			$(this).addClass("ui-icon-check ui-btn-icon-right");
-		})
-
-		function initMap() {
-			console.log("Init 1");
-			const map = new google.maps.Map(document.getElementById("set-location-map"), {
-				zoom: 15,
-				center: { lat: 51.517582, lng: -0.141525 },
+			$('#configure-location').on('click', function () {
+				var updatedLocation = $('.set-location-saved-location-list-item.ui-icon-check.ui-btn-icon-right').text();
+				console.log(updatedLocation);
+				if (updatedLocation !== '') {
+					const payload = { updatedLocation };
+					const error = user.updateLocation(payload);
+					if (error) {
+						console.log('Failed to update the user location.');
+					} else {
+						console.log('Successfully updated the user location.');
+						$(":mobile-pagecontainer").pagecontainer("change", "home.html",);
+						// history.back();
+					}
+				} else {
+					$(":mobile-pagecontainer").pagecontainer("change", "home.html",);
+					// history.back();
+				}
 			});
-		}
-	</script>
+
+			$("#set-location-btn").click(function () {
+				// Handle the map click event.
+				$(":mobile-pagecontainer").pagecontainer("change", "location_search.html",);
+			});
+
+			// $("#configure-location").click(function () {
+			// 	$(":mobile-pagecontainer").pagecontainer("change", "home.html",);
+			// });
+
+			$("#deliever_asap").prop("checked", true);
+			$("#scheduled_order").prop("checked", false);
+			$("#deliever_asap").click(function (eventObject) {
+				if (!$(this).prop("checked")) {
+					$(this).prop("checked", false).checkboxradio("refresh");
+				} else {
+					$(this).prop("checked", true).checkboxradio("refresh");
+					$('#scheduled_order').prop("checked", false).checkboxradio("refresh");
+				}
+			})
+			$("#scheduled_order").click(function (eventObject) {
+				if (!$(this).prop("checked")) {
+					$(this).prop("checked", false).checkboxradio("refresh");
+				} else {
+					$(this).prop("checked", true).checkboxradio("refresh");
+					$('#deliever_asap').prop("checked", false).checkboxradio("refresh");
+				}
+			})
+
+			$('.set-location-saved-location-list-item').click(function (eventObject) {
+				$('.set-location-saved-location-list-item.ui-icon-check.ui-btn-icon-right').removeClass("ui-icon-check ui-btn-icon-right");
+				$(this).addClass("ui-icon-check ui-btn-icon-right");
+			});
+
+			$('.set-location-previous-location-list-item').click(function (eventObject) {
+				$('.set-location-previous-location-list-item.ui-icon-check.ui-btn-icon-right').removeClass("ui-icon-check ui-btn-icon-right");
+				$(this).addClass("ui-icon-check ui-btn-icon-right");
+			});
+
+					// function initMap() {
+					// 	console.log("Init 1");
+					// 	const map = new google.maps.Map(document.getElementById("set-location-map"), {
+					// 		zoom: 15,
+					// 		center: { lat: 51.517582, lng: -0.141525 },
+					// 	});
+					// }
+		</script>
+	</div>
 </body>
 
 </html>

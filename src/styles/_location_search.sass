@@ -2,7 +2,7 @@ body
 	font-family: "Poppins"
 
 	#location-search-map
-		height: 50vh
+		height: 52vh
 		width: 100%
 
 	.user-location-details-container
@@ -14,8 +14,11 @@ body
 			justify-content: space-between
 
 			#favourite-icon
-				padding-top: 0.75em
-				padding-right: 0.50em
+				display: flex
+				align-items: center
+				margin-top: -0.40em
+				font-size: x-large
+				color: #EB5757
 
 		.selected-location-details-container
 			display: flex
@@ -25,10 +28,7 @@ body
 				flex-direction: column
 				padding-left: 0.5em
 
-				#selected-street
-					margin: 0
-
-				#selected-town
+				#selected-location
 					margin: 0
 
 		.additional-location-details-container
