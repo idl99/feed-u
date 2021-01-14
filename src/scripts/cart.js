@@ -22,7 +22,8 @@ const INITIAL_CART_STATE = Object.freeze({
     vendor: {
     },
     items: [
-    ]
+    ],
+    paymentMethod: 'cash'
 });
 
 
@@ -86,5 +87,10 @@ module.exports = function () {
             console.log('Clearing cart...');
             cookie.set(CART_STORAGE_KEY, INITIAL_CART_STATE);
         },
+        setPaymentMethod: function (paymentMethod) {
+            const currentCart = cookie.getJSON(CART_STORAGE_KEY);
+            currentCart.paymentMethod = paymentMethod;
+            cookie.set(CART_STORAGE_KEY, currentCart);
+        }
     }
 }()
