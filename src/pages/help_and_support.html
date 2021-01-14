@@ -20,7 +20,10 @@
 
 
     <!-- <div role="main" class="ui-content"> -->
-    <div data-role="page" id="Page1" class="ui-responsive-panel">
+    <!-- <div data-role="page" id="Page1" class="ui-responsive-panel"> -->
+
+
+
         <style>
             .help_and_sup_container {
                 display: flex;
@@ -68,14 +71,26 @@
             }
         </style>
 
-        <div data-role="header" data-position="fixed" data-add-back-btn="true">
+        <!-- <div data-role="header" data-position="fixed" data-add-back-btn="true">
             <span class="ui-title"></span>
+        </div> -->
+
+
+
+
+
+
+<div data-role="page" class="feedU-page ui-responsive-panel">
+        <div data-role="header" id="past-orders-header" data-add-back-btn="true" data-position="fixed"
+            data-tap-toggle="false">
+            <img src="../assets/logo.png"></img>
         </div>
+
 
         <div role="main" class="ui-content">
             <!-- First container for customer hotlines  -->
             <div class="help_and_sup_container ">
-                <h1>Help and Support</h1>
+                <h1 style="margin-top: 0.5em; margin-bottom: 1em;">Help and Support</h1>
                 <h3><i class="fa fa-headphones" aria-hidden="true" style="color: red;"></i>
                     Customer Hotlines</h3>
                 <div class="hotlines-container">
@@ -88,8 +103,7 @@
                 </div>
             </div>
             <br>
-            <br>
-            <br>
+           
             <!-- Second container for feedback text fields -->
             <div class="help_and_sup_container ">
                 <h3><i class="fa fa-commenting" aria-hidden="true" style="color: cornflowerblue;"></i>
