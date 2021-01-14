@@ -18,41 +18,123 @@
                 font-family: "Poppins";
             }
 
+            .vendor-page-top-section {
+                position: relative;
+                margin-bottom: 1em;
+            }
+
+            #vendor-page-vendor-image {
+                display: block;
+                width: 100%;
+                height: auto;
+                margin: 0;
+            }
+
+            .vendor-page-vendor-details-container {
+                position: absolute;
+                bottom: 0;
+                padding-top: 0.25em;
+                padding-bottom: 0.25em;
+                font-weight: 100;
+                background: rgba(0, 0, 0, 0.5);
+                /* Black see-through */
+                color: #f1f1f1;
+                width: 100%;
+                opacity: 1;
+                text-align: left;
+            }
+
+            .vendor-page-vendor-details {
+                display: flex;
+                justify-content: space-between;
+                text-shadow: none;
+            }
+
+            .vendor-page-vendor-introduction {
+                margin-left: 1em;
+            }
+
+            #vendor-page-vendor-title {
+                font-size: 18px;
+            }
+
+            #vendor-page-vendor-location {
+                font-size: 12px;
+            }
+
+            #vendor-page-vendor-delivery-time {
+                font-size: 12px;
+            }
+
+            .vendor-page-vendor-favourite {
+                display: flex;
+                align-items: center;
+                margin-right: 1em;
+            }
+
+            #vendor-favourite-icon {
+                font-size: 25px;
+            }
+
+            .vendor-page-vendor-food-categories-section {
+                display: flex;
+                align-items: center;
+                font-size: 12px;
+            }
+
+            #vendor-food-categories-bullet {
+                margin-right: 1em;
+                font-size: 7px;
+            }
+
+            .vendor-page-vendor-ratings-section {
+                display: flex;
+                align-items: center;
+                font-size: 11px;
+            }
+
+            #vendor-rate-star-icon {
+                color: #F2C94C;
+            }
+
+            #vendor-page-vendor-comments {
+                margin-left: 1.25em;
+            }
+
             .container {
                 display: flex;
                 flex-direction: column;
             }
 
-            .item_poi_container {
+            .vendor-poi-item-container {
                 display: flex;
                 flex: 1 1 auto;
                 margin-bottom: 2.5%;
             }
 
-            .poi_text_content {
+            .vendor-poi-item-content {
                 display: flex;
                 width: 100%;
             }
 
-            .poi_details {
+            .vendor-poi-item-details {
                 display: flex;
-                flex-direction:
-                    column;
+                flex-direction: column;
                 margin-left: 5%;
             }
 
-            .poi_title_description {
+            .vendor-poi-item-title-description {
                 width: 92%;
                 text-align: justify;
                 text-justify: inter-word;
             }
 
-            #poi_title {
+            #vendor-poi-item-title {
                 margin: 0;
                 font-size: 14px;
             }
 
-            #poi_description {
+            #vendor-poi-item-description {
                 margin-top: 4%;
                 margin-bottom: 4%;
                 margin-left: 0;
@@ -60,8 +142,9 @@
                 font-size: 11px;
             }
 
-            .poi_ratings_bar {
+            .vendor-poi-item-rating-bar {
                 display: flex;
+                justify-content: center;
                 align-items: center;
                 height: 20px;
                 width: 70px;
@@ -70,22 +153,28 @@
                 border-radius: 25px;
             }
 
+            #vendor-poi-item-rate-star-icon {
+                color: #F2C94C;
+            }
+
+            #vendor-poi-item-no-of-rated-customers {
+                margin-top: 0.25em;
+                margin-left: 0.25em;
+                font-size: 8px;
+            }
+
             #poi_ratings_image {
                 margin-top: 2%;
             }
 
-            #poi_ratings_text {
-                margin-left: 3%;
-            }
-
-            .poi_price_tag {
+            .vendor-poi-item-price-tag {
                 width: 60%;
             }
 
-            #poi_price {
+            #vendor-poi-item-price {
+                margin: 0;
                 text-align: right;
                 font-size: 14px;
-                margin: 0;
             }
 
             a:link {
@@ -111,66 +200,40 @@
                 color: black;
             }
         </style>
-        <div data-role="header" data-position="fixed" data-add-back-btn="true">
+        <div data-role="header" data-position="fixed" data-add-back-btn="true" data-tap-toggle="false">
             <!-- <a href="#" data-icon="back" class="ui-btn-left">Back</a> -->
             <h1>Header Bar</h1>
         </div>
         <div role="main" class="ui-content">
-            <div style="position: relative; margin-bottom: 1em;">
-                <img id="vendor-page-vendor-image" style="display:block; width: 100%; height: auto; margin: 0;"
-                    src="../assets/vendor_page_images/burgers_ahouy.jpg">
-                <div style="
-                    position: absolute;
-                    bottom: 0;
-                    padding-top: 0.25em;
-                    padding-bottom: 0.25em;
-                    font-weight: 100;
-                    background: rgba(0, 0, 0, 0.5); /* Black see-through */
-                    color: #f1f1f1;
-                    width: 100%;
-                    opacity:1;
-                    text-align: left;">
-                    <div style="display: flex; justify-content: space-between; text-shadow: none;">
-                        <div style="margin-left: 1em;">
-                            <span id="vendor-page-vendor-title" style="font-size: 18px;">Burgers Ahouy!</span><br>
-                            <span id="vendor-page-vendor-location" style="font-size: 12px;">COLOMBO 3 </span>
-                            <span id="vendor-page-vendor-delivery-time" style="font-size: 12px;">(25 - 30 MIN)</span>
+            <div class="vendor-page-top-section">
+                <img id="vendor-page-vendor-image" src="../assets/vendor_page_images/burgers_ahouy.jpg">
+                <div class="vendor-page-vendor-details-container">
+                    <div class="vendor-page-vendor-details">
+                        <div class="vendor-page-vendor-introduction">
+                            <span id="vendor-page-vendor-title">Burgers Ahouy!</span><br>
+                            <span id="vendor-page-vendor-location">COLOMBO 3 </span>
+                            <span id="vendor-page-vendor-delivery-time">(25 - 30 MIN)</span>
                         </div>
-                        <div style="margin-right: 1em;">
-                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M17.5552 9.72095C19.3297 7.80275 22.1053 7.56537 23.9298 9.19405L23.93 9.19419C26.1205 11.1535 26.2444 14.7096 24.2702 16.844L24.27 16.8442L16.2078 25.5653C16.2078 25.5654 16.2077 25.5654 16.2076 25.5655C16.1359 25.643 16.06 25.6666 15.9982 25.6666C15.9364 25.6666 15.8605 25.643 15.7888 25.5655C15.7887 25.5654 15.7887 25.5654 15.7886 25.5653L7.72684 16.8447C5.75589 14.7101 5.87998 11.1532 8.07089 9.19393C9.89576 7.56503 12.675 7.8034 14.4447 9.72022L14.4459 9.72143L15.2667 10.6075L16.0003 11.3995L16.7339 10.6075L17.5547 9.72143L17.5552 9.72095Z"
-                                    stroke="white" stroke-width="2" />
-                            </svg>
+                        <div class="vendor-page-vendor-favourite">
+                            <i id="vendor-favourite-icon" class="fa fa-heart-o"></i>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div style="font-size: 12px;">
-                <svg width="5" height="5" viewBox="0 0 5 5" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle r="2.5" transform="matrix(1 0 0 -1 2.5 2.5)" fill="#C4C4C4" />
-                </svg>
+            <div class="vendor-page-vendor-food-categories-section">
+                <i class="fa fa-circle" id="vendor-food-categories-bullet"></i>
                 Burgers
-                <svg style="margin-left: 2%;" width="5" height="5" viewBox="0 0 5 5" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <circle r="2.5" transform="matrix(1 0 0 -1 2.5 2.5)" fill="#C4C4C4" />
-                </svg>
+                <i class="fa fa-circle" id="vendor-food-categories-bullet" style="margin-left: 1em;"></i>
                 American
             </div>
-            <div style="display: flex;
-			align-items: center;
-			font-size: 11px;">
-                <p><svg id="poi_ratings_image" width="12" height="11" viewBox="0 0 12 11" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
-                            fill="#F2C94C" />
-                    </svg>
+
+            <div class="vendor-page-vendor-ratings-section">
+                <p>
+                    <i class='fa fa-star fa-fw' id="vendor-rate-star-icon"></i>
                     <span id="vendor-page-vendor-rating-value">0.0</span>
                 <p id="vendor-page-vendor-no-of-ratings">(0)</p>
-                <p style="margin-left: 1.25em;">View Comments</p>
+                <p id="vendor-page-vendor-comments">View Comments</p>
                 </p>
             </div>
             <!-- Gamification process section  -->
@@ -222,87 +285,6 @@
             </a>
             <br>
             <div id="vendor-page-container" class="container">
-                <!-- <div class="poi_container">
-                    <div>
-                        <img src="../assets/vendor_page_images/tom_yum_soup.jpg">
-                    </div>
-                    <div class="poi_text_content">
-                        <div class="poi_details">
-                            <div class="poi_title_description">
-                                <p id="poi_title">Tom Yum Soup</p>
-                                <p id="poi_description">Picked from the fresh vegetables and fish from the with special
-                                    Chicken Broth.</p>
-                            </div>
-                            <div class="poi_ratings_bar">
-                                <p id="poi_ratings_text"><svg id="poi_ratings_image" width="12" height="11"
-                                        viewBox="0 0 12 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
-                                            fill="#F2C94C" />
-                                    </svg>&nbsp;&nbsp;4.6&nbsp;
-                                <p>(47)</p>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="poi_price_tag">
-                            <p id="poi_price">LKR 800</p>
-                        </div>
-                    </div>
-                </div> -->
-                <!-- <div class="poi_container">
-                    <div>
-                        <img src="../assets/vendor_page_images/crispy_chicken_burger.jpg">
-                    </div>
-                    <div class="poi_text_content">
-                        <div class="poi_details">
-                            <div class="poi_title_description">
-                                <p id="poi_title">Crispy Chicken Burger</p>
-                                <p id="poi_description">Crispy, Chicky, Crispy Chicken Burger. It’s pretty much
-                                    self-explanatory.</p>
-                            </div>
-                            <div class="poi_ratings_bar">
-                                <p id="poi_ratings_text"><svg id="poi_ratings_image" width="12" height="11"
-                                        viewBox="0 0 12 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
-                                            fill="#F2C94C" />
-                                    </svg>&nbsp;&nbsp;4.0&nbsp;
-                                <p>(10)</p>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="poi_price_tag">
-                            <p id="poi_price">LKR 450</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="poi_container">
-                    <div>
-                        <img src="../assets/vendor_page_images/hawaiian_burger.jpg">
-                    </div>
-                    <div class="poi_text_content">
-                        <div class="poi_details">
-                            <div class="poi_title_description">
-                                <p id="poi_title">Hawaiian Burger</p>
-                                <p id="poi_description">Yes! Pineapples go on burgers too. Don’t let others tell you
-                                    otherwise.</p>
-                            </div>
-                            <div class="poi_ratings_bar">
-                                <p id="poi_ratings_text"><svg id="poi_ratings_image" width="12" height="11"
-                                        viewBox="0 0 12 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
-                                            fill="#F2C94C" />
-                                    </svg>&nbsp;&nbsp;4.8&nbsp;
-                                <p>(45)</p>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="poi_price_tag">
-                            <p id="poi_price">LKR 600</p>
-                        </div>
-                    </div>
-                </div> -->
             </div>
         </div>
         <!--
@@ -316,44 +298,58 @@
             </div>
         </div> -->
         <script>
-            const { utils, datastore } = app;
+            const { utils, datastore, user } = app;
+            const FAVORITE_ICON_STATES = {
+                FILLED: 'fa-heart',
+                UNFILLED: 'fa-heart-o',
+                FILLED_COLOR: '#EB5757',
+                UNFILLED_COLOR: '#F1F1F1',
+            }
+
             var vendor = {};
 
-            function setVendorDetails({ vendorName, vendorImageLocation, location, deliveryTime, vendorRatings, items }) {
+            function setVendorDetails(vendor) {
+                const { vendorName, vendorImageLocation, location, deliveryTime, vendorRatings, items } = vendor;
 
                 $('#vendor-page-vendor-title').text(vendorName);
                 $('#vendor-page-vendor-location').text(location);
                 $('#vendor-page-vendor-delivery-time').text(`(${deliveryTime})`);
                 $('#vendor-page-vendor-rating-value').text(vendorRatings.vendorRatingValue);
-                $('#vendor-page-vendor-no-of-ratings').text(vendorRatings.vendorNoOfRatings);
+                $('#vendor-page-vendor-no-of-ratings').text(`(${vendorRatings.vendorNoOfRatings})`);
                 $('#vendor-page-vendor-image').attr('src', vendorImageLocation);
+
+                const itemIsFavorite = user.isItemFavorite(user.FAVORITE_TYPES.VENDOR, vendor);
+                if (itemIsFavorite) {
+                    $('#vendor-favourite-icon').addClass(FAVORITE_ICON_STATES.FILLED)
+                        .removeClass(FAVORITE_ICON_STATES.UNFILLED).css('color', FAVORITE_ICON_STATES.FILLED_COLOR);
+                } else {
+                    $('#vendor-favourite-icon').addClass(FAVORITE_ICON_STATES.UNFILLED)
+                        .removeClass(FAVORITE_ICON_STATES.FILLED).css('color', FAVORITE_ICON_STATES.UNFILLED_COLOR);
+                }
 
                 // render items in order summary
                 const itemCards = items.map(({ itemId, itemImageLocation, itemTitle, itemDescription, itemRatings, itemPrice }) => {
                     var markup =
-                        `<div class="item_poi_container" item-id="${itemId}">
+                        `<div class="vendor-poi-item-container" item-id="${itemId}">
                             <div>
                                 <img src=${itemImageLocation}>
                             </div>
-                            <div class="poi_text_content">
-                                <div class="poi_details">
-                                    <div class="poi_title_description">
-                                        <p id="poi_title">${itemTitle}</p>
-                                        <p id="poi_description">${itemDescription}</p>
+                            <div class="vendor-poi-item-content">
+                                <div class="vendor-poi-item-details">
+                                    <div class="vendor-poi-item-title-description">
+                                        <p id="vendor-poi-item-title">${itemTitle}</p>
+                                        <p id="vendor-poi-item-description">${itemDescription}</p>
                                     </div>
-                                    <div class="poi_ratings_bar">
-                                        <p id="poi_ratings_text"><svg id="poi_ratings_image" width="12" height="11"
-                                                viewBox="0 0 12 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
-                                                    fill="#F2C94C" />
-                                            </svg>&nbsp;&nbsp;${itemRatings.itemRatingValue}&nbsp;
-                                        <p>(${itemRatings.itemNoOfRatings})</p>
-                                        </p>
+                                    <div class="vendor-poi-item-rating-bar">
+                                        <span>
+                                            <i class='fa fa-star fa-fw' id="vendor-poi-item-rate-star-icon"></i> 
+                                            ${(itemRatings.itemRatingValue).toFixed(1)} 
+								        </span>
+								        <small id="vendor-poi-item-no-of-rated-customers">(${itemRatings.itemNoOfRatings})</small>
                                     </div>
                                 </div>
-                                <div class="poi_price_tag">
-                                    <p id="poi_price">LKR ${itemPrice}</p>
+                                <div class="vendor-poi-item-price-tag">
+                                    <p id="vendor-poi-item-price">LKR ${itemPrice}</p>
                                 </div>
                             </div>
                         </div>`;
@@ -369,7 +365,7 @@
 
                 // IMPORTANT: NOTE WHEN YOU REPLACE HTML THE LISTENERS ALSO BECOME OBSOLETE
                 // THAT'S WHY THE LOGIC TO BIND TO THE CLICK LISTENER HAS BEEN ADDED HERE
-                $(".item_poi_container").click(function () {
+                $(".vendor-poi-item-container").click(function () {
                     // Handle Item POI click event
                     var itemId = $(this).attr("item-id"); // which vendor card was clicked
                     $(":mobile-pagecontainer").pagecontainer("change", "item_detail.html", {
@@ -380,6 +376,21 @@
                     });
                 });
             }
+
+            $('#vendor-favourite-icon').on('click', function () {
+
+                const wasUnfilled = $('#vendor-favourite-icon').hasClass('fa-heart-o');
+                if (wasUnfilled) {
+                    $(this).css('color', FAVORITE_ICON_STATES.FILLED_COLOR);
+                    user.addFavorite(user.FAVORITE_TYPES.VENDOR, vendor);
+                } else {
+                    $(this).css('color', FAVORITE_ICON_STATES.UNFILLED_COLOR);
+                    user.removeFavorite(user.FAVORITE_TYPES.VENDOR, vendor);
+                }
+
+                $(this).toggleClass(FAVORITE_ICON_STATES.FILLED);
+                $(this).toggleClass(FAVORITE_ICON_STATES.UNFILLED);
+            });
 
             $('body').on('pagebeforeshow', "#vendor-page", function (event, { toPage }) {
                 const url = toPage[0].baseURI;

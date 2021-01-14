@@ -10,59 +10,61 @@
 </head>
 
 <body>
-    <style>
-        .container {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            padding-left: 2em;
-            padding-right: 2em;
-            padding-bottom: 2em;
-        }
+    <!-- <div role="main" class="ui-content"> -->
+    <div data-role="page" id="Page1" class="ui-responsive-panel">
+        <style>
+            /* .container {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                padding-left: 2em;
+                padding-right: 2em;
+                padding-bottom: 2em;
+            }
 
-        .hotlines-container {
-            display: block;
-            justify-content: center;
-            height: 55px;
-            width: 335px;
-            margin-bottom: 5%;
-            margin-block-start: 1px;
-            margin-block-end: 1px;
-            margin-inline-start: 1px;
-            margin-inline-end: 1px;
-        }
+            .hotlines-container {
+                display: block;
+                justify-content: center;
+                height: 55px;
+                width: 335px;
+                margin-bottom: 5%;
+                margin-block-start: 1px;
+                margin-block-end: 1px;
+                margin-inline-start: 1px;
+                margin-inline-end: 1px;
+            } */
 
-        .ok-button {
-            width: 100%;
-            text-align: center;
-            background: #EB5757;
-            color: white;
-            margin:
-                0px;
-            padding: 0px;
-            border-radius: 0%;
-            text-shadow: none;
+            .ok-button {
+                width: 100%;
+                text-align: center;
+                background: #EB5757;
+                color: white;
+                margin:
+                    0px;
+                padding: 0px;
+                border-radius: 0%;
+                text-shadow: none;
 
-        }
+            }
 
-        .submit-feedback-button {
-            width: 100%;
-            text-align: center;
-            background: #27AE60;
-            color: white;
-            margin: 0px;
-            padding: 0px;
-            border-radius: 0%;
-            text-shadow: none;
-        }
-    </style>
+            .submit-feedback-button {
+                width: 100%;
+                text-align: center;
+                background: #27AE60;
+                color: white;
+                margin: 0px;
+                padding: 0px;
+                border-radius: 0%;
+                text-shadow: none;
+            }
+        </style>
 
-    <div role="main" class="ui-content">
-        <div data-role="page" id="Page1">
-            <div data-role="header" data-position="fixed">
-                <a href="#" data-icon="back" class="ui-btn-left">Back</a>
-                <h1>Header Bar</h1>
-            </div>
+        <div data-role="header" data-position="fixed">
+            <a href="#" data-icon="back" class="ui-btn-left">Back</a>
+            <h1>Header Bar</h1>
+        </div>
+
+        <div role="main" class="ui-content">
             <!-- First container for customer hotlines  -->
             <div class="container">
                 <h1>Help and Support</h1>
@@ -120,13 +122,18 @@
                     </button>
                 </a>
             </div>
-            <script>
-                $('#foo').change(function () {
-                    if ($(this).val() === 'custom') {
-                        $(this).replaceWith('<input name="foo" type="text" />');
-                    }
-                });
-            </script>
         </div>
+
+        <script>
+            $('#foo').change(function () {
+                if ($(this).val() === 'custom') {
+                    $(this).replaceWith('<input name="foo" type="text" />');
+                }
+            });
+        </script>
     </div>
+
+    <!-- </div> -->
 </body>
+
+</html>
