@@ -1,0 +1,65 @@
+<!-- Author : Vinula Uthsara Buthgamumudalige | 2016088 | W1673611 -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Help</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../css/base.css" />
+    <script src="../bundle.js"></script>
+</head>
+
+<body>
+
+    <!-- delivery success -->
+    <style>
+        .success_popup_items{
+                display: flex;
+                justify-content: center;
+            }
+    </style>
+                <!-- delivery success popup -->
+                <div data-role="popup" id="popup" data-overlay-theme="b" data-theme="b" data-corners="false"
+                    style="padding: 1em;">
+                    <h2 style="color:#27AE60">DELIVERY COMPLETED</h2>
+                    <br>
+                    <div class="success_popup_items">
+                    <img id="deliver-success" src="../assets/vendor_page_images/delivery_completed.jpg" alt="">
+                    </div>
+                    <h2 class="success_popup_items">ENJOY YOUR MEAL<i class="fa fa-heart" aria-hidden="true" style="color: #EB5757; margin-left: 6px;"></i></h2>
+                    <h5 class="success_popup_items">And here's a little reward for ordering</h5>
+                    <h5 class="success_popup_items">with us</h5>
+                    <h2 class="success_popup_items">50 Points <i class="fa fa-database" aria-hidden="true" style="color: #F2C94C; margin-left: 10px;"></i></h2>
+                    <h5 class="success_popup_items">credited to your account</h5>
+                    <br>
+                    <!-- redirect to leaderboard -->
+                    <a data-rel="back">
+                        <button id="checkLBBtn" class="cLB-button"
+                            style="width: 100%; text-align: center; border-radius: 100px; border-width: 2px; background: white; color: #EB5757; border-color: #EB5757 ; margin-bottom: 10px; margin-top: -5px; padding: 0px;  text-shadow: none;">
+                            <h4> Check Leaderboard</h4>
+                        </button>
+                    <!-- redirect to support -->
+                        <button id="getSupBtn" class="get-Sup-button"
+                            style="width: 100%; text-align: center; border-radius: 100px; border-width: 2px; background: white; color: #EB5757; border-color: #EB5757 ; margin: 0px; padding: 0px;  text-shadow: none;">
+                            <h4> Get support about order</h4>
+                        </button>
+                    </a>
+                </div>
+                <!--end of delivery sucess pop up  -->
+
+                <!-- BUTTONS BUTTONS BUTTON BUTTONS BUTTONS BUTTONS BUTTONS BUTTONS -->
+
+                <a href="#popup" data-rel="popup" data-position-to="window" data-transition="fade">
+                    <button id="submitFBBtn" class="submit-feedback-button"
+                        style="width: 100%; text-align: center; background: #27AE60; color: white; border-width: 3px; border-radius: 100px; margin: 0px; padding: 0px; text-shadow: none;">
+                        <h4> Delivery Success Popup</h4>
+                    </button>
+                </a>
+
+                <style>
+                    
+                </style>
+
+
+
+</body>
