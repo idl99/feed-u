@@ -66,7 +66,7 @@ $(document).on("ready", function () {
         $('body').append(markup);
 
         // Manually initialize the panel
-        $("body>[data-role='panel']").panel();
+        $("body>[data-role='panel']").enhanceWithin().panel();
         evaluatePanelOpen();
 
         $('body').on("pagecontainerchange", function () {
