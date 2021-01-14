@@ -5381,8 +5381,10 @@ body .all-poi-container .poi-details {
   margin-left: 5%;
 }
 body .all-poi-container .poi-catergory-container {
+  display: flex;
+  align-items: center;
+  margin-top: 0.3em;
   font-size: 12px;
-  margin-top: 2%;
 }
 body .all-poi-container #poi-catergory {
   margin-right: 0.75em;
@@ -5409,6 +5411,7 @@ body .all-poi-container #poi-rate-star-icon {
   color: #F2C94C;
 }
 body .all-poi-container #poi-no-of-rated-customers {
+  margin-top: 0.25em;
   margin-left: 0.25em;
   font-size: 8px;
 }
@@ -5422,7 +5425,6 @@ body {
   font-family: "Poppins";
 }
 body #vendor-stories {
-  background-color: #303030;
   text-shadow: none;
 }
 body #vendor-stories #main-container {
@@ -5433,6 +5435,7 @@ body #vendor-stories #main-container {
   left: 0;
   right: 0;
   bottom: 0;
+  background-color: #303030;
 }
 body #vendor-stories #main-container .vendor-details-container {
   display: flex;
@@ -5455,6 +5458,7 @@ body #vendor-stories #main-container .vendor-details-container .vendor-details .
 body #vendor-stories #main-container .vendor-details-container .vendor-details .story-header #vendor-text {
   display: flex;
   flex-direction: column;
+  text-shadow: none;
 }
 body #vendor-stories #main-container .story-playback {
   margin-top: 2em;
@@ -5577,13 +5581,6 @@ body #saved-locations #list-item {
   margin: 0 0 0 0;
 }
 
-#checkout {
-  display: flex;
-  min-height: inherit;
-}
-#checkout .ui-content {
-  flex-grow: 1;
-}
 #checkout #checkout-restaurant-details-container {
   display: grid;
   row-gap: 2vh;
@@ -5613,7 +5610,7 @@ body #saved-locations #list-item {
   text-align: right;
 }
 
-div[data-role=page].feedU-page * {
+div[data-role=page].feedU-page * :not(.fa) {
   font-family: "Poppins";
   text-shadow: none;
 }
@@ -5625,12 +5622,12 @@ div[data-role=page].feedU-page .ui-header {
 }
 div[data-role=page].feedU-page .ui-footer .full-width-btn {
   background-color: #EB5757;
-  border: none;
-  margin: 0;
   color: #FFFFFF;
-  width: inherit;
   text-transform: uppercase;
-  padding: 1em 0em;
+  min-width: 100%;
+  margin: 0;
+  border: none;
+  padding: 15px;
 }
 
 /*# sourceMappingURL=base.css.map */

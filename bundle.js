@@ -680,27 +680,48 @@ $(document).on("pagecontainerbeforehide", function (event, ui) {
     window.Stripe = undefined;
 })
 
+const screenDimens = {
+    iPad: 1024
+}
+
+/**
+ * This function opens the navigation panel programatically
+ * if the screen width is above the specified size
+ * 
+ * Refer https://forum.jquery.com/topic/responsive-panel-demo-broken-how-to-keep-a-panel-open-on-a-large-window
+ */
+const evaluatePanelOpen = function () {
+    var width = $(window).width();
+    if (width >= screenDimens.iPad) {
+        console.log('Opening navigation panel');
+        $("#navigation-menu").panel("open");
+    } else {
+        $("#navigation-menu").panel("close");
+    }
+}
+
 /**
  * https://github.com/jquery/demos.jquerymobile.com/blob/master/1.4.5/panel-external/index.html
  */
-$(document).one("ready", function () {
+$(document).on("ready", function () {
+    $.get("navigation_side_bar.html", function (markup) {
+        // Add the panel to the body
+        $('body').append(markup);
 
-    var panelMarkup = `
-        <div data-role="panel" id="leftpanel1" data-position="left" data-display="reveal" data-theme="a">
+        // Manually initialize the panel
+        $("body>[data-role='panel']").enhanceWithin().panel();
+        evaluatePanelOpen();
 
-        <h3>Left Panel: Reveal</h3>
-        <p>This panel is positioned on the left with the reveal display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
-        <p>To close, click off the panel, swipe left or right, hit the Esc key, or use the button below:</p>
-        <a href="#demo-links" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left ui-btn-inline">Close panel</a>
+        $('body').on("pagecontainerchange", function () {
+            // Check again when we navigate to another page
+            evaluatePanelOpen();
+        })
 
-        </div>
-    `
-
-    // Add the panel to the body
-    $('body').append(panelMarkup);
-
-    // Manually initialize the panel
-    $("body>[data-role='panel']").panel();
+        $(window).on("resize", function () {
+            // Check again when the window gets resized (maybe due to change in screen orientation)
+            evaluatePanelOpen();
+        })
+    })
 })
 
 },{"./cart":3,"./datastore":4,"./payment":6,"./user":7,"./utils":8,"@stripe/stripe-js":1,"jquery":10,"jquery-mobile":9}],6:[function(require,module,exports){
@@ -802,6 +823,10 @@ const DEFAULT_USER = {
     location: {
         display: "Nugegoda, Delkanda",
     },
+    favorites: {
+        items: [],
+        vendors: [],
+    }
 }
 
 const orders = {
@@ -861,8 +886,14 @@ const orders = {
 
 module.exports = function () {
     return {
+        FAVORITE_TYPES: {
+            ITEM: 'item',
+            VENDOR: 'vendor',
+        },
         init: function () {
-            cookie.set(USER, DEFAULT_USER)
+            if (!cookie.get(USER)) { // Set cookie only if not already set
+                cookie.set(USER, DEFAULT_USER)
+            }
         },
         updateLocation: function ({ updatedLocation }) {
             const user = cookie.getJSON(USER);
@@ -882,6 +913,77 @@ module.exports = function () {
         getSpecificOrder: function (pastOrderId) {
             const order = orders.pastOrders.find(order => order.pastOrderId == pastOrderId);
             return order;
+        },
+        getFavorites: function () {
+            return cookie.getJSON(USER).favorites;
+        },
+        isItemFavorite: function (type, favoriteItem) {
+            const loggedInUser = cookie.getJSON(USER);
+            const currentFavorites = loggedInUser.favorites;
+
+            switch (type) {
+                case this.FAVORITE_TYPES.VENDOR:
+                    return currentFavorites['vendors']
+                        .findIndex(vendor => vendor.vendorId === favoriteItem.vendorId) > -1;
+
+                case this.FAVORITE_TYPES.ITEM:
+                    return currentFavorites['items']
+                        .findIndex(i => i.itemId === favoriteItem.itemId) > -1;
+            }
+
+        },
+        addFavorite: function (type, favoriteItem) {
+            console.log('Adding favorite ...');
+
+            // Retrieve details from cookie
+            const loggedInUser = cookie.getJSON(USER);
+            const currentFavorites = loggedInUser.favorites;
+
+            // Update favorites
+            switch (type) {
+                case this.FAVORITE_TYPES.VENDOR:
+                    const isVendorAlreadyMarkedFavorite = currentFavorites['vendors'].find(i => i.vendorId === favoriteItem.vendorId)
+                    if (!isVendorAlreadyMarkedFavorite) {
+                        currentFavorites['vendors'].push(favoriteItem);
+                    }
+                    break;
+                case this.FAVORITE_TYPES.ITEM:
+                    const isItemAlreadyMarkedFavorite = currentFavorites['items'].find(i => i.itemId === favoriteItem.itemId)
+                    if (!isItemAlreadyMarkedFavorite) {
+                        currentFavorites['items'].push(favoriteItem);
+                    }
+                    break;
+            }
+
+            const newFavorites = currentFavorites;
+            const updatedUser = { ...loggedInUser, favorites: newFavorites };
+
+            // Set the cookie
+            console.log('Updated User ...', updatedUser);
+            cookie.set(USER, updatedUser);
+        },
+        removeFavorite: function (type, favoriteItem) {
+            console.log('Removing favorite ...');
+
+            // Retrieve details from cookie
+            const loggedInUser = cookie.getJSON(USER);
+            const currentFavorites = loggedInUser.favorites;
+
+            // Update favorites
+            var newFavorites = {};
+            if (type === this.FAVORITE_TYPES.VENDOR) {
+                currentFavorites['vendors'] = currentFavorites['vendors'].filter(i => i.vendorId != favoriteItem.vendorId);
+                newFavorites = { ...currentFavorites };
+            } else if (type === this.FAVORITE_TYPES.ITEM) {
+                currentFavorites['items'] = currentFavorites['items'].filter(i => i.itemId != favoriteItem.itemId);
+                newFavorites = { ...currentFavorites };
+            }
+
+            const updatedUser = { ...loggedInUser, favorites: newFavorites };
+
+            // Set the cookie
+            console.log('Updated User ...', updatedUser);
+            cookie.set(USER, updatedUser);
         },
         updateSpecificOrder: function (pastOrderId, updatedVendorRating, updatedVendorComment,
             updatedItemNames, updateItemRatings, updatedItemComments) {

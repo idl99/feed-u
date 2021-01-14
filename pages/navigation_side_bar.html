@@ -1,9 +1,23 @@
-<div data-role="panel" id="navigation-menu" data-position-fixed="true">
-    <span>Navigation menu goes here</span>
-</div>
-
-<div data-role="header" data-position="fixed" id="home-header" data-tap-toggle="false">
-    <a id="navigation-menu-hamburger" href="#navigation-menu"
-        class="ui-btn ui-shadow ui-corner-all ui-icon-bars ui-btn-icon-notext ui-btn-inline">Delete</a>
-    <h4>LOGO</h4>
+<div data-role="panel" id="navigation-menu" data-display="reveal" data-position-fixed="true" data-theme="a"
+    data-swipe-close="false" data-inset="true">
+    <style>
+        #navigation-menu i.fa {
+            margin-right: 10px;
+        }
+    </style>
+    <ul data-role="listview" data-inset="true">
+        <li><a href="#"><i class="fa fa-user-circle ui-li-icon ui-corner-none" aria-hidden="true"></i>Edit Profile</a>
+        </li>
+        <li><a href="past_orders.html"><i class="fa fa-file-text ui-li-icon ui-corner-none" aria-hidden="true"></i>Past
+                Orders</a></li>
+        <li><a href="payment_methods.html"><i class="fa fa-credit-card-alt ui-li-icon ui-corner-none"
+                    aria-hidden="true"></i>Payment Methods</a></li>
+        <li><a href="leaderboard.html"><i class="fa fa-gift ui-li-icon ui-corner-none"
+                    aria-hidden="true"></i>Leaderboard</a></li>
+        <li><a href="#"><i class="fa fa-star ui-li-icon ui-corner-none" aria-hidden="true"></i>Favorites List</a></li>
+        <li><a href="help_and_support.html"><i class="fa fa-handshake-o ui-li-icon ui-corner-none"
+                    aria-hidden="true"></i>Help and Support</a></li>
+        <li><a href="#"><i class="fa fa-question-circle ui-li-icon ui-corner-none" aria-hidden="true"></i>About Us</a>
+        </li>
+    </ul>
 </div>
