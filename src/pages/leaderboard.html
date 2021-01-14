@@ -14,7 +14,12 @@
 </head>
 
 <body>
-    <div data-role="page" id="Page1" class="ui-responsive-panel">
+    <!-- <div data-role="page" id="Page1" class="ui-responsive-panel"> -->
+    <div data-role="page" class="feedU-page ui-responsive-panel">
+        <div data-role="header" id="past-orders-header" data-add-back-btn="true" data-position="fixed"
+            data-tap-toggle="false">
+            <img src="../assets/logo.png"></img>
+        </div>
         <style>
             .leaderboard-items {
                 display: grid;
@@ -61,12 +66,12 @@
                 border-radius: 100px;
             }
         </style>
-        <div data-role="header" data-position="fixed" data-add-back-btn="true">
+        <!-- <div data-role="header" data-position="fixed" data-add-back-btn="true">
             <h1>Header Bar</h1>
-        </div>
+        </div> -->
+        
         <div role="main" class="ui-content">
-            <h1>Leaderboard</h1>
-            <br>
+            <h1 style="margin-top: 2em; margin-bottom: 1em;">Leaderboard</h1>
             <!-- Grid titles -->
             <div class="leaderboard-items" id="list-users">
                 <div class="leaderboard-title">Pos.</div>
