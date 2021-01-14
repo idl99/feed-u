@@ -13,9 +13,9 @@
 </head>
 
 <body>
-	<div data-role="page" id="location_search">
+	<div data-role="page" id="location_search" class="feedU-page ui-responsive-panel">
 		<div data-role="header" data-position="fixed" data-add-back-btn="true">
-			<h1>Header Bar</h1>
+			<img src="../assets/logo.png"></img>
 		</div>
 		<div class="ui-content" style="padding-top: 0%;">
 			<form class="ui-filterable">
@@ -65,13 +65,13 @@
 				var updatedLocation = $('#selected-location').text();
 				console.log("Updated location details:", updatedLocation);
 				const payload = { updatedLocation };
-                const error = user.updateLocation(payload);
-                if (error) {
-                    console.log('Failed to update the user location.');
-                } else {
-                    console.log('Successfully updated the user location.');
-                    history.back();
-                }
+				const error = user.updateLocation(payload);
+				if (error) {
+					console.log('Failed to update the user location.');
+				} else {
+					console.log('Successfully updated the user location.');
+					history.back();
+				}
 			});
 
 			$('#favourite-icon').on('click', function () {

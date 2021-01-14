@@ -5482,7 +5482,7 @@ body {
   font-family: "Poppins";
 }
 body #location-search-map {
-  height: 52vh;
+  height: 50vh;
   width: 100%;
 }
 body .user-location-details-container {
@@ -5526,22 +5526,52 @@ body .user-location-details-container .additional-location-details-container #la
 body #set-location-button-text {
   text-align: center;
 }
+body #update-location {
+  background-color: #EB5757;
+  color: #F1F1F1;
+}
 
 body {
   font-family: "Poppins";
 }
-body #set-location-map {
-  height: 33vh;
-  width: 100%;
-  margin: 0;
-  padding: 0;
+body #set-location-btn-container {
+  display: flex;
+  height: 20vh;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+body #set-location-btn-container #set-location-btn {
+  background-color: #EB5757;
+  color: #F1F1F1;
+  font-size: 17px;
+  overflow-wrap: break-word;
+}
+body #horizontal-line {
+  margin-top: 1em;
+  color: #EB5757;
+}
+body #tab-item {
+  font-size: 14px;
 }
 body #saved-locations {
   display: none;
 }
-body #saved-locations #list-item {
-  text-align: center;
-  font-size: 16px;
+body #saved-locations .set-location-saved-location-list-item {
+  font-size: 14.5px;
+}
+body #previous-locations {
+  display: none;
+}
+body #previous-locations .set-location-previous-location-list-item {
+  font-size: 14.5px;
+}
+body #set-location-fa-icons {
+  margin-right: 1em;
+  color: #EB5757;
+}
+body #configure-location-btn {
+  background-color: #EB5757;
+  color: #F1F1F1;
 }
 
 .vendor-rating-page-container {

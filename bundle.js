@@ -684,6 +684,8 @@ const screenDimens = {
     iPad: 1024
 }
 
+const navigationPanelBlockedScreens = ["vendor-stories", "vendor-rating", "item-rating"];
+
 /**
  * This function opens the navigation panel programatically
  * if the screen width is above the specified size
@@ -712,9 +714,12 @@ $(document).on("ready", function () {
         $("body>[data-role='panel']").enhanceWithin().panel();
         evaluatePanelOpen();
 
-        $('body').on("pagecontainerchange", function () {
-            // Check again when we navigate to another page
-            evaluatePanelOpen();
+        $('body').on("pagecontainerchange", function (event, ui) {
+            console.log("Navigating to page:", ui.toPage[0].id);
+            if (!navigationPanelBlockedScreens.includes(ui.toPage[0].id)) {
+                // Check again when we navigate to another page
+                evaluatePanelOpen();
+            }
         })
 
         $(window).on("resize", function () {

@@ -13,8 +13,12 @@
 </head>
 
 <body>
-    <div data-role="page" id="past-orders">
+    <div data-role="page" id="past-orders" class="feedU-page ui-responsive-panel">
         <style>
+            #past-orders-heading {
+                margin-top: 0em;
+            }
+
             .past-order-card {
                 display: flex;
                 flex-direction: column;
@@ -108,7 +112,7 @@
         </style>
         <div data-role="header" id="past-orders-header" data-add-back-btn="true" data-position="fixed"
             data-tap-toggle="false">
-            <h4>Header</h4>
+            <img src="../assets/logo.png"></img>
         </div>
         <div role="main" class="ui-content">
             <h1 id="past-orders-heading">Past Orders</h1>
