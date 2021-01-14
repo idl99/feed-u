@@ -298,10 +298,18 @@
             </div>
         </div> -->
         <script>
-            const { utils, datastore } = app;
+            const { utils, datastore, user } = app;
+            const FAVORITE_ICON_STATES = {
+                FILLED: 'fa-heart',
+                UNFILLED: 'fa-heart-o',
+                FILLED_COLOR: '#EB5757',
+                UNFILLED_COLOR: '#F1F1F1',
+            }
+
             var vendor = {};
 
-            function setVendorDetails({ vendorName, vendorImageLocation, location, deliveryTime, vendorRatings, items }) {
+            function setVendorDetails(vendor) {
+                const { vendorName, vendorImageLocation, location, deliveryTime, vendorRatings, items } = vendor;
 
                 $('#vendor-page-vendor-title').text(vendorName);
                 $('#vendor-page-vendor-location').text(location);
@@ -309,6 +317,15 @@
                 $('#vendor-page-vendor-rating-value').text(vendorRatings.vendorRatingValue);
                 $('#vendor-page-vendor-no-of-ratings').text(`(${vendorRatings.vendorNoOfRatings})`);
                 $('#vendor-page-vendor-image').attr('src', vendorImageLocation);
+
+                const itemIsFavorite = user.isItemFavorite(user.FAVORITE_TYPES.VENDOR, vendor);
+                if (itemIsFavorite) {
+                    $('#vendor-favourite-icon').addClass(FAVORITE_ICON_STATES.FILLED)
+                        .removeClass(FAVORITE_ICON_STATES.UNFILLED).css('color', FAVORITE_ICON_STATES.FILLED_COLOR);
+                } else {
+                    $('#vendor-favourite-icon').addClass(FAVORITE_ICON_STATES.UNFILLED)
+                        .removeClass(FAVORITE_ICON_STATES.FILLED).css('color', FAVORITE_ICON_STATES.UNFILLED_COLOR);
+                }
 
                 // render items in order summary
                 const itemCards = items.map(({ itemId, itemImageLocation, itemTitle, itemDescription, itemRatings, itemPrice }) => {
@@ -361,8 +378,18 @@
             }
 
             $('#vendor-favourite-icon').on('click', function () {
-                $(this).toggleClass('fa-heart');
-                $(this).toggleClass('fa-heart-o');
+
+                const wasUnfilled = $('#vendor-favourite-icon').hasClass('fa-heart-o');
+                if (wasUnfilled) {
+                    $(this).css('color', FAVORITE_ICON_STATES.FILLED_COLOR);
+                    user.addFavorite(user.FAVORITE_TYPES.VENDOR, vendor);
+                } else {
+                    $(this).css('color', FAVORITE_ICON_STATES.UNFILLED_COLOR);
+                    user.removeFavorite(user.FAVORITE_TYPES.VENDOR, vendor);
+                }
+
+                $(this).toggleClass(FAVORITE_ICON_STATES.FILLED);
+                $(this).toggleClass(FAVORITE_ICON_STATES.UNFILLED);
             });
 
             $('body').on('pagebeforeshow', "#vendor-page", function (event, { toPage }) {
