@@ -13,6 +13,10 @@ const DEFAULT_USER = {
     location: {
         display: "Nugegoda, Delkanda",
     },
+    favorites: {
+        items: [],
+        vendors: [],
+    }
 }
 
 const orders = {
@@ -72,8 +76,14 @@ const orders = {
 
 module.exports = function () {
     return {
+        FAVORITE_TYPES: {
+            ITEM: 'item',
+            VENDOR: 'vendor',
+        },
         init: function () {
-            cookie.set(USER, DEFAULT_USER)
+            if (!cookie.get(USER)) { // Set cookie only if not already set
+                cookie.set(USER, DEFAULT_USER)
+            }
         },
         updateLocation: function ({ updatedLocation }) {
             const user = cookie.getJSON(USER);
@@ -93,6 +103,77 @@ module.exports = function () {
         getSpecificOrder: function (pastOrderId) {
             const order = orders.pastOrders.find(order => order.pastOrderId == pastOrderId);
             return order;
+        },
+        getFavorites: function () {
+            return cookie.getJSON(USER).favorites;
+        },
+        isItemFavorite: function (type, favoriteItem) {
+            const loggedInUser = cookie.getJSON(USER);
+            const currentFavorites = loggedInUser.favorites;
+
+            switch (type) {
+                case this.FAVORITE_TYPES.VENDOR:
+                    return currentFavorites['vendors']
+                        .findIndex(vendor => vendor.vendorId === favoriteItem.vendorId) > -1;
+
+                case this.FAVORITE_TYPES.ITEM:
+                    return currentFavorites['items']
+                        .findIndex(i => i.itemId === favoriteItem.itemId) > -1;
+            }
+
+        },
+        addFavorite: function (type, favoriteItem) {
+            console.log('Adding favorite ...');
+
+            // Retrieve details from cookie
+            const loggedInUser = cookie.getJSON(USER);
+            const currentFavorites = loggedInUser.favorites;
+
+            // Update favorites
+            switch (type) {
+                case this.FAVORITE_TYPES.VENDOR:
+                    const isVendorAlreadyMarkedFavorite = currentFavorites['vendors'].find(i => i.vendorId === favoriteItem.vendorId)
+                    if (!isVendorAlreadyMarkedFavorite) {
+                        currentFavorites['vendors'].push(favoriteItem);
+                    }
+                    break;
+                case this.FAVORITE_TYPES.ITEM:
+                    const isItemAlreadyMarkedFavorite = currentFavorites['items'].find(i => i.itemId === favoriteItem.itemId)
+                    if (!isItemAlreadyMarkedFavorite) {
+                        currentFavorites['items'].push(favoriteItem);
+                    }
+                    break;
+            }
+
+            const newFavorites = currentFavorites;
+            const updatedUser = { ...loggedInUser, favorites: newFavorites };
+
+            // Set the cookie
+            console.log('Updated User ...', updatedUser);
+            cookie.set(USER, updatedUser);
+        },
+        removeFavorite: function (type, favoriteItem) {
+            console.log('Removing favorite ...');
+
+            // Retrieve details from cookie
+            const loggedInUser = cookie.getJSON(USER);
+            const currentFavorites = loggedInUser.favorites;
+
+            // Update favorites
+            var newFavorites = {};
+            if (type === this.FAVORITE_TYPES.VENDOR) {
+                currentFavorites['vendors'] = currentFavorites['vendors'].filter(i => i.vendorId != favoriteItem.vendorId);
+                newFavorites = { ...currentFavorites };
+            } else if (type === this.FAVORITE_TYPES.ITEM) {
+                currentFavorites['items'] = currentFavorites['items'].filter(i => i.itemId != favoriteItem.itemId);
+                newFavorites = { ...currentFavorites };
+            }
+
+            const updatedUser = { ...loggedInUser, favorites: newFavorites };
+
+            // Set the cookie
+            console.log('Updated User ...', updatedUser);
+            cookie.set(USER, updatedUser);
         },
         updateSpecificOrder: function (pastOrderId, updatedVendorRating, updatedVendorComment,
             updatedItemNames, updateItemRatings, updatedItemComments) {
