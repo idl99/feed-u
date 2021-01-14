@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Feed U - Item Detail Page</title>
 
     <link rel="stylesheet" href="../css/base.css">
     <script src="../bundle.js"></script>
@@ -18,42 +18,49 @@
                 font-family: "Poppins";
             }
 
-            .container {
-                display: flex;
-                flex-direction: column;
+            .item-detail-page-item-image-section {
+                position: relative;
+                margin-bottom: 1em;
+                background-color: white;
+                color: black;
             }
 
-            .poi_container {
-                display: flex;
-                flex: 1 1 auto;
-                justify-content: top;
-                height: 65px;
-                width: 335px;
-                margin-bottom: 5%;
-            }
-
-            .poi_image {
-                float: left;
-            }
-
-            .poi_content {
-                display: flex;
-                flex-direction: column;
+            #item-detail-page-item-img {
+                display: block;
                 width: 100%;
-                float: right;
-                margin-left: 5%;
+                height: auto;
+                margin: 0;
             }
 
-            .status_bar {
+            .item-detail-page-item-img-txt-container {
+                position: absolute;
+                bottom: 0;
+                padding-top: 0.25em;
+                padding-bottom: 0.25em;
+                font-weight: 100;
+                background: rgba(0, 0, 0, 0.5);
+                /* Black see-through */
+                color: #f1f1f1;
+                width: 100%;
+                opacity: 1;
+                text-align: left;
+            }
+
+            .item-detail-page-item-ratings-with-name {
                 display: flex;
-                align-items: top;
-                margin-top: 2%;
-                font-size: 12px;
+                justify-content: space-between;
             }
 
-            .rating_bar {
+            #item-detail-page-item-name {
+                margin-left: 1em;
+                font-size: 18px;
+            }
+
+            .item-detail-page-item-rating-bar {
                 display: flex;
                 align-items: center;
+                justify-content: center;
+                margin-right: 0.5em;
                 height: 20px;
                 width: 70px;
                 font-size: 11px;
@@ -62,142 +69,160 @@
                 color: black;
             }
 
-            .item_image {
-                display: block;
-                margin-left: auto;
-                margin-right: auto;
-                width: 80%;
+            #item-detail-page-item-rate-star-icon {
+                color: #F2C94C;
             }
 
-            .customize_container {
+            #item-detail-page-item-no-of-ratings {
+                margin-bottom: 1em;
+            }
+
+            #item-detail-page-item-description {
+                text-align: justify;
+                text-justify: inter-word;
+            }
+
+            .item-detail-page-item-customize-container {
                 display: flex;
                 justify-content: flex-start;
                 overflow: auto;
             }
 
-            .customize_container>div {
+            .item-detail-page-item-customize-container>div {
                 margin: 10px;
                 font-size: 12px;
             }
 
-            .pop-outer {}
-
-            .pop-inner {
-                max-width: 294px;
-                max-height: 645px;
-                padding: 2em 2em 2em 2em;
+            #item-detail-page-item-special-instructions {
                 margin: 0;
+                padding: 0;
+            }
 
+            .item-detail-page-item-quantity-change-container {
+                display: flex;
+                justify-content: center;
+                padding: 1em 1em 1em 1em;
+            }
+
+            .item-detail-page-item-quantity-change {
+                display: flex;
+                justify-content: center;
+                display: flex;
+                justify-content: space-evenly;
+                background-color: #F2F2F2;
+                border-radius: 100px;
+                width: 50%;
+            }
+
+            .item-detail-page-item-comments-container {
+                display: flex;
+                justify-content: center;
+            }
+
+            #addToCartBtn {
+                width: 100%;
+                text-align: center;
+                background: #EB5757;
+                color: white;
+                margin: 0px;
+                padding: 0px;
+                border-radius: 0%;
             }
         </style>
         <div data-role="header" data-add-back-btn="true">
             <span class="ui-title"></span>
         </div>
         <div role="main" class="ui-content">
-            <div style="position: relative; margin-bottom: 1em; 
-                                background-color: white;
-                                color: black;">
-                <img id="item-detail-image" style="display:block; width: 100%; height: auto; margin: 0;"
-                    src="../assets/vendor_page_images/tom_yum_soup.jpg">
-                <div style="position: absolute;
-                                        bottom: 0;
-                                        padding-top: 0.25em;
-                                        padding-bottom: 0.25em;
-                                        font-weight: 100;
-                                        background: rgba(0, 0, 0, 0.5); /* Black see-through */
-                                        color: #f1f1f1;
-                                        width: 100%;
-                                        opacity:1;
-                                        text-align: left;">
-                    <div style="display: flex; justify-content: space-between;">
-                        <div style="margin-left: 1em;">
-                            <span id="item-detail-name" style="font-size: 18px;">Item Name</span><br>
-                        </div>
+            <div class="item-detail-page-item-image-section">
+                <img id="item-detail-page-item-img" src="../assets/vendor_page_images/tom_yum_soup.jpg">
+                <div class="item-detail-page-item-img-txt-container">
+                    <div class="item-detail-page-item-ratings-with-name">
+                        <span id="item-detail-page-item-name">Item Name</span><br>
                         <!-- rating bar next to item name -->
-                        <div class="rating_bar">
-                            <p><svg width="12" height="11" viewBox="0 0 12 11" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M6 0L7.34708 4.1459H11.7063L8.17963 6.7082L9.52671 10.8541L6 8.2918L2.47329 10.8541L3.82037 6.7082L0.293661 4.1459H4.65292L6 0Z"
-                                        fill="#F2C94C" />
-                                </svg>
-                                <span id="item-detail-rating-value">0.0</span>
-                            <p id="item-detail-no-of-ratings">(0)</p>
+                        <div class="item-detail-page-item-rating-bar">
+                            <p>
+                                <i class='fa fa-star fa-fw' id="item-detail-page-item-rate-star-icon"></i>
+                                <span id="item-detail-page-item-rating-value">0.0</span>
+                                <small id="item-detail-page-item-no-of-ratings">(0)</small>
                             </p>
                         </div>
                         <!-- ---end of rating bar------- -->
                     </div>
                 </div>
             </div>
-            <p id="item-description" style="text-align: justify; text-justify: inter-word;">This soup is a special
+            <p id="item-detail-page-item-description">This soup
+                is a special
                 dish
                 prepared by world renowned chef Gonagala Ramsey, made to a secret recipe that has been passed on
                 from
                 his Chinese ancestors.</p>
             <!-- Customization options container -->
-            <div class="customize_container">
+            <div class="item-detail-page-item-customize-container">
                 <div>
                     <form>
                         <p>Choice of Size</p>
-                        <input type="radio" id="small" name="item-customization-size" value="small">
-                        <label for="small">Small</label><br>
-                        <input type="radio" id="regular" name="item-customization-size" value="regular">
-                        <label for="regular">Regular</label><br>
-                        <input type="radio" id="large" name="item-customization-size" value="large">
-                        <label for="large">Large</label>
+                        <input type="radio" id="small-size" name="item-detail-page-item-customization-size"
+                            value="small-size">
+                        <label for="small-size">Small</label><br>
+                        <input type="radio" id="regular-size" name="item-detail-page-item-customization-size"
+                            value="regular-size">
+                        <label for="regular-size">Regular</label><br>
+                        <input type="radio" id="large-size" name="item-detail-page-item-customization-size"
+                            value="large-size">
+                        <label for="large-size">Large</label>
                     </form>
                 </div>
                 <div>
                     <form>
                         <p>Level of Salt</p>
-                        <input type="radio" id="large1" name="item-customization-salt" value="large1">
-                        <label for="large1">No Salt</label><br>
-                        <input type="radio" id="regular1" name="item-customization-salt" value="regular1">
-                        <label for="regular1">Less</label><br>
-                        <input type="radio" id="small1" name="item-customization-salt" value="small1">
-                        <label for="small1">Normal</label>
+                        <input type="radio" id="no-salt" name="item-detail-page-item-customization-salt"
+                            value="no-salt">
+                        <label for="no-salt">No Salt</label><br>
+                        <input type="radio" id="less-salt" name="item-detail-page-item-customization-salt"
+                            value="less-salt">
+                        <label for="less-salt">Less</label><br>
+                        <input type="radio" id="normal-salt" name="item-detail-page-item-customization-salt"
+                            value="normal-salt">
+                        <label for="normal-salt">Normal</label>
                     </form>
                 </div>
                 <div>
                     <form>
                         <p>Level of Spice</p>
-                        <input type="radio" id="large2" name="item-customization-spice" value="large2">
-                        <label for="large2">None</label><br>
-                        <input type="radio" id="regular2" name="item-customization-spice" value="regular2">
-                        <label for="regular2">Mild</label><br>
-                        <input type="radio" id="small2" name="item-customization-spice" value="small2">
-                        <label for="small2">Hot</label>
+                        <input type="radio" id="no-spice" name="item-detail-page-item-customization-spice"
+                            value="no-spice">
+                        <label for="no-spice">None</label><br>
+                        <input type="radio" id="mild-spice" name="item-detail-page-item-customization-spice"
+                            value="mild-spice">
+                        <label for="mild-spice">Mild</label><br>
+                        <input type="radio" id="hot-spice" name="item-detail-page-item-customization-spice"
+                            value="hot-spice">
+                        <label for="hot-spice">Hot</label>
                     </form>
                 </div>
             </div>
             <div>
                 <!--end of customization container ----->
-                     <p style="margin: 0; padding: 0;">Special Instructions</p>
+                     <p id="item-detail-page-item-special-instructions">Special Instructions</p>
                      <input type="text" name="sp-instr" id="sp-instr" value=""
                     placeholder="Add a note (extra salt, no onions, etc.)">
             </div>
-            <div style="display: flex; justify-content: center; padding: 1em 1em 1em 1em;">
-                <div
-                    style="display: flex; justify-content: center; display: flex; justify-content: space-evenly; background-color: #F2F2F2; border-radius: 100px; width: 50%;">
-                    <p id="item-detail-decr-item-qty">-</p>
-                    <p id="item-detail-item-qty">1</p>
-                    <p id="item-detail-incr-item-qty">+</p>
+            <div class="item-detail-page-item-quantity-change-container">
+                <div class="item-detail-page-item-quantity-change">
+                    <p id="item-detail-page-decr-item-qty">-</p>
+                    <p id="item-detail-page-item-qty">1</p>
+                    <p id="item-detail-page-incr-item-qty">+</p>
                 </div>
             </div>
             <p>Comments</p>
-            <div style="display: flex; justify-content: center;">
+            <div class="item-detail-page-item-comments-container">
 
             </div>
         </div>
         <div data-role="footer">
-            <button id="addToCartBtn"
-                style="width: 100%; text-align: center; background: #EB5757; color: white; margin: 0px; padding: 0px; border-radius: 0%;">
+            <button id="addToCartBtn">
                 <h4> Add to Cart</h4>
             </button>
-        </div>
-
-        <div data-role="popup" id="item-detail-popup">
-            <p id="item-detail-popup-msg">This is a completely basic popup, no options set.</p>
         </div>
 
         <script>
@@ -208,11 +233,11 @@
             var quantity = 1;
 
             function setItemDetails({ itemTitle, itemDescription, itemRatings, itemImageLocation }) {
-                $('#item-detail-name').text(itemTitle)
-                $('#item-description').text(itemDescription)
-                $('#item-detail-rating-value').text(itemRatings.itemRatingValue)
-                $('#item-detail-no-of-ratings').text(`(${itemRatings.itemNoOfRatings})`)
-                $('#item-detail-image').attr("src", itemImageLocation)
+                $('#item-detail-page-item-name').text(itemTitle)
+                $('#item-detail-page-item-description').text(itemDescription)
+                $('#item-detail-page-item-rating-value').text(itemRatings.itemRatingValue)
+                $('#item-detail-page-item-no-of-ratings').text(`(${itemRatings.itemNoOfRatings})`)
+                $('#item-detail-page-item-img').attr("src", itemImageLocation)
             }
 
             $('body').on('pagebeforeshow', "#item-detail-page", function (event, { toPage }) {
@@ -229,19 +254,19 @@
                 setItemDetails(itemDetails);
             });
 
-            $('#item-detail-incr-item-qty').click(function (event) {
+            $('#item-detail-page-incr-item-qty').click(function (event) {
                 if (quantity < 9) {
                     // Can only add upto 9 nos. of an item
                     quantity += 1;
-                    $('#item-detail-item-qty').text(quantity)
+                    $('#item-detail-page-item-qty').text(quantity)
                 }
             })
 
-            $('#item-detail-decr-item-qty').click(function (event) {
+            $('#item-detail-page-decr-item-qty').click(function (event) {
                 if (quantity > 1) {
                     // Have to at least add 1 nos. of an item
                     quantity -= 1;
-                    $('#item-detail-item-qty').text(quantity)
+                    $('#item-detail-page-item-qty').text(quantity)
                 }
             })
 
