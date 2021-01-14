@@ -11,13 +11,16 @@
 </head>
 
 <body>
-    <div data-role="page" id="checkout" class="feedU-page">
+    <!-- 
+        ui-responsive-panel is very important
+        otherwise layout will get messed up with the external navigation panel
+     -->
+    <div data-role="page" id="checkout" class="feedU-page ui-responsive-panel">
         <div data-role="header" id="checkout-header" data-add-back-btn="true" data-position="fixed"
             data-tap-toggle="false">
             <img src="../assets/logo.png"></img>
         </div>
-        <div class="ui-content" data-fullscreen="true">
-            <!-- <a href="#leftpanel1" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-mini">Reveal</a> -->
+        <div role="main" class="ui-content">
             <div id="checkout-restaurant-details-container">
                 <div id="checkout-restaurant-name">Restaurant Name</div>
                 <div style="display: flex; flex-direction: row; align-items: center;">
@@ -69,7 +72,7 @@
         </div>
         <!-- TODO disable this button -->
         <div data-role="footer" data-position="fixed" data-enhanced="false">
-            <button id="checkout-place-order" class="full-width-btn">Place the Order</button>
+            <button id="checkout-place-order" class="ui-btn full-width-btn">Place the Order</button>
         </div>
 
         <script>
