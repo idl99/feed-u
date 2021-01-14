@@ -18,50 +18,61 @@
 </head>
 
 <body>
-	<div data-role="page" id="set-location">
+	<div data-role="page" id="set-location" class="feedU-page ui-responsive-panel">
 		<div data-role="header" data-position="fixed" data-add-back-btn="true">
-			<h1>Header Bar</h1>
+			<img src="../assets/logo.png">
+			<span class="ui-content"></span>
 		</div>
-		<div id="set-location-map">
-			<!-- <h2> Map Here</h2> -->
-			<button id="set-location-btn">Set Location from Google Maps</button>
-		</div>
-		<div data-role="tabs" id="tabs" style="padding: 0 0 0 0;">
-			<div data-role="navbar">
-				<ul>
-					<li><a href="#saved-locations" data-ajax="false" class="ui-btn-active">Saved Locations</a></li>
-					<li><a href="#previous-locations" data-ajax="false">Previous Locations</a></li>
-				</ul>
+		<div data-role="main" class="ui-content">
+			<div id="set-location-btn-container">
+				<button id="set-location-btn">
+					Set Location <i class="fa fa-map-marker" aria-hidden="true"></i>
+					from Google Maps <i class="fa fa-map-o" aria-hidden="true"></i>
+				</button>
 			</div>
-			<div id="saved-locations">
-				<ul data-role="listview">
-					<li class="set-location-saved-location-list-item">Delkanda, Nugegoda
-					</li>
-					<li class="set-location-saved-location-list-item">Nedimala, Dehiwala</li>
-					<li class="set-location-saved-location-list-item">Kandalanda, Homagama</li>
-					<li class="set-location-saved-location-list-item">Attidiya, Dehiwala</li>
-				</ul>
+			<div data-role="tabs" id="tabs">
+				<div data-role="navbar">
+					<ul>
+						<li><a id="tab-item" href="#saved-locations" data-ajax="false" class="ui-btn-active">Saved
+								Locations</a></li>
+						<li><a id="tab-item" href="#previous-locations" data-ajax="false">Previous Locations</a></li>
+					</ul>
+				</div>
+				<div class=" ui-content" id="saved-locations">
+					<ul data-role="listview">
+						<li class="set-location-saved-location-list-item">Delkanda, Nugegoda
+						</li>
+						<li class="set-location-saved-location-list-item">Nedimala, Dehiwala</li>
+						<li class="set-location-saved-location-list-item">Kandalanda, Homagama</li>
+						<li class="set-location-saved-location-list-item">Attidiya, Dehiwala</li>
+					</ul>
+				</div>
+				<div class="ui-content" id="previous-locations">
+					<ul data-role="listview">
+						<li class="set-location-previous-location-list-item">Makumbura, Kottawa</li>
+						<li class="set-location-previous-location-list-item">Piliyandala, Kottawa</li>
+						<li class="set-location-previous-location-list-item">Nawala, Rajagiriya</li>
+						<li class="set-location-previous-location-list-item">Nugegoda, Nugegoda</li>
+					</ul>
+				</div>
 			</div>
-			<div id="previous-locations">
-				<ul data-role="listview">
-					<li class="set-location-previous-location-list-item">Makumbura, Kottawa</li>
-					<li class="set-location-previous-location-list-item">Piliyandala, Kottawa</li>
-					<li class="set-location-previous-location-list-item">Nawala, Rajagiriya</li>
-					<li class="set-location-previous-location-list-item">Nugegoda, Nugegoda</li>
-				</ul>
+			<hr id="horizontal-line">
+			<div id="order_time">
+				<form>
+					<fieldset data-role="controlgroup" data-iconpos="right">
+						<input type="checkbox" name="deliever_asap" id="deliever_asap">
+						<label for="deliever_asap"><i id="set-location-fa-icons" class="fa fa-clock-o"
+								aria-hidden="true"></i>Deliver it
+							ASAP</label>
+						<input type="checkbox" name="scheduled_order" id="scheduled_order">
+						<label for="scheduled_order"><i id="set-location-fa-icons" class="fa fa-calendar"
+								aria-hidden="true"></i>Scheduled
+							Order</label>
+					</fieldset>
+				</form>
 			</div>
 		</div>
-		<div class="ui-content" id="order_time">
-			<form>
-				<fieldset data-role="controlgroup" data-iconpos="right">
-					<input type="checkbox" name="deliever_asap" id="deliever_asap">
-					<label for="deliever_asap">Deliver it ASAP</label>
-					<input type="checkbox" name="scheduled_order" id="scheduled_order">
-					<label for="scheduled_order">Scheduled Order</label>
-				</fieldset>
-			</form>
-		</div>
-		<div id="configure-location" data-role="footer" data-position="fixed">
+		<div id="configure-location-btn" data-role="footer" data-position="fixed">
 			<h1>Save</h1>
 		</div>
 		<!-- <script
@@ -91,12 +102,12 @@
 			});
 
 			$("#set-location-btn").click(function () {
-				// Handle the map click event.
 				$(":mobile-pagecontainer").pagecontainer("change", "location_search.html",);
 			});
 
-			// $("#configure-location").click(function () {
-			// 	$(":mobile-pagecontainer").pagecontainer("change", "home.html",);
+			// $("#set-location-map").click(function () {
+			// 	// Handle the map click event.
+			// 	$(":mobile-pagecontainer").pagecontainer("change", "location_search.html",);
 			// });
 
 			$("#deliever_asap").prop("checked", true);
@@ -128,13 +139,13 @@
 				$(this).addClass("ui-icon-check ui-btn-icon-right");
 			});
 
-					// function initMap() {
-					// 	console.log("Init 1");
-					// 	const map = new google.maps.Map(document.getElementById("set-location-map"), {
-					// 		zoom: 15,
-					// 		center: { lat: 51.517582, lng: -0.141525 },
-					// 	});
-					// }
+			// function initMap() {
+			// 	console.log("Init 1");
+			// 	const map = new google.maps.Map(document.getElementById("set-location-map"), {
+			// 		zoom: 15,
+			// 		center: { lat: 51.517582, lng: -0.141525 },
+			// 	});
+			// }
 		</script>
 	</div>
 </body>
