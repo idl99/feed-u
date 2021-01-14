@@ -13,13 +13,13 @@
     <!-- <div role="main" class="ui-content"> -->
     <div data-role="page" id="Page1" class="ui-responsive-panel">
         <style>
-            /* .container {
+            .help_and_sup_container {
                 display: flex;
-                flex-direction: row;
+                flex-direction: column;
                 justify-content: center;
-                padding-left: 2em;
-                padding-right: 2em;
-                padding-bottom: 2em;
+                padding-left: 1em;
+                padding-right: 1em;
+                padding-bottom: 1em;
             }
 
             .hotlines-container {
@@ -32,7 +32,7 @@
                 margin-block-end: 1px;
                 margin-inline-start: 1px;
                 margin-inline-end: 1px;
-            } */
+            }
 
             .ok-button {
                 width: 100%;
@@ -65,24 +65,25 @@
 
         <div role="main" class="ui-content">
             <!-- First container for customer hotlines  -->
-            <div class="container">
+            <div class="help_and_sup_container ">
                 <h1>Help and Support</h1>
-                <h3><i class="fa fa-headphones" aria-hidden="true"></i>
+                <h3><i class="fa fa-headphones" aria-hidden="true" style="color: red;"></i>
                     Customer Hotlines</h3>
                 <div class="hotlines-container">
-                    <p><i class="fa fa-phone" aria-hidden="true"></i>
+                    <p><i class="fa fa-phone" aria-hidden="true" style="color: green;"></i>
                         +94778656775</p>
-                    <p><i class="fa fa-phone" aria-hidden="true"></i>
+                    <p><i class="fa fa-phone" aria-hidden="true" style="color: green;"></i>
                         +947775847568</p>
-                    <p><i class="fa fa-phone" aria-hidden="true"></i>
+                    <p><i class="fa fa-phone" aria-hidden="true" style="color: green;"></i>
                         +947708623485</p>
                 </div>
             </div>
             <br>
             <br>
+            <br>
             <!-- Second container for feedback text fields -->
-            <div class="container">
-                <h3><i class="fa fa-commenting" aria-hidden="true"></i>
+            <div class="help_and_sup_container ">
+                <h3><i class="fa fa-commenting" aria-hidden="true" style="color: cornflowerblue;"></i>
                     Give us feedback</h3>
                 <!-- Text fields with place holders -->
                 <input type="text" name="feedback-type" id="feedback-type" value="" placeholder="Feedback Type">
