@@ -86,7 +86,12 @@ $(document).on("pagecontainercreate", function () {
 
         $(window).on("resize", function () {
             // Check again when the window gets resized (maybe due to change in screen orientation)
-            evaluatePanelOpen();
+            const activePage = $(":mobile-pagecontainer").pagecontainer("getActivePage")[0];
+            const shouldShowPanel = !navigationPanelBlockedScreens.includes(activePage.id);
+            if (shouldShowPanel) {
+                // Check again when we navigate to another page
+                evaluatePanelOpen();
+            }
         })
     })
 })
