@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <div data-role="page" id="vendor-page">
+    <div data-role="page" id="vendor-page" class="feedU-page ui-responsive-panel">
         <style>
             body {
                 font-family: "Poppins";
@@ -84,17 +84,32 @@
 
             #vendor-food-categories-bullet {
                 margin-right: 1em;
+                color: #C4C4C4;
                 font-size: 7px;
             }
 
             .vendor-page-vendor-ratings-section {
                 display: flex;
                 align-items: center;
-                font-size: 11px;
+                margin-top: 0.50em;
+                margin-bottom: 1em;
+                font-size: 12px;
+            }
+
+            .vendor-page-vendor-rating-bar {
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
 
             #vendor-rate-star-icon {
                 color: #F2C94C;
+            }
+
+            #vendor-page-vendor-no-of-ratings {
+                margin-top: 0.25em;
+                margin-left: 0.25em;
+                font-size: 8px;
             }
 
             #vendor-page-vendor-comments {
@@ -199,10 +214,33 @@
                 text-decoration: none;
                 color: black;
             }
+
+            #popup {
+                padding: 1em;
+            }
+
+            #okBtn {
+                width: 100%;
+                text-align: center;
+                background: #EB5757;
+                color: white;
+                margin: 0px;
+                padding: 0px;
+                border-radius: 0%;
+                text-shadow: none;
+            }
+
+            .vendor-page-reward-container-section {
+                border: 1px solid gray;
+                border-width: thin;
+                display: flex;
+                flex-direction: column;
+                padding: 10px 10px 10px 10px;
+            }
         </style>
         <div data-role="header" data-position="fixed" data-add-back-btn="true" data-tap-toggle="false">
             <!-- <a href="#" data-icon="back" class="ui-btn-left">Back</a> -->
-            <h1>Header Bar</h1>
+            <img src="../assets/logo.png"></img>
         </div>
         <div role="main" class="ui-content">
             <div class="vendor-page-top-section">
@@ -230,15 +268,16 @@
 
             <div class="vendor-page-vendor-ratings-section">
                 <p>
+                <div class="vendor-page-vendor-rating-bar">
                     <i class='fa fa-star fa-fw' id="vendor-rate-star-icon"></i>
                     <span id="vendor-page-vendor-rating-value">0.0</span>
-                <p id="vendor-page-vendor-no-of-ratings">(0)</p>
-                <p id="vendor-page-vendor-comments">View Comments</p>
+                    <small id="vendor-page-vendor-no-of-ratings">(0)</small>
+                </div>
+                <a id="vendor-page-vendor-comments">View Comments</a>
                 </p>
             </div>
             <!-- Gamification process section  -->
-            <div data-role="popup" id="popup" data-overlay-theme="b" data-theme="b" data-corners="false"
-                style="padding: 1em;">
+            <div data-role="popup" id="popup" data-overlay-theme="b" data-theme="b" data-corners="false">
                 <p> Rewards Offered </p>
                 <hr>
                 <h3>How obtain a reward</h3>
@@ -246,33 +285,35 @@
                 <h3>Reward At</h3>
                 <p>Burgers Ahoy!</p>
                 <h3>Details</h3>
-                <p>Rewards expire 60 days after you earn them. They can be used only once, on a single order, and
+                <p>
+                    Rewards expire 60 days after you earn them. They can be used only once, on a single order, and
                     cannot be combined with any other offer.
 
                     If a restaurant cancels this programme after you started earning rewards, you’ll have 30 days to
-                    finish earning the reward and 60 days to use any rewards you’ve earned at that restaurant.</p>
+                    finish earning the reward and 60 days to use any rewards you’ve earned at that restaurant.
+                </p>
                 <!-- OK button with close action -->
                 <a data-rel="back">
-                    <button id="okBtn"
-                        style="width: 100%; text-align: center; background: #EB5757; color: white; margin: 0px; padding: 0px; border-radius: 0%; text-shadow: none;">
+                    <button id="okBtn">
                         <h4> OK</h4>
                     </button>
                 </a>
                 <!-- </div> -->
             </div>
             <a href="#popup" data-rel="popup" data-position-to="window" data-transition="fade">
-                <div
-                    style="border:1px solid gray; border-width: thin; display: flex; flex-direction: column; padding-left: 10px; padding-right: 10px; padding-top: 10px; padding-bottom: 10px;">
+                <div class="vendor-page-reward-container-section">
                     <div style="display: flex; justify-content: space-evenly;">
-                        <div style="display: flex; align-items: center;"><i class="fa fa-adjust" aria-hidden="true"
-                                style="color: #EB5757;"></i></div>
+                        <div style="display: flex; align-items: center;">
+                            <i class="fa fa-adjust" aria-hidden="true" style="color: #EB5757;"></i>
+                        </div>
 
                         <div style="display:flex; flex-direction: column; margin-left: 1em;">
                             <h5 style="margin: 0;">3 orders earns a LKR 350 reward <br>LKR 750 minimum</h5>
                         </div>
 
-                        <div style="display: flex; align-items: center; margin-left: 1em;"><i class="fa fa-angle-right"
-                                aria-hidden="true" style="color: #EB5757;"></i></div>
+                        <div style="display: flex; align-items: center; margin-left: 1em;">
+                            <i class="fa fa-angle-right" aria-hidden="true" style="color: #EB5757;"></i>
+                        </div>
                     </div>
                     <!-- progress bar -->
                     <div style="display: flex; justify-content: center; margin-top: 0.5em;">
