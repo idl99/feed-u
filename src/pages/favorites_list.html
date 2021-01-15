@@ -26,7 +26,7 @@
         </div>
         <div role="main" class="ui-content">
             <div class="favorites-list-section-title-container">
-                <h2 style="display: inline;">Your Favorite Items</h2>
+                <h3 style="display: inline;">Your Favorite Items</h3>
                 <a data-enhance="false" href="" id="favorites-list-email-items-btn"
                     class="ui-btn ui-btn-inline favorites-list-email-btn">Email</a>
             </div>
@@ -37,7 +37,7 @@
             <br />
 
             <div class="favorites-list-section-title-container">
-                <h2 style="display: inline;">Your Favorite Vendors</h2>
+                <h3 style="display: inline;">Your Favorite Vendors</h3>
                 <a data-enhance="false" href="" id="favorites-list-email-vendors-btn"
                     class="ui-btn ui-btn-inline favorites-list-email-btn">Email</a>
             </div>
@@ -50,18 +50,22 @@
 
             const { user } = app;
 
-            function removeFavorite(element, vendorId) {
+            function removeFavoriteVendor(element, vendorId) {
                 console.log(vendorId);
                 user.removeFavorite(user.FAVORITE_TYPES.VENDOR, { vendorId });
                 $(element).parent().parent().remove();
+                renderFavoriteVendors();
             }
 
-            $('body').on("pagecontainerbeforeshow", function (event, ui) {
+            function removeFavoriteItem(element, itemId) {
+                user.removeFavorite(user.FAVORITE_TYPES.ITEM, { itemId });
+                $(element).parent().parent().remove();
+                renderFavoriteItems();
+            }
+
+            function renderFavoriteVendors() {
 
                 const favoriteVendors = user.getFavorites().vendors;
-                const favoriteItems = user.getFavorites().items;
-
-                console.log('Inside favorites list page ...');
 
                 if (favoriteVendors.length == 0) {
                     $("#favorites-list-email-vendors-btn").hide();
@@ -69,50 +73,99 @@
                     $("#favorites-list-email-vendors-btn").show();
                 }
 
+                const vendorCards = favoriteVendors.map(({ vendorId, vendorImageLocation, vendorName, vendorCatergories, vendorRatings, deliveryTime }) => {
+
+                    const vendorCategoriesMarkup = vendorCatergories.reduce((acc, category) => {
+                        return acc + `<span style="margin-right: 10px; display: flex; align-items: center;"><i class="fa fa-circle" id="poi-catergory"></i>${category}</span>`
+                    }, ``);
+
+                    const markup = `
+                        <div class="poi-container" vendor-id="${vendorId}">
+                            <img src=${vendorImageLocation} class="poi-image">
+                            <div class="poi-details">
+                                <div>${vendorName}</div>
+                                <div class="poi-catergory-container">
+                                    ${vendorCategoriesMarkup}
+                                </div>
+                                <div class="poi-rating-bar-container">
+                                    <div class="poi-rating-bar">
+                                        <span><i class='fa fa-star fa-fw' id="poi-rate-star-icon"></i> ${vendorRatings.vendorRatingValue} </span>
+                                        <small id="poi-no-of-rated-customers">(${vendorRatings.vendorNoOfRatings})</small>
+                                    </div>
+                                    <div id="poi-delivery-time">${deliveryTime}</div>
+                                </div>
+                            </div>
+                            <div style="padding: 2px 0px;">
+                                <svg vendor-id="${vendorId}" onclick="removeFavoriteVendor(this, this.getAttribute('vendor-id'))" width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M7.5 0C3.35685 0 0 3.35685 0 7.5C0 11.6431 3.35685 15 7.5 15C11.6431 15 15 11.6431 15 7.5C15 3.35685 11.6431 0 7.5 0ZM3.50806 8.70968C3.30847 8.70968 3.14516 8.54637 3.14516 8.34677V6.65323C3.14516 6.45363 3.30847 6.29032 3.50806 6.29032H11.4919C11.6915 6.29032 11.8548 6.45363 11.8548 6.65323V8.34677C11.8548 8.54637 11.6915 8.70968 11.4919 8.70968H3.50806Z" fill="#EB5757"/>
+                                </svg>
+                            </div>
+                        </div>`
+
+                    return markup;
+
+                });
+
+                if (vendorCards.length > 0) {
+                    $('#favorite-vendors-container').html(vendorCards)
+                } else {
+                    $('#favorite-vendors-container').html('No Favorite Vendors yet')
+                }
+            }
+
+            function renderFavoriteItems() {
+
+                const favoriteItems = user.getFavorites().items;
+
                 if (favoriteItems.length == 0) {
                     $("#favorites-list-email-items-btn").hide();
                 } else {
                     $("#favorites-list-email-items-btn").show();
                 }
 
-                const thisPage = ui.toPage[0];
-                if (thisPage.id === 'favorites-list-page') {
-                    const vendorCards = favoriteVendors.map(({ vendorId, vendorImageLocation, vendorName, vendorCatergories, vendorRatings, deliveryTime }) => {
-
-                        const vendorCategoriesMarkup = vendorCatergories.reduce((acc, category) => {
-                            return acc + `<span style="margin-right: 10px; display: flex; align-items: center;"><i class="fa fa-circle" id="poi-catergory"></i>${category}</span>`
-                        }, ``);
-
-                        const markup = `
-                                <div class="poi-container" vendor-id="${vendorId}">
-                                    <img src=${vendorImageLocation} class="poi-image">
-                                    <div class="poi-details">
-                                        <div>${vendorName}</div>
-                                        <div class="poi-catergory-container">
-                                            ${vendorCategoriesMarkup}
+                const itemCards = favoriteItems.map(({ itemId, itemImageLocation, itemTitle, itemDescription, itemRatings, itemPrice }) => {
+                    var markup =
+                        `<div class="vendor-poi-item-container" item-id="${itemId}">
+                                <div>
+                                    <img src=${itemImageLocation}>
+                                </div>
+                                <div class="vendor-poi-item-content">
+                                    <div class="vendor-poi-item-details">
+                                        <div class="vendor-poi-item-title-description">
+                                            <p id="vendor-poi-item-title">${itemTitle}</p>
+                                            <p id="vendor-poi-item-description">${itemDescription}</p>
                                         </div>
-                                        <div class="poi-rating-bar-container">
-                                            <div class="poi-rating-bar">
-                                                <span><i class='fa fa-star fa-fw' id="poi-rate-star-icon"></i> ${vendorRatings.vendorRatingValue} </span>
-                                                <small id="poi-no-of-rated-customers">(${vendorRatings.vendorNoOfRatings})</small>
-                                            </div>
-                                            <div id="poi-delivery-time">${deliveryTime}</div>
+                                        <div class="vendor-poi-item-rating-bar">
+                                            <span>
+                                                <i class='fa fa-star fa-fw' id="vendor-poi-item-rate-star-icon"></i> 
+                                                ${(itemRatings.itemRatingValue).toFixed(1)} 
+                                            </span>
+                                            <small id="vendor-poi-item-no-of-rated-customers">(${itemRatings.itemNoOfRatings})</small>
                                         </div>
-                                    </div>
-                                    <div style="padding: 2px 0px;">
-                                        <svg vendor-id="${vendorId}" onclick="removeFavorite(this, this.getAttribute('vendor-id'))" width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M7.5 0C3.35685 0 0 3.35685 0 7.5C0 11.6431 3.35685 15 7.5 15C11.6431 15 15 11.6431 15 7.5C15 3.35685 11.6431 0 7.5 0ZM3.50806 8.70968C3.30847 8.70968 3.14516 8.54637 3.14516 8.34677V6.65323C3.14516 6.45363 3.30847 6.29032 3.50806 6.29032H11.4919C11.6915 6.29032 11.8548 6.45363 11.8548 6.65323V8.34677C11.8548 8.54637 11.6915 8.70968 11.4919 8.70968H3.50806Z" fill="#EB5757"/>
-                                        </svg>
                                     </div>
                                 </div>
-                            `
+                                <div style="padding: 2px 0px;">
+                                    <svg item-id="${itemId}" onclick="removeFavoriteItem(this, this.getAttribute('item-id'))" width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M7.5 0C3.35685 0 0 3.35685 0 7.5C0 11.6431 3.35685 15 7.5 15C11.6431 15 15 11.6431 15 7.5C15 3.35685 11.6431 0 7.5 0ZM3.50806 8.70968C3.30847 8.70968 3.14516 8.54637 3.14516 8.34677V6.65323C3.14516 6.45363 3.30847 6.29032 3.50806 6.29032H11.4919C11.6915 6.29032 11.8548 6.45363 11.8548 6.65323V8.34677C11.8548 8.54637 11.6915 8.70968 11.4919 8.70968H3.50806Z" fill="#EB5757"/>
+                                    </svg>
+                                </div>
+                            </div>`;
+                    return markup;
+                });
 
-                        return markup;
+                if (itemCards.length > 0) {
+                    $('#favorite-items-container').html(itemCards);
+                } else {
+                    $('#favorite-items-container').html('No Favorite Items yet');
+                }
 
-                    });
+            }
 
-                    $('#favorite-vendors-container').html(vendorCards)
-
+            $('body').on("pagecontainerbeforeshow", function (event, ui) {
+                const thisPage = ui.toPage[0];
+                if (thisPage.id === 'favorites-list-page') {
+                    renderFavoriteVendors()
+                    renderFavoriteItems()
                 }
             });
         </script>
