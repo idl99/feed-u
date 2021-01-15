@@ -79,26 +79,52 @@
     </style>
     
     <script>
-        function openSecondPopup() {
-                // $('#popup1').popup();
-                // $("#popup1").popup("close")
-                // $('#popup2').popup("open", {
-                //     positionTo: "window"
-                // })
 
-                $(document).on("pageinit", function () {
+    $(document).bind('pageinit', function () {
+        setTimeout(function () {
+            $("#popup1").popup();
+            $("#popup1").popup("open");
+        }, 100);
+        setTimeout(function () {
+            $("#popup1").popup("close");
+        }, 3000);
+        setTimeout(function () {
+            $("#popup2").popup();
+            $("#popup2").popup("open");
+        }, 3100);
+    });
+
+
+
+        function openSecondPopup() {
+            // $('#popup1').popup();
+            // $("#popup1").popup("close")
+            // $('#popup2').popup("open", {
+            //     positionTo: "window"
+            // })
+
+            $(document).on("pageinit", function () {
                 $('.popup1').on({
                     popupafterclose: function () {
                         setTimeout(function () { $('.popup2').popup('open') }, 100);
                     }
-    });
-});
-            }
+                });
+            });
+        }
 
         function hideFirstPopup() {
-                $('#popup1').popup();
-                $("#popup1").popup("close")
-            }
+            $('#popup1').popup();
+            $("#popup1").popup("close")
+        }
+
+
+
+
+
+
+
+
+
     </script>
 
 
