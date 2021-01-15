@@ -41,7 +41,8 @@ const screenDimens = {
     iPad: 1024
 }
 
-const navigationPanelBlockedScreens = ["landing", "vendor-stories", "vendor-rating", "item-rating"];
+const navigationPanelBlockedScreens = ["landing", "vendor-stories", "vendor-rating", "item-rating",
+    "order-in-progress-page", "delivery-in-progress-page"];
 
 /**
  * This function opens the navigation panel programatically
