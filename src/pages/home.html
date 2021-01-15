@@ -90,7 +90,7 @@
 
 		<div id="home-footer" data-role="footer" class="footer-checkout-btn" data-position="fixed"
 			data-tap-toggle="false">
-			<h4>CHECKOUT</h4>
+			<h4>View Basket</h4>
 		</div>
 
 		<style>
@@ -184,7 +184,7 @@
 
 		<script>
 
-			const { user } = app;
+			const { user, cart } = app;
 
 			$(".link-set-location-page").click(function (event) {
 				event.preventDefault();
@@ -249,6 +249,14 @@
 				if (activePage === 'home') {
 					// Retrieve user location from cookie and set to label
 					$("#user-home-delivery-location").text(user.getDetails().location.display);
+
+					const thereAreNoItemsInCart = cart.summary().items.length == 0;
+					if (thereAreNoItemsInCart) {
+						$("#home-footer").hide();
+					} else {
+						$("#home-footer").show();
+					}
+
 				}
 			});
 
