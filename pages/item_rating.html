@@ -206,7 +206,6 @@
         <script>
             // Initialize the user store in order to retrieve the past order items.
             const {
-                datastore,
                 user,
                 utils
             } = app;
@@ -349,13 +348,8 @@
                     ratings[i] = ($(itemNamesAndRatings[i]).find('#item-ratings li.selected').last().data('value'));
                 }
 
-                // Update the details in the past orders datastore.
                 console.log("Updating Items", item_names, "with ratings", ratings);
                 user.updateSpecificOrder(pastOrderId, vendorRating, vendorComment, item_names, ratings, []);
-
-                // Update the details in the vendor datastore.
-                var vendorId = datastore.getVendorIdFromVendorName($('#vendor-name').text().substring(0, $('#vendor-name').text().length - 1));
-                datastore.updateVendorAndItemRatings(vendorId, vendorRating, item_names, ratings);
 
                 $(":mobile-pagecontainer").pagecontainer("change", "past_orders.html");
             };

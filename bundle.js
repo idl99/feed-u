@@ -409,7 +409,7 @@ const data = Object.freeze({
                 "American"
             ],
             "vendorRatings": {
-                "vendorRatingValue": 4.6,
+                "vendorRatingValue": 2.6,
                 "vendorNoOfRatings": 100
             },
             "location": "Colombo 3",
@@ -460,7 +460,7 @@ const data = Object.freeze({
                 "Pizza"
             ],
             "vendorRatings": {
-                "vendorRatingValue": 4.8,
+                "vendorRatingValue": 3.8,
                 "vendorNoOfRatings": 99
             },
             "location": "Colombo 5",
@@ -510,7 +510,7 @@ const data = Object.freeze({
                 "Sri Lankan"
             ],
             "vendorRatings": {
-                "vendorRatingValue": 4.5,
+                "vendorRatingValue": 6.5,
                 "vendorNoOfRatings": 150
             },
             "location": "Colombo 7",
@@ -637,61 +637,6 @@ module.exports = function () {
             const allVendorsItems = data.vendors.flatMap(vendor => vendor.items)
             const item = allVendorsItems.find(item => item.itemId === itemId);
             return item;
-        },
-        getVendorIdFromVendorName: function (vendorName) {
-            const vendor = data.vendors.find(vendor => vendor.vendorName === vendorName);
-            return vendor.vendorId;
-        },
-        updateVendorAndItemRatings: function (vendorId, vendorRating, itemTitles, ratings) {
-            // Updates the vendor ratings and item ratings accordingly.
-
-            // Retrieve the vendor using the vendor Id so that it can be updated.
-            const vendor = data.vendors.find(vendor => vendor.vendorId === vendorId);
-
-            // Update the vendor ratings and increase the count of no: of rated people.
-            vendor.vendorRatings.vendorRatingValue = (parseFloat(vendor.vendorRatings.vendorRatingValue * vendor.vendorRatings.vendorNoOfRatings) + parseFloat(vendorRating)) / (vendor.vendorRatings.vendorNoOfRatings + 1);
-            vendor.vendorRatings.vendorNoOfRatings = vendor.vendorRatings.vendorNoOfRatings + 1;
-
-            // Update the ratings of the vendor's items.
-            var updatedVendorAndItemRatings = [];
-            for (var i = 0; i < itemTitles.length; i++) {
-                vendor.items.map(item => {
-                    // Update if the item names match.
-                    if (item.itemTitle.replace(/\s/g, "") === itemTitles[i]) {
-                        updatedVendorAndItemRatings.push({
-                            "itemImageLocation": item.itemImageLocation,
-                            "itemId": item.itemId,
-                            "itemTitle": item.itemTitle,
-                            "itemDescription": item.itemDescription,
-                            "itemRatings": {
-                                "itemRatingValue": (parseFloat(item.itemRatings.itemRatingValue * item.itemRatings.itemNoOfRatings) + parseFloat(ratings[i])) / (item.itemRatings.itemNoOfRatings + 1),
-                                "itemNoOfRatings": item.itemRatings.itemNoOfRatings + 1
-                            },
-                            "itemPrice": item.itemPrice
-                        });
-                    } else {
-                        // Else check if the item is already there and add it if it is not there.
-                        if (updatedVendorAndItemRatings.find(updatedItem => updatedItem.itemId === item.itemId) === undefined) {
-                            updatedVendorAndItemRatings.push({
-                                "itemImageLocation": item.itemImageLocation,
-                                "itemId": item.itemId,
-                                "itemTitle": item.itemTitle,
-                                "itemDescription": item.itemDescription,
-                                "itemRatings": {
-                                    "itemRatingValue": item.itemRatings.itemRatingValue,
-                                    "itemNoOfRatings": item.itemRatings.itemNoOfRatings
-                                },
-                                "itemPrice": item.itemPrice
-                            });
-                        }
-                    }
-                });
-            }
-            vendor.items = updatedVendorAndItemRatings;
-
-            // CHeck if the update was successfull.
-            var test = data.vendors.find(vendor => vendor.vendorId === vendorId);
-            console.log("Updated Vendor:", test);
         },
         getLeaderboard: function () {
             const { points } = user.getDetails().profile;
@@ -912,7 +857,7 @@ const orders = {
             "pastOrderId": "ord1",
             "vendorCoverImageLocation": "../assets/past_orders/past_order_cover_image.jpg",
             "vendorLogoImageLocation": "../assets/stories_images/story-big.png",
-            "vendorName": "Burgers Ahouy!",
+            "vendorName": "Burgers Ahoy!",
             "noOfOrderedItems": 3,
             "price": 1000,
             "date": "Oct 10 at 12:12 PM",
@@ -943,7 +888,7 @@ const orders = {
             "pastOrderId": "ord2",
             "vendorCoverImageLocation": "../assets/past_orders/past_order_cover_image.jpg",
             "vendorLogoImageLocation": "../assets/stories_images/story-big.png",
-            "vendorName": "Burgers Ahouy!",
+            "vendorName": "Burgers Ahoy!",
             "noOfOrderedItems": 1,
             "price": 500,
             "date": "Oct 01 at 08:30 PM",
