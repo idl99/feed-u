@@ -59,8 +59,8 @@
 								alt="carousel-3">
 						</div>
 
-						<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-						<a class="next" onclick="plusSlides(1)">&#10095;</a>
+						<a class="prev" onclick="nextCarouselItem(-1)">&#10094;</a>
+						<a class="next" onclick="nextCarouselItem(1)">&#10095;</a>
 
 					</div>
 				</div>
@@ -110,14 +110,12 @@
 				vertical-align: middle;
 			}
 
-			/* Carousel container */
 			.carousel-container {
 				max-width: 1000px;
 				position: relative;
 				margin: auto;
 			}
 
-			/* Next & previous buttons */
 			.prev,
 			.next {
 				cursor: pointer;
@@ -134,36 +132,20 @@
 				user-select: none;
 			}
 
-			/* Position the "next button" to the right */
 			.next {
 				right: 0;
 				border-radius: 3px 0 0 3px;
 			}
 
-			/* On hover, add a black background color with a little bit see-through */
 			.prev:hover,
 			.next:hover {
 				background-color: rgba(0, 0, 0, 0.8);
 			}
 
-			/* The dots/bullets/indicators */
-			.dot {
-				cursor: pointer;
-				height: 15px;
-				width: 15px;
-				margin: 0 2px;
-				background-color: #bbb;
-				border-radius: 50%;
-				display: inline-block;
-				transition: background-color 0.6s ease;
-			}
-
-			.active,
-			.dot:hover {
+			.active {
 				background-color: #717171;
 			}
 
-			/* Fading animation */
 			.fade {
 				-webkit-animation-name: fade;
 				-webkit-animation-duration: 1.5s;
@@ -287,30 +269,25 @@
 
 
 			var carouselItemIndex = 1;
-			showSlides(carouselItemIndex);
+			showCarouselSlideshow(carouselItemIndex);
 
-			function plusSlides(n) {
-				showSlides(carouselItemIndex += n);
+			function nextCarouselItem(n) {
+				showCarouselSlideshow(carouselItemIndex += n);
 			}
 
-			function currentSlide(n) {
-				showSlides(carouselItemIndex = n);
+			function currentCarouselItem(n) {
+				showCarouselSlideshow(carouselItemIndex = n);
 			}
 
-			function showSlides(n) {
+			function showCarouselSlideshow(n) {
 				var i;
 				var carouselItems = document.getElementsByClassName("carousel-item");
-				var dots = document.getElementsByClassName("dot");
 				if (n > carouselItems.length) { carouselItemIndex = 1 }
 				if (n < 1) { carouselItemIndex = carouselItems.length }
 				for (i = 0; i < carouselItems.length; i++) {
 					carouselItems[i].style.display = "none";
 				}
-				for (i = 0; i < dots.length; i++) {
-					dots[i].className = dots[i].className.replace(" active", "");
-				}
 				carouselItems[carouselItemIndex - 1].style.display = "block";
-				dots[carouselItemIndex - 1].className += " active";
 			}
 		</script>
 	</div>
