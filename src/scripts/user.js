@@ -11,7 +11,7 @@ const DEFAULT_USER = {
         stripe_customer_id: 'cus_IhWwxopENtlI1P',
     },
     location: {
-        display: "Nugegoda, Delkanda",
+        display: "Delkanda, Nugegoda",
     },
     favorites: {
         items: [],

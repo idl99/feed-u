@@ -3,38 +3,41 @@
 
 body
 
-    @media screen and ( min-width: variables.$dimens_ipad)
-        .ui-panel-dismiss
-            display: none // This disables the ability to dismiss the panel on larger screens
+    #navigation-menu-hamburger
+        position: absolute
+        left: 15px
+        top: 15px
 
-        #navigation-menu-hamburger
-            display: none // Hide the hamburger icon on larger screens to make the panel non-collapsible
+    #home-main-content-container
+        display: flex
+        flex-direction: column
 
     .user-delivery-location-details
         display: flex
-        justify-content: center 
+        justify-content: center
         align-items: center
 
         #deliver-now-txt
             margin-right: 5px
 
         #user-home-delivery-location
-            overflow: hidden 
-            white-space: nowrap 
+            overflow: hidden
+            white-space: nowrap
             text-overflow: ellipsis
-    
-    .favourite-vendor-stories-container
+
+    #home-favourite-vendor-stories-container
         display: flex
         justify-content: flex-start
         overflow: auto
 
-        #favourite-vendor-story
-            margin-left: 0.25em 
-            margin-right: 0.25em 
+        .favourite-vendor-story
+            margin: 0.25em 0.25em
+            width: 40px
+            height: 40px
 
     .all-poi-container
-        display: flex
-        flex-direction: column
+        display: grid
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr))
 
         .poi-container
             display: flex
@@ -42,7 +45,7 @@ body
             justify-content: top
             height: 65px
             width: 335px
-            margin-bottom: 5%
+            margin-bottom: 20px
 
         .poi-image
             float: left
@@ -53,12 +56,12 @@ body
             width: 100%
             float: right
             margin-left: 5%
-        
+
         .poi-catergory-container
             display: flex
             align-items: center
             margin-top: 0.30em
-            font-size: 12px 
+            font-size: 12px
 
         #poi-catergory
             margin-right: 0.75em
@@ -80,16 +83,41 @@ body
             font-size: 11px
             background: #F2F2F2
             border-radius: 25px
-        
+
         #poi-rate-star-icon
             color: #F2C94C
 
         #poi-no-of-rated-customers
-            margin-top: 0.25em
-            margin-left: 0.25em 
-            font-size: 8px
-        
+            margin-left: 0.25em
+            font-size: 9px
+
         #poi-delivery-time
-            display: flex 
-            align-items: center 
+            display: flex
+            align-items: center
             margin-left: 0.50em
+
+    @media screen and ( min-width: variables.$dimens_ipad)
+        .ui-panel-dismiss
+            display: none // This disables the ability to dismiss the panel on larger screens
+
+        #home-main-content-container
+            display: grid
+            grid-template-columns: 90% 10%
+            grid-template-rows: 0.1fr 1fr
+
+        #home-favourite-stories-section
+            grid-row-start: 1
+            grid-row-end: 3
+            grid-column-start: 2
+            display: flex
+            flex-direction: column
+            align-items: center
+
+        #home-favourite-vendor-stories-container
+            flex-direction: column
+
+            .favourite-vendor-story
+                margin: 10px 0.25em
+
+        #navigation-menu-hamburger
+            display: none // Hide the hamburger icon on larger screens to make the panel non-collapsible
