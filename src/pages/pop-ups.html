@@ -45,7 +45,14 @@
                 <h4> Get support about order</h4>
             </button>
         </a>
+
+        <a href="#" data-rel="back"
+            class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right"
+            style="background-color: #EB5757;">Close</a>
+        </a>
     </div>
+
+    
     <!--end of delivery sucess pop up  -->
 
     <!-- BUTTONS BUTTONS BUTTON BUTTONS BUTTONS BUTTONS BUTTONS BUTTONS -->
@@ -58,6 +65,8 @@
     </a>
 
 
+
+
     <!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 
     <!-- Favourites email pop-up -->
@@ -68,6 +77,55 @@
             justify-content: center;
         }
     </style>
+    
+    <script>
+
+    $(document).bind('pageinit', function () {
+        setTimeout(function () {
+            $("#popup1").popup();
+            $("#popup1").popup("open");
+        }, 100);
+        setTimeout(function () {
+            $("#popup1").popup("close");
+        }, 3000);
+        setTimeout(function () {
+            $("#popup2").popup();
+            $("#popup2").popup("open");
+        }, 3100);
+    });
+
+
+
+        function openSecondPopup() {
+            // $('#popup1').popup();
+            // $("#popup1").popup("close")
+            // $('#popup2').popup("open", {
+            //     positionTo: "window"
+            // })
+
+            $(document).on("pageinit", function () {
+                $('.popup1').on({
+                    popupafterclose: function () {
+                        setTimeout(function () { $('.popup2').popup('open') }, 100);
+                    }
+                });
+            });
+        }
+
+        function hideFirstPopup() {
+            $('#popup1').popup();
+            $("#popup1").popup("close")
+        }
+
+
+
+
+
+
+
+
+
+    </script>
 
 
     <div data-role="popup" id="popup1" data-overlay-theme="b" data-theme="b" data-corners="false" style="padding: 1em;">
@@ -76,24 +134,55 @@
             <input type="text" class="favourites-email-popup" name="recipient-email" id="rec-email" value=""
                 placeholder="koshami@deshanwatte.lk">
             <div class="favourites-email-popup">
-                    <h4><i class="fa fa-paperclip" aria-hidden="true" style="margin-right: 5px;"></i>Your Favourites</h4>
+                <h4><i class="fa fa-paperclip" aria-hidden="true" style="margin-right: 5px;"></i>Your Favourites</h4>
             </div>
         </div>
+
+        <!-- <a href="#popup2" data-rel="popup" data-position-to="window" data-transition="fade"> -->
+            <button id="emailBtn" data-rel=back class="email-button"
+                style="width: 100%; text-align: center; border-radius: 100px; border-width: 2px; background:#EB5757; color: white; border-color: #EB5757 ; margin: 0px; padding: 0px;  text-shadow: none;">
+                <h4>Send E-mail</h4>
+            </button>
+
+            <div data-role="popup" id="popup2" data-overlay-theme="b" data-theme="b" data-corners="false" style="padding: 1em;">
+                <div>
+                    <h2 class="favourites-email-popup">Are you sure you want to</h2>
+                    <h2 class="favourites-email-popup">send the email?</h2>
+                    <input type="text" class="favourites-email-popup" name="recipient-email" id="rec-email" value=""
+                        placeholder="koshami@deshanwatte.lk">
+                </div>
+            </div>
+
+<!-- 
+        </a> -->
+
+            <div data-role="popup" id="popup2" data-overlay-theme="b" data-theme="b" data-corners="false" style="padding: 1em;">
+                <div>
+                    <h2 class="favourites-email-popup">Are you sure you want to</h2>
+                    <h2 class="favourites-email-popup">send the email?</h2>
+                    <input type="text" class="favourites-email-popup" name="recipient-email" id="rec-email" value=""
+                        placeholder="koshami@deshanwatte.lk">
+                </div>
+            </div>
+
+
+        <!-- </a> -->
         
-
-
-        
-
-        <button id="emailBtn" class="email-button"
-            style="width: 100%; text-align: center; border-radius: 100px; border-width: 2px; background:#EB5757; color: white; border-color: #EB5757 ; margin: 0px; padding: 0px;  text-shadow: none;">
-            <h4>Send E-mail</h4>
-        </button>
-        <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right" style="background-color: #EB5757;">Close</a>
+        <a href="#" data-rel="back"
+            class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right"
+            style="background-color: #EB5757;">Close</a>
         </a>
     </div>
 
 
-
+    <!-- <div data-role="popup" id="popup2" data-overlay-theme="b" data-theme="b" data-corners="false" style="padding: 1em;">
+        <div>
+            <h2 class="favourites-email-popup">Are you sure you want to</h2>
+            <h2 class="favourites-email-popup">send the email?</h2>
+            <input type="text" class="favourites-email-popup" name="recipient-email" id="rec-email" value=""
+                placeholder="koshami@deshanwatte.lk">
+        </div>
+    </div> -->
 
     <!-- BUTTONS BUTTONS BUTTON BUTTONS BUTTONS BUTTONS BUTTONS BUTTONS -->
 
@@ -103,23 +192,16 @@
             <h4> Send favourites</h4>
         </button>
     </a>
+    
 
 
+    
 
 
-    <!-- 
-
-            <div>
-                <h2 class="favourites-email-popup">Are you sure you want to</h2>
-                <h2 class="favourites-email-popup">send the email?</h2>
-                <input type="text" class="favourites-email-popup" name="recipient-email" id="rec-email" value=""
-                    placeholder="koshami@deshanwatte.lk">
-            </div>
-
-
-        <a href="#popup2" data-rel="popup" data-position-to="window" data-transition="fade"></a> -->
+        
 
 
 
 
 </body>
+</html>

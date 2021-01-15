@@ -70,6 +70,56 @@
 
         </div>
 
+        <!-- delivery success popup -->
+
+        <div data-role="popup" id="delivery-complete-popup" data-overlay-theme="b" data-theme="b" data-corners="false"
+            style="padding: 1em;">
+        
+            <style>
+                .success_popup_items {
+                    display: flex;
+                    justify-content: center;
+                }
+            </style>
+        
+            <h2 style="color:#27AE60">DELIVERY COMPLETED</h2>
+            <br>
+            <div class="success_popup_items">
+                <img id="deliver-success" src="../assets/vendor_page_images/delivery_completed.jpg" alt="">
+            </div>
+            <h2 class="success_popup_items">ENJOY YOUR MEAL<i class="fa fa-heart" aria-hidden="true"
+                    style="color: #EB5757; margin-left: 6px;"></i></h2>
+            <h5 class="success_popup_items">And here's a little reward for ordering</h5>
+            <h5 class="success_popup_items">with us</h5>
+            <h2 class="success_popup_items">50 Points <i class="fa fa-database" aria-hidden="true"
+                    style="color: #F2C94C; margin-left: 10px;"></i></h2>
+            <h5 class="success_popup_items">credited to your account</h5>
+            <br>
+            <!-- redirect to leaderboard -->
+            <a data-rel="back">
+                <button id="checkLBBtn" class="cLB-button" 
+                    style="width: 100%; text-align: center; border-radius: 100px; border-width: 2px; background: white; color: #EB5757; border-color: #EB5757 ; margin-bottom: 10px; margin-top: -5px; padding: 0px;  text-shadow: none;">
+                    <a href="/Users/vinulauthsara/Desktop/feed-u/src/pages/leaderboard.html"></a>
+                    <h4> Check Leaderboard</h4>
+                </button>
+                <!-- redirect to support -->
+                <button id="getSupBtn" class="get-Sup-button"
+                    style="width: 100%; text-align: center; border-radius: 100px; border-width: 2px; background: white; color: #EB5757; border-color: #EB5757 ; margin: 0px; padding: 0px;  text-shadow: none;">
+                    <a href="/Users/vinulauthsara/Desktop/feed-u/src/pages/help_and_support.html"></a>
+                    <h4> Get support about order</h4>
+                </button>
+            </a>
+        
+            <a href="#" data-rel="back"
+                class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right"
+                style="background-color: #EB5757;">Close</a>
+            </a>
+        </div>
+
+
+        <!--end of delivery sucess pop up  -->
+
+
         <script>
             {
                 const { cart } = app;
@@ -205,9 +255,19 @@
                 function progressOrder() {
 
                 }
+
+                function deliveryCompleted() {
+                    $('#delivery-complete-popup').popup("open", {
+                        positionTo: "window"
+                    })
+
+                }
             }
 
         </script>
+
+
+
 
     </div>
 

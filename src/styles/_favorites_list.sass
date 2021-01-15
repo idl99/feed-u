@@ -1,0 +1,25 @@
+// We don't need to include the underscore when referring to a partial
+@use 'variables'
+@use "sass:map"
+
+body
+
+    #favorites-list-page
+
+        & #favorite-vendors-container
+
+            display: grid
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr))
+
+        & .favorites-list-section-title-container
+            display: flex
+            margin: 20px 0px
+            flex-direction: row
+            align-items: center
+
+        & .favorites-list-email-btn
+            margin-left: auto
+            background-color: transparent
+            border: 2px solid map.get(variables.$feedU-theme, "primary-color")
+            border-radius: 5px
+            width: 5em
