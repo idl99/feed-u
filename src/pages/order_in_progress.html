@@ -95,8 +95,9 @@
                 $("#order-payment-method").text(selectedPaymentMethod.toUpperCase())
             }
 
-            function progressOrder() {
-
+            function progressToDelivery() {
+                $(":mobile-pagecontainer").pagecontainer("change", "delivery_in_progress.html")
+                return "Progressing to Delivery ...";
             }
 
         </script>
