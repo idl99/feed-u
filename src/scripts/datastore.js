@@ -240,6 +240,61 @@ module.exports = function () {
             const item = allVendorsItems.find(item => item.itemId === itemId);
             return item;
         },
+        getVendorIdFromVendorName: function (vendorName) {
+            const vendor = data.vendors.find(vendor => vendor.vendorName === vendorName);
+            return vendor.vendorId;
+        },
+        updateVendorAndItemRatings: function (vendorId, vendorRating, itemTitles, ratings) {
+            // Updates the vendor ratings and item ratings accordingly.
+
+            // Retrieve the vendor using the vendor Id so that it can be updated.
+            const vendor = data.vendors.find(vendor => vendor.vendorId === vendorId);
+
+            // Update the vendor ratings and increase the count of no: of rated people.
+            vendor.vendorRatings.vendorRatingValue = (parseFloat(vendor.vendorRatings.vendorRatingValue * vendor.vendorRatings.vendorNoOfRatings) + parseFloat(vendorRating)) / (vendor.vendorRatings.vendorNoOfRatings + 1);
+            vendor.vendorRatings.vendorNoOfRatings = vendor.vendorRatings.vendorNoOfRatings + 1;
+
+            // Update the ratings of the vendor's items.
+            var updatedVendorAndItemRatings = [];
+            for (var i = 0; i < itemTitles.length; i++) {
+                vendor.items.map(item => {
+                    // Update if the item names match.
+                    if (item.itemTitle.replace(/\s/g, "") === itemTitles[i]) {
+                        updatedVendorAndItemRatings.push({
+                            "itemImageLocation": item.itemImageLocation,
+                            "itemId": item.itemId,
+                            "itemTitle": item.itemTitle,
+                            "itemDescription": item.itemDescription,
+                            "itemRatings": {
+                                "itemRatingValue": (parseFloat(item.itemRatings.itemRatingValue * item.itemRatings.itemNoOfRatings) + parseFloat(ratings[i])) / (item.itemRatings.itemNoOfRatings + 1),
+                                "itemNoOfRatings": item.itemRatings.itemNoOfRatings + 1
+                            },
+                            "itemPrice": item.itemPrice
+                        });
+                    } else {
+                        // Else check if the item is already there and add it if it is not there.
+                        if (updatedVendorAndItemRatings.find(updatedItem => updatedItem.itemId === item.itemId) === undefined) {
+                            updatedVendorAndItemRatings.push({
+                                "itemImageLocation": item.itemImageLocation,
+                                "itemId": item.itemId,
+                                "itemTitle": item.itemTitle,
+                                "itemDescription": item.itemDescription,
+                                "itemRatings": {
+                                    "itemRatingValue": item.itemRatings.itemRatingValue,
+                                    "itemNoOfRatings": item.itemRatings.itemNoOfRatings
+                                },
+                                "itemPrice": item.itemPrice
+                            });
+                        }
+                    }
+                });
+            }
+            vendor.items = updatedVendorAndItemRatings;
+
+            // CHeck if the update was successfull.
+            var test = data.vendors.find(vendor => vendor.vendorId === vendorId);
+            console.log("Updated Vendor:", test);
+        },
         getLeaderboard: function () {
             const { points } = user.getDetails().profile;
             const loggedInUser = { name: "You", points };
