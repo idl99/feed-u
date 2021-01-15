@@ -110,8 +110,10 @@
                 margin-bottom: 1em;
             }
         </style>
-        <div data-role="header" id="past-orders-header" data-add-back-btn="true" data-position="fixed"
-            data-tap-toggle="false">
+        <div data-role="header" id="checkout-header" data-position="fixed" data-tap-toggle="false">
+            <a class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-corner-all" href="#" data-rel="back"
+                data-icon="arrow-l" data-theme="c" data-role="button">Back</a>
+            <span class="ui-title"></span>
             <img src="../assets/logo.png"></img>
         </div>
         <div role="main" class="ui-content">
@@ -131,7 +133,7 @@
                 const pastOrderCards = pastOrders.map(({ pastOrderId, vendorCoverImageLocation, vendorName, noOfOrderedItems, price, date, vendorRating, orderedItems }) => {
                     var markup1 =
                         `<div class="past-order-card" past-order-id="${pastOrderId}"">
-                            <img id="past-order-cover-img" src=${vendorCoverImageLocation}
+                            <img id="past-order-cover-img" style="object-fit: cover;" src=${vendorCoverImageLocation}
                                 alt="Past Order Cover Image">
                             <span id="past-order-vendor-name">${vendorName}</span>
                             <span id="past-order-no-items-and-price">${noOfOrderedItems} items for LKR ${price}.00 <i class="fa fa-circle"

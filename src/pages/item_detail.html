@@ -49,6 +49,8 @@
             .item-detail-page-item-ratings-with-name {
                 display: flex;
                 justify-content: space-between;
+                align-items: center;
+                padding: 0.25em 0;
             }
 
             #item-detail-page-item-name {
@@ -60,13 +62,13 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                margin-right: 0.5em;
                 height: 20px;
                 width: 70px;
                 font-size: 11px;
                 background: #F2F2F2;
                 border-radius: 25px;
                 color: black;
+                margin-right: 1em;
             }
 
             #item-detail-page-item-rate-star-icon {
@@ -128,8 +130,21 @@
                 padding: 0px;
                 border-radius: 0%;
             }
+
+            .item-page-item-favourite {
+                display: flex;
+                align-items: center;
+                margin-right: 1em;
+            }
+
+            #item-favourite-icon {
+                font-size: 25px;
+            }
         </style>
-        <div data-role="header" data-add-back-btn="true">
+        <div data-role="header" id="checkout-header" data-position="fixed" data-tap-toggle="false">
+            <a class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-corner-all" href="#" data-rel="back"
+                data-icon="arrow-l" data-theme="c" data-role="button">Back</a>
+            <span class="ui-title"></span>
             <img src="../assets/logo.png"></img>
         </div>
         <div role="main" class="ui-content">
@@ -137,16 +152,21 @@
                 <img id="item-detail-page-item-img" src="../assets/vendor_page_images/tom_yum_soup.jpg">
                 <div class="item-detail-page-item-img-txt-container">
                     <div class="item-detail-page-item-ratings-with-name">
-                        <span id="item-detail-page-item-name">Item Name</span><br>
+                        <span id="item-detail-page-item-name">Item Name</span>
                         <!-- rating bar next to item name -->
-                        <div class="item-detail-page-item-rating-bar">
-                            <p>
-                                <i class='fa fa-star fa-fw' id="item-detail-page-item-rate-star-icon"></i>
-                                <span id="item-detail-page-item-rating-value">0.0</span>
-                                <small id="item-detail-page-item-no-of-ratings">(0)</small>
-                            </p>
+                        <div style="display: flex; align-items: center;">
+                            <div class="item-detail-page-item-rating-bar">
+                                <p>
+                                    <i class='fa fa-star fa-fw' id="item-detail-page-item-rate-star-icon"></i>
+                                    <span id="item-detail-page-item-rating-value">0.0</span>
+                                    <small id="item-detail-page-item-no-of-ratings">(0)</small>
+                                </p>
+                            </div>
+                            <!-- ---end of rating bar------- -->
+                            <div class="item-page-item-favourite">
+                                <i id="item-favourite-icon" class="fa fa-heart-o"></i>
+                            </div>
                         </div>
-                        <!-- ---end of rating bar------- -->
                     </div>
                 </div>
             </div>
@@ -227,7 +247,7 @@
 
         <script>
 
-            const { utils, datastore, cart } = app;
+            const { utils, datastore, cart, user } = app;
             var item = {};
             var vendor = {};
             var quantity = 1;
@@ -252,6 +272,38 @@
                 item = itemDetails;
                 vendor = vendorDetails;
                 setItemDetails(itemDetails);
+
+                const FAVORITE_ICON_STATES = {
+                    FILLED: 'fa-heart',
+                    UNFILLED: 'fa-heart-o',
+                    FILLED_COLOR: '#EB5757',
+                    UNFILLED_COLOR: '#F1F1F1',
+                }
+
+                const itemIsFavorite = user.isItemFavorite(user.FAVORITE_TYPES.ITEM, item);
+                if (itemIsFavorite) {
+                    $('#item-favourite-icon').addClass(FAVORITE_ICON_STATES.FILLED)
+                        .removeClass(FAVORITE_ICON_STATES.UNFILLED).css('color', FAVORITE_ICON_STATES.FILLED_COLOR);
+                } else {
+                    $('#item-favourite-icon').addClass(FAVORITE_ICON_STATES.UNFILLED)
+                        .removeClass(FAVORITE_ICON_STATES.FILLED).css('color', FAVORITE_ICON_STATES.UNFILLED_COLOR);
+                }
+
+                $('#item-favourite-icon').on('click', function () {
+
+                    const wasUnfilled = $('#item-favourite-icon').hasClass('fa-heart-o');
+                    if (wasUnfilled) {
+                        $(this).css('color', FAVORITE_ICON_STATES.FILLED_COLOR);
+                        user.addFavorite(user.FAVORITE_TYPES.ITEM, item);
+                    } else {
+                        $(this).css('color', FAVORITE_ICON_STATES.UNFILLED_COLOR);
+                        user.removeFavorite(user.FAVORITE_TYPES.ITEM, item);
+                    }
+
+                    $(this).toggleClass(FAVORITE_ICON_STATES.FILLED);
+                    $(this).toggleClass(FAVORITE_ICON_STATES.UNFILLED);
+                });
+
             });
 
             $('#item-detail-page-incr-item-qty').click(function (event) {
