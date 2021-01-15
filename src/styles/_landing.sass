@@ -1,12 +1,12 @@
 body
 
     #landing
-        background-image: url("../assets/backgrounds/landing-page-mock.jpg")
-        background-color: #cccccc
-        background-size: cover
-        background-repeat: no-repeat
-        min-height: inherit
-        text-shadow: none
+        // background-image: url("../assets/backgrounds/landing-page-mock.jpg")
+        // background-color: #cccccc
+        // background-size: cover
+        // background-repeat: no-repeat
+        // min-height: inherit
+        // text-shadow: none
 
         &-header
             background-color: transparent
@@ -15,6 +15,12 @@ body
             z-index: 100
 
         .ui-content
+            background-image: url("../assets/backgrounds/landing-page-mock.jpg")
+            background-color: #cccccc
+            background-size: cover
+            background-repeat: no-repeat
+            min-height: inherit
+            text-shadow: none
             /* full size */
             position: absolute
             top: 0
@@ -52,7 +58,9 @@ body
             .landing-text
                 font-size: 3vw
 
-            #landing-location-search-input
+            #landing-location-search
+                position: relative
+                margin: 3vh 0vw
                 width: 66%
 
         /* @media only screen and (min-height: 1024px) { */
@@ -64,5 +72,7 @@ body
             .landing-text
                 font-size: 4vh
 
-            #landing-location-search-input
+            #landing-location-search
+                position: relative
+                margin: 3vh 0vw
                 width: 80%

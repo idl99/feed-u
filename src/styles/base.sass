@@ -12,6 +12,8 @@
 @use "set_location"
 @use "vendor_rating"
 @use "checkout"
+@use "order_in_progress"
+@use "delivery_in_progress"
 @use "variables"
 
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap")
@@ -22,11 +24,19 @@ div[data-role="page"].feedU-page
         font-family: variables.$font-family
         text-shadow: none
 
+    .ui-title
+        margin-left: 0px
+        margin-right: 0px
+
     .ui-header
         background-color: map.get(variables.$feedU-theme, "primary-color")
-        display: flex
         padding: 5px 0px
+        display: flex
         justify-content: center
+
+        a[data-rel="back"]
+            left: 10px
+            top: 15px
 
     .ui-footer
 

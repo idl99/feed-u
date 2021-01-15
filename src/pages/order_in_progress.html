@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feed U - Order in Progress</title>
+
+    <link rel="stylesheet" href="../css/base.css" />
+    <script src="../bundle.js"></script>
+</head>
+
+<body>
+
+    <div data-role="page" id="order-in-progress-page" class="ui-responsive-panel">
+
+        <div role="main" class="ui-content" style="padding: 0px">
+
+            <div
+                style="background-color: #ed595b; height: 40vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px 15px;">
+                <h2 style="text-align: center; text-shadow: none; color: white;">
+                    Your Order Is Being Prepared</h2>
+                <img src="../assets/cooking_animated.gif" style="object-fit: contain; height: 80%; width: 80%;" />
+            </div>
+
+            <div id="order-in-progress-order-summary-container">
+                <h1>ETA</h1>
+                <h2>8:30 PM</h2>
+                <p>Your Order will be picked up once preparation is complete</p>
+
+                <hr />
+
+                <div id="order-in-progress-order-summary">
+                    <span style="text-align: center;"> Your Ordered From </span>
+                    <h2 style="text-align: center;" id="order-you-ordered-from"></h2>
+                    <div id="order-items-grid"></div>
+                    <div class="order-payment-detail">
+                        <span>
+                            <svg width="22" height="24" viewBox="0 0 22 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M0 18.9984V21C0 22.6547 3.69531 24 8.25 24C12.8047 24 16.5 22.6547 16.5 21V18.9984C14.7254 20.3625 11.4812 21 8.25 21C5.01875 21 1.77461 20.3625 0 18.9984ZM13.75 6C18.3047 6 22 4.65469 22 3C22 1.34531 18.3047 0 13.75 0C9.19531 0 5.5 1.34531 5.5 3C5.5 4.65469 9.19531 6 13.75 6ZM0 14.0812V16.5C0 18.1547 3.69531 19.5 8.25 19.5C12.8047 19.5 16.5 18.1547 16.5 16.5V14.0812C14.7254 15.675 11.477 16.5 8.25 16.5C5.02305 16.5 1.77461 15.675 0 14.0812ZM17.875 14.5969C20.3371 14.0766 22 13.1109 22 12V9.99844C21.0031 10.7672 19.5379 11.2922 17.875 11.6156V14.5969ZM8.25 7.5C3.69531 7.5 0 9.17813 0 11.25C0 13.3219 3.69531 15 8.25 15C12.8047 15 16.5 13.3219 16.5 11.25C16.5 9.17813 12.8047 7.5 8.25 7.5ZM17.673 10.1391C20.2512 9.63281 22 8.63906 22 7.5V5.49844C20.4746 6.675 17.8535 7.30781 15.0949 7.45781C16.3625 8.12813 17.2949 9.02812 17.673 10.1391Z"
+                                    fill="black" />
+                            </svg>
+                            <span>Total</span>
+                        </span>
+                        <span id="order-bill-total">0.00</span>
+                    </div>
+                    <div class="order-payment-detail">
+                        <span>
+                            <svg width="22" height="24" viewBox="0 0 22 25" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M10.353 7.0459L12.4258 7.74414C12.4962 7.76519 12.5592 7.81537 12.605 7.88689C12.6508 7.95841 12.6768 8.04727 12.679 8.13965C12.679 8.36426 12.5228 8.5498 12.3307 8.5498H10.971C10.8244 8.54926 10.6794 8.5128 10.5436 8.44238C10.3434 8.33496 10.1127 8.35938 9.9592 8.54004L9.23351 9.39453C9.19994 9.43209 9.17097 9.47587 9.14757 9.52441C9.11761 9.58724 9.09767 9.65703 9.0889 9.72975C9.08014 9.80247 9.08272 9.8767 9.09649 9.94814C9.11027 10.0196 9.13497 10.0868 9.16917 10.146C9.20337 10.2052 9.2464 10.2551 9.29576 10.293C9.69765 10.6013 10.1476 10.793 10.6139 10.8545V11.7188C10.6139 12.1484 10.9129 12.5 11.2773 12.5H11.9407C12.3055 12.5 12.6045 12.1484 12.6045 11.7188V10.8594C13.8623 10.6836 14.8137 9.3457 14.648 7.7832C14.5276 6.66016 13.7901 5.7666 12.8696 5.4541L10.7968 4.75586C10.7264 4.73481 10.6634 4.68463 10.6176 4.61311C10.5718 4.54159 10.5458 4.45273 10.5436 4.36035C10.5436 4.13574 10.6998 3.9502 10.8919 3.9502H12.2516C12.3987 3.95049 12.5443 3.98696 12.6806 4.05762C12.8803 4.16504 13.1114 4.14062 13.2649 3.95996L13.9906 3.10547C14.0231 3.06871 14.051 3.02591 14.0735 2.97852C14.1037 2.91571 14.1239 2.84587 14.1329 2.77304C14.1419 2.7002 14.1395 2.62581 14.1258 2.55417C14.1122 2.48253 14.0876 2.41505 14.0534 2.35563C14.0193 2.29622 13.9763 2.24604 13.9268 2.20801C13.5248 1.89967 13.0747 1.70798 12.6084 1.64648V0.78125C12.6084 0.351562 12.3097 0 11.9449 0H11.2815C10.9167 0 10.6181 0.351562 10.6181 0.78125V1.64062C9.36184 1.81641 8.40851 3.1543 8.57427 4.7168C8.6942 5.83984 9.43403 6.7334 10.353 7.0459ZM21.5902 16.0205C21.1395 15.498 20.4367 15.5322 19.9631 16.0205L16.4339 19.6289C16.0007 20.0732 15.4615 20.3145 14.9061 20.3125H10.3889C10.2268 20.3125 10.0714 20.2302 9.95677 20.0837C9.84216 19.9372 9.77778 19.7385 9.77778 19.5312C9.77778 19.324 9.84216 19.1253 9.95677 18.9788C10.0714 18.8323 10.2268 18.75 10.3889 18.75H13.3791C13.9864 18.75 14.5521 18.2178 14.6491 17.4512C14.6611 17.3631 14.6669 17.2739 14.6667 17.1846C14.6661 16.7707 14.537 16.374 14.3079 16.0816C14.0787 15.7892 13.7682 15.625 13.4444 15.625H7.33333C6.3027 15.6253 5.30347 16.0786 4.50313 16.9087L2.72708 18.75H0.611111C0.449034 18.75 0.293596 18.8323 0.17899 18.9788C0.0643847 19.1253 0 19.324 0 19.5312L0 24.2188C0 24.426 0.0643847 24.6247 0.17899 24.7712C0.293596 24.9177 0.449034 25 0.611111 25H14.2377C14.7929 25.0006 15.3318 24.7595 15.7655 24.3164L21.5417 18.4082C21.6806 18.2661 21.7936 18.087 21.8728 17.8833C21.952 17.6796 21.9954 17.4563 22.0001 17.2289C22.0047 17.0015 21.9705 16.7756 21.8997 16.5668C21.829 16.3581 21.7235 16.1717 21.5906 16.0205H21.5902Z"
+                                    fill="black" />
+                            </svg>
+                            <span>Paying By</span>
+                        </span>
+                        <span id="order-payment-method">Points</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <script>
+            const { cart } = app;
+            const summary = cart.summary();
+
+            $("#order-you-ordered-from")
+                .text(summary.vendor.vendorName);
+
+            var items = summary.items;
+            if (items.length > 0) {
+                const itemsList = items.map(({ quantity, itemTitle, itemPrice }) => {
+                    var markup =
+                        `<div class="order-item">
+                        <div class="order-item-quantity">${quantity} X </div>
+                        <div class="order-item-name">${itemTitle}</div>
+                        <div class="order-item-price">${itemPrice * quantity}</div>
+                    </div>`;
+                    return markup;
+                });
+                $('#order-items-grid').html(itemsList.reduce((markup, item) => markup + item));
+            }
+
+            var billTotal = items.reduce((sum, { quantity, itemPrice }) => {
+                return sum + quantity * itemPrice;
+            }, 0);
+            $("#order-bill-total").text(billTotal)
+
+            {
+                const selectedPaymentMethod = summary.paymentMethod;
+                console.log(selectedPaymentMethod);
+                $("#order-payment-method").text(selectedPaymentMethod.toUpperCase())
+            }
+
+            function progressToDelivery() {
+                $(":mobile-pagecontainer").pagecontainer("change", "delivery_in_progress.html")
+                return "Progressing to Delivery ...";
+            }
+
+        </script>
+
+    </div>
+
+</body>
+
+</html>
