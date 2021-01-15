@@ -11,7 +11,7 @@ const data = Object.freeze({
                 "American"
             ],
             "vendorRatings": {
-                "vendorRatingValue": 4.6,
+                "vendorRatingValue": 2.6,
                 "vendorNoOfRatings": 100
             },
             "location": "Colombo 3",
@@ -62,7 +62,7 @@ const data = Object.freeze({
                 "Pizza"
             ],
             "vendorRatings": {
-                "vendorRatingValue": 4.8,
+                "vendorRatingValue": 3.8,
                 "vendorNoOfRatings": 99
             },
             "location": "Colombo 5",
@@ -112,7 +112,7 @@ const data = Object.freeze({
                 "Sri Lankan"
             ],
             "vendorRatings": {
-                "vendorRatingValue": 4.5,
+                "vendorRatingValue": 6.5,
                 "vendorNoOfRatings": 150
             },
             "location": "Colombo 7",

@@ -77,6 +77,29 @@
             justify-content: center;
         }
     </style>
+    
+    <script>
+        function openSecondPopup() {
+                // $('#popup1').popup();
+                // $("#popup1").popup("close")
+                // $('#popup2').popup("open", {
+                //     positionTo: "window"
+                // })
+
+                $(document).on("pageinit", function () {
+                $('.popup1').on({
+                    popupafterclose: function () {
+                        setTimeout(function () { $('.popup2').popup('open') }, 100);
+                    }
+    });
+});
+            }
+
+        function hideFirstPopup() {
+                $('#popup1').popup();
+                $("#popup1").popup("close")
+            }
+    </script>
 
 
     <div data-role="popup" id="popup1" data-overlay-theme="b" data-theme="b" data-corners="false" style="padding: 1em;">
@@ -89,8 +112,8 @@
             </div>
         </div>
 
-        <a href="#popup2" data-rel="popup" data-position-to="window" data-transition="fade">
-            <button id="emailBtn" class="email-button"
+        <!-- <a href="#popup2" data-rel="popup" data-position-to="window" data-transition="fade"> -->
+            <button id="emailBtn" data-rel=back class="email-button"
                 style="width: 100%; text-align: center; border-radius: 100px; border-width: 2px; background:#EB5757; color: white; border-color: #EB5757 ; margin: 0px; padding: 0px;  text-shadow: none;">
                 <h4>Send E-mail</h4>
             </button>
@@ -104,8 +127,8 @@
                 </div>
             </div>
 
-
-        </a>
+<!-- 
+        </a> -->
 
             <div data-role="popup" id="popup2" data-overlay-theme="b" data-theme="b" data-corners="false" style="padding: 1em;">
                 <div>
