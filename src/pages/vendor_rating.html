@@ -71,7 +71,7 @@
                     </ul>
                 </div>
                 <div class="vendor-rating-comment">
-                    <textarea placeholder="Leave your thoughts about the vendor here"></textarea>
+                    <textarea id="vendor-comment" placeholder="Leave your thoughts about the vendor here"></textarea>
                 </div>
                 <button class="continue-btn" onclick="onContinueClick()" disabled>
                     <h4 id="continue-btn-txt">Continue</h4>
@@ -148,6 +148,7 @@
 
             // Proceeds to the item_rating.html page for item rating.
             function onContinueClick(event) {
+                vendorComment = $('#vendor-comment').val();
                 console.log('Clicked continue. Opening the item ratings page.')
                 $(":mobile-pagecontainer").pagecontainer("change", "item_rating.html", {
                     data: {
