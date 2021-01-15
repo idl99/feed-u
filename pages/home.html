@@ -67,18 +67,17 @@
 				<div id="home-favourite-stories-section">
 					<p>Stories</p>
 					<div id="home-favourite-vendor-stories-container">
-						<img class="favourite-vendor-story" src="../assets/stories_images/story.png"
+						<img class="favourite-vendor-story" src="../assets/stories_images/story_1.png"
 							onclick="onStoryClick()">
-						<img class="favourite-vendor-story" src="../assets/stories_images/story.png">
-						<img class="favourite-vendor-story" src="../assets/stories_images/story.png">
-						<img class="favourite-vendor-story" src="../assets/stories_images/story.png">
-						<img class="favourite-vendor-story" src="../assets/stories_images/story.png">
-						<img class="favourite-vendor-story" src="../assets/stories_images/story.png">
-						<img class="favourite-vendor-story" src="../assets/stories_images/story.png">
-						<img class="favourite-vendor-story" src="../assets/stories_images/story.png">
-						<img class="favourite-vendor-story" src="../assets/stories_images/story.png">
-						<img class="favourite-vendor-story" src="../assets/stories_images/story.png">
-						<img class="favourite-vendor-story" src="../assets/stories_images/story.png">
+						<img class="favourite-vendor-story" src="../assets/stories_images/story_2.jpg">
+						<img class="favourite-vendor-story" src="../assets/stories_images/story_3.jpg">
+						<img class="favourite-vendor-story" src="../assets/stories_images/story_4.jpg">
+						<img class="favourite-vendor-story" src="../assets/stories_images/story_5.jpg">
+						<img class="favourite-vendor-story" src="../assets/stories_images/story_6.jpg">
+						<img class="favourite-vendor-story" src="../assets/stories_images/story_7.jpg">
+						<img class="favourite-vendor-story" src="../assets/stories_images/story_8.jpg">
+						<img class="favourite-vendor-story" src="../assets/stories_images/story_9.jpg">
+						<img class="favourite-vendor-story" src="../assets/stories_images/story_10.jpg">
 					</div>
 				</div>
 				<div id="home-pois-section">
@@ -229,7 +228,7 @@
 					`</div>
 						<div class="poi-rating-bar-container">
 							<div class="poi-rating-bar">
-								<span><i class='fa fa-star fa-fw' id="poi-rate-star-icon"></i> ${vendorRatings.vendorRatingValue} 
+								<span><i class='fa fa-star fa-fw' id="poi-rate-star-icon"></i> ${(vendorRatings.vendorRatingValue).toFixed(1)} 
 								</span>
 								<small id="poi-no-of-rated-customers">(${vendorRatings.vendorNoOfRatings})</small>
 							</div>
