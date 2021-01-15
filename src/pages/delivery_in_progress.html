@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feed U - Delivery in Progress</title>
+    <title>FeedU - Delivery In Progress</title>
 
     <link rel="stylesheet" href="../css/base.css" />
     <script src="../bundle.js"></script>
@@ -16,17 +16,19 @@
 
         <div role="main" class="ui-content" style="padding: 0px">
 
-            <div style="background-color: #ed595b; height: 40vh; display: flex; flex-direction: column; align-items: center; justify-content: center;     justify-content: center;
-                padding: 20px 15px;">
-                <h2 style="text-align: center; text-shadow: none; color: white;">
-                    Your Order Is Being Prepared</h2>
-                <img src="../assets/cooking_animated.gif" style="object-fit: contain; height: 80%; width: 80%;" />
+            <div style="height: 60vh; display: flex; flex-direction: column; align-items: center;">
+                <span style="width: 100%; background-color: #27AE60">
+                    <h2 style="text-align: center; text-shadow: none; color: white;">Your Order Is On The Way</h2>
+                </span>
+                <div id="delivery-in-progress-map">
+                    <h2> Map Here</h2>
+                </div>
             </div>
 
             <div id="delivery-in-progress-order-summary-container">
                 <h1>ETA</h1>
                 <h2>8:30 PM</h2>
-                <p>Your Order will be picked up once preparation is complete</p>
+                <p>Your Order is On The Way!</p>
 
                 <hr />
 
@@ -61,37 +63,149 @@
                 </div>
             </div>
 
+            <script
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4fxzjh0_9j9aIXCecrSeDxBztKU5Lzao&callback=initMap"
+                defer></script>
+            <!-- AIzaSyDxXPSmnErfv7OFrzfG0q2BSRVAqa-N_Mc -->
+
         </div>
 
         <script>
-            const { cart } = app;
-            const summary = cart.summary();
+            {
+                const { cart } = app;
+                const summary = cart.summary();
 
-            $("#delivery-you-ordered-from")
-                .text(summary.vendor.vendorName);
+                $("#delivery-you-ordered-from")
+                    .text(summary.vendor.vendorName);
 
-            var items = summary.items;
-            if (items.length > 0) {
-                const itemsList = items.map(({ quantity, itemTitle, itemPrice }) => {
-                    var markup =
-                        `<div class="delivery-item">
+                var items = summary.items;
+                if (items.length > 0) {
+                    const itemsList = items.map(({ quantity, itemTitle, itemPrice }) => {
+                        var markup =
+                            `<div class="delivery-item">
                         <div class="delivery-item-quantity">${quantity} X </div>
                         <div class="delivery-item-name">${itemTitle}</div>
                         <div class="delivery-item-price">${itemPrice * quantity}</div>
                     </div>`;
-                    return markup;
-                });
-                $('#delivery-items-grid').html(itemsList.reduce((markup, item) => markup + item));
+                        return markup;
+                    });
+                    $('#delivery-items-grid').html(itemsList.reduce((markup, item) => markup + item));
+                }
+
+                var billTotal = items.reduce((sum, { quantity, itemPrice }) => {
+                    return sum + quantity * itemPrice;
+                }, 0);
+                $("#delivery-bill-total").text(billTotal)
+
+                const selectedPaymentMethod = summary.paymentMethod;
+                console.log(selectedPaymentMethod);
+                $("#delivery-payment-method").text(selectedPaymentMethod.toUpperCase())
+
+                function initMap() {
+
+                    var directionsService = new google.maps.DirectionsService();
+
+                    const homePin =
+                        "../assets/map_images/home_pin.svg";
+
+                    const bikePin =
+                        "../assets/map_images/bike_pin.svg";
+
+                    var directionsRenderer = new google.maps.DirectionsRenderer({
+                        suppressMarkers: true,
+                        polylineOptions: {
+                            strokeColor: "#27AE60",
+                        }
+                    });
+
+                    const VENDOR_X_COORD = 6.871321115320514
+                    const VENDOR_Y_COORD = 79.85840357887588
+                    const vendorLocationCoordinates = new google.maps.LatLng(VENDOR_X_COORD, VENDOR_Y_COORD); // Dinemore Wellawatte
+
+                    const DELIVERY_X_COORD = 6.865415299521071
+                    const DELIVERY_Y_COORD = 79.85985586374917
+                    const deliveryLocationCoordinates = new google.maps.LatLng(DELIVERY_X_COORD, DELIVERY_Y_COORD); // IIT
+
+                    const center = deliveryLocationCoordinates;
+
+
+                    const map = new google.maps.Map(document.getElementById("delivery-in-progress-map"), {
+                        zoom: 14,
+                        center,
+                    });
+
+                    const startMarker = new google.maps.Marker({
+                        map,
+                        draggable: true,
+                        animation: google.maps.Animation.DROP,
+                        position: vendorLocationCoordinates,
+                        icon: bikePin,
+                    });
+
+                    const endMarker = new google.maps.Marker({
+                        map,
+                        draggable: true,
+                        animation: google.maps.Animation.DROP,
+                        position: deliveryLocationCoordinates,
+                        icon: homePin,
+                    });
+
+                    directionsRenderer.setMap(map);
+
+                    var request = {
+                        origin: vendorLocationCoordinates,
+                        destination: deliveryLocationCoordinates,
+                        travelMode: 'DRIVING'
+                    };
+                    directionsService.route(request, function (result, status) {
+                        if (status == 'OK') {
+                            directionsRenderer.setDirections(result);
+                        }
+                    });
+
+                    // geocoder = new google.maps.Geocoder();
+
+                    // marker.addListener("click", toggleBounce);
+
+                    // marker.addListener('dragend', function (ev) {
+                    //     console.log('Latitude: ' + marker.getPosition().lat() + ', Longitude: ' + marker.getPosition().lng());
+                    //     const latlng = {
+                    //         lat: parseFloat(marker.getPosition().lat()),
+                    //         lng: parseFloat(marker.getPosition().lng()),
+                    //     };
+                    //     geocoder.geocode({ location: latlng }, (results, status) => {
+                    //         if (status === "OK") {
+                    //             var location = results[0].formatted_address;
+                    //             $('#selected-location').text(location);
+                    //         } else {
+                    //             // Keep empty when everything is completed.
+                    //             console.log('Cannot fetch location details right now. Hence, setting a default location.');
+                    //             $('#selected-location').text("1600 Amphitheatre Parkway, Mountain View, CA 94043, USA");
+                    //         }
+                    //     });
+                    // });
+                }
+
+                // function calcRoute() {
+                //     var start = document.getElementById('start').value;
+                //     var end = document.getElementById('end').value;
+                //     var request = {
+                //         origin: start,
+                //         destination: end,
+                //         travelMode: 'DRIVING'
+                //     };
+                //     directionsService.route(request, function (result, status) {
+                //         if (status == 'OK') {
+                //             directionsRenderer.setDirections(result);
+                //         }
+                //     });
+                // }
+
+
+                function progressOrder() {
+
+                }
             }
-
-            var billTotal = items.reduce((sum, { quantity, itemPrice }) => {
-                return sum + quantity * itemPrice;
-            }, 0);
-            $("#delivery-bill-total").text(billTotal)
-
-            var selectedPaymentMethod = summary.paymentMethod;
-            console.log(selectedPaymentMethod);
-            $("#delivery-payment-method").text(selectedPaymentMethod.toUpperCase())
 
         </script>
 
