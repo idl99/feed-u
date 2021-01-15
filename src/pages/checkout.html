@@ -87,10 +87,12 @@
 
             const handlePlaceOrder = function (event, stripe) {
 
+                cart.setPaymentMethod(selectedPaymentMethod);
+
                 if (selectedPaymentMethod === 'one-time-card-payment') {
                     console.log("One Time card payment option selected");
                     payment.createCheckoutSession({
-                        success_url: "https://idl99.github.io/feed-u/pages/checkout.html",
+                        success_url: "https://idl99.github.io/feed-u/pages/delivery_in_progress.html",
                         cancel_url: "https://idl99.github.io/feed-u/pages/checkout.html",
                         line_items: cart.summary().items.map(({ itemTitle, itemPrice, quantity }) => {
                             return {
@@ -113,6 +115,8 @@
                             sessionId: id,
                         })
                     })
+                } else {
+                    $(':mobile-pagecontainer').pagecontainer("change", "delivery_in_progress.html")
                 }
             }
 

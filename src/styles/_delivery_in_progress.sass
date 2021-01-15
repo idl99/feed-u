@@ -1,0 +1,38 @@
+@use '_variables'
+
+#delivery-in-progress-page
+    display: flex
+    flex-direction: column
+
+    #delivery-in-progress-order-summary-container
+        padding: 0em 1em
+
+        #delivery-in-progress-order-summary
+            display: flex
+            flex-direction: column
+            margin: 3vh 3vw
+
+            #delivery-items-grid
+                margin: 2em 0em
+                display: grid
+                grid-row-gap: 20px
+
+            .delivery-item
+                display: grid
+                grid-template-columns: 1fr 6fr 3fr
+                align-content: stretch
+                overflow-wrap: anywhere
+
+                .delivery-item-quantity
+                    text-align: left
+
+                .delivery-item-price
+                    text-align: right
+
+            .delivery-payment-detail
+                display: flex
+                justify-content: space-between
+                margin: 0.5em 0em
+                align-items: center
+
+    // @media screen and ( max-width >= variables.$dimens_ipad)
