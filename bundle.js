@@ -684,7 +684,7 @@ const screenDimens = {
     iPad: 1024
 }
 
-const navigationPanelBlockedScreens = ["landing", "vendor-stories", "vendor-rating", "item-rating"];
+const navigationPanelBlockedScreens = ["vendor-stories", "vendor-rating", "item-rating"];
 
 /**
  * This function opens the navigation panel programatically
@@ -705,19 +705,14 @@ const evaluatePanelOpen = function () {
 /**
  * https://github.com/jquery/demos.jquerymobile.com/blob/master/1.4.5/panel-external/index.html
  */
-$(document).on("pagecontainercreate", function () {
+$(document).on("ready", function () {
     $.get("navigation_side_bar.html", function (markup) {
         // Add the panel to the body
         $('body').append(markup);
 
         // Manually initialize the panel
         $("body>[data-role='panel']").enhanceWithin().panel();
-        const activePage = $(":mobile-pagecontainer").pagecontainer("getActivePage")[0];
-        const shouldShowPanel = !navigationPanelBlockedScreens.includes(activePage.id);
-        if (shouldShowPanel) {
-            // Check again when we navigate to another page
-            evaluatePanelOpen();
-        }
+        evaluatePanelOpen();
 
         $('body').on("pagecontainerchange", function (event, ui) {
             console.log("Navigating to page:", ui.toPage[0].id);
@@ -729,12 +724,7 @@ $(document).on("pagecontainercreate", function () {
 
         $(window).on("resize", function () {
             // Check again when the window gets resized (maybe due to change in screen orientation)
-            const activePage = $(":mobile-pagecontainer").pagecontainer("getActivePage")[0];
-            const shouldShowPanel = !navigationPanelBlockedScreens.includes(activePage.id);
-            if (shouldShowPanel) {
-                // Check again when we navigate to another page
-                evaluatePanelOpen();
-            }
+            evaluatePanelOpen();
         })
     })
 })

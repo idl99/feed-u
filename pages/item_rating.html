@@ -12,7 +12,7 @@
 
 </head>
 
-<body onload="hideCommentPopup()">
+<body>
     <div data-role="page" id="item-rating" class="feedU-page ui-responsive-panel">
         <style>
             .item-rating-page-container {
@@ -89,75 +89,6 @@
                 padding: 0.25em 0.25em 0.25em 0.25em;
                 margin: 0 0 0 0;
             }
-
-            #comment-icon {
-                cursor: pointer;
-            }
-
-            /* The popup form - hidden by default */
-            .comment-popup {
-                /* display: none; */
-                /* position: fixed;
-                bottom: 0;
-                right: 15px;
-                z-index: 9; */
-                border: 3px solid #f1f1f1;
-            }
-
-            /* Add styles to the form container */
-            .comment-container {
-                max-width: 300px;
-                padding: 10px;
-                background-color: white;
-            }
-
-            /* Full-width input fields */
-            .comment-container input[type=text],
-            .comment-container input[type=password] {
-                width: 100%;
-                padding: 15px;
-                margin: 5px 0 22px 0;
-                border: none;
-                background: #f1f1f1;
-            }
-
-            /* When the inputs get focus, do something */
-            .comment-container input[type=text]:focus,
-            .comment-container input[type=password]:focus {
-                background-color: #ddd;
-                outline: none;
-            }
-
-            /* Set a style for the submit/login button */
-            .comment-container .btn {
-                background-color: #EB5757;
-                color: white;
-                padding: 16px 20px;
-                border: none;
-                cursor: pointer;
-                width: 100%;
-                margin-bottom: 10px;
-                opacity: 0.8;
-            }
-
-            /* Add a red background color to the cancel button */
-            .comment-container .cancel {
-                background-color: #EB5757;
-            }
-
-            /* Add some hover effects to buttons */
-            .comment-container .btn:hover,
-            .open-button:hover {
-                opacity: 1;
-            }
-
-            .comment-box-width {
-                width: -webkit-fill-available;
-            }
-
-            .center-text {
-                text-align: center;
-            }
         </style>
         <div role="main" class="ui-content">
             <div class="item-rating-container">
@@ -193,11 +124,9 @@
             </div>
         </div>
         <script>
+
             // Initialize the user store in order to retrieve the past order items.
-            const {
-                user,
-                utils
-            } = app;
+            const { user, utils } = app;
             // Variables that are used in the script.
             var pastOrderId;
             var vendorRating;
@@ -213,8 +142,7 @@
                 vendorRating = queryParams.vendorRating;
                 vendorComment = queryParams.vendorComment;
 
-                console.log("Past order Id:", pastOrderId, "Vendor rating:", vendorRating, "Vendor comment:",
-                    vendorComment);
+                console.log("Past order Id:", pastOrderId, "Vendor rating:", vendorRating, "Vendor comment:", vendorComment);
                 console.log("vendor comment", vendorComment);
 
                 var order = user.getSpecificOrder(pastOrderId);
@@ -224,11 +152,7 @@
                 $('#vendor-name').text(order.vendorName + "?");
 
                 // Render items in past order summary.
-                order.orderedItems.forEach(({
-                    itemName,
-                    rating,
-                    comment
-                }) => {
+                order.orderedItems.forEach(({ itemName, rating, comment }) => {
 
                     var markup = `
                     <div class="past-order-item-rating">
@@ -253,7 +177,7 @@
                             </ul>
                         </div>
                         <p>
-                            <svg width="22" height="21" viewBox="0 0 22 21" fill="none" class="cursor-pointer" id="comment-icon" onclick="commentPopup()"
+                            <svg width="22" height="21" viewBox="0 0 22 21" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
                                     d="M7.375 16.25V15.75H6.875H2.75C1.46343 15.75 0.5 14.809 0.5 13.75V2.5C0.5 1.44101 1.46343 0.5 2.75 0.5H19.25C20.5366 0.5 21.5 1.44101 21.5 2.5V13.75C21.5 14.809 20.5366 15.75 19.25 15.75H13.0625H12.9082L12.7808 15.8369L7.41813 19.4943C7.41781 19.4945 7.41749 19.4947 7.41718 19.4949C7.41103 19.4988 7.40499 19.5007 7.39735 19.5011C7.39019 19.5015 7.38231 19.5004 7.375 19.4981V16.25Z"
@@ -263,29 +187,14 @@
                     </div>`;
 
                     $(markup).insertBefore($('.ratings-submit-btn'));
-
                 });
-
-                var commentpopup = `
-                <div class="comment-popup comment-container" id="comment-popup">
-                <p class="center-text">Provide your feedback for the product purchased through ${$('#vendor-name').text()}</p>
-
-
-                <textarea id="comment-box" class="comment-box-width" placeholder="Leave your thoughts about the product here"></textarea>
-
-                <button class="btn" id="submit-comment">Comment</button>
-                <button class="btn cancel" id="close-popup">Cancel</button>
-                </div>`;
-
-                $(commentpopup).insertBefore($('.ratings-submit-btn'));
 
                 // Disables the submit button initially.
                 enableSubmitButton();
 
                 $('#item-ratings li').on('click', function () {
                     // The rating value that is selected by the user
-                    var ratedItem = $(this).parent().parent().parent().children(
-                        '#past-order-item-description').text();
+                    var ratedItem = $(this).parent().parent().parent().children('#past-order-item-description').text();
                     var onRatingSelect = parseInt($(this).data('value'), 10);
                     var ratings = $(this).parent().children('li.star-icon');
 
@@ -345,8 +254,7 @@
 
                 // Extract the item name and rating for each item.
                 for (var i = 0; i < itemNamesAndRatings.length; i++) {
-                    item_names[i] = ($(itemNamesAndRatings[i]).first('p').text()).replace(/(\r\n|\n|\r)/gm, "").replace(
-                        /\s/g, '');
+                    item_names[i] = ($(itemNamesAndRatings[i]).first('p').text()).replace(/(\r\n|\n|\r)/gm, "").replace(/\s/g, '');
                     ratings[i] = ($(itemNamesAndRatings[i]).find('#item-ratings li.selected').last().data('value'));
                 }
 
@@ -361,53 +269,8 @@
                 $(":mobile-pagecontainer").pagecontainer("change", "past_orders.html");
             });
 
-            function hideCommentPopup() {
-                $('#comment-popup').popup();
-                $("#comment-popup").popup("close")
-            }
-
-            function commentPopup() {
-                // document.getElementById("comment-popup").style.display = "block";
-                // $('#comment-popup').popup();
-                $('#comment-popup').popup("open", {
-                    positionTo: "window"
-                })
-                // $("#comment-popup").popup("open");
-
-            }
-
-            function addComment() {
-                if (document.getElementById("comment-box").value == "") {
-                    console.log("no comment");
-                    alert("Type something first");
-
-                } else {
-                    $("#comment-popup").popup("close")
-                    // document.getElementById("comment-added-checkup").style.display = "block";
-                    alert("Comment has been successfully submitted!");
-                    document.getElementById("comment-box").value = "";
-
-                }
-            }
-            $('body').on("pagecontainershow", function (event, ui) {
-                $("#submit-comment").on("click", function (event, ui) {
-                    addComment();
-                })
-            })
-
-            function closeForm() {
-                $("#comment-popup").popup("close")
-            }
-
-            $('body').on("pagecontainershow", function (event, ui) {
-                $("#close-popup").on("click", function (event, ui) {
-                    closeForm();
-                })
-            })
         </script>
     </div>
-
-
 </body>
 
 </html>
