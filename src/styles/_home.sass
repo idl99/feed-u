@@ -1,7 +1,14 @@
 // We don't need to include the underscore when referring to a partial
 @use 'variables'
+@use 'sass:map'
 
 body
+
+    & .home-carousel-btn
+        color: map.get(variables.$feedU-theme, "background-color")
+        // margin-right: 20px
+        // margin-left: 20px
+        font-size: 2em
 
     #navigation-menu-hamburger
         position: absolute
