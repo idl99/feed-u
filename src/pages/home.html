@@ -59,8 +59,8 @@
 								alt="carousel-3">
 						</div>
 
-						<a class="prev" onclick="nextCarouselItem(-1)">&#10094;</a>
-						<a class="next" onclick="nextCarouselItem(1)">&#10095;</a>
+						<a class="prev home-carousel-btn" onclick="nextCarouselItem(-1)">&#10094;</a>
+						<a class="next home-carousel-btn" onclick="nextCarouselItem(1)">&#10095;</a>
 
 					</div>
 				</div>
@@ -88,9 +88,9 @@
 			</div>
 		</div>
 
-		<div id="home-footer" data-role="footer" data-position="fixed" data-tap-toggle="false"
-			style="background-color: #27AE60; color: white; text-shadow: none; padding: 7px 0px">
-			<h4>CHECKOUT</h4>
+		<div id="home-footer" data-role="footer" class="footer-checkout-btn" data-position="fixed"
+			data-tap-toggle="false">
+			<h4>View Basket</h4>
 		</div>
 
 		<style>
@@ -137,14 +137,14 @@
 				border-radius: 3px 0 0 3px;
 			}
 
-			.prev:hover,
-			.next:hover {
-				background-color: rgba(0, 0, 0, 0.8);
+			.prev,
+			.next {
+				background-color: rgba(0, 0, 0, 0.3);
 			}
 
-			.active {
+			/* .active {
 				background-color: #717171;
-			}
+			} */
 
 			.fade {
 				-webkit-animation-name: fade;
@@ -184,7 +184,7 @@
 
 		<script>
 
-			const { user } = app;
+			const { user, cart } = app;
 
 			$(".link-set-location-page").click(function (event) {
 				event.preventDefault();
@@ -249,6 +249,14 @@
 				if (activePage === 'home') {
 					// Retrieve user location from cookie and set to label
 					$("#user-home-delivery-location").text(user.getDetails().location.display);
+
+					const thereAreNoItemsInCart = cart.summary().items.length == 0;
+					if (thereAreNoItemsInCart) {
+						$("#home-footer").hide();
+					} else {
+						$("#home-footer").show();
+					}
+
 				}
 			});
 
