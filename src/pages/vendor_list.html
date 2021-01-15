@@ -2,66 +2,14 @@
 <html>
 
 <head>
-    <title>Feed U - Home Page</title>
+    <title>Feed U - Home Page - Vendor List Page</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
-    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <link rel="stylesheet" href="../css/base.css" />
+    <script src="../bundle.js"></script>
 
     <style>
-        /* body {
-            font-family: "Poppins";
-        }
-
-        .container {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .poi_container {
-            display: flex;
-            flex: 1 1 auto;
-            justify-content: top;
-            height: 65px;
-            width: 335px;
-            margin-bottom: 5%;
-        }
-
-        .poi_image {
-            float: left;
-        }
-
-        .poi_content {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            float: right;
-            margin-left: 5%;
-        }
-
-        .status_bar {
-            display: flex;
-            align-items: top;
-            margin-top: 2%;
-            font-size: 12px;
-        }
-
-        .rating_bar {
-            display: flex;
-            align-items: center;
-            height: 20px;
-            width: 70px;
-            font-size: 11px;
-            background: #F2F2F2;
-            border-radius: 25px;
-        } */
-
-        
         .ui-select {
             width: 100px !important;
             position: relative !important;
@@ -105,7 +53,6 @@
             top: 17px !important;
             height: 10px !important;
         }
-        
     </style>
 </head>
 
@@ -113,20 +60,18 @@
     <div data-role="page" id="Page1">
         <div role="main" class="ui-content">
             <div style="background-color: #E5E5E5;border-radius: 20px;width: 100%;height: 35px">
-                <div class="filter">
-                    <!-- filter img icon -->
-                    <img><i class="fa fa-filter" aria-hidden="true" style="color:#EB5757"></i>
-                    <!-- /////////////// -->
-                    <fieldset class="ui-field-contain" style="display: inline;">
-                        
+                <div class="filter" style="display: flex;">
+                    <i class="fa fa-filter" aria-hidden="true"
+                        style="margin-top: 0.75em; margin-left: 0.75em; color:#EB5757;"></i>
+                    <div style="margin-top: 0.75em;">
                         <select name="select-choice-1" id="select-choice-1">
                             <option value="sort" disabled selected="selected">Sort</option>
                             <option value="a-z">A - Z</option>
                             <option value="rating">Rating</option>
                             <option value="deliverytime">Delivery Time</option>
                         </select>
-                    </fieldset>
-                    <fieldset class="ui-field-contain" style="display: inline;">
+                    </div>
+                    <div style="margin-top: 0.75em;">
                         <select name="select-choice-1" id="select-choice-1">
                             <option value="ratings" disabled selected="selected">Ratings</option>
                             <option value=">3">> 3</option>
@@ -134,91 +79,86 @@
                             <option value=">5">> 5</option>
                             <option value="none">None</option>
                         </select>
-                    </fieldset>
-                    <fieldset class="ui-field-contain" style="display: inline;">
+                    </div>
+                    <div style="margin-top: 0.75em;">
                         <select name="select-choice-1" id="select-choice-1">
                             <option value="deliverytime1" disabled selected="selected">Delivery Time</option>
                             <option value=">3">> 2 hour</option>
                             <option value=">4">> 1 hour</option>
                             <option value=">5">> 30 mins</option>
                         </select>
-                    </fieldset>
-                    <!-- <fieldset class="ui-field-contain" style="display: inline;">
-                   <select name="select-choice-1" id="select-choice-1">
-                       <option value="deliverytime1" disabled selected="selected">Dietary</option>
-                   </select>
-               </fieldset> -->
+                    </div>
                 </div>
             </div>
             <br>
             <br>
 
-            <div id="home-container" class="all-poi-container">
-                <script>
-                    const { datastore } = app;
-
-                    var vendors = datastore.getAllVendors(); // TODO refactor this once mock data is removed
-
-                    // render items in order summary
-                    vendors.forEach(({ vendorId, vendorImageLocation, vendorName, vendorCatergories, vendorRatings, deliveryTime }) => {
-                        var markupP1 = `<div class="poi-container" vendor-id="${vendorId}">
-                            <img src=${vendorImageLocation} class="poi-image">
-                            <div class="poi-details">
-                                <div>${vendorName}</div>
-                                <div class="poi-catergory-container">`
-                        var markupP2 = ``
-                        var i = 0;
-                        vendorCatergories.forEach((category) => {
-                            if (i === 0) {
-                                markupP2 = markupP2 + `<i class="fa fa-circle" id="poi-catergory"></i>${category}`
-                            } else {
-                                markupP2 = markupP2 + `<i class="fa fa-circle" id="poi-catergory" style="margin-left: 2em;"></i>${category}`
-                            }
-                            i = i + 1;
-                        });
-                        var markupP3 =
-                            `</div>
-                                <div class="poi-rating-bar-container">
-                                    <div class="poi-rating-bar">
-                                        <span><i class='fa fa-star fa-fw' id="poi-rate-star-icon"></i> ${vendorRatings.vendorRatingValue} 
-                                        </span>
-                                        <small id="poi-no-of-rated-customers">(${vendorRatings.vendorNoOfRatings})</small>
-                                    </div>
-                                    <div id="poi-delivery-time">${deliveryTime}</div>
-                                </div>
-                            </div>
-                        </div>`
-                        var markup = markupP1 + markupP2 + markupP3;
-                        $('#home-container').append(markup)
-                    });
-
-                    $('body').on("pagecontainershow", function (event, ui) {
-                        // This event will get fired each time the pagecontainershow event fires,
-                        // that means it'll fire even when loading another page (other than home.html)
-
-                        var activePage = ui.toPage[0].id;
-                        if (activePage === 'home') {
-                            // Retrieve user location from cookie and set to label
-                            $("#user-home-delivery-location").text(user.getDetails().location.display);
-                        }
-                    });
-                    // Handle Vendor POI click event
-                    // https://stackoverflow.com/questions/943987/add-jquery-click-handler-to-multiple-elements
-                    $(".poi-container").click(function () {
-                        var vendorId = $(this).attr("vendor-id"); // which vendor card was clicked
-                        $(":mobile-pagecontainer").pagecontainer("change", "vendor_page.html", {
-                            data: {
-                                vendorId
-                            }
-                        });
-                    });
-
-                    $("#home-footer").on("click", function (event) {
-                        $(":mobile-pagecontainer").pagecontainer("change", "checkout.html");
-                    });
-                </script>
+            <div id="vendor-list-container" class="all-poi-container">
             </div>
         </div>
+        <script>
+            const { datastore } = app;
+
+            var vendors = datastore.getAllVendors(); // TODO refactor this once mock data is removed
+
+            // render items in order summary
+            vendors.forEach(({ vendorId, vendorImageLocation, vendorName, vendorCatergories, vendorRatings, deliveryTime }) => {
+                var markupP1 = `<div class="poi-container" vendor-id="${vendorId}">
+                    <img src=${vendorImageLocation} class="poi-image">
+                    <div class="poi-details">
+                        <div>${vendorName}</div>
+                        <div class="poi-catergory-container">`
+                var markupP2 = ``
+                var i = 0;
+                vendorCatergories.forEach((category) => {
+                    if (i === 0) {
+                        markupP2 = markupP2 + `<i class="fa fa-circle" id="poi-catergory"></i>${category}`
+                    } else {
+                        markupP2 = markupP2 + `<i class="fa fa-circle" id="poi-catergory" style="margin-left: 2em;"></i>${category}`
+                    }
+                    i = i + 1;
+                });
+                var markupP3 =
+                    `</div>
+                        <div class="poi-rating-bar-container">
+                            <div class="poi-rating-bar">
+                                <span><i class='fa fa-star fa-fw' id="poi-rate-star-icon"></i> ${vendorRatings.vendorRatingValue} 
+                                </span>
+                                <small id="poi-no-of-rated-customers">(${vendorRatings.vendorNoOfRatings})</small>
+                            </div>
+                            <div id="poi-delivery-time">${deliveryTime}</div>
+                        </div>
+                    </div>
+                </div>`
+                var markup = markupP1 + markupP2 + markupP3;
+                $('#vendor-list-container').append(markup)
+            });
+
+            $('body').on("pagecontainershow", function (event, ui) {
+                // This event will get fired each time the pagecontainershow event fires,
+                // that means it'll fire even when loading another page (other than home.html)
+
+                var activePage = ui.toPage[0].id;
+                if (activePage === 'home') {
+                    // Retrieve user location from cookie and set to label
+                    $("#user-home-delivery-location").text(user.getDetails().location.display);
+                }
+            });
+            // Handle Vendor POI click event
+            // https://stackoverflow.com/questions/943987/add-jquery-click-handler-to-multiple-elements
+            $(".poi-container").click(function () {
+                var vendorId = $(this).attr("vendor-id"); // which vendor card was clicked
+                $(":mobile-pagecontainer").pagecontainer("change", "vendor_page.html", {
+                    data: {
+                        vendorId
+                    }
+                });
+            });
+
+            $("#home-footer").on("click", function (event) {
+                $(":mobile-pagecontainer").pagecontainer("change", "checkout.html");
+            });
+        </script>
     </div>
 </body>
 
