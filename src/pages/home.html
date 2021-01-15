@@ -24,19 +24,45 @@
 
 		<div role="main" class="ui-content">
 			<div id="home-main-content-container">
-				<div class="user-delivery-location-details">
-					<span id="deliver-now-txt">Deliver Now | </span>
-					<!-- 
+				<div>
+					<div class="user-delivery-location-details">
+						<span id="deliver-now-txt">Deliver Now | </span>
+						<!-- 
 							https://css-tricks.com/flexbox-truncated-text/ 
 							TODO fix for longer display names
 						-->
-					<span id="user-home-delivery-location">Delivery Location </span>
-					<!-- 
+						<span style="flex: 0 0 12rem;" id="user-home-delivery-location">Delivery Location </span>
+						<!-- 
 						TODO if we set href here to set_location page it doesn't work. works for any other page.
 						Also, manual jQuery AJAX navigation works.
 					-->
-					<a class="link-set-location-page ui-btn ui-shadow ui-corner-all ui-icon-navigation ui-btn-icon-notext"
-						style="margin-left: 5px;"></a>
+						<a class="link-set-location-page ui-btn ui-shadow ui-corner-all ui-icon-navigation ui-btn-icon-notext"
+							style="margin-left: 5px;"></a>
+					</div>
+					<!-- <div>
+					<img style="margin-top: 0.50em; width: 100%;" src="../assets/main_page/carousel.jpg" alt="carousel">
+				</div> -->
+					<div class="carousel-container">
+
+						<div class="carousel-item fade">
+							<img style="margin-top: 0.50em; width: 100%;" src="../assets/main_page/carousel_1.jpg"
+								alt="carousel-1">
+						</div>
+
+						<div class="carousel-item fade">
+							<img style="margin-top: 0.50em; width: 100%;" src="../assets/main_page/carousel_2.jpg"
+								alt="carousel-2">
+						</div>
+
+						<div class="carousel-item fade">
+							<img style="margin-top: 0.50em; width: 100%;" src="../assets/main_page/carousel_3.jpg"
+								alt="carousel-3">
+						</div>
+
+						<a class="prev" onclick="nextCarouselItem(-1)">&#10094;</a>
+						<a class="next" onclick="nextCarouselItem(1)">&#10095;</a>
+
+					</div>
 				</div>
 				<div id="home-favourite-stories-section">
 					<p>Stories</p>
@@ -66,6 +92,95 @@
 			style="background-color: #27AE60; color: white; text-shadow: none; padding: 7px 0px">
 			<h4>CHECKOUT</h4>
 		</div>
+
+		<style>
+			* {
+				box-sizing: border-box
+			}
+
+			body {
+				margin: 0
+			}
+
+			.carousel-item {
+				display: none
+			}
+
+			img {
+				vertical-align: middle;
+			}
+
+			.carousel-container {
+				max-width: 1000px;
+				position: relative;
+				margin: auto;
+			}
+
+			.prev,
+			.next {
+				cursor: pointer;
+				position: absolute;
+				top: 50%;
+				width: auto;
+				padding: 16px;
+				margin-top: -22px;
+				color: white;
+				font-weight: bold;
+				font-size: 18px;
+				transition: 0.6s ease;
+				border-radius: 0 3px 3px 0;
+				user-select: none;
+			}
+
+			.next {
+				right: 0;
+				border-radius: 3px 0 0 3px;
+			}
+
+			.prev:hover,
+			.next:hover {
+				background-color: rgba(0, 0, 0, 0.8);
+			}
+
+			.active {
+				background-color: #717171;
+			}
+
+			.fade {
+				-webkit-animation-name: fade;
+				-webkit-animation-duration: 1.5s;
+				animation-name: fade;
+				animation-duration: 1.5s;
+			}
+
+			@-webkit-keyframes fade {
+				from {
+					opacity: .4
+				}
+
+				to {
+					opacity: 1
+				}
+			}
+
+			@keyframes fade {
+				from {
+					opacity: .4
+				}
+
+				to {
+					opacity: 1
+				}
+			}
+
+			@media only screen and (max-width: 300px) {
+
+				.prev,
+				.next {
+					font-size: 11px
+				}
+			}
+		</style>
 
 		<script>
 
@@ -151,6 +266,29 @@
 			$("#home-footer").on("click", function (event) {
 				$(":mobile-pagecontainer").pagecontainer("change", "checkout.html");
 			});
+
+
+			var carouselItemIndex = 1;
+			showCarouselSlideshow(carouselItemIndex);
+
+			function nextCarouselItem(n) {
+				showCarouselSlideshow(carouselItemIndex += n);
+			}
+
+			function currentCarouselItem(n) {
+				showCarouselSlideshow(carouselItemIndex = n);
+			}
+
+			function showCarouselSlideshow(n) {
+				var i;
+				var carouselItems = document.getElementsByClassName("carousel-item");
+				if (n > carouselItems.length) { carouselItemIndex = 1 }
+				if (n < 1) { carouselItemIndex = carouselItems.length }
+				for (i = 0; i < carouselItems.length; i++) {
+					carouselItems[i].style.display = "none";
+				}
+				carouselItems[carouselItemIndex - 1].style.display = "block";
+			}
 		</script>
 	</div>
 

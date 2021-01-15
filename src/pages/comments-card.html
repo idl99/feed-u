@@ -101,13 +101,26 @@
 
     <div class="card ui-block-solo">
         <div style="background-color: #F2F2F2;">
-            <img src="img_avatar.png" alt="Profile photo" style="width:100%">
-            <span style="font-weight: bold;">Ihan Dilnath</span>
-            <span style="font-weight: lighter; color: darkgrey;">1 month ago</span>
-            <span>Insert rating</span>
-            <div class="ui-btn-right" onclick="hideComments()">
-                <span><a href="#" class="ui-btn ui-icon-carat-u ui-btn-icon-notext ui-corner-all"
-                        style="background-color: white;">No text</a> </span>
+            <div style="display: flex;">
+                <img src="img_avatar.png" alt="Profile photo">
+                <span style="font-weight: bold;">Ihan Dilnath</span>
+                <span style="font-weight: lighter; color: darkgrey;">1 month ago</span>
+                <div style="display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 20px;
+                width: 50px;
+                font-size: 11px;
+                background: #FFD77C;
+                border-radius: 25px;">
+                    <span style="font-size: 12px;">4.5<i class='fa fa-star fa-fw'
+                            style="margin-left: 0.25em; color: #ffffff;"></i></span>
+                </div>
+
+                <div class="ui-btn-right" onclick="hideComments()">
+                    <span><a href="#" class="ui-btn ui-icon-carat-u ui-btn-icon-notext ui-corner-all"
+                            style="background-color: white;">No text</a> </span>
+                </div>
             </div>
             <div class="container">
                 <p>This soup is absolutely... disappointing. “World-renowned Chef Gonagala Ramsey” - pfffttt. My dog can
