@@ -72,16 +72,16 @@
                         </select>
                     </div>
                     <div style="margin-top: 0.75em;">
-                        <select name="select-choice-1" id="select-choice-1">
+                        <select name="select-choice-2" id="select-choice-2">
                             <option value="ratings" disabled selected="selected">Ratings</option>
-                            <option value=">3">> 3</option>
-                            <option value=">4">> 4</option>
-                            <option value=">5">> 5</option>
+                            <option value="3">> 3</option>
+                            <option value="4">> 4</option>
+                            <option value="5">> 5</option>
                             <option value="none">None</option>
                         </select>
                     </div>
                     <div style="margin-top: 0.75em;">
-                        <select name="select-choice-1" id="select-choice-1">
+                        <select name="select-choice-3" id="select-choice-3">
                             <option value="deliverytime1" disabled selected="selected">Delivery Time</option>
                             <option value=">3">> 2 hour</option>
                             <option value=">4">> 1 hour</option>
@@ -122,7 +122,7 @@
                     `</div>
                         <div class="poi-rating-bar-container">
                             <div class="poi-rating-bar">
-                                <span><i class='fa fa-star fa-fw' id="poi-rate-star-icon"></i> ${vendorRatings.vendorRatingValue} 
+                                <span id="test"><i class='fa fa-star fa-fw' id="poi-rate-star-icon"></i> ${vendorRatings.vendorRatingValue} 
                                 </span>
                                 <small id="poi-no-of-rated-customers">(${vendorRatings.vendorNoOfRatings})</small>
                             </div>
@@ -157,6 +157,22 @@
 
             $("#home-footer").on("click", function (event) {
                 $(":mobile-pagecontainer").pagecontainer("change", "checkout.html");
+            });
+
+            jQuery('#select-choice-2').on('change', function () {
+                var value = jQuery('#select-choice-2').val();
+                console.log(value);
+
+                jQuery('.poi-container').hide();
+
+                jQuery('.poi-container').each(function () {
+                    var showDiv = parseFloat(jQuery(this).find('#test').text()) > value;
+                    console.log(showDiv);
+                    if (showDiv) {
+                        console.log("Im Here")
+                        jQuery(this).show();
+                    }
+                });
             });
         </script>
     </div>
