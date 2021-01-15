@@ -5754,6 +5754,9 @@ div[data-role=page].feedU-page .ui-title {
   margin-left: 0px;
   margin-right: 0px;
 }
+div[data-role=page].feedU-page .ui-content {
+  background-color: #FFFFFF;
+}
 div[data-role=page].feedU-page .ui-header {
   background-color: #EB5757;
   padding: 5px 0px;
