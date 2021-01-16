@@ -5582,8 +5582,8 @@ body #set-location-btn-container #set-location-btn {
   font-size: 17px;
 }
 body #horizontal-line {
-  margin-top: 1em;
-  margin-bottom: 1em;
+  margin-top: 3em;
+  margin-bottom: 1.5em;
   color: #EB5757;
 }
 body #tab-item {
@@ -5591,12 +5591,16 @@ body #tab-item {
 }
 body #saved-locations {
   display: none;
+  margin-left: 1em;
+  margin-right: 1em;
 }
 body #saved-locations .set-location-saved-location-list-item {
   font-size: 14.5px;
 }
 body #previous-locations {
   display: none;
+  margin-left: 1em;
+  margin-right: 1em;
 }
 body #previous-locations .set-location-previous-location-list-item {
   font-size: 14.5px;
