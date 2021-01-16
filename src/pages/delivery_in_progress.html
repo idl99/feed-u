@@ -74,14 +74,14 @@
 
         <div data-role="popup" id="delivery-complete-popup" data-overlay-theme="b" data-theme="b" data-corners="false"
             style="padding: 1em;">
-        
+
             <style>
                 .success_popup_items {
                     display: flex;
                     justify-content: center;
                 }
             </style>
-        
+
             <h2 style="color:#27AE60">DELIVERY COMPLETED</h2>
             <br>
             <div class="success_popup_items">
@@ -97,7 +97,7 @@
             <br>
             <!-- redirect to leaderboard -->
             <a data-rel="back">
-                <button id="checkLBBtn" class="cLB-button" 
+                <button id="checkLBBtn" class="cLB-button"
                     style="width: 100%; text-align: center; border-radius: 100px; border-width: 2px; background: white; color: #EB5757; border-color: #EB5757 ; margin-bottom: 10px; margin-top: -5px; padding: 0px;  text-shadow: none;">
                     <a href="/Users/vinulauthsara/Desktop/feed-u/src/pages/leaderboard.html"></a>
                     <h4> Check Leaderboard</h4>
@@ -109,7 +109,7 @@
                     <h4> Get support about order</h4>
                 </button>
             </a>
-        
+
             <a href="#" data-rel="back"
                 class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right"
                 style="background-color: #EB5757;">Close</a>
@@ -256,12 +256,18 @@
 
                 }
 
-                function deliveryCompleted() {
-                    $('#delivery-complete-popup').popup("open", {
-                        positionTo: "window"
-                    })
+                // function deliveryCompleted() {
+                //     $('#delivery-complete-popup').popup("open", {
+                //         positionTo: "window"
+                //     })
 
-                }
+                // }
+                $(document).bind('pageinit', function () {
+                    setTimeout(function () {
+                        $("#delivery-complete-popup").popup();
+                        $("#delivery-complete-popup").popup("open");
+                    }, 6000);
+                });
             }
 
         </script>
