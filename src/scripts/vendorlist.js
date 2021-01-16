@@ -15,7 +15,7 @@ const data = Object.freeze({
                 "vendorNoOfRatings": 100
             },
             "location": "Colombo 3",
-            "deliveryTime": "25",
+            "deliveryTime": "25.3",
             "items": [
                 {
                     "itemImageLocation": "../assets/vendor_page_images/tom_yum_soup.jpg",
@@ -66,7 +66,7 @@ const data = Object.freeze({
                 "vendorNoOfRatings": 99
             },
             "location": "Colombo 5",
-            "deliveryTime": "33",
+            "deliveryTime": "33.6",
             "items": [
                 {
                     "itemImageLocation": "../assets/vendor_page_images/cheese_lovers_pizza.jpg",
@@ -116,7 +116,7 @@ const data = Object.freeze({
                 "vendorNoOfRatings": 150
             },
             "location": "Colombo 7",
-            "deliveryTime": "45",
+            "deliveryTime": "45.4",
             "items": [
                 {
                     "itemImageLocation": "../assets/vendor_page_images/prawn_curry_and_rice.jpg",
@@ -166,7 +166,7 @@ const data = Object.freeze({
                 "vendorNoOfRatings": 82
             },
             "location": "Colombo 1",
-            "deliveryTime": "52",
+            "deliveryTime": "52.6",
             "items": [
                 {
                     "itemImageLocation": "../assets/vendor_page_images/bruschetta_pasta.jpg",

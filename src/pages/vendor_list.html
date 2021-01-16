@@ -173,31 +173,31 @@
                     var showDiv = parseFloat(jQuery(this).find('#test').text()) > value;
                     console.log(showDiv);
                     if (showDiv) {
-                        console.log("Im Here")
+                        console.log("Ratings values")
                         jQuery(this).show();
                     }
                 });
             });
             
-            $("#home-footer").on("click", function (event) {
-                $(":mobile-pagecontainer").pagecontainer("change", "checkout.html");
-            });
+           
     
             jQuery('#select-choice-3').on('change', function () {
-                var value = jQuery('#select-choice-3').val();
-                console.log(value);
+                var value1 = jQuery('#select-choice-3').val();
+                console.log(value1);
 
                 jQuery('.poi-container').hide();
 
                 jQuery('.poi-container').each(function () {
-                    var showDiv = parseFloat(jQuery(this).find('#test').text()) > value;
-                    console.log(showDiv);
-                    if (showDiv) {
-                        console.log("Im Here")
+                    var showDiv1 = parseFloat(jQuery(this).find('#poi-delivery-time').text()) > value1;
+                    console.log(showDiv1);
+                    if (showDiv1) {
+                        console.log("Delivery time values")
                         jQuery(this).show();
                     }
                 });
             });
+
+
         </script>
     </div>
 </body>
