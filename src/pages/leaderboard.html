@@ -1,0 +1,131 @@
+<!-- Author : Vinula Uthsara Buthgamumudalige | 2016088 | W1673611 -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Leaderboard</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="../css/base.css" />
+
+    <script src="../bundle.js"></script>
+</head>
+
+<body>
+    <!-- <div data-role="page" id="Page1" class="ui-responsive-panel"> -->
+    <div data-role="page" class="feedU-page ui-responsive-panel">
+        <div data-role="header" id="checkout-header" data-position="fixed" data-tap-toggle="false">
+            <a class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-corner-all" href="#" data-rel="back"
+                data-icon="arrow-l" data-theme="c" data-role="button">Back</a>
+            <span class="ui-title"></span>
+            <img src="../assets/logo.png"></img>
+        </div>
+        <style>
+            .leaderboard-items {
+                display: grid;
+                grid-row-gap: 5px;
+                grid-template-columns: auto auto auto;
+                justify-content: space-evenly;
+            }
+
+            .leaderboard-item {
+                padding: 18px;
+                font-size: 15px;
+                text-align: center;
+            }
+
+            .leaderboard-title {
+                padding: 10px;
+                font-size: 18px;
+                text-align: center;
+            }
+
+            .total-points {
+                display: grid;
+                grid-column-gap: 6.5em;
+                grid-template-columns: auto auto;
+                width: 100%;
+                height: 3em;
+                background-color: #27AE60;
+                color: white;
+                justify-content: center;
+                text-shadow: none;
+                border-radius: 100px;
+            }
+
+            .points-to-next-rank {
+                display: grid;
+                grid-column-gap: 3em;
+                grid-template-columns: auto auto;
+                background-color: #EB5757;
+                color: white;
+                width: 100%;
+                height: 3em;
+                justify-content: center;
+                text-shadow: none;
+                border-radius: 100px;
+            }
+        </style>
+        <!-- <div data-role="header" data-position="fixed" data-add-back-btn="true">
+            <h1>Header Bar</h1>
+        </div> -->
+
+        <div role="main" class="ui-content">
+            <h1 style="margin-top: 0.5em; margin-bottom: 1em;">Leaderboard</h1>
+            <!-- Grid titles -->
+            <div class="leaderboard-items" id="list-users">
+                <div class="leaderboard-title">Pos.</div>
+                <div class="leaderboard-title">Name</div>
+                <div class="leaderboard-title">Points</div>
+            </div>
+            <br>
+            <!-- Total points -->
+            <div class="total-points">
+                <div class="leaderboard-title">Total Points : </div>
+                <div class="leaderboard-title" id="tot-pnt"></div>
+            </div>
+            <br>
+            <!-- Points to next rank -->
+            <div class="points-to-next-rank">
+                <div class="leaderboard-title">Points to next rank :</div>
+                <div class="leaderboard-title" id="pnts-to-next"></div>
+            </div>
+        </div>
+
+        <script>
+
+            const { datastore } = app;
+            var leaderboard = datastore.getLeaderboard();
+            var i = 1;
+            var totPoints = 0;
+            leaderboard.forEach(({ name, points }) => {
+                var markupL1 = `<div class="leaderboard-item">${i}</div>`
+                var markupL2 = `<div class="leaderboard-item">${name}</div>`
+                var markupL3 = `<div class="leaderboard-item">${points} <i class="fa fa-database" aria-hidden="true" style="color: #F2C94C;"></i></div>`
+                var markupL = markupL1 + markupL2 + markupL3;
+                i++;
+                $('#list-users').append(markupL)
+
+            });
+
+            const { user } = app;
+            const userPoints = user.getDetails().profile.points;
+            $('#tot-pnt').text(userPoints)
+
+            var aboveUserPoints = 0;
+            var eachUserPoints = datastore.getLeaderboard();
+            console.log(eachUserPoints)
+            eachUserPoints.forEach(({ points }) => {
+                if (userPoints < points) {
+                    aboveUserPoints = points;
+                }
+            });
+            var pointsToNext = aboveUserPoints - userPoints;
+            $('#pnts-to-next').text(pointsToNext) 
+        </script>
+    </div>
+</body>
+
+</html>

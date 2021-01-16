@@ -1,0 +1,34 @@
+#checkout
+    // display: flex
+    // min-height: inherit
+
+    // .ui-content
+    //     flex-grow: 1
+
+    #checkout-restaurant-details-container
+        display: grid
+        row-gap: 2vh
+        justify-items: center
+        margin: 1vh 1vw
+
+    #checkout-order-summary
+        display: flex
+        flex-direction: column
+        margin: 3vh 3vw
+
+        #checkout-items-grid
+            margin: 1em 0em
+            display: grid
+            grid-row-gap: 20px
+
+            .checkout-item
+                display: grid
+                grid-template-columns: 1fr 6fr 3fr
+                align-content: stretch
+                overflow-wrap: anywhere
+
+                .checkout-item-quantity
+                    text-align: left
+
+                .checkout-item-price
+                    text-align: right

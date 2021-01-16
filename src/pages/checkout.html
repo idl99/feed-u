@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feed U - Checkout</title>
+
+    <link rel="stylesheet" href="../css/base.css" />
+    <script src="../bundle.js"></script>
+</head>
+
+<body>
+    <!-- 
+        ui-responsive-panel is very important
+        otherwise layout will get messed up with the external navigation panel
+     -->
+    <div data-role="page" id="checkout" class="feedU-page ui-responsive-panel">
+        <div data-role="header" id="checkout-header" data-position="fixed" data-tap-toggle="false">
+            <a class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-corner-all" href="#" data-rel="back"
+                data-icon="arrow-l" data-theme="c" data-role="button">Back</a>
+            <span class="ui-title"></span>
+            <img src="../assets/logo.png"></img>
+        </div>
+        <div role="main" class="ui-content">
+            <div id="checkout-restaurant-details-container">
+                <div id="checkout-restaurant-name">Restaurant Name</div>
+                <div style="display: flex; flex-direction: row; align-items: center;">
+                    <span style="margin-right: 5px;">Deliver Now | </span>
+                    <!-- 
+                        https://css-tricks.com/flexbox-truncated-text/ 
+                        TODO fix for longer display names
+                    -->
+                    <span id="checkout-delivery-location"
+                        style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+                        Delivery Location </span>
+                    <a class="link-set-location-page ui-btn ui-shadow ui-corner-all ui-icon-navigation ui-btn-icon-notext"
+                        style="margin-left: 5px;"></a>
+                </div>
+                <div id="checkout-eta">ETA</div>
+                <div id="checkout-payment-method-container">
+                    Paying
+                    <span id="checkout-bill-total">0</span>
+                    By
+                    <a id="checkout-payment-method" href="#checkout-payment-method-selection-popup"
+                        data-rel="popup">Cash</a>
+                </div>
+            </div>
+
+            <hr style="margin: 5vh 0vw" />
+
+            <div id="checkout-order-summary">
+                <span style="text-align: center;"> Your Order </span>
+                <div>
+                    <!-- <a href="#" style="margin: 2vh 0vw; float: left;">Clear Cart</a> -->
+                    <a href="#" style="margin: 2vh 0vw; float: right;">View Menu</a>
+                </div>
+
+                <div id="checkout-items-grid"></div>
+                <a href="#" id="clear-cart-btn" style="color: #EB5757; margin: 4vh 0vw; text-align: center;">Clear
+                    Cart</a>
+            </div>
+            <div id="popup-container">
+                <div data-role="popup" id="checkout-payment-method-selection-popup">
+                    <ul id="checkout-payment-method-selection-list" data-role="listview" data-inset="true"
+                        style="min-width:210px;">
+                        <li data-role="list-divider">Choose a payment method</li>
+                        <li payment-method-type="cash" class="checkout-payment-method-selection-item">Cash</li>
+                        <li payment-method-type="one-time-card-payment" class="checkout-payment-method-selection-item">
+                            One Time Card Payment</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- TODO disable this button -->
+        <div data-role="footer" data-position="fixed" data-enhanced="false">
+            <button id="checkout-place-order" class="ui-btn full-width-btn">Place the Order</button>
+        </div>
+
+        <script>
+            // $('body').on('pageshow', "#checkout", function (event, { toPage }) {
+            // });
+            // The code below uses ES6 syntax since modern browsers support it (Chrome / Edge versions released after 2016)
+            // Refer https://www.w3schools.com/js/js_versions.asp for more
+            const { user, cart, stripe, payment } = app;
+            const summary = cart.summary();
+
+            let selectedPaymentMethod = "cash"
+
+            const handlePlaceOrder = function (event, stripe) {
+
+                cart.setPaymentMethod(selectedPaymentMethod);
+
+                if (selectedPaymentMethod === 'one-time-card-payment') {
+                    console.log("One Time card payment option selected");
+                    payment.createCheckoutSession({
+                        success_url: "https://idl99.github.io/feed-u/pages/order_in_progress.html",
+                        cancel_url: "https://idl99.github.io/feed-u/pages/checkout.html",
+                        line_items: cart.summary().items.map(({ itemTitle, itemPrice, quantity }) => {
+                            return {
+                                price_data: {
+                                    currency: 'lkr',
+                                    product_data: {
+                                        name: itemTitle,
+                                    },
+                                    unit_amount: itemPrice * 100,
+                                },
+                                quantity,
+                            }
+                        }),
+                        mode: "payment",
+                        payment_method_types: ["card"],
+                        client_reference_id: user.getPaymentDetails().stripe_customer_id,
+                    }).then(response => {
+                        const { id } = response
+                        stripe.redirectToCheckout({
+                            sessionId: id,
+                        })
+                    })
+                } else {
+                    $(':mobile-pagecontainer').pagecontainer("change", "order_in_progress.html")
+                }
+            }
+
+            $("#checkout-restaurant-name").text(summary.vendor.vendorName);
+            $("#checkout-eta").text(summary.vendor.deliveryTime);
+            $("#checkout-delivery-location").text(user.getDetails().location.display);
+            summary.items.length === 0 ? $("#clear-cart-btn").hide() : $("#clear-cart-btn").show();
+
+            $(".link-set-location-page").on("click", function (event) {
+                event.preventDefault();
+                $.mobile.navigate("set_location.html");
+            })
+
+            $('.checkout-payment-method-selection-item').click(function () {
+                selectedPaymentMethod = $(this).attr("payment-method-type");
+                $('#checkout-payment-method').text($(this).text());
+            })
+
+            const initializePaymentMethods = () => {
+                // Add points option
+                const pointsOption = $(`<li payment-method-type="points" class="checkout-payment-method-selection-item">Points (${user.getDetails().profile.points})</li>`);
+                pointsOption.click(function () {
+                    selectedPaymentMethod = $(this).attr("payment-method-type");
+                    $('#checkout-payment-method').text($(this).text());
+                });
+
+                let cardOptions = [];
+                payment.getAllCardsForCustomer(function ({ data }) {
+                    cardOptions = data.map(({ card }) => {
+                        const paymentOption = $(`<li payment-method-type="card" class="checkout-payment-method-selection-item">${card.brand.toUpperCase()} - **** ${card.last4}</li>`);
+                        paymentOption.click(function () {
+                            selectedPaymentMethod = $(this).attr("payment-method-type");
+                            $('#checkout-payment-method').text($(this).text());
+                        });
+                        return paymentOption;
+                    })
+                    $("#checkout-payment-method-selection-list").append(pointsOption, cardOptions);
+                    $("#checkout-payment-method-selection-list").listview("refresh")
+                })
+            }
+
+            $("#checkout-payment-method-selection-popup").on("popupcreate", function () {
+                initializePaymentMethods();
+            });
+
+            stripe
+                .loadStripe("pk_test_51I3c8WBYsXgRXg4sHaDeNTSCG8lvZNnN4c8tUydiuqUwArCXylLnE8poGx5UapOqEhR2cEGlHLM1V8J8ecat0SEB00fopbAHm7")
+                .then(stripe => {
+                    $("#checkout-place-order").on("click", (event) => handlePlaceOrder(event, stripe))
+                })
+
+            var items = summary.items;
+
+            // Calculate bill total
+            var billTotal = items.reduce((sum, { quantity, itemPrice }) => {
+                return sum + quantity * itemPrice;
+            }, 0);
+            $("#checkout-bill-total").text(billTotal)
+
+            // render items in order summary
+            if (items.length > 0) {
+                const itemsList = items.map(({ quantity, itemTitle, itemPrice }) => {
+                    var markup =
+                        `<div class="checkout-item">
+                        <div class="checkout-item-quantity">${quantity} X </div>
+                        <div class="checkout-item-name">${itemTitle}</div>
+                        <div class="checkout-item-price">${itemPrice * quantity}</div>
+                    </div>`;
+                    return markup;
+                });
+                $('#checkout-items-grid').html(itemsList.reduce((markup, item) => markup + item));
+            }
+
+            $("#clear-cart-btn").click(function () {
+                cart.clearCart();
+                $("#checkout").remove();
+                $(":mobile-pagecontainer").pagecontainer("change", "home.html");
+            })
+        </script>
+    </div>
+</body>
+
+</html>

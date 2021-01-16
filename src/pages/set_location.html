@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Feed U - Set Location Page</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="../css/base.css" />
+
+	<script src="../bundle.js"></script>
+
+	<style>
+
+	</style>
+
+</head>
+
+<body>
+	<div data-role="page" id="set-location" class="feedU-page ui-responsive-panel">
+		<div data-role="header" data-position="fixed" data-tap-toggle="false" data-add-back-btn="true">
+			<img src="../assets/logo.png">
+			<span class="ui-title"></span>
+		</div>
+		<div data-role="main" class="ui-content">
+			<div id="set-location-btn-container">
+				<button id="set-location-btn">
+					Set Location from Google Maps
+					<i class="fa fa-map-marker" aria-hidden="true"></i>
+				</button>
+			</div>
+			<div data-role="tabs" id="tabs">
+				<div data-role="navbar">
+					<ul>
+						<li><a id="tab-item" href="#saved-locations" data-ajax="false" class="ui-btn-active">Saved
+								Locations</a></li>
+						<li><a id="tab-item" href="#previous-locations" data-ajax="false">Previous Locations</a></li>
+					</ul>
+				</div>
+				<div class=" ui-content" id="saved-locations">
+					<ul data-role="listview">
+						<li class="set-location-saved-location-list-item">Delkanda, Nugegoda
+						</li>
+						<li class="set-location-saved-location-list-item">Nedimala, Dehiwala</li>
+						<li class="set-location-saved-location-list-item">Kandalanda, Homagama</li>
+						<li class="set-location-saved-location-list-item">Attidiya, Dehiwala</li>
+					</ul>
+				</div>
+				<div class="ui-content" id="previous-locations">
+					<ul data-role="listview">
+						<li class="set-location-previous-location-list-item">Makumbura, Kottawa</li>
+						<li class="set-location-previous-location-list-item">Piliyandala, Kottawa</li>
+						<li class="set-location-previous-location-list-item">Nawala, Rajagiriya</li>
+						<li class="set-location-previous-location-list-item">Nugegoda, Nugegoda</li>
+					</ul>
+				</div>
+			</div>
+			<hr id="horizontal-line">
+			<div id="order_time">
+				<form>
+					<fieldset data-role="controlgroup" data-iconpos="right">
+						<input type="checkbox" name="deliever_asap" id="deliever_asap">
+						<label for="deliever_asap"><i id="set-location-fa-icons" class="fa fa-clock-o"
+								aria-hidden="true"></i>Deliver it
+							ASAP</label>
+						<input type="checkbox" name="scheduled_order" id="scheduled_order">
+						<label for="scheduled_order"><i id="set-location-fa-icons" class="fa fa-calendar"
+								aria-hidden="true"></i>Scheduled
+							Order</label>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+		<div id="configure-location-btn" data-role="footer" data-tap-toggle="false" data-position="fixed">
+			<h1>Save</h1>
+		</div>
+		<!-- <script
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4fxzjh0_9j9aIXCecrSeDxBztKU5Lzao&callback=initMap"
+			defer></script> -->
+		<script>
+
+			const { user } = app;
+
+			$('#configure-location-btn').on('click', function () {
+				var updatedLocation = $('.set-location-saved-location-list-item.ui-icon-check.ui-btn-icon-right').text();
+				if (updatedLocation === '') {
+					updatedLocation = $('.set-location-previous-location-list-item.ui-icon-check.ui-btn-icon-right').text();
+				}
+				console.log(updatedLocation);
+				if (updatedLocation !== '') {
+					const payload = { updatedLocation };
+					const error = user.updateLocation(payload);
+					if (error) {
+						console.log('Failed to update the user location.');
+					} else {
+						console.log('Successfully updated the user location.');
+						$(":mobile-pagecontainer").pagecontainer("change", "home.html",);
+						// history.back();
+					}
+				} else {
+					$(":mobile-pagecontainer").pagecontainer("change", "home.html",);
+					// history.back();
+				}
+			});
+
+			$("#set-location-btn").click(function () {
+				$(":mobile-pagecontainer").pagecontainer("change", "location_search.html",);
+			});
+
+			// $("#set-location-map").click(function () {
+			// 	// Handle the map click event.
+			// 	$(":mobile-pagecontainer").pagecontainer("change", "location_search.html",);
+			// });
+
+			$("#deliever_asap").prop("checked", true);
+			$("#scheduled_order").prop("checked", false);
+			$("#deliever_asap").click(function (eventObject) {
+				if (!$(this).prop("checked")) {
+					$(this).prop("checked", false).checkboxradio("refresh");
+				} else {
+					$(this).prop("checked", true).checkboxradio("refresh");
+					$('#scheduled_order').prop("checked", false).checkboxradio("refresh");
+				}
+			})
+			$("#scheduled_order").click(function (eventObject) {
+				if (!$(this).prop("checked")) {
+					$(this).prop("checked", false).checkboxradio("refresh");
+				} else {
+					$(this).prop("checked", true).checkboxradio("refresh");
+					$('#deliever_asap').prop("checked", false).checkboxradio("refresh");
+				}
+			})
+
+			$('.set-location-saved-location-list-item').click(function (eventObject) {
+				$('.set-location-saved-location-list-item.ui-icon-check.ui-btn-icon-right').removeClass("ui-icon-check ui-btn-icon-right");
+				$(this).addClass("ui-icon-check ui-btn-icon-right");
+			});
+
+			$('.set-location-previous-location-list-item').click(function (eventObject) {
+				$('.set-location-previous-location-list-item.ui-icon-check.ui-btn-icon-right').removeClass("ui-icon-check ui-btn-icon-right");
+				$(this).addClass("ui-icon-check ui-btn-icon-right");
+			});
+
+			// function initMap() {
+			// 	console.log("Init 1");
+			// 	const map = new google.maps.Map(document.getElementById("set-location-map"), {
+			// 		zoom: 15,
+			// 		center: { lat: 51.517582, lng: -0.141525 },
+			// 	});
+			// }
+		</script>
+	</div>
+</body>
+
+</html>

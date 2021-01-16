@@ -1,1 +1,7 @@
 node_modules/
+
+# Since the files in here are generated
+# ignoring this folder from gitignore to avoid frequent merge conflicts.
+dist/
+src/bundle.js
+src/css/

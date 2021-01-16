@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feed U - Favorites List</title>
+
+    <link rel="stylesheet" href="../css/base.css" />
+
+    <script src="../bundle.js"></script>
+</head>
+
+<body>
+
+    <div id="favorites-list-page" data-role="page" class="feedU-page ui-responsive-panel">
+        <div data-role="header" data-toggle-on-tap="false">
+            <span class="ui-title"></span>
+            <a class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-corner-all" href="#" data-rel="back"
+                data-icon="arrow-l" data-theme="c" data-role="button">Back</a>
+            <div data-enhance="false">
+                <a href="home.html">
+                    <img src="../assets/logo.png"></img>
+                </a>
+            </div>
+        </div>
+        <div role="main" class="ui-content">
+            <div class="favorites-list-section-title-container">
+                <h2 style="display: inline;">Your Favorite Items</h2>
+                <a data-enhance="false" href="" id="favorites-list-email-items-btn"
+                    class="ui-btn ui-btn-inline favorites-list-email-btn">Email</a>
+            </div>
+            <div id="favorite-items-container">
+                No Favorite Items yet
+            </div>
+
+            <br />
+
+            <div class="favorites-list-section-title-container">
+                <h2 style="display: inline;">Your Favorite Vendors</h2>
+                <a data-enhance="false" href="" id="favorites-list-email-vendors-btn"
+                    class="ui-btn ui-btn-inline favorites-list-email-btn">Email</a>
+            </div>
+            <div id="favorite-vendors-container">
+                No Favorite Vendors yet
+            </div>
+        </div>
+
+        <script>
+
+            const { user } = app;
+
+            function removeFavorite(element, vendorId) {
+                console.log(vendorId);
+                user.removeFavorite(user.FAVORITE_TYPES.VENDOR, { vendorId });
+                $(element).parent().parent().remove();
+            }
+
+            $('body').on("pagecontainerbeforeshow", function (event, ui) {
+
+                const favoriteVendors = user.getFavorites().vendors;
+                const favoriteItems = user.getFavorites().items;
+
+                console.log('Inside favorites list page ...');
+
+                if (favoriteVendors.length == 0) {
+                    $("#favorites-list-email-vendors-btn").hide();
+                } else {
+                    $("#favorites-list-email-vendors-btn").show();
+                }
+
+                if (favoriteItems.length == 0) {
+                    $("#favorites-list-email-items-btn").hide();
+                } else {
+                    $("#favorites-list-email-items-btn").show();
+                }
+
+                const thisPage = ui.toPage[0];
+                if (thisPage.id === 'favorites-list-page') {
+                    const vendorCards = favoriteVendors.map(({ vendorId, vendorImageLocation, vendorName, vendorCatergories, vendorRatings, deliveryTime }) => {
+
+                        const vendorCategoriesMarkup = vendorCatergories.reduce((acc, category) => {
+                            return acc + `<span style="margin-right: 10px; display: flex; align-items: center;"><i class="fa fa-circle" id="poi-catergory"></i>${category}</span>`
+                        }, ``);
+
+                        const markup = `
+                                <div class="poi-container" vendor-id="${vendorId}">
+                                    <img src=${vendorImageLocation} class="poi-image">
+                                    <div class="poi-details">
+                                        <div>${vendorName}</div>
+                                        <div class="poi-catergory-container">
+                                            ${vendorCategoriesMarkup}
+                                        </div>
+                                        <div class="poi-rating-bar-container">
+                                            <div class="poi-rating-bar">
+                                                <span><i class='fa fa-star fa-fw' id="poi-rate-star-icon"></i> ${vendorRatings.vendorRatingValue} </span>
+                                                <small id="poi-no-of-rated-customers">(${vendorRatings.vendorNoOfRatings})</small>
+                                            </div>
+                                            <div id="poi-delivery-time">${deliveryTime}</div>
+                                        </div>
+                                    </div>
+                                    <div style="padding: 2px 0px;">
+                                        <svg vendor-id="${vendorId}" onclick="removeFavorite(this, this.getAttribute('vendor-id'))" width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M7.5 0C3.35685 0 0 3.35685 0 7.5C0 11.6431 3.35685 15 7.5 15C11.6431 15 15 11.6431 15 7.5C15 3.35685 11.6431 0 7.5 0ZM3.50806 8.70968C3.30847 8.70968 3.14516 8.54637 3.14516 8.34677V6.65323C3.14516 6.45363 3.30847 6.29032 3.50806 6.29032H11.4919C11.6915 6.29032 11.8548 6.45363 11.8548 6.65323V8.34677C11.8548 8.54637 11.6915 8.70968 11.4919 8.70968H3.50806Z" fill="#EB5757"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            `
+
+                        return markup;
+
+                    });
+
+                    $('#favorite-vendors-container').html(vendorCards)
+
+                }
+            });
+        </script>
+
+    </div>
+
+</body>
+
+</html>

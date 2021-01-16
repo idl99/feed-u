@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feed U - Item Detail Page</title>
+
+    <link rel="stylesheet" href="../css/base.css">
+    <script src="../bundle.js"></script>
+</head>
+
+<body>
+
+    <div data-role="page" id="item-detail-page" class="feedU-page ui-responsive-panel">
+        <style>
+            body {
+                font-family: "Poppins";
+            }
+
+            .item-detail-page-item-image-section {
+                position: relative;
+                margin-bottom: 1em;
+                background-color: white;
+                color: black;
+            }
+
+            #item-detail-page-item-img {
+                display: block;
+                width: 100%;
+                height: auto;
+                margin: 0;
+            }
+
+            .item-detail-page-item-img-txt-container {
+                position: absolute;
+                bottom: 0;
+                padding-top: 0.25em;
+                padding-bottom: 0.25em;
+                font-weight: 100;
+                background: rgba(0, 0, 0, 0.5);
+                /* Black see-through */
+                color: #f1f1f1;
+                width: 100%;
+                opacity: 1;
+                text-align: left;
+            }
+
+            .item-detail-page-item-ratings-with-name {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0.25em 0;
+            }
+
+            #item-detail-page-item-name {
+                margin-left: 1em;
+                font-size: 18px;
+            }
+
+            .item-detail-page-item-rating-bar {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 20px;
+                width: 70px;
+                font-size: 11px;
+                background: #F2F2F2;
+                border-radius: 25px;
+                color: black;
+                margin-right: 1em;
+            }
+
+            #item-detail-page-item-rate-star-icon {
+                color: #F2C94C;
+            }
+
+            #item-detail-page-item-no-of-ratings {
+                margin-bottom: 1em;
+            }
+
+            #item-detail-page-item-description {
+                text-align: justify;
+                text-justify: inter-word;
+            }
+
+            .item-detail-page-item-customize-container {
+                display: flex;
+                justify-content: flex-start;
+                overflow: auto;
+            }
+
+            .item-detail-page-item-customize-container>div {
+                margin: 10px;
+                font-size: 12px;
+            }
+
+            #item-detail-page-item-special-instructions {
+                margin: 0;
+                padding: 0;
+            }
+
+            .item-detail-page-item-quantity-change-container {
+                display: flex;
+                justify-content: center;
+                padding: 1em 1em 1em 1em;
+            }
+
+            .item-detail-page-item-quantity-change {
+                display: flex;
+                justify-content: center;
+                display: flex;
+                justify-content: space-evenly;
+                background-color: #F2F2F2;
+                border-radius: 100px;
+                width: 50%;
+            }
+
+            .item-detail-page-item-comments-container {
+                display: flex;
+                justify-content: center;
+            }
+
+            #addToCartBtn {
+                width: 100%;
+                text-align: center;
+                background: #EB5757;
+                color: white;
+                margin: 0px;
+                padding: 0px;
+                border-radius: 0%;
+            }
+
+            .item-page-item-favourite {
+                display: flex;
+                align-items: center;
+                margin-right: 1em;
+            }
+
+            #item-favourite-icon {
+                font-size: 25px;
+            }
+        </style>
+        <div data-role="header" id="checkout-header" data-position="fixed" data-tap-toggle="false">
+            <a class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-corner-all" href="#" data-rel="back"
+                data-icon="arrow-l" data-theme="c" data-role="button">Back</a>
+            <span class="ui-title"></span>
+            <img src="../assets/logo.png"></img>
+        </div>
+        <div role="main" class="ui-content">
+            <div class="item-detail-page-item-image-section">
+                <img id="item-detail-page-item-img" src="../assets/vendor_page_images/tom_yum_soup.jpg">
+                <div class="item-detail-page-item-img-txt-container">
+                    <div class="item-detail-page-item-ratings-with-name">
+                        <span id="item-detail-page-item-name">Item Name</span>
+                        <!-- rating bar next to item name -->
+                        <div style="display: flex; align-items: center;">
+                            <div class="item-detail-page-item-rating-bar">
+                                <p>
+                                    <i class='fa fa-star fa-fw' id="item-detail-page-item-rate-star-icon"></i>
+                                    <span id="item-detail-page-item-rating-value">0.0</span>
+                                    <small id="item-detail-page-item-no-of-ratings">(0)</small>
+                                </p>
+                            </div>
+                            <!-- ---end of rating bar------- -->
+                            <div class="item-page-item-favourite">
+                                <i id="item-favourite-icon" class="fa fa-heart-o"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p id="item-detail-page-item-description">This soup
+                is a special
+                dish
+                prepared by world renowned chef Gonagala Ramsey, made to a secret recipe that has been passed on
+                from
+                his Chinese ancestors.</p>
+            <!-- Customization options container -->
+            <div class="item-detail-page-item-customize-container">
+                <div>
+                    <form>
+                        <p>Choice of Size</p>
+                        <input type="radio" id="small-size" name="item-detail-page-item-customization-size"
+                            value="small-size">
+                        <label for="small-size">Small</label><br>
+                        <input type="radio" id="regular-size" name="item-detail-page-item-customization-size"
+                            value="regular-size">
+                        <label for="regular-size">Regular</label><br>
+                        <input type="radio" id="large-size" name="item-detail-page-item-customization-size"
+                            value="large-size">
+                        <label for="large-size">Large</label>
+                    </form>
+                </div>
+                <div>
+                    <form>
+                        <p>Level of Salt</p>
+                        <input type="radio" id="no-salt" name="item-detail-page-item-customization-salt"
+                            value="no-salt">
+                        <label for="no-salt">No Salt</label><br>
+                        <input type="radio" id="less-salt" name="item-detail-page-item-customization-salt"
+                            value="less-salt">
+                        <label for="less-salt">Less</label><br>
+                        <input type="radio" id="normal-salt" name="item-detail-page-item-customization-salt"
+                            value="normal-salt">
+                        <label for="normal-salt">Normal</label>
+                    </form>
+                </div>
+                <div>
+                    <form>
+                        <p>Level of Spice</p>
+                        <input type="radio" id="no-spice" name="item-detail-page-item-customization-spice"
+                            value="no-spice">
+                        <label for="no-spice">None</label><br>
+                        <input type="radio" id="mild-spice" name="item-detail-page-item-customization-spice"
+                            value="mild-spice">
+                        <label for="mild-spice">Mild</label><br>
+                        <input type="radio" id="hot-spice" name="item-detail-page-item-customization-spice"
+                            value="hot-spice">
+                        <label for="hot-spice">Hot</label>
+                    </form>
+                </div>
+            </div>
+            <div>
+                <!--end of customization container ----->
+                     <p id="item-detail-page-item-special-instructions">Special Instructions</p>
+                     <input type="text" name="sp-instr" id="sp-instr" value=""
+                    placeholder="Add a note (extra salt, no onions, etc.)">
+            </div>
+            <div class="item-detail-page-item-quantity-change-container">
+                <div class="item-detail-page-item-quantity-change">
+                    <p id="item-detail-page-decr-item-qty">-</p>
+                    <p id="item-detail-page-item-qty">1</p>
+                    <p id="item-detail-page-incr-item-qty">+</p>
+                </div>
+            </div>
+            <p>Comments</p>
+            <div class="item-detail-page-item-comments-container">
+
+            </div>
+        </div>
+        <div data-role="footer">
+            <button id="addToCartBtn">
+                <h4> Add to Cart</h4>
+            </button>
+        </div>
+
+        <script>
+
+            const { utils, datastore, cart, user } = app;
+            var item = {};
+            var vendor = {};
+            var quantity = 1;
+
+            function setItemDetails({ itemTitle, itemDescription, itemRatings, itemImageLocation }) {
+                $('#item-detail-page-item-name').text(itemTitle)
+                $('#item-detail-page-item-description').text(itemDescription)
+                $('#item-detail-page-item-rating-value').text(itemRatings.itemRatingValue)
+                $('#item-detail-page-item-no-of-ratings').text(`(${itemRatings.itemNoOfRatings})`)
+                $('#item-detail-page-item-img').attr("src", itemImageLocation)
+            }
+
+            $('body').on('pagebeforeshow', "#item-detail-page", function (event, { toPage }) {
+                // The pageshow event is deprecated from 1.4.0 and removed in 1.6.0 but then jQuery Mobile itself is deprecated
+                // and 1.6.0 will never come
+
+                // console.log($(':mobile-pagecontainer').pagecontainer("getActivePage"))
+                const url = toPage[0].baseURI;
+                const queryParams = utils.parseUrlForQueryParams(url);
+                const itemDetails = datastore.getSpecificItem(queryParams.itemId);
+                const vendorDetails = datastore.getSpecificVendor(queryParams.vendorId);
+                item = itemDetails;
+                vendor = vendorDetails;
+                setItemDetails(itemDetails);
+
+                const FAVORITE_ICON_STATES = {
+                    FILLED: 'fa-heart',
+                    UNFILLED: 'fa-heart-o',
+                    FILLED_COLOR: '#EB5757',
+                    UNFILLED_COLOR: '#F1F1F1',
+                }
+
+                const itemIsFavorite = user.isItemFavorite(user.FAVORITE_TYPES.ITEM, item);
+                if (itemIsFavorite) {
+                    $('#item-favourite-icon').addClass(FAVORITE_ICON_STATES.FILLED)
+                        .removeClass(FAVORITE_ICON_STATES.UNFILLED).css('color', FAVORITE_ICON_STATES.FILLED_COLOR);
+                } else {
+                    $('#item-favourite-icon').addClass(FAVORITE_ICON_STATES.UNFILLED)
+                        .removeClass(FAVORITE_ICON_STATES.FILLED).css('color', FAVORITE_ICON_STATES.UNFILLED_COLOR);
+                }
+
+                $('#item-favourite-icon').on('click', function () {
+
+                    const wasUnfilled = $('#item-favourite-icon').hasClass('fa-heart-o');
+                    if (wasUnfilled) {
+                        $(this).css('color', FAVORITE_ICON_STATES.FILLED_COLOR);
+                        user.addFavorite(user.FAVORITE_TYPES.ITEM, item);
+                    } else {
+                        $(this).css('color', FAVORITE_ICON_STATES.UNFILLED_COLOR);
+                        user.removeFavorite(user.FAVORITE_TYPES.ITEM, item);
+                    }
+
+                    $(this).toggleClass(FAVORITE_ICON_STATES.FILLED);
+                    $(this).toggleClass(FAVORITE_ICON_STATES.UNFILLED);
+                });
+
+            });
+
+            $('#item-detail-page-incr-item-qty').click(function (event) {
+                if (quantity < 9) {
+                    // Can only add upto 9 nos. of an item
+                    quantity += 1;
+                    $('#item-detail-page-item-qty').text(quantity)
+                }
+            })
+
+            $('#item-detail-page-decr-item-qty').click(function (event) {
+                if (quantity > 1) {
+                    // Have to at least add 1 nos. of an item
+                    quantity -= 1;
+                    $('#item-detail-page-item-qty').text(quantity)
+                }
+            })
+
+            $('#addToCartBtn').click(function (event) {
+                const payload = { vendor, item: { ...item, quantity } };
+                const error = cart.addItemToCart(payload)
+                if (error) {
+                    console.log('Add to cart failed');
+                    $('#item-detail-popup-msg').text(error);
+                    $('#item-detail-popup').popup("open");
+                } else {
+                    console.log('Add to cart successsful');
+                    history.back();
+                }
+            })
+        </script>
+    </div>
+
+</body>
+
+</html>

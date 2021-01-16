@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Feed U - QR-Result</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../css/base.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="../libs/jquery/jquery-1.11.1/jquery-1.11.1.min.js"></script>
+    <script src="../libs/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+
+    <style>
+        .coupon {
+            border: 5px dotted #bbb;
+            /* Dotted border */
+            width: 30%;
+            border-radius: 15px;
+            /* Rounded border */
+            margin: 0 auto;
+            /* Center the coupon */
+            /* max-width: 600px; */
+        }
+
+        .container {
+            padding: 2px 16px;
+            background-color: #f1f1f1;
+            text-align: center;
+        }
+
+        .promo {
+            background: #ccc;
+            padding: 3px;
+        }
+
+        .expire {
+            color: red;
+        }
+
+        .header {
+            text-align: left;
+            ;
+        }
+
+        .brand-name {
+            font-size: 20px;
+        }
+    </style>
+
+    <div class="coupon" data-role="popup" class="ui-content" data-dismissible="false">
+        <a href="#" data-rel="back"
+            class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-left">Close</a>
+        <div class="container header">
+            <h3 class="brand-name">FeedU</h3>
+            <img src="C:/Users/Acer/Documents/Mobile UI-UX/colored-bg.png" alt="Avatar" style="width:25%;">
+        </div>
+        <!-- C:/Users/Acer/Documents/Mobile UI-UX/qr-result.png -->
+        <div style="text-align: center;">
+            <img src="C:/Users/Acer/Documents/Mobile UI-UX/undraw_gift_card.svg" alt="Avatar" style="width:40%;">
+        </div>
+        <div class="container" style="background-color:white; text-align: center;">
+            <h2><b>CONGRATULATIONS</b></h2>
+            <p>YOU JUST W0N A 30% OFF YOUR PURCHASE</p>
+            <p>*insert photo*</p>
+        </div>
+        <div class="container">
+            <p>Use Promo Code: <span class="promo">BOH232</span></p>
+            <p class="expire">Expires: Feb 03, 2021</p>
+        </div>
+    </div>
+</body>
+
+</html>
