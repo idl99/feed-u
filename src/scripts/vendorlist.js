@@ -11,11 +11,11 @@ const data = Object.freeze({
                 "American"
             ],
             "vendorRatings": {
-                "vendorRatingValue": 4.6,
+                "vendorRatingValue": 2.6,
                 "vendorNoOfRatings": 100
             },
             "location": "Colombo 3",
-            "deliveryTime": "25-30 mins",
+            "deliveryTime": "25",
             "items": [
                 {
                     "itemImageLocation": "../assets/vendor_page_images/tom_yum_soup.jpg",
@@ -66,7 +66,7 @@ const data = Object.freeze({
                 "vendorNoOfRatings": 99
             },
             "location": "Colombo 5",
-            "deliveryTime": "15-20 mins",
+            "deliveryTime": "15",
             "items": [
                 {
                     "itemImageLocation": "../assets/vendor_page_images/cheese_lovers_pizza.jpg",
@@ -116,7 +116,7 @@ const data = Object.freeze({
                 "vendorNoOfRatings": 150
             },
             "location": "Colombo 7",
-            "deliveryTime": "5-10 mins",
+            "deliveryTime": "5",
             "items": [
                 {
                     "itemImageLocation": "../assets/vendor_page_images/prawn_curry_and_rice.jpg",
@@ -162,11 +162,11 @@ const data = Object.freeze({
                 "Italian"
             ],
             "vendorRatings": {
-                "vendorRatingValue": 4.1,
+                "vendorRatingValue": 3.1,
                 "vendorNoOfRatings": 82
             },
             "location": "Colombo 1",
-            "deliveryTime": "25-40 mins",
+            "deliveryTime": "40",
             "items": [
                 {
                     "itemImageLocation": "../assets/vendor_page_images/bruschetta_pasta.jpg",
@@ -213,11 +213,11 @@ const data = Object.freeze({
                 "Thai"
             ],
             "vendorRatings": {
-                "vendorRatingValue": 4.9,
+                "vendorRatingValue": 3.9,
                 "vendorNoOfRatings": 29
             },
             "location": "Colombo 1",
-            "deliveryTime": "20-35 mins",
+            "deliveryTime": "20",
             "items": [
 
             ],
@@ -232,7 +232,7 @@ const data = Object.freeze({
                 "Thai"
             ],
             "vendorRatings": {
-                "vendorRatingValue": 4.3,
+                "vendorRatingValue": 2.3,
                 "vendorNoOfRatings": 10
             },
             "location": "Colombo 1",
@@ -251,11 +251,11 @@ const data = Object.freeze({
                 "Indian"
             ],
             "vendorRatings": {
-                "vendorRatingValue": 3.9,
+                "vendorRatingValue": 1.9,
                 "vendorNoOfRatings": 84
             },
             "location": "Colombo 1",
-            "deliveryTime": "22-35 mins",
+            "deliveryTime": "35",
             "items": [
 
             ],
@@ -270,11 +270,11 @@ const data = Object.freeze({
                 "Sour"
             ],
             "vendorRatings": {
-                "vendorRatingValue": 4.4,
+                "vendorRatingValue": 3.4,
                 "vendorNoOfRatings": 97
             },
             "location": "Colombo 1",
-            "deliveryTime": "35-50 mins",
+            "deliveryTime": "50",
             "items": [
 
             ],
@@ -288,11 +288,11 @@ const data = Object.freeze({
                 "Indian"
             ],
             "vendorRatings": {
-                "vendorRatingValue": 4.9,
+                "vendorRatingValue": 3.9,
                 "vendorNoOfRatings": 200
             },
             "location": "Colombo 1",
-            "deliveryTime": "40-45 mins",
+            "deliveryTime": "45",
             "items": [
 
             ],
@@ -307,7 +307,7 @@ const data = Object.freeze({
                 "American"
             ],
             "vendorRatings": {
-                "vendorRatingValue": 3.5,
+                "vendorRatingValue": 5.5,
                 "vendorNoOfRatings": 73
             },
             "location": "Colombo 1",
@@ -330,7 +330,7 @@ const data = Object.freeze({
                 "vendorNoOfRatings": 55
             },
             "location": "Colombo 1",
-            "deliveryTime": "10-30 mins",
+            "deliveryTime": "10",
             "items": [
 
             ],
@@ -345,11 +345,11 @@ const data = Object.freeze({
                 "Smoothies"
             ],
             "vendorRatings": {
-                "vendorRatingValue": 4.0,
+                "vendorRatingValue": 5.6,
                 "vendorNoOfRatings": 67
             },
             "location": "Colombo 1",
-            "deliveryTime": "20-50 mins",
+            "deliveryTime": "55",
             "items": [
 
             ],
@@ -390,61 +390,6 @@ module.exports = function () {
             const allVendorsItems = data.vendors.flatMap(vendor => vendor.items)
             const item = allVendorsItems.find(item => item.itemId === itemId);
             return item;
-        },
-        getVendorIdFromVendorName: function (vendorName) {
-            const vendor = data.vendors.find(vendor => vendor.vendorName === vendorName);
-            return vendor.vendorId;
-        },
-        updateVendorAndItemRatings: function (vendorId, vendorRating, itemTitles, ratings) {
-            // Updates the vendor ratings and item ratings accordingly.
-
-            // Retrieve the vendor using the vendor Id so that it can be updated.
-            const vendor = data.vendors.find(vendor => vendor.vendorId === vendorId);
-
-            // Update the vendor ratings and increase the count of no: of rated people.
-            vendor.vendorRatings.vendorRatingValue = (parseFloat(vendor.vendorRatings.vendorRatingValue * vendor.vendorRatings.vendorNoOfRatings) + parseFloat(vendorRating)) / (vendor.vendorRatings.vendorNoOfRatings + 1);
-            vendor.vendorRatings.vendorNoOfRatings = vendor.vendorRatings.vendorNoOfRatings + 1;
-
-            // Update the ratings of the vendor's items.
-            var updatedVendorAndItemRatings = [];
-            for (var i = 0; i < itemTitles.length; i++) {
-                vendor.items.map(item => {
-                    // Update if the item names match.
-                    if (item.itemTitle.replace(/\s/g, "") === itemTitles[i]) {
-                        updatedVendorAndItemRatings.push({
-                            "itemImageLocation": item.itemImageLocation,
-                            "itemId": item.itemId,
-                            "itemTitle": item.itemTitle,
-                            "itemDescription": item.itemDescription,
-                            "itemRatings": {
-                                "itemRatingValue": (parseFloat(item.itemRatings.itemRatingValue * item.itemRatings.itemNoOfRatings) + parseFloat(ratings[i])) / (item.itemRatings.itemNoOfRatings + 1),
-                                "itemNoOfRatings": item.itemRatings.itemNoOfRatings + 1
-                            },
-                            "itemPrice": item.itemPrice
-                        });
-                    } else {
-                        // Else check if the item is already there and add it if it is not there.
-                        if (updatedVendorAndItemRatings.find(updatedItem => updatedItem.itemId === item.itemId) === undefined) {
-                            updatedVendorAndItemRatings.push({
-                                "itemImageLocation": item.itemImageLocation,
-                                "itemId": item.itemId,
-                                "itemTitle": item.itemTitle,
-                                "itemDescription": item.itemDescription,
-                                "itemRatings": {
-                                    "itemRatingValue": item.itemRatings.itemRatingValue,
-                                    "itemNoOfRatings": item.itemRatings.itemNoOfRatings
-                                },
-                                "itemPrice": item.itemPrice
-                            });
-                        }
-                    }
-                });
-            }
-            vendor.items = updatedVendorAndItemRatings;
-
-            // CHeck if the update was successfull.
-            var test = data.vendors.find(vendor => vendor.vendorId === vendorId);
-            console.log("Updated Vendor:", test);
         },
         getLeaderboard: function () {
             const { points } = user.getDetails().profile;

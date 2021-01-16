@@ -59,33 +59,37 @@
 <body>
     <div data-role="page" id="Page1">
         <div role="main" class="ui-content">
-            <div style="background-color: #E5E5E5;border-radius: 20px;width: 100%;height: 35px">
+            <div data-role="listview" style="background-color: #E5E5E5;border-radius: 20px;width: 100%;height: 35px">
                 <div class="filter" style="display: flex;">
                     <i class="fa fa-filter" aria-hidden="true"
                         style="margin-top: 0.75em; margin-left: 0.75em; color:#EB5757;"></i>
                     <div style="margin-top: 0.75em;">
                         <select name="select-choice-1" id="select-choice-1">
                             <option value="sort" disabled selected="selected">Sort</option>
-                            <option value="a-z">A - Z</option>
+                            <!-- <option value="a-z">A - Z</option> -->
                             <option value="rating">Rating</option>
                             <option value="deliverytime">Delivery Time</option>
                         </select>
                     </div>
                     <div style="margin-top: 0.75em;">
-                        <select name="select-choice-1" id="select-choice-1">
+                        <select name="select-choice-2" id="select-choice-2">
                             <option value="ratings" disabled selected="selected">Ratings</option>
-                            <option value=">3">> 3</option>
-                            <option value=">4">> 4</option>
-                            <option value=">5">> 5</option>
-                            <option value="none">None</option>
+                            <option value="1">> 1</option>
+                            <option value="2">> 2</option>
+                            <option value="3">> 3</option>
+                            <option value="4">> 4</option>
+                            <option value="5">> 5</option>
+                            <option value="0">Any</option>
                         </select>
                     </div>
                     <div style="margin-top: 0.75em;">
-                        <select name="select-choice-1" id="select-choice-1">
+                        <select name="select-choice-3" id="select-choice-3">
                             <option value="deliverytime1" disabled selected="selected">Delivery Time</option>
-                            <option value=">3">> 2 hour</option>
-                            <option value=">4">> 1 hour</option>
-                            <option value=">5">> 30 mins</option>
+                            <option value="20">> 20 mins</option>
+                            <option value="30">> 30 mins</option>
+                            <option value="40">> 40 mins</option>
+                            <option value="50">> 50 mins</option>
+                            <option value="0">Any</option>
                         </select>
                     </div>
                 </div>
@@ -97,9 +101,9 @@
             </div>
         </div>
         <script>
-            const { datastore } = app;
+            const { vendorlist } = app;
 
-            var vendors = datastore.getAllVendors(); // TODO refactor this once mock data is removed
+            var vendors = vendorlist.getAllVendors(); // TODO refactor this once mock data is removed
 
             // render items in order summary
             vendors.forEach(({ vendorId, vendorImageLocation, vendorName, vendorCatergories, vendorRatings, deliveryTime }) => {
@@ -122,7 +126,7 @@
                     `</div>
                         <div class="poi-rating-bar-container">
                             <div class="poi-rating-bar">
-                                <span><i class='fa fa-star fa-fw' id="poi-rate-star-icon"></i> ${vendorRatings.vendorRatingValue} 
+                                <span id="test"><i class='fa fa-star fa-fw' id="poi-rate-star-icon"></i> ${vendorRatings.vendorRatingValue} 
                                 </span>
                                 <small id="poi-no-of-rated-customers">(${vendorRatings.vendorNoOfRatings})</small>
                             </div>
@@ -158,6 +162,39 @@
             $("#home-footer").on("click", function (event) {
                 $(":mobile-pagecontainer").pagecontainer("change", "checkout.html");
             });
+
+            jQuery('#select-choice-2').on('change', function () {
+                var value = jQuery('#select-choice-2').val();
+                console.log(value);
+
+                jQuery('.poi-container').hide();
+
+                jQuery('.poi-container').each(function () {
+                    var showDiv = parseFloat(jQuery(this).find('#test').text()) > value;
+                    console.log(showDiv);
+                    if (showDiv) {
+                        console.log("Ratings values")
+                        jQuery(this).show();
+                    }
+                });
+            });
+    
+            jQuery('#select-choice-3').on('change', function () {
+                var value1 = jQuery('#select-choice-3').val();
+                console.log(value1);
+
+                jQuery('.poi-container').hide();
+
+                jQuery('.poi-container').each(function () {
+                    var showDiv1 = parseFloat(jQuery(this).find('#poi-delivery-time').text()) > value1;
+                    console.log(showDiv1);
+                    if (showDiv1) {
+                        console.log("Delivery time values")
+                        jQuery(this).show();
+                    }
+                });
+            });
+
         </script>
     </div>
 </body>

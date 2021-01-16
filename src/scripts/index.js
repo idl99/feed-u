@@ -13,6 +13,8 @@ var utils = require('./utils')
 
 var payment = require('./payment')
 
+var vendorlist = require('./vendorlist')
+
 var stripe = require('@stripe/stripe-js');
 
 var emailjs = require('emailjs-com');
@@ -25,6 +27,7 @@ window.app = {
     utils,
     payment,
     stripe,
+    vendorlist,
     emailjs
 }
 
