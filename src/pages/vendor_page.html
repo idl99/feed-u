@@ -403,24 +403,27 @@
                 });
 
                 // Concatenate the item cards markup
-                const allItemCardsMarkup = itemCards.reduce((markup, card) => markup + card);
+                if (itemCards.length > 0) {
+                    const allItemCardsMarkup = itemCards.reduce((markup, card) => markup + card);
 
-                // Replace instead of appending to container
-                // because jQuery Mobile caches pages
-                $('#vendor-page-container').html(allItemCardsMarkup)
+                    // Replace instead of appending to container
+                    // because jQuery Mobile caches pages
+                    $('#vendor-page-container').html(allItemCardsMarkup)
 
-                // IMPORTANT: NOTE WHEN YOU REPLACE HTML THE LISTENERS ALSO BECOME OBSOLETE
-                // THAT'S WHY THE LOGIC TO BIND TO THE CLICK LISTENER HAS BEEN ADDED HERE
-                $(".vendor-poi-item-container").click(function () {
-                    // Handle Item POI click event
-                    var itemId = $(this).attr("item-id"); // which vendor card was clicked
-                    $(":mobile-pagecontainer").pagecontainer("change", "item_detail.html", {
-                        data: {
-                            itemId,
-                            vendorId: vendor.vendorId,
-                        }
+                    // IMPORTANT: NOTE WHEN YOU REPLACE HTML THE LISTENERS ALSO BECOME OBSOLETE
+                    // THAT'S WHY THE LOGIC TO BIND TO THE CLICK LISTENER HAS BEEN ADDED HERE
+                    $(".vendor-poi-item-container").click(function () {
+                        // Handle Item POI click event
+                        var itemId = $(this).attr("item-id"); // which vendor card was clicked
+                        $(":mobile-pagecontainer").pagecontainer("change", "item_detail.html", {
+                            data: {
+                                itemId,
+                                vendorId: vendor.vendorId,
+                            }
+                        });
                     });
-                });
+                }
+
             }
 
             $('#vendor-favourite-icon').on('click', function () {
