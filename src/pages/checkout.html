@@ -25,14 +25,14 @@
         <div role="main" class="ui-content">
             <div id="checkout-restaurant-details-container">
                 <div id="checkout-restaurant-name">Restaurant Name</div>
-                <div style="display: flex; flex-direction: row; align-items: center;">
+                <div style="max-width: 335px; display: flex; flex-direction: row; align-items: center;">
                     <span style="margin-right: 5px;">Deliver Now | </span>
                     <!-- 
                         https://css-tricks.com/flexbox-truncated-text/ 
                         TODO fix for longer display names
                     -->
                     <span id="checkout-delivery-location"
-                        style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+                        style="overflow: auto; white-space: nowrap; text-overflow: ellipsis; flex: 0 0 12rem;">
                         Delivery Location </span>
                     <a class="link-set-location-page ui-btn ui-shadow ui-corner-all ui-icon-navigation ui-btn-icon-notext"
                         style="margin-left: 5px;"></a>

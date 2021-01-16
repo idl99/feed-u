@@ -13,10 +13,14 @@
 </head>
 
 <body>
-	<div data-role="page" id="vendor-stories" class="feedU-page ui-responsive-panel">
+	<div data-role="page" id="vendor-stories" class="feedU-page ui-responsive-panel" style="touch-action: none;">
 		<script>
+			// var timeOut;
 			function onCloseBtnClick(event) {
-				console.log('Clicked close button. Navigating back to home.')
+				// console.log(timeOut);
+				// clearTimeout(timeOut);
+				console.log('Clicked close button. Navigating back to home.');
+				// $('#main-container').remove();
 
 				// refer https://jquerymobile.com/upgrade-guide/1.4/#navigation on how to navigate
 
@@ -28,15 +32,17 @@
 
 			// Navigate to the next page on swipeleft
 			// $(document).on("swipeleft", "#vendor-stories", function (event) {
+			// 	$('.story-playback').remove();
+			// 	$('.vendor-details').remove();
 			// 	$(":mobile-pagecontainer").pagecontainer("change", "vendor_stories_2.html", {
 			// 		transition: "slide"
 			// 	});
 			// });
 
 			// $(document).on('pageshow', '#vendor-stories', function () {
-			// 	setTimeout(function () {
+			// 	timeOut = setTimeout(function () {
 			// 		$(":mobile-pagecontainer").pagecontainer("change", "home.html");
-			// 	}, 10000);
+			// 	}, 7000);
 			// });
 
 		</script>
