@@ -13,6 +13,8 @@ var utils = require('./utils')
 
 var payment = require('./payment')
 
+var vendorlist = require('./vendorlist')
+
 var stripe = require('@stripe/stripe-js');
 
 window.app = {
@@ -21,6 +23,7 @@ window.app = {
     datastore,
     utils,
     payment,
+    vendorlist,
     stripe
 }
 
