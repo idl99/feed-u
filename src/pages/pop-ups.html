@@ -81,7 +81,6 @@
             setTimeout(function () {
                 $('#popup2').popup('open');
             }, 500);
-            // $('#popup2').popup("open");
         }
 
         function onNoButtonClick(event) {
@@ -95,14 +94,12 @@
             setTimeout(function () {
                 $('#popup3').popup('open');
             }, 500);
-            // $('#popup2').popup("open");
         }
 
         function onOkButtonClick(event) {
             console.log("yes button clicked");
             $('#popup3').popup("close");
         }
-
 
     </script>
 
@@ -143,19 +140,19 @@
                 style="width: 100%; text-align: center; border-radius: 100px; border-width: 2px; background:#EB5757; color: white; border-color: #EB5757 ; padding: 0px;  text-shadow: none;">
                 <h4>No</h4>
             </button>
-            
+
         </div>
     </div>
 
     <div data-role="popup" id="popup3" data-overlay-theme="b" data-theme="b" data-corners="false" style="padding: 1em;">
         <div>
             <h2 class="favourites-email-popup">E-mail has been sent.</h2>
-            
+
             <button id="okBtn" class="ok-button" onclick="onOkButtonClick()"
                 style="width: 100%; text-align: center; border-radius: 100px; border-width: 2px; background:#EB5757; color: white; border-color: #EB5757 ; padding: 0px;  text-shadow: none;">
                 <h4>Ok</h4>
             </button>
-            
+
         </div>
     </div>
 
@@ -174,7 +171,7 @@
     </a>
 
 
-    
+
 
 
 </body>
