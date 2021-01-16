@@ -96,19 +96,22 @@
             <h5 class="success_popup_items">credited to your account</h5>
             <br>
             <!-- redirect to leaderboard -->
-            <a data-rel="back">
-                <button id="checkLBBtn" class="cLB-button"
+            <!-- <a data-rel="back"> -->
+                <a href="../pages/leaderboard.html">
+                <button id="checkLBBtn" class="cLB-button" onclick="deliverySuccessPopUpClose()"
                     style="width: 100%; text-align: center; border-radius: 100px; border-width: 2px; background: white; color: #EB5757; border-color: #EB5757 ; margin-bottom: 10px; margin-top: -5px; padding: 0px;  text-shadow: none;">
-                    <a href="/Users/vinulauthsara/Desktop/feed-u/src/pages/leaderboard.html"></a>
+                    <!-- <a href="../pages/leaderboard.html"></a> -->
                     <h4> Check Leaderboard</h4>
                 </button>
+                </a>
                 <!-- redirect to support -->
-                <button id="getSupBtn" class="get-Sup-button"
+                <a href="../pages/help_and_support.html">
+                <button id="getSupBtn" class="get-Sup-button" onclick="deliverySuccessPopUpClose()"
                     style="width: 100%; text-align: center; border-radius: 100px; border-width: 2px; background: white; color: #EB5757; border-color: #EB5757 ; margin: 0px; padding: 0px;  text-shadow: none;">
-                    <a href="/Users/vinulauthsara/Desktop/feed-u/src/pages/help_and_support.html"></a>
                     <h4> Get support about order</h4>
                 </button>
-            </a>
+                </a>
+            <!-- </a> -->
 
             <a href="#" data-rel="back"
                 class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right"
@@ -256,18 +259,24 @@
 
                 }
 
-                // function deliveryCompleted() {
-                //     $('#delivery-complete-popup').popup("open", {
-                //         positionTo: "window"
-                //     })
+                function deliveryCompleted() {
+                    $('#delivery-complete-popup').popup("open", {
+                        positionTo: "window"
+                    })
+                }
 
+
+                
+                // $(document).bind('click', function () {
+                    
+                //         $("#delivery-complete-popup").popup();
+                //         $("#delivery-complete-popup").popup("open");
+                    
+                // });
+
+                // function deliverySuccessPopUpClose(){
+                //     $('#delivery-complete-popup').popup("close");
                 // }
-                $(document).bind('pageinit', function () {
-                    setTimeout(function () {
-                        $("#delivery-complete-popup").popup();
-                        $("#delivery-complete-popup").popup("open");
-                    }, 6000);
-                });
             }
 
         </script>
