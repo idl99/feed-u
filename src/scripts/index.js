@@ -15,13 +15,17 @@ var payment = require('./payment')
 
 var stripe = require('@stripe/stripe-js');
 
+var emailjs = require('emailjs-com');
+emailjs.init('user_9qHmfUChqBKT2SNghQ1v1');
+
 window.app = {
     cart,
     user,
     datastore,
     utils,
     payment,
-    stripe
+    stripe,
+    emailjs
 }
 
 /**

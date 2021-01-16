@@ -28,7 +28,7 @@
             <div class="favorites-list-section-title-container">
                 <h3 style="display: inline;">Your Favorite Items</h3>
                 <a data-enhance="false" href="" id="favorites-list-email-items-btn"
-                    class="ui-btn ui-btn-inline favorites-list-email-btn">Email</a>
+                    class="ui-btn ui-btn-inline favorites-list-email-btn" onclick="sendFavoriteItems()">Email</a>
             </div>
             <div id="favorite-items-container">
                 No Favorite Items yet
@@ -39,7 +39,7 @@
             <div class="favorites-list-section-title-container">
                 <h3 style="display: inline;">Your Favorite Vendors</h3>
                 <a data-enhance="false" href="" id="favorites-list-email-vendors-btn"
-                    class="ui-btn ui-btn-inline favorites-list-email-btn">Email</a>
+                    class="ui-btn ui-btn-inline favorites-list-email-btn" onclick="sendFavoriteVendors()">Email</a>
             </div>
             <div id="favorite-vendors-container">
                 No Favorite Vendors yet
@@ -48,26 +48,45 @@
 
         <script>
 
-            const { user } = app;
+            const { user, emailjs } = app;
+
+            function sendFavoriteItems() {
+                console.log("Sending email ...");
+                let markup = processFavoriteItemsMarkupForEmail("https://idl99.github.io/feed-u/");
+                markup = markup.reduce((acc, itemCard) => acc += itemCard);
+                emailjs.send('service_0souedh', 'template_zpzrlod', {
+                    "sender": "Ihan Dilnath",
+                    "recipient": "ihan.2016030@iit.ac.lk",
+                    "favourites_markup": markup
+                })
+            }
+
+            function sendFavoriteVendors() {
+                console.log("Sending email ...");
+                let markup = processFavoriteVendorsMarkupForEmail("https://idl99.github.io/feed-u/");
+                markup = markup.reduce((acc, vendorCard) => acc += vendorCard);
+                emailjs.send('service_0souedh', 'template_jsnk30i', {
+                    "sender": "Ihan Dilnath",
+                    "recipient": "ihan.2016030@iit.ac.lk",
+                    "favourites_markup": markup
+                })
+            }
 
             function removeFavoriteVendor(element, vendorId) {
-                console.log(vendorId);
                 user.removeFavorite(user.FAVORITE_TYPES.VENDOR, { vendorId });
                 $(element).parent().parent().remove();
-                renderFavoriteVendors();
             }
 
             function removeFavoriteItem(element, itemId) {
                 user.removeFavorite(user.FAVORITE_TYPES.ITEM, { itemId });
                 $(element).parent().parent().remove();
-                renderFavoriteItems();
             }
 
-            function renderFavoriteVendors() {
+            function processFavoriteVendorsMarkup() {
 
                 const favoriteVendors = user.getFavorites().vendors;
 
-                if (favoriteVendors.length == 0) {
+                if (favoriteVendors.length < 1) {
                     $("#favorites-list-email-vendors-btn").hide();
                 } else {
                     $("#favorites-list-email-vendors-btn").show();
@@ -106,6 +125,46 @@
 
                 });
 
+                return vendorCards;
+            }
+
+            function processFavoriteVendorsMarkupForEmail(baseUrlForImages) {
+
+                const favoriteVendors = user.getFavorites().vendors;
+
+                const vendorCards = favoriteVendors.map(({ vendorId, vendorImageLocation, vendorName, vendorCatergories, vendorRatings, deliveryTime }) => {
+
+                    const vendorCategoriesMarkup = vendorCatergories.reduce((acc, category) => {
+                        return acc + `<span style="margin-right: 10px; display: flex; align-items: center;"><i class="fa fa-circle" id="poi-catergory"></i>${category}</span>`
+                    }, ``);
+
+                    const markup = `
+                    <div class="poi-container" style="display: flex;align-items: flex-start; width: 100%; margin: 0px 1.5em 1.5em 0px;">
+                        <img src=${vendorImageLocation.replace("../", baseUrlForImages)} class="poi-image"
+                            style="margin-right: 1em;width: 105px;height: 105px;object-fit: cover;">
+                        <div class="poi-details" style="font-family: 'Poppins';">
+                            <div style="font-size: x-large; font-weight: 700;">${vendorName}</div>
+                            <div class="poi-catergory-container" style="display: flex; font-size: medium;">
+                                ${vendorCategoriesMarkup}
+                            </div>
+                            <div class="poi-rating-bar-container">
+                                <div class="poi-rating-bar">
+                                    <span><i class="fa fa-star fa-fw" id="poi-rate-star-icon"></i> ${vendorRatings.vendorRatingValue} </span>
+                                    <small id="poi-no-of-rated-customers">(${vendorRatings.vendorNoOfRatings})</small>
+                                </div>
+                                <div id="poi-delivery-time">${deliveryTime}</div>
+                            </div>
+                        </div>
+                    </div><br>`
+
+                    return markup;
+                });
+
+                return vendorCards;
+
+            }
+
+            function updateFavoriteVendorListUI(vendorCards) {
                 if (vendorCards.length > 0) {
                     $('#favorite-vendors-container').html(vendorCards)
                 } else {
@@ -113,11 +172,11 @@
                 }
             }
 
-            function renderFavoriteItems() {
+            function processFavoriteItemsMarkup() {
 
                 const favoriteItems = user.getFavorites().items;
 
-                if (favoriteItems.length == 0) {
+                if (favoriteItems.length < 1) {
                     $("#favorites-list-email-items-btn").hide();
                 } else {
                     $("#favorites-list-email-items-btn").show();
@@ -153,6 +212,42 @@
                     return markup;
                 });
 
+                return itemCards;
+            }
+
+            function processFavoriteItemsMarkupForEmail(baseUrlForImages) {
+                const favoriteItems = user.getFavorites().items;
+
+                const itemCards = favoriteItems.map(({ itemId, itemImageLocation, itemTitle, itemDescription, itemRatings, itemPrice }) => {
+                    var markup =
+                        `<div class="vendor-poi-item-container" style="display: flex; font-family: 'Poppins';">
+                        <div>
+                            <img src=${itemImageLocation.replace("../", baseUrlForImages)} style="margin-right: 1em;">
+                        </div>
+                        <div class="vendor-poi-item-content">
+                            <div class="vendor-poi-item-details">
+                                <div class="vendor-poi-item-title-description">
+                                    <div id="vendor-poi-item-title" style="font-size: x-large; font-weight: 700;">${itemTitle}</div>
+                                        <span id="vendor-poi-item-description">${itemDescription}</span>
+                                    </div>
+                                <div class="vendor-poi-item-rating-bar">
+                                    <span>
+                                        <i class="fa fa-star fa-fw" id="vendor-poi-item-rate-star-icon"></i>
+                                        ${(itemRatings.itemRatingValue).toFixed(1)} 
+                                    </span>
+                                    <small id="vendor-poi-item-no-of-rated-customers">(${itemRatings.itemNoOfRatings})</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
+
+                    return markup;
+                })
+
+                return itemCards;
+            }
+
+            function updateFavoriteItemListUI(itemCards) {
                 if (itemCards.length > 0) {
                     $('#favorite-items-container').html(itemCards);
                 } else {
@@ -164,8 +259,14 @@
             $('body').on("pagecontainerbeforeshow", function (event, ui) {
                 const thisPage = ui.toPage[0];
                 if (thisPage.id === 'favorites-list-page') {
-                    renderFavoriteVendors()
-                    renderFavoriteItems()
+                    // console.log('Favorite items', user.getFavorites().items);
+                    // console.log('Favorite vendors', user.getFavorites().vendors);
+
+                    vendorCards = processFavoriteVendorsMarkup();
+                    updateFavoriteVendorListUI(vendorCards);
+
+                    itemCards = processFavoriteItemsMarkup();
+                    updateFavoriteItemListUI(itemCards);
                 }
             });
         </script>
