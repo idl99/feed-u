@@ -5363,10 +5363,18 @@ body #home-favourite-vendor-stories-container {
   justify-content: flex-start;
   overflow: auto;
 }
-body #home-favourite-vendor-stories-container .favourite-vendor-story {
+body #home-favourite-vendor-stories-container #favourite-vendor-story {
   margin: 0.25em 0.25em;
   width: 40px;
   height: 40px;
+}
+body .home-categories-container {
+  display: flex;
+  justify-content: flex-start;
+  overflow: auto;
+}
+body .home-categories-container #category-item {
+  margin: 0em 0.5em;
 }
 body .all-poi-container {
   display: grid;
