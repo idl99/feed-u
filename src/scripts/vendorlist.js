@@ -15,7 +15,7 @@ const data = Object.freeze({
                 "vendorNoOfRatings": 100
             },
             "location": "Colombo 3",
-            "deliveryTime": "25.3",
+            "deliveryTime": "25",
             "items": [
                 {
                     "itemImageLocation": "../assets/vendor_page_images/tom_yum_soup.jpg",
@@ -62,11 +62,11 @@ const data = Object.freeze({
                 "Pizza"
             ],
             "vendorRatings": {
-                "vendorRatingValue": 3.8,
+                "vendorRatingValue": 4.8,
                 "vendorNoOfRatings": 99
             },
             "location": "Colombo 5",
-            "deliveryTime": "33.6",
+            "deliveryTime": "15",
             "items": [
                 {
                     "itemImageLocation": "../assets/vendor_page_images/cheese_lovers_pizza.jpg",
@@ -112,11 +112,11 @@ const data = Object.freeze({
                 "Sri Lankan"
             ],
             "vendorRatings": {
-                "vendorRatingValue": 6.5,
+                "vendorRatingValue": 4.5,
                 "vendorNoOfRatings": 150
             },
             "location": "Colombo 7",
-            "deliveryTime": "45.4",
+            "deliveryTime": "5",
             "items": [
                 {
                     "itemImageLocation": "../assets/vendor_page_images/prawn_curry_and_rice.jpg",
@@ -162,11 +162,11 @@ const data = Object.freeze({
                 "Italian"
             ],
             "vendorRatings": {
-                "vendorRatingValue": 4.1,
+                "vendorRatingValue": 3.1,
                 "vendorNoOfRatings": 82
             },
             "location": "Colombo 1",
-            "deliveryTime": "52.6",
+            "deliveryTime": "40",
             "items": [
                 {
                     "itemImageLocation": "../assets/vendor_page_images/bruschetta_pasta.jpg",
@@ -201,6 +201,157 @@ const data = Object.freeze({
                     },
                     "itemPrice": 230
                 },
+            ],
+        },
+        {
+            "vendorId": "v5",
+            "vendorImageLocation": "../assets/vendor_list_view_images/thai_tanic.jpg",
+            "vendorName": "Thai Tanic",
+            "vendorCatergories": [
+                "Soup",
+                "Salad",
+                "Thai"
+            ],
+            "vendorRatings": {
+                "vendorRatingValue": 3.9,
+                "vendorNoOfRatings": 29
+            },
+            "location": "Colombo 1",
+            "deliveryTime": "20",
+            "items": [
+
+            ],
+        },
+        {
+            "vendorId": "v6",
+            "vendorImageLocation": "../assets/vendor_list_view_images/pita_pan.jpg",
+            "vendorName": "Pita Pan",
+            "vendorCatergories": [
+                "Burgers",
+                "Mediterrenean",
+                "Thai"
+            ],
+            "vendorRatings": {
+                "vendorRatingValue": 2.3,
+                "vendorNoOfRatings": 10
+            },
+            "location": "Colombo 1",
+            "deliveryTime": "12-15 mins",
+            "items": [
+
+            ],
+        },
+        {
+            "vendorId": "v7",
+            "vendorImageLocation": "../assets/vendor_list_view_images/hoppers_and_betrayals.jpg",
+            "vendorName": "Hoppers and Betrayals",
+            "vendorCatergories": [
+                "Hoppers",
+                "Sri Lankan",
+                "Indian"
+            ],
+            "vendorRatings": {
+                "vendorRatingValue": 1.9,
+                "vendorNoOfRatings": 84
+            },
+            "location": "Colombo 1",
+            "deliveryTime": "35",
+            "items": [
+
+            ],
+        },
+        {
+            "vendorId": "v8",
+            "vendorImageLocation": "../assets/vendor_list_view_images/cutie_pies_and_cupcakes.jpg",
+            "vendorName": "Cutie Pies and Cupcakes",
+            "vendorCatergories": [
+                "Cupcakes",
+                "Sweet",
+                "Sour"
+            ],
+            "vendorRatings": {
+                "vendorRatingValue": 3.4,
+                "vendorNoOfRatings": 97
+            },
+            "location": "Colombo 1",
+            "deliveryTime": "50",
+            "items": [
+
+            ],
+        },
+        {
+            "vendorId": "v9",
+            "vendorImageLocation": "../assets/vendor_list_view_images/tikka-k_inta.jpg",
+            "vendorName": "Tikka-k Inta",
+            "vendorCatergories": [
+                "Paratha",
+                "Indian"
+            ],
+            "vendorRatings": {
+                "vendorRatingValue": 3.9,
+                "vendorNoOfRatings": 200
+            },
+            "location": "Colombo 1",
+            "deliveryTime": "45",
+            "items": [
+
+            ],
+        },
+        {
+            "vendorId": "v10",
+            "vendorImageLocation": "../assets/vendor_list_view_images/the_codfather.jpg",
+            "vendorName": "The Codfather",
+            "vendorCatergories": [
+                "Chips",
+                "Fried Fish",
+                "American"
+            ],
+            "vendorRatings": {
+                "vendorRatingValue": 5.5,
+                "vendorNoOfRatings": 73
+            },
+            "location": "Colombo 1",
+            "deliveryTime": "5-15 mins",
+            "items": [
+
+            ],
+        },
+        {
+            "vendorId": "v11",
+            "vendorImageLocation": "../assets/vendor_list_view_images/the_tipsy_cow.jpg",
+            "vendorName": "The Tipsy Cow",
+            "vendorCatergories": [
+                "Cocktails",
+                "Smoothies",
+                "Juice"
+            ],
+            "vendorRatings": {
+                "vendorRatingValue": 5.0,
+                "vendorNoOfRatings": 55
+            },
+            "location": "Colombo 1",
+            "deliveryTime": "10",
+            "items": [
+
+            ],
+        },
+        {
+            "vendorId": "v12",
+            "vendorImageLocation": "../assets/vendor_list_view_images/the_dairy_godmother.jpg",
+            "vendorName": "The Dairy Godmother",
+            "vendorCatergories": [
+                "Dairy",
+                "Milk",
+                "Smoothies"
+            ],
+            "vendorRatings": {
+                "vendorRatingValue": 5.6,
+                "vendorNoOfRatings": 67
+            },
+            "location": "Colombo 1",
+            "deliveryTime": "55",
+            "items": [
+
             ],
         },
     ],
