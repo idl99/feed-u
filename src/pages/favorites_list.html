@@ -28,7 +28,8 @@
             <div class="favorites-list-section-title-container">
                 <h3 style="display: inline;">Your Favorite Items</h3>
                 <a data-enhance="false" href="" id="favorites-list-email-items-btn"
-                    class="ui-btn ui-btn-inline favorites-list-email-btn" onclick="sendFavoriteItems()">Email</a>
+                    class="ui-btn ui-btn-inline favorites-list-email-btn"
+                    onclick="openEmailAddressInputPopup('items')">Email</a>
             </div>
             <div id="favorite-items-container">
                 No Favorite Items yet
@@ -39,7 +40,8 @@
             <div class="favorites-list-section-title-container">
                 <h3 style="display: inline;">Your Favorite Vendors</h3>
                 <a data-enhance="false" href="" id="favorites-list-email-vendors-btn"
-                    class="ui-btn ui-btn-inline favorites-list-email-btn" onclick="sendFavoriteVendors()">Email</a>
+                    class="ui-btn ui-btn-inline favorites-list-email-btn"
+                    onclick="openEmailAddressInputPopup('vendors')">Email</a>
             </div>
             <div id="favorite-vendors-container">
                 No Favorite Vendors yet
@@ -50,24 +52,24 @@
 
             const { user, emailjs } = app;
 
-            function sendFavoriteItems() {
-                console.log("Sending email ...");
+            function sendFavoriteItems(email) {
+                console.log("Sending email to ", email);
                 let markup = processFavoriteItemsMarkupForEmail("https://idl99.github.io/feed-u/");
                 markup = markup.reduce((acc, itemCard) => acc += itemCard);
                 emailjs.send('service_0souedh', 'template_zpzrlod', {
                     "sender": "Ihan Dilnath",
-                    "recipient": "ihan.2016030@iit.ac.lk",
+                    "recipient": email,
                     "favourites_markup": markup
                 })
             }
 
-            function sendFavoriteVendors() {
+            function sendFavoriteVendors(email) {
                 console.log("Sending email ...");
                 let markup = processFavoriteVendorsMarkupForEmail("https://idl99.github.io/feed-u/");
                 markup = markup.reduce((acc, vendorCard) => acc += vendorCard);
                 emailjs.send('service_0souedh', 'template_jsnk30i', {
                     "sender": "Ihan Dilnath",
-                    "recipient": "ihan.2016030@iit.ac.lk",
+                    "recipient": email,
                     "favourites_markup": markup
                 })
             }
@@ -102,7 +104,7 @@
                         <div class="poi-container" vendor-id="${vendorId}">
                             <img src=${vendorImageLocation} class="poi-image">
                             <div class="poi-details">
-                                <div>${vendorName}</div>
+                                <div class="poi-vendor-name">${vendorName}</div>
                                 <div class="poi-catergory-container">
                                     ${vendorCategoriesMarkup}
                                 </div>
@@ -270,6 +272,112 @@
                 }
             });
         </script>
+
+        <!-- Favourites email pop-up -->
+        <style>
+            .favourites-email-popup {
+                display: flex;
+                justify-content: center;
+            }
+        </style>
+
+        <script>
+
+            let emailType;
+            let recipientEmailAddress;
+
+            function openEmailAddressInputPopup(type) {
+                emailType = type;
+                $("#email-favorites-list-email-addr-popup").popup("open");
+            }
+
+            function openConfirmationPopup() {
+                recipientEmailAddress = $("#rec-email").val();
+                $('#email-favorites-list-email-addr-popup').popup("close");
+                setTimeout(function () {
+                    $('#email-favorites-list-confirmation-popup').popup('open');
+                }, 500);
+            }
+
+            function cancelEmail(event) {
+                $('#email-favorites-list-confirmation-popup').popup("close");
+            }
+
+            function sendEmail(event) {
+                if (emailType == "vendors") {
+                    sendFavoriteVendors(recipientEmailAddress);
+                } else if (emailType == "items") {
+                    sendFavoriteItems(recipientEmailAddress);
+                } else {
+                    alert('Invalid email type');
+                }
+
+                $('#email-favorites-list-confirmation-popup').popup("close");
+                setTimeout(function () {
+                    $('#email-favorites-list-success-popup').popup('open');
+                }, 500);
+            }
+
+            function onOkButtonClick(event) {
+                $('#email-favorites-list-success-popup').popup("close");
+            }
+
+        </script>
+
+        <div data-role="popup" id="email-favorites-list-email-addr-popup" data-corners="false" style="padding: 1em;">
+            <div>
+                <h2 class="favourites-email-popup">Enter the recipient's email address</h2>
+                <input type="text" class="favourites-email-popup" name="recipient-email" id="rec-email" value=""
+                    placeholder="Email Address">
+                <div class="favourites-email-popup">
+                    <h4><i class="fa fa-paperclip" aria-hidden="true" style="margin-right: 5px;"></i>Your Favourites
+                    </h4>
+                </div>
+            </div>
+
+
+            <button id="emailBtn" class="email-button" onclick="openConfirmationPopup()"
+                style="width: 100%; text-align: center; border-width: 2px; background:#EB5757; color: white; border-color: #EB5757 ; margin: 0px; padding: 0px;  text-shadow: none;">
+                <h4>Send E-mail</h4>
+            </button>
+
+            <a href="#" data-rel="back"
+                class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right"
+                style="background-color: #EB5757;">Close</a>
+            </a>
+
+        </div>
+
+        <div data-role="popup" id="email-favorites-list-confirmation-popup" data-overlay-theme="b" data-theme="b"
+            data-corners="false" style="padding: 1em;">
+            <div>
+                <h3 class="favourites-email-popup">Are you sure you want to</h3>
+                <h3 class="favourites-email-popup">send the email?</h3>
+                <button id="yesBtn" class="yes-button" onclick="sendEmail()"
+                    style="width: 100%; text-align: center; border-radius: 100px; border-width: 2px; background:#EB5757; color: white; border-color: #EB5757 ; padding: 0px;  text-shadow: none;">
+                    <h4>Yes</h4>
+                </button>
+
+                <button id="noBtn" class="no-button" onclick="cancelEmail()"
+                    style="width: 100%; text-align: center; border-radius: 100px; border-width: 2px; background:#EB5757; color: white; border-color: #EB5757 ; padding: 0px;  text-shadow: none;">
+                    <h4>No</h4>
+                </button>
+
+            </div>
+        </div>
+
+        <div data-role="popup" id="email-favorites-list-success-popup" data-corners="false" style="padding: 1em;">
+            <div>
+                <h3 class="favourites-email-popup">E-mail has been sent.</h3>
+
+                <button id="okBtn" class="ok-button" onclick="onOkButtonClick()"
+                    style="width: 100%; text-align: center; border-radius: 100px; border-width: 2px; background:#EB5757; color: white; border-color: #EB5757 ; padding: 0px;  text-shadow: none;">
+                    <h4>OK</h4>
+                </button>
+
+            </div>
+        </div>
+
 
     </div>
 
