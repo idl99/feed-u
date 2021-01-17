@@ -9,96 +9,68 @@
     <link rel="stylesheet" href="../css/base.css" />
     <script src="../bundle.js"></script>
 
-    <style>
-        .ui-select {
-            width: 100px !important;
-            position: relative !important;
-            top: -35px !important;
-            left: 30px !important;
-        }
-
-        .ui-btn-corner-all,
-        .ui-btn.ui-corner-all,
-        .ui-slider-track.ui-corner-all,
-        .ui-flipswitch.ui-corner-all,
-        .ui-li-count {
-            border-radius: 20px !important;
-            font-size: 12px;
-            color: white;
-            background-color: #EB5757;
-            position: relative;
-            top: 17px;
-            height: 10px;
-        }
-
-        .ui-btn-icon-left:after,
-        .ui-btn-icon-right:after,
-        .ui-btn-icon-top:after,
-        .ui-btn-icon-bottom:after,
-        .ui-btn-icon-notext:after {
-
-            background-color: transparent;
-        }
-
-        .ui-btn-corner-all,
-        .ui-btn.ui-corner-all,
-        .ui-slider-track.ui-corner-all,
-        .ui-flipswitch.ui-corner-all,
-        .ui-li-count:active {
-            border-radius: 20px !important;
-            font-size: 12px !important;
-            color: white !important;
-            background-color: #EB5757 !important;
-            position: relative !important;
-            top: 17px !important;
-            height: 10px !important;
-        }
-    </style>
 </head>
 
 <body>
-    <div data-role="page" id="Page1">
+    <div data-role="page" id="vendor-list-page" class="feedU-page ui-responsive-panel">
+        <style>
+            #vendor-list-page .filter .ui-select {
+                margin-right: 10px;
+            }
+
+            #vendor-list-page .filter .ui-select a {
+                border-radius: 20px;
+                background-color: #EB5757;
+                color: white;
+            }
+
+            #vendor-list-page #vendor-list-container .poi-details :first-child {
+                font-weight: 700;
+            }
+        </style>
+
+        <div data-role="header" data-toggle-on-tap="false" data-position="fixed">
+            <span class="ui-title"></span>
+            <a class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-corner-all" href="#" data-rel="back"
+                data-icon="arrow-l" data-theme="c" data-role="button">Back</a>
+            <div data-enhance="false">
+                <a href="home.html">
+                    <img src="../assets/logo.png"></img>
+                </a>
+            </div>
+        </div>
+
         <div role="main" class="ui-content">
-            <div data-role="listview" style="background-color: #E5E5E5;border-radius: 20px;width: 100%;height: 35px">
-                <div class="filter" style="display: flex;">
+            <div>
+                <div class="filter"
+                    style="display: flex; margin: 5px 0 25px 0; align-items: center; overflow: auto; background: #F2F2F2; border-radius: 50px 0px 0px 50px;">
                     <i class="fa fa-filter" aria-hidden="true"
-                        style="margin-top: 0.75em; margin-left: 0.75em; color:#EB5757;"></i>
-                    <div style="margin-top: 0.75em;">
-                        <select name="select-choice-1" id="select-choice-1">
-                            <option value="sort" disabled selected="selected">Sort</option>
-                            <option value="a-z">A - Z</option>
-                            <option value="rating">Rating</option>
-                            <option value="deliverytime">Delivery Time</option>
-                        </select>
-                    </div>
-                    <div style="margin-top: 0.75em;">
-                        <select name="select-choice-2" id="select-choice-2">
-                            <option value="ratings" disabled selected="selected">Ratings</option>
-                            <option value="1">> 1</option>
-                            <option value="2">> 2</option>
-                            <option value="3">> 3</option>
-                            <option value="4">> 4</option>
-                            <option value="5">> 5</option>
-                            <option value="0">Any</option>
-                        </select>
-                    </div>
-                    <div style="margin-top: 0.75em;">
-                        <select name="select-choice-3" id="select-choice-3">
-                            <option value="deliverytime1" disabled selected="selected">Delivery Time</option>
-                            <option value="20">> 20 mins</option>
-                            <option value="30">> 30 mins</option>
-                            <option value="40">> 40 mins</option>
-                            <option value="50">> 50 mins</option>
-                            <option value="0">Any</option>
-                        </select>
-                    </div>
+                        style="margin: 0px 16px; color: #EB5757; font-size: 2em;"></i>
+                    <select name="select-choice-1" id="select-choice-1" data-native-menu="false">
+                        <option value="a-z" selected>A - Z</option>
+                        <option value="rating">Rating</option>
+                        <option value="deliverytime">Delivery Time</option>
+                    </select>
+                    <select name="select-choice-2" id="select-choice-2" data-native-menu="false">
+                        <option value="1" selected>> 1</option>
+                        <option value="2">> 2</option>
+                        <option value="3">> 3</option>
+                        <option value="4">> 4</option>
+                        <option value="5">> 5</option>
+                        <option value="0">Any</option>
+                    </select>
+                    <select name="select-choice-3" id="select-choice-3" data-native-menu="false">
+                        <option value="20" selected>> 20 mins</option>
+                        <option value="30">> 30 mins</option>
+                        <option value="40">> 40 mins</option>
+                        <option value="50">> 50 mins</option>
+                        <option value="0">Any</option>
+                    </select>
                 </div>
             </div>
-            <br>
-            <br>
 
-            <div id="vendor-list-container" class="all-poi-container">
-            </div>
+            <div id="vendor-list-container" class="all-poi-container"></div>
+
         </div>
         <script>
             const { datastore } = app;
@@ -175,8 +147,8 @@
                     parseInt($(vendor_1).find('#poi-delivery-time').text()) ? 1 : -1;
             }
 
-            jQuery('#select-choice-1').on('change', function () {
-                var value = jQuery('#select-choice-1').val();
+            $('#select-choice-1').on('change', function () {
+                var value = $('#select-choice-1').val();
                 console.log(value);
                 if (value == 'a-z') {
                     // Default sorting based on vendor names in the form of ascending order.
@@ -198,34 +170,34 @@
                 $(":mobile-pagecontainer").pagecontainer("change", "checkout.html");
             });
 
-            jQuery('#select-choice-2').on('change', function () {
-                var value = jQuery('#select-choice-2').val();
+            $('#select-choice-2').on('change', function () {
+                var value = $('#select-choice-2').val();
                 console.log(value);
 
-                jQuery('.poi-container').hide();
+                $('.poi-container').hide();
 
-                jQuery('.poi-container').each(function () {
-                    var showDiv = parseFloat(jQuery(this).find('#test').text()) > value;
+                $('.poi-container').each(function () {
+                    var showDiv = parseFloat($(this).find('#test').text()) > value;
                     console.log(showDiv);
                     if (showDiv) {
                         console.log("Ratings values")
-                        jQuery(this).show();
+                        $(this).show();
                     }
                 });
             });
 
-            jQuery('#select-choice-3').on('change', function () {
-                var value1 = jQuery('#select-choice-3').val();
+            $('#select-choice-3').on('change', function () {
+                var value1 = $('#select-choice-3').val();
                 console.log(value1);
 
-                jQuery('.poi-container').hide();
+                $('.poi-container').hide();
 
-                jQuery('.poi-container').each(function () {
-                    var showDiv1 = parseFloat(jQuery(this).find('#poi-delivery-time').text()) > value1;
+                $('.poi-container').each(function () {
+                    var showDiv1 = parseFloat($(this).find('#poi-delivery-time').text()) > value1;
                     console.log(showDiv1);
                     if (showDiv1) {
                         console.log("Delivery time values")
-                        jQuery(this).show();
+                        $(this).show();
                     }
                 });
             });
