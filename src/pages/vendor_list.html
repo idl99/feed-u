@@ -159,6 +159,41 @@
                 });
             });
 
+
+
+
+
+
+
+
+            var alphabeticallyOrderedDivs = $divs.sort(function (a, b) {
+                    return (ascendingname == $(a).find("p.poi_text").text().toLowerCase() < $(b).find("p.poi_text").text().toLowerCase()) ? 1 : -1;
+                });
+
+
+                var $divs = $("div.sort-style");
+                $('#name_btn').on("click", function () {
+                    var alphabeticallyOrderedDivs = $divs.sort(function (a, b) {
+                        return (ascendingname == $(a).find("p.poi_text").text().toLowerCase() < $(b).find("p.poi_text").text().toLowerCase()) ? 1 : -1;
+                    });
+                    ascendingname = ascendingname ? false : true;
+                    if (!ascendingname) {
+                        $('#name_btn').removeClass('ui-btn ui-btn-icon-right sorting-down');
+                        $('#name_btn').addClass('ui-btn ui-btn-icon-right sorting-up');
+                    }
+                    else if (ascendingname) {
+                        $('#name_btn').removeClass('ui-btn ui-btn-icon-right sorting-up')
+                        $('#name_btn').addClass('ui-btn ui-btn-icon-right sorting-down');
+                    }
+                    else {
+                        $('#name_btn').addClass('ui-btn');
+                    }
+                    $("#test123").html(alphabeticallyOrderedDivs);
+
+                });
+
+
+
             $("#home-footer").on("click", function (event) {
                 $(":mobile-pagecontainer").pagecontainer("change", "checkout.html");
             });
