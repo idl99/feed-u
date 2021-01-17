@@ -51,13 +51,9 @@
                 text-shadow: none;
             }
 
-            .vendor-page-vendor-introduction {
-                font-weight: 400;
-                margin-left: 1em;
-            }
-
             #vendor-page-vendor-title {
                 font-size: 18px;
+                font-weight: 700;
             }
 
             #vendor-page-vendor-location {
@@ -125,81 +121,6 @@
                 row-gap: 15px;
             }
 
-            .vendor-poi-item-container {
-                display: flex;
-                flex: 1 1 auto;
-                margin-bottom: 2.5%;
-            }
-
-            .vendor-poi-item-content {
-                display: flex;
-                width: 100%;
-            }
-
-            .vendor-poi-item-details {
-                display: flex;
-                flex-direction: column;
-                margin-left: 5%;
-            }
-
-            .vendor-poi-item-title-description {
-                width: 170px;
-                text-align: justify;
-            }
-
-            #vendor-poi-item-title {
-                text-align: left;
-                margin: 0;
-                font-size: 14px;
-                font-weight: 700;
-            }
-
-            #vendor-poi-item-description {
-                margin-top: 4%;
-                margin-bottom: 4%;
-                margin-left: 0;
-                margin-right: 0;
-                font-size: 11px;
-                display: -webkit-box;
-                -webkit-line-clamp: 3;
-                -webkit-box-orient: vertical;
-                overflow: hidden;
-            }
-
-            .vendor-poi-item-rating-bar {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                height: 20px;
-                width: 70px;
-                font-size: 11px;
-                background: #F2F2F2;
-                border-radius: 25px;
-            }
-
-            #vendor-poi-item-rate-star-icon {
-                color: #F2C94C;
-            }
-
-            #vendor-poi-item-no-of-rated-customers {
-                margin-left: 0.25em;
-                font-size: 9px;
-            }
-
-            #poi_ratings_image {
-                margin-top: 2%;
-            }
-
-            .vendor-poi-item-price-tag {
-                width: 60%;
-            }
-
-            #vendor-poi-item-price {
-                margin: 0;
-                text-align: right;
-                font-size: 14px;
-            }
-
             a:link {
                 text-decoration: none;
                 color: #333333;
@@ -248,10 +169,15 @@
                 width: fit-content;
             }
         </style>
-        <div data-role="header" data-position="fixed" data-tap-toggle="false">
+        <div data-role="header" data-toggle-on-tap="false" data-position="fixed">
+            <span class="ui-title"></span>
             <a class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-corner-all" href="#" data-rel="back"
                 data-icon="arrow-l" data-theme="c" data-role="button">Back</a>
-            <img src="../assets/logo.png"></img>
+            <div data-enhance="false">
+                <a href="home.html">
+                    <img src="../assets/logo.png"></img>
+                </a>
+            </div>
         </div>
         <div role="main" class="ui-content">
             <div class="vendor-page-top-section">
