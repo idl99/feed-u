@@ -230,6 +230,12 @@ module.exports = function () {
 
             var test = orders.pastOrders.find(order => order.pastOrderId == pastOrderId);
             console.log("Updated Order:", test);
+        },
+        addPointsToUser(points) {
+            const loggedInUser = cookie.getJSON(USER);
+            loggedInUser.profile.points += points;
+            const updatedUser = loggedInUser;
+            cookie.set(USER, updatedUser);
         }
     }
 }()
