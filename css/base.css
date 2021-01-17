@@ -5777,7 +5777,7 @@ body #favorites-list-page #favorite-items-container {
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
 }
 
-.feedU-page .footer-checkout-btn {
+.feedU-page .footer-full-width-btn {
   background-color: #27AE60;
   color: white;
   text-shadow: none;
