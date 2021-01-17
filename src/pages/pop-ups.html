@@ -32,7 +32,8 @@
 
 
     <!-- delivery success popup -->
-    <div data-role="popup" id="deliver-complete-popup" data-overlay-theme="b" data-theme="b" data-corners="false" style="padding: 1em;">
+    <div data-role="popup" id="deliver-complete-popup" data-overlay-theme="b" data-theme="b" data-corners="false"
+        style="padding: 1em;">
         <h2 style="color:#27AE60">DELIVERY COMPLETED</h2>
         <br>
         <div class="success_popup_items">
@@ -83,36 +84,36 @@
 
     <script>
 
-            function onInitialButtonClick(event) {
-                console.log("Initial button clicked");
-                $('#popup1').popup("open");
-            }
+        function onInitialButtonClick(event) {
+            console.log("Initial button clicked");
+            $('#popup1').popup("open");
+        }
 
-            function onSecondaryButtonClick(event) {
-                console.log("Secondary button clicked");
-                $('#popup1').popup("close");
-                setTimeout(function () {
-                    $('#popup2').popup('open');
-                }, 500);
-            }
+        function onSecondaryButtonClick(event) {
+            console.log("Secondary button clicked");
+            $('#popup1').popup("close");
+            setTimeout(function () {
+                $('#popup2').popup('open');
+            }, 500);
+        }
 
-            function onNoButtonClick(event) {
-                console.log("yes button clicked");
-                $('#popup2').popup("close");
-            }
+        function onNoButtonClick(event) {
+            console.log("yes button clicked");
+            $('#popup2').popup("close");
+        }
 
-            function onYesButtonClick(event) {
-                console.log("yes button clicked");
-                $('#popup2').popup("close");
-                setTimeout(function () {
-                    $('#popup3').popup('open');
-                }, 500);
-            }
+        function onYesButtonClick(event) {
+            console.log("yes button clicked");
+            $('#popup2').popup("close");
+            setTimeout(function () {
+                $('#popup3').popup('open');
+            }, 500);
+        }
 
-            function onOkButtonClick(event) {
-                console.log("yes button clicked");
-                $('#popup3').popup("close");
-            }
+        function onOkButtonClick(event) {
+            console.log("yes button clicked");
+            $('#popup3').popup("close");
+        }
 
     </script>
 
@@ -169,11 +170,6 @@
         </div>
     </div>
 
-
-
-
-
-
     <!-- BUTTONS BUTTONS BUTTON BUTTONS BUTTONS BUTTONS BUTTONS BUTTONS -->
 
     <a href="#popup1" data-rel="popup" data-position-to="window" data-transition="fade">
@@ -182,6 +178,54 @@
             <h4> Send favourites</h4>
         </button>
     </a>
+
+
+
+    <style>
+
+
+
+    </style>
+
+    <a href="#phoneNumberPopUp" data-rel="popup" data-position-to="window" data-transition="fade">
+        <button onclick="phoneNumberPopUp()" id="submitFBBtn" class="phoneNumber"
+            style="width: 100%; text-align: center; background: #EB5757; color: white; border-width: 3px; border-radius: 100px; margin: 0px; padding: 0px; text-shadow: none;">
+            <h4> Phone Number</h4>
+        </button>
+    </a>
+    
+
+    <div data-role="popup" id="phoneNumberPopUp" data-overlay-theme="b" data-theme="b" data-corners="false">
+        
+        <h4>Why do we need your phone number?</h4>
+        <h5 style="margin-top: 15px; margin-bottom: 15px;">Your number will only be visible to the vendor and  delivery partner for the duration of the order, so that </h5>
+        
+        <h5 style="margin-top: 15px; margin-bottom: 15px;">1)  the vendor may contact you regarding the order</h5>
+
+        <h5 style="margin-top: 15px; margin-bottom: 15px;">2) the delivery partner may contact you in case of trouble finding directions or to notify you once your order has reached your doorstep.</h5>
+
+        <!-- OK button with close action -->
+        <a data-rel="back">
+            <button id="okBtn"style="width: 100%; text-align: center; background: #EB5757; color: white; border-width: 3px; margin-bottom: 10px; padding: 0px; text-shadow: none;">
+                <h4> OK, got it!</h4>
+            </button>
+        </a>
+        <!-- </div> -->
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
