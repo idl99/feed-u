@@ -8,6 +8,52 @@
 
     <link rel="stylesheet" href="../css/base.css">
     <script src="../bundle.js"></script>
+
+    <script>
+        // scripts for the comments
+        var block_to_insert;
+        var comment_container_block;
+
+        function myScript() {
+            // presence check for the reply
+            var comment = document.getElementById("comment").value;
+            var commentCheckerPopUp = document.getElementById("comment-presence-checkup");
+            if (comment == "") {
+
+                // commentCheckerPopUp.style.display = "block";
+                console.log("no comment");
+                document.getElementById("comment").value = "PLEASE ENTER A COMMENT FIRST";
+
+            } else {
+                // commentCheckerPopUp.style.display = "none";
+                block_to_insert = document.createElement('div');
+                document.getElementById("display-comment").innerHTML = comment;
+                block_to_insert.innerHTML = document.getElementById("reply-section").innerHTML;
+                comment_container_block = document.getElementById('comment-submission');
+                comment_container_block.appendChild(block_to_insert);
+                document.getElementById("comment").value = "";
+            }
+        }
+
+        function hideComments() {
+            console.log("Icon clicked");
+            comment_container_block = document.getElementById('comment-submission');
+            if (comment_container_block.style.display != "none") {
+                comment_container_block.style.display = "none";
+            } else if (comment_container_block.style.display == "none") {
+                comment_container_block.style.display = "block"
+            }
+        }
+
+        function reportComment() {
+            console.log("Repport comment has been called");
+            document.getElementById("comment-report").style.display = "block";
+        }
+
+        function reportCommentReply() {
+            document.getElementById("comment-report2").style.display = "block";
+        }
+    </script>
 </head>
 
 <body>
@@ -142,6 +188,66 @@
             #item-favourite-icon {
                 font-size: 25px;
             }
+
+            /* comments style */
+            .card {
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+                transition: 0.3s;
+                width: 100%;
+            }
+
+            .card:hover {
+                box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+            }
+
+            .container {
+                padding: 2px 16px;
+            }
+
+            /* The Modal (background) */
+            .modal {
+                display: none;
+                /* Hidden by default */
+                position: fixed;
+                /* Stay in place */
+                z-index: 1;
+                /* Sit on top */
+                padding-top: 100px;
+                /* Location of the box */
+                left: 0;
+                top: 0;
+                width: 100%;
+                /* Full width */
+                height: 100%;
+                /* Full height */
+                overflow: auto;
+                /* Enable scroll if needed */
+                background-color: rgb(0, 0, 0);
+                /* Fallback color */
+                background-color: rgba(0, 0, 0, 0.4);
+                /* Black w/ opacity */
+            }
+
+            /* Modal Content */
+            .modal-content {
+                background-color: #fefefe;
+                margin: auto;
+                padding: 20px;
+                border: 1px solid #888;
+                width: 100%;
+            }
+
+            .avatar {
+                vertical-align: middle;
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+            }
+
+            .comment-header-position {
+                margin-top: 16px;
+                margin-left: 5px;
+            }
         </style>
         <div data-role="header" id="checkout-header" data-position="fixed" data-tap-toggle="false">
             <a class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-corner-all" href="#" data-rel="back"
@@ -237,10 +343,84 @@
                     <p id="item-detail-page-incr-item-qty">+</p>
                 </div>
             </div>
-            <p>Comments</p>
-            <div class="item-detail-page-item-comments-container">
+            <h1 style="margin: 5px 0px; margin-bottom: 15px;">Comments</h1>
+
+            <div class="card ui-block-solo">
+                <div style="background-color: #F2F2F2;">
+                    <div style="display: flex;">
+                        <img src="../assets/team/ihan.jpg" class="avatar" alt="Profile photo">
+                        <span style="font-weight: bold;" class="comment-header-position">Ihan Lelwala </span>
+                        <span style="font-weight: 400; color: darkgrey;" class="comment-header-position">1 month
+                            ago</span>
+                        <div style="display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: 20px;
+                    width: 50px;
+                    font-size: 11px;
+                    background: #FFD77C;
+                    border-radius: 25px;" class="comment-header-position">
+                            <span style="font-size: 12px;">4.5<i class='fa fa-star fa-fw'
+                                    style="margin-left: 0.25em; color: #ffffff;"></i></span>
+                        </div>
+
+                        <div class="container>">
+                            <div class="row"> </div>
+                            <a onclick="hideComments()"
+                                class="ui-btn ui-shadow ui-corner-all ui-icon-carat-u ui-btn-icon-notext">collapsible</a>
+                        </div>
+
+                    </div>
+                    <div class="container">
+                        <p>This item is absolutely... delicious. “World-renowned Chef Gonagala Ramsey” - perfect. No one
+                            can cook better.</p>
+                        <span>
+                            <p id="comment-report" style="color: #EB5757; display: none">This comment has been reported.
+                            </p>
+                        </span>
+                        <a href="#report-comment-popup" onclick="reportComment()" data-rel="popup"
+                            data-transition="flow" style="text-decoration: underline; color: #EB5757;">Report
+                            Comment</a>
+                    </div>
+                </div>
+
+                <div class="container" id="comment-submission">
+                    <textarea
+                        style="display:block; height: 33px; padding-left: 25px; width: -webkit-fill-available; background-color: #F2F2F2; border-radius: 50px; box-shadow: none;"
+                        placeholder="Type your reply here" id="comment"
+                        onfocus="if(this.value == 'PLEASE ENTER A COMMENT FIRST') { this.value = ''; }"></textarea>
+                    <div style="text-align: center;">
+                        <button onclick="myScript()"
+                            style="width: auto; height: auto; margin-inline-start: auto;background-color: #EB5757; color: white;">Submit</button>
+
+                    </div>
+
+                </div>
+                <!-- Comments reply section -->
+                <div id="reply-section" style="display: none;" class="collapsible">
+                    <img src="../assets/images//profile_photos/thenuka-dp.jpg" class="avatar" width="100%"
+                        alt="Profile photo">
+                    <span style="font-weight: bold;">Cheif Gonagala</span>
+                    <span style="font-weight: 400; color: darkgrey;">1 month ago</span>
+
+
+                    <div class="container" style="margin-bottom: 5px;">
+                        <p id="display-comment">Teeheehee. *wink wink*</p>
+                        <span>
+                            <p id="comment-report2" style="color: #EB5757; display: none">This comment has been
+                                reported.</p>
+                        </span>
+                        <a href="#report-comment-popup" onclick="reportCommentReply()" data-rel="popup"
+                            data-transition="flow" style="text-decoration: underline; color: #EB5757;">Report
+                            Comment</a>
+                        <br>
+                    </div>
+                </div>
 
             </div>
+            <!-- comments reply section ends -->
+
+
         </div>
         <div data-role="footer">
             <button id="addToCartBtn">
@@ -249,8 +429,12 @@
         </div>
 
         <script>
-
-            const { utils, datastore, cart, user } = app;
+            const {
+                utils,
+                datastore,
+                cart,
+                user
+            } = app;
             var item = {};
             var vendor = {};
             var quantity = 1;
@@ -278,7 +462,12 @@
             });
 
 
-            function setItemDetails({ itemTitle, itemDescription, itemRatings, itemImageLocation }) {
+            function setItemDetails({
+                itemTitle,
+                itemDescription,
+                itemRatings,
+                itemImageLocation
+            }) {
                 $('#item-detail-page-item-name').text(itemTitle)
                 $('#item-detail-page-item-description').text(itemDescription)
                 $('#item-detail-page-item-rating-value').text(itemRatings.itemRatingValue)
@@ -286,7 +475,9 @@
                 $('#item-detail-page-item-img').attr("src", itemImageLocation)
             }
 
-            $('body').on('pagebeforeshow', "#item-detail-page", function (event, { toPage }) {
+            $('body').on('pagebeforeshow', "#item-detail-page", function (event, {
+                toPage
+            }) {
                 // The pageshow event is deprecated from 1.4.0 and removed in 1.6.0 but then jQuery Mobile itself is deprecated
                 // and 1.6.0 will never come
 
@@ -302,10 +493,12 @@
                 const itemIsFavorite = user.isItemFavorite(user.FAVORITE_TYPES.ITEM, item);
                 if (itemIsFavorite) {
                     $('#item-favourite-icon').addClass(FAVORITE_ICON_STATES.FILLED)
-                        .removeClass(FAVORITE_ICON_STATES.UNFILLED).css('color', FAVORITE_ICON_STATES.FILLED_COLOR);
+                        .removeClass(FAVORITE_ICON_STATES.UNFILLED).css('color', FAVORITE_ICON_STATES
+                            .FILLED_COLOR);
                 } else {
                     $('#item-favourite-icon').addClass(FAVORITE_ICON_STATES.UNFILLED)
-                        .removeClass(FAVORITE_ICON_STATES.FILLED).css('color', FAVORITE_ICON_STATES.UNFILLED_COLOR);
+                        .removeClass(FAVORITE_ICON_STATES.FILLED).css('color', FAVORITE_ICON_STATES
+                            .UNFILLED_COLOR);
                 }
 
             });
@@ -327,7 +520,13 @@
             })
 
             $('#addToCartBtn').click(function (event) {
-                const payload = { vendor, item: { ...item, quantity } };
+                const payload = {
+                    vendor,
+                    item: {
+                        ...item,
+                        quantity
+                    }
+                };
                 const error = cart.addItemToCart(payload)
                 if (error) {
                     console.log('Add to cart failed');
@@ -340,7 +539,11 @@
             })
         </script>
     </div>
-
 </body>
+<!-- markup for the comments popup -->
+<div data-role="popup" id="report-comment-popup" data-overlay-theme="a">
+    <p>Comment has been reported successfully.
+    </p>
+</div>
 
 </html>
