@@ -33,11 +33,13 @@
 
             #item-rating-description {
                 margin-bottom: 0;
+                font-size: 16px;
                 text-align: center;
             }
 
             #vendor-name {
                 margin-top: 0;
+                font-size: 16px;
                 text-align: center;
             }
 
@@ -52,11 +54,12 @@
             }
 
             #past-order-item-description {
-                width: 33.3%;
+                width: 30%;
+                font-size: 13px;
             }
 
             .item-rating-bar {
-                width: 40%;
+                width: 43.3%;
             }
 
             .item-rating-bar ul {
@@ -153,10 +156,13 @@
 
             .comment-box-width {
                 width: -webkit-fill-available;
+                font-size: 14px;
             }
 
             .center-text {
-                text-align: center;
+                text-align: justify;
+                font-weight: bold;
+                font-size: 14px;
             }
         </style>
         <div role="main" class="ui-content">
@@ -409,8 +415,9 @@
                 })
             })
 
-            $('#comment-popup').on("popupcreate", function (event, ui) {
-                $("comment-popup-vendor-name").text($('#vendor-name').text());
+            $('#comment-popup').on("popupafteropen", function (event, ui) {
+                console.log("Here inside comment popup");
+                $("#comment-popup-vendor-name").text($('#vendor-name').text());
             })
 
         </script>
