@@ -24,17 +24,14 @@
 
 <body>
     <div id="payment-methods" data-role="page" class="feedU-page ui-responsive-panel">
-        <div id="payment-methods-header" data-role="header" data-toggle-on-tap="false" data-position="fixed"
-            data-add-back-btn="true">
+        <div data-role="header" data-position="fixed" id="home-header" data-tap-toggle="false">
+            <a class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-corner-all" href="#" data-rel="back"
+                data-icon="arrow-l" data-theme="c" data-role="button">Back</a>
             <span class="ui-title"></span>
-            <div data-enhance="false">
-                <a href="home.html">
-                    <img src="../assets/logo.png"></img>
-                </a>
-            </div>
+            <img src="../assets/logo.png"></img>
         </div>
         <div role="main" class="ui-content" style="display: flex; flex-direction: column;">
-            <h4>Payment Methods</h4>
+            <h2>Payment Methods</h2>
             <a href="./add_new_payment_method.html" style="align-self: flex-end;">Add New</a>
             <div id="payment-methods-container">
                 <ul data-role="listview" id="payment-methods-list" style="margin: 1em 0em;">
@@ -52,7 +49,6 @@
                 </ul>
             </div>
         </div>
-        <div id="payment-methods-footer" data-role="footer" data-toggle-on-tap="false" data-position="fixed"></div>
         <script>
             const { user, payment } = app;
 
