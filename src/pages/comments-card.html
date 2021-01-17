@@ -37,11 +37,63 @@
         }
 
         function hideComments() {
+            console.log("Icon clicked");
+            comment_container_block = document.getElementById('comment-submission');
             if (comment_container_block.style.display != "none") {
                 comment_container_block.style.display = "none";
             } else if (comment_container_block.style.display == "none") {
                 comment_container_block.style.display = "block"
             }
+        }
+
+        // second predefined card
+
+        var block_to_insert_2;
+        var comment_container_block_2;
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            var commentCheckerPopUp2 = document.getElementById("comment-presence-checkup");
+            if (event.target == commentCheckerPopUp2) {
+                commentCheckerPopUp2.style.display = "none";
+            }
+        }
+
+        function myScript2() {
+            // presence check for the reply
+            var comment = document.getElementById("comment-2").value;
+            var commentCheckerPopUp2 = document.getElementById("comment-presence-checkup");
+            if (comment == "") {
+                console.log("no comment");
+                commentCheckerPopUp2.style.display = "block";
+
+            } else {
+                commentCheckerPopUp2.style.display = "none";
+                block_to_insert_2 = document.createElement('div');
+                document.getElementById("display-comment-2").innerHTML = comment;
+                block_to_insert_2.innerHTML = document.getElementById("reply-section-2").innerHTML;
+                comment_container_block_2 = document.getElementById('comment-submission-2');
+                comment_container_block_2.appendChild(block_to_insert_2);
+                document.getElementById("comment").value = "";
+            }
+        }
+
+        function hideComments2() {
+            comment_container_block_2 = document.getElementById('comment-submission-2');
+            if (comment_container_block_2.style.display != "none") {
+                comment_container_block_2.style.display = "none";
+            } else if (comment_container_block_2.style.display == "none") {
+                comment_container_block_2.style.display = "block"
+            }
+            comment_container_block = document.getElementById('comment-submission');
+            if (comment_container_block.style.display != "none") {
+                comment_container_block.style.display = "none";
+            } else if (comment_container_block.style.display == "none") {
+                comment_container_block.style.display = "block"
+            }
+        }
+
+        function hey(){
+            console.log("what up baby");
         }
     </script>
 </head>
@@ -96,15 +148,27 @@
             border: 1px solid #888;
             width: 80%;
         }
+
+        .avatar {
+            vertical-align: middle;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+
+        .comment-header-position {
+            margin-top: 16px;
+            margin-left: 5px;
+        }
     </style>
 
 
     <div class="card ui-block-solo">
         <div style="background-color: #F2F2F2;">
             <div style="display: flex;">
-                <img src="img_avatar.png" alt="Profile photo">
-                <span style="font-weight: bold;">Ihan Dilnath</span>
-                <span style="font-weight: lighter; color: darkgrey;">1 month ago</span>
+                <img src="../assets/images//profile_photos/deshan-dp.jpg" class="avatar" alt="Profile photo">
+                <span style="font-weight: bold;" class="comment-header-position">Deshan Koswatte </span>
+                <span style="font-weight: lighter; color: darkgrey;" class="comment-header-position">1 month ago</span>
                 <div style="display: flex;
                 justify-content: center;
                 align-items: center;
@@ -112,7 +176,7 @@
                 width: 50px;
                 font-size: 11px;
                 background: #FFD77C;
-                border-radius: 25px;">
+                border-radius: 25px;" class="comment-header-position">
                     <span style="font-size: 12px;">4.5<i class='fa fa-star fa-fw'
                             style="margin-left: 0.25em; color: #ffffff;"></i></span>
                 </div>
@@ -142,12 +206,12 @@
         </div>
         <!-- Comments section -->
         <div id="reply-section" style="display: none;" class="collapsible">
-            <img src="img_avatar.png" alt="Profile photo" style="width:100%">
+            <img src="../assets/images//profile_photos/thenuka-dp.jpg" class="avatar" width="100%" alt="Profile photo">
             <span style="font-weight: bold;">Cheif Gonagala</span>
             <span style="font-weight: lighter; color: darkgrey;">1 month ago</span>
 
 
-            <div class="container">
+            <div class="container" style="margin-bottom: 5px;">
                 <p id="display-comment">Teeheehee. *wink wink*</p>
                 <a href="#report-comment-popup" data-rel="popup" data-transition="flow"
                     style="text-decoration: underline; color: #EB5757;">Report Comment</a>
@@ -156,17 +220,80 @@
         </div>
 
     </div>
+
+    <span><br><br></span>
+
+    <!-- second comment card -->
+
+    <div class="card ui-block-solo">
+        <div style="background-color: #F2F2F2;">
+            <div style="display: flex;">
+                <img src="../assets/images//profile_photos/vinula.jpg" class="avatar" alt="Profile photo">
+                <span style="font-weight: bold;" class="comment-header-position">Vinula Uthsara </span>
+                <span style="font-weight: lighter; color: darkgrey;" class="comment-header-position">1 month ago</span>
+                <div style="display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 20px;
+                width: 50px;
+                font-size: 11px;
+                background: #FFD77C;
+                border-radius: 25px;" class="comment-header-position">
+                    <span style="font-size: 12px;">4.5<i class='fa fa-star fa-fw'
+                            style="margin-left: 0.25em; color: #ffffff;"></i></span>
+                </div>
+
+                <div class="ui-btn-right" onclick="hideComments2()">
+                    <span><a href="#" class="ui-btn ui-icon-carat-u ui-btn-icon-notext ui-corner-all"
+                            style="background-color: white;">No text</a> </span>
+                </div>
+            </div>
+            <div class="container">
+                <p>This soup is absolutely... disappointing. “World-renowned Chef Gonagala Ramsey” - pfffttt. My dog can
+                    cook better.</p>
+                <a href="#report-comment-popup" data-rel="popup" data-transition="flow"
+                    style="text-decoration: underline; color: #EB5757;">Report Comment</a>
+            </div>
+        </div>
+
+        <div class="container" id="comment-submission-2">
+            <textarea
+                style="display:block; height: 33px; padding-left: 25px; width: -webkit-fill-available; background-color: #F2F2F2; border-radius: 50px; box-shadow: none;"
+                placeholder="Type your reply here" id="comment-2"></textarea>
+            <div style="text-align: center;">
+                <button onclick="myScript2()"
+                    style="width: auto; height: auto; margin-inline-start: auto;">Submit</button>
+            </div>
+
+        </div>
+         <!-- Comments section -->
+        <div id="reply-section-2" style="display: none;" class="collapsible">
+            <img src="../assets/images//profile_photos/thenuka-dp.jpg" class="avatar" width="100%" alt="Profile photo">
+            <span style="font-weight: bold;">Cheif Gonagala</span>
+            <span style="font-weight: lighter; color: darkgrey;">1 month ago</span>
+
+
+            <div class="container">
+                <p id="display-comment-2">Teeheehee. *wink wink*</p>
+                <a href="#report-comment-popup" data-rel="popup" data-transition="flow"
+                    style="text-decoration: underline; color: #EB5757;">Report Comment</a>
+                <br>
+            </div>
+        </div>
+
+    </div> 
+
 </body>
 
 <div data-role="popup" id="report-comment-popup" data-overlay-theme="a">
     <p>Comment has been reported successfully.
-    <p>
+    </p>
 </div>
 
 <div class="modal" style="display: none;" id="comment-presence-checkup">
     <div class="modal-content">
         <p>Please type a comment before submitting.
-        <p>
+        </p>
     </div>
 </div>
 
