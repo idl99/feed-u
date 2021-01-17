@@ -91,6 +91,10 @@ module.exports = function () {
             const currentCart = cookie.getJSON(CART_STORAGE_KEY);
             currentCart.paymentMethod = paymentMethod;
             cookie.set(CART_STORAGE_KEY, currentCart);
+        },
+        getPointsForCart() {
+            const currentCart = cookie.getJSON(CART_STORAGE_KEY);
+            return currentCart.items.reduce((acc, { itemPrice, quantity }) => acc += (itemPrice * quantity), 0) * 0.01; // 100 Rs. -> 1 Point
         }
     }
 }()
