@@ -95,17 +95,15 @@
 						console.log('Failed to update the user location.');
 					} else {
 						console.log('Successfully updated the user location.');
-						$(":mobile-pagecontainer").pagecontainer("change", "home.html",);
-						// history.back();
+						$(":mobile-pagecontainer").pagecontainer("change", "home.html");
 					}
 				} else {
-					$(":mobile-pagecontainer").pagecontainer("change", "home.html",);
-					// history.back();
+					$(":mobile-pagecontainer").pagecontainer("change", "home.html");
 				}
 			});
 
 			$("#set-location-btn").click(function () {
-				$(":mobile-pagecontainer").pagecontainer("change", "location_search.html",);
+				$(":mobile-pagecontainer").pagecontainer("change", "location_search.html");
 			});
 
 			// $("#set-location-map").click(function () {
