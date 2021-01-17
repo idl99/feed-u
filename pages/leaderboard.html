@@ -116,13 +116,21 @@
 
             var aboveUserPoints = 0;
             var eachUserPoints = datastore.getLeaderboard(user.getDetails().profile);
-            console.log(eachUserPoints)
-            eachUserPoints.forEach(({ points }) => {
-                if (userPoints < points) {
-                    aboveUserPoints = points;
-                }
-            });
-            var pointsToNext = aboveUserPoints - userPoints;
+            const isLoggedInUserTop = eachUserPoints[0].name === "You";
+            console.log(eachUserPoints, isLoggedInUserTop);
+
+            let pointsToNext;
+            if (!isLoggedInUserTop) {
+                eachUserPoints.forEach(({ points }) => {
+                    if (userPoints < points) {
+                        aboveUserPoints = points;
+                    }
+                });
+                pointsToNext = aboveUserPoints - userPoints;
+            } else {
+                pointsToNext = 0;
+            }
+
             $('#pnts-to-next').text(pointsToNext) 
         </script>
     </div>

@@ -5658,7 +5658,7 @@ body #configure-location-btn {
 #checkout #checkout-order-summary {
   display: flex;
   flex-direction: column;
-  margin: 3vh 3vw;
+  margin: 0vh 3vw;
 }
 #checkout #checkout-order-summary #checkout-items-grid {
   margin: 1em 0em;
@@ -5884,6 +5884,7 @@ body #favorites-list-page #favorite-items-container {
   margin: 0;
   font-size: 14px;
   font-weight: 700;
+  text-align: left;
 }
 
 #vendor-poi-item-description {
@@ -5939,6 +5940,9 @@ div[data-role=page].feedU-page .ui-title {
 div[data-role=page].feedU-page .ui-content {
   background-color: #FFFFFF;
   height: 100vh;
+}
+div[data-role=page].feedU-page .ui-content .disabled-btn-text {
+  color: #BDBDBD;
 }
 div[data-role=page].feedU-page .ui-header {
   background-color: #EB5757;

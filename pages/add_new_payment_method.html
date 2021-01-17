@@ -12,17 +12,20 @@
 
 <body>
 
-    <div data-role="page" id="add-new-payment-method-page">
-        <div data-role="header" data-position="fixed" data-add-back-btn="true " data-toggle-on-tap="false">
+    <div data-role="page" id="add-new-payment-method-page" class="feedU-page">
+        <div data-role="header" data-position="fixed" id="home-header" data-tap-toggle="false">
+            <a class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-corner-all" href="#" data-rel="back"
+                data-icon="arrow-l" data-theme="c" data-role="button">Back</a>
             <span class="ui-title"></span>
+            <img src="../assets/logo.png"></img>
         </div>
         <div role="main" class="ui-content">
-            <h4>Add New Payment Method</h4>
-            <ul class="ui-nodisc-icon ui-alt-icon" data-role="listview">
-                <li><a class="add-new-payment-method-card-option">Credit Card</a></li>
-                <li><a class="add-new-payment-method-card-option">Debit Card</a></li>
-                <li><a href="#">PayPal</a></li>
-                <li><a href="#">Apple Pay</a></li>
+            <h2>Add New Payment Method</h2>
+            <ul class="ui-nodisc-icon ui-alt-icon" data-role="listview" style="margin: 7vh 0 0 0;">
+                <li class="add-new-payment-method-card-option ui-btn-icon-right ui-icon-carat-r">Credit Card</li>
+                <li class="add-new-payment-method-card-option ui-btn-icon-right ui-icon-carat-r">Debit Card</li>
+                <li class="disabled-btn-text ui-btn-icon-right ui-icon-carat-r">PayPal (COMING SOON)</li>
+                <li class="disabled-btn-text ui-btn-icon-right ui-icon-carat-r">Apple Pay (COMING SOON)</li>
             </ul>
         </div>
 
