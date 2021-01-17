@@ -1,4 +1,5 @@
-var cookie = require('js-cookie');
+const cookie = require('js-cookie');
+const datastore = require('./datastore');
 
 const USER = "user";
 
@@ -25,7 +26,7 @@ const orders = {
             "pastOrderId": "ord1",
             "vendorCoverImageLocation": "../assets/past_orders/past_order_cover_image.jpg",
             "vendorLogoImageLocation": "../assets/stories_images/story-big.png",
-            "vendorName": "Burgers Ahoy!",
+            "vendorName": "Burgers Ahouy!",
             "noOfOrderedItems": 3,
             "price": 1000,
             "date": "Oct 10 at 12:12 PM",
@@ -56,7 +57,7 @@ const orders = {
             "pastOrderId": "ord2",
             "vendorCoverImageLocation": "../assets/past_orders/past_order_cover_image.jpg",
             "vendorLogoImageLocation": "../assets/stories_images/story-big.png",
-            "vendorName": "Burgers Ahoy!",
+            "vendorName": "Burgers Ahouy!",
             "noOfOrderedItems": 1,
             "price": 500,
             "date": "Oct 01 at 08:30 PM",
@@ -105,7 +106,32 @@ module.exports = function () {
             return order;
         },
         getFavorites: function () {
-            return cookie.getJSON(USER).favorites;
+            let { vendors, items } = cookie.getJSON(USER).favorites;
+            vendors = vendors.map(vendor => vendor.vendorId);
+            items = items.map(item => item.itemId);
+
+            const favoriteVendors = [];
+            const favoriteItems = [];
+
+            for (const vendor of datastore.getAllVendors()) {
+                const vendorsItems = vendor.items;
+                if (vendors.includes(vendor.vendorId)) {
+                    favoriteVendors.push(vendor);
+                }
+
+                vendorsItems.forEach(item => {
+                    if (items.includes(item.itemId)) {
+                        favoriteItems.push(item);
+                    }
+                })
+
+                if (vendors.length == favoriteVendors.length &&
+                    items.length == favoriteItems.length) {
+                    break;
+                }
+            }
+
+            return { vendors: favoriteVendors, items: favoriteItems };
         },
         isItemFavorite: function (type, favoriteItem) {
             const loggedInUser = cookie.getJSON(USER);
@@ -134,13 +160,15 @@ module.exports = function () {
                 case this.FAVORITE_TYPES.VENDOR:
                     const isVendorAlreadyMarkedFavorite = currentFavorites['vendors'].find(i => i.vendorId === favoriteItem.vendorId)
                     if (!isVendorAlreadyMarkedFavorite) {
-                        currentFavorites['vendors'].push(favoriteItem);
+                        const { vendorId } = favoriteItem;
+                        currentFavorites['vendors'].push({ vendorId });
                     }
                     break;
                 case this.FAVORITE_TYPES.ITEM:
                     const isItemAlreadyMarkedFavorite = currentFavorites['items'].find(i => i.itemId === favoriteItem.itemId)
                     if (!isItemAlreadyMarkedFavorite) {
-                        currentFavorites['items'].push(favoriteItem);
+                        const { itemId } = favoriteItem;
+                        currentFavorites['items'].push({ itemId });
                     }
                     break;
             }

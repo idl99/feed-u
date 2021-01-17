@@ -12,7 +12,7 @@
 
 </head>
 
-<body onload="hideCommentPopup()">
+<body>
     <div data-role="page" id="item-rating" class="feedU-page ui-responsive-panel">
         <style>
             .item-rating-page-container {
@@ -192,9 +192,21 @@
                 </button>
             </div>
         </div>
+        <div data-role="popup" class="comment-popup comment-container" id="comment-popup">
+            <p class="center-text">Provide your feedback for the product purchased through
+                <span id="comment-popup-vendor-name"></span>
+            </p>
+
+            <textarea id="comment-box" class="comment-box-width"
+                placeholder="Leave your thoughts about the product here"></textarea>
+
+            <button class="btn" id="submit-comment">Comment</button>
+            <button class="btn cancel" id="close-popup">Cancel</button>
+        </div>
         <script>
             // Initialize the user store in order to retrieve the past order items.
             const {
+                datastore,
                 user,
                 utils
             } = app;
@@ -265,19 +277,6 @@
                     $(markup).insertBefore($('.ratings-submit-btn'));
 
                 });
-
-                var commentpopup = `
-                <div class="comment-popup comment-container" id="comment-popup">
-                <p class="center-text">Provide your feedback for the product purchased through ${$('#vendor-name').text()}</p>
-
-
-                <textarea id="comment-box" class="comment-box-width" placeholder="Leave your thoughts about the product here"></textarea>
-
-                <button class="btn" id="submit-comment">Comment</button>
-                <button class="btn cancel" id="close-popup">Cancel</button>
-                </div>`;
-
-                $(commentpopup).insertBefore($('.ratings-submit-btn'));
 
                 // Disables the submit button initially.
                 enableSubmitButton();
@@ -350,8 +349,13 @@
                     ratings[i] = ($(itemNamesAndRatings[i]).find('#item-ratings li.selected').last().data('value'));
                 }
 
+                // Update the details in the past orders datastore.
                 console.log("Updating Items", item_names, "with ratings", ratings);
                 user.updateSpecificOrder(pastOrderId, vendorRating, vendorComment, item_names, ratings, []);
+
+                // Update the details in the vendor datastore.
+                var vendorId = datastore.getVendorIdFromVendorName($('#vendor-name').text().substring(0, $('#vendor-name').text().length - 1));
+                datastore.updateVendorAndItemRatings(vendorId, vendorRating, item_names, ratings);
 
                 $(":mobile-pagecontainer").pagecontainer("change", "past_orders.html");
             };
@@ -404,6 +408,11 @@
                     closeForm();
                 })
             })
+
+            $('#comment-popup').on("popupcreate", function (event, ui) {
+                $("comment-popup-vendor-name").text($('#vendor-name').text());
+            })
+
         </script>
     </div>
 

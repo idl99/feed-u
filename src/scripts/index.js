@@ -13,7 +13,12 @@ var utils = require('./utils')
 
 var payment = require('./payment')
 
+var vendorlist = require('./vendorlist')
+
 var stripe = require('@stripe/stripe-js');
+
+var emailjs = require('emailjs-com');
+emailjs.init('user_9qHmfUChqBKT2SNghQ1v1');
 
 window.app = {
     cart,
@@ -21,7 +26,9 @@ window.app = {
     datastore,
     utils,
     payment,
-    stripe
+    stripe,
+    vendorlist,
+    emailjs
 }
 
 /**
