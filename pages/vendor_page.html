@@ -304,7 +304,7 @@
                 $('#vendor-page-vendor-title').text(vendorName);
                 $('#vendor-page-vendor-location').text(location);
                 $('#vendor-page-vendor-delivery-time').text(`(${deliveryTime})`);
-                $('#vendor-page-vendor-rating-value').text(vendorRatings.vendorRatingValue);
+                $('#vendor-page-vendor-rating-value').text(vendorRatings.vendorRatingValue.toFixed(1));
                 $('#vendor-page-vendor-no-of-ratings').text(`(${vendorRatings.vendorNoOfRatings})`);
                 $('#vendor-page-vendor-image').attr('src', vendorImageLocation);
 
@@ -333,9 +333,9 @@
                                     <div class="vendor-poi-item-rating-bar">
                                         <span>
                                             <i class='fa fa-star fa-fw' id="vendor-poi-item-rate-star-icon"></i> 
-                                            ${(itemRatings.itemRatingValue).toFixed(1)} 
+                                            ${(itemRatings.itemRatingValue).toFixed(1)}
+                                            <small id="vendor-poi-item-no-of-rated-customers">(${itemRatings.itemNoOfRatings})</small> 
 								        </span>
-								        <small id="vendor-poi-item-no-of-rated-customers">(${itemRatings.itemNoOfRatings})</small>
                                     </div>
                                 </div>
                                 <div class="vendor-poi-item-price-tag">

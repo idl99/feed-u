@@ -240,9 +240,10 @@
 					`</div>
 						<div class="poi-rating-bar-container">
 							<div class="poi-rating-bar">
-								<span><i class='fa fa-star fa-fw' id="poi-rate-star-icon"></i> ${(vendorRatings.vendorRatingValue).toFixed(1)} 
+								<span>
+									<i class='fa fa-star fa-fw' id="poi-rate-star-icon"></i> ${(vendorRatings.vendorRatingValue).toFixed(1)}
+									<small id="poi-no-of-rated-customers">(${vendorRatings.vendorNoOfRatings})</small> 
 								</span>
-								<small id="poi-no-of-rated-customers">(${vendorRatings.vendorNoOfRatings})</small>
 							</div>
 							<div id="poi-delivery-time">${deliveryTime}</div>
 						</div>
