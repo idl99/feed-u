@@ -14,6 +14,11 @@ module.exports = function (grunt) {
             }
         },
         browserify: { // Bundles the JS
+            options: {
+                browserifyOptions: {
+                    debug: true
+                }
+            },
             build: {
                 // cwd: 'src/', // DO NOT USE THIS OPTION HERE. IT WILL MESS UP THE BUILD
                 src: './src/scripts/index.js',

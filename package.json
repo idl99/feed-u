@@ -38,6 +38,7 @@
   "homepage": "https://github.com/idl99/feed-u#readme",
   "dependencies": {
     "@stripe/stripe-js": "^1.11.0",
+    "emailjs-com": "^2.6.4",
     "js-cookie": "^2.2.1"
   },
   "devDependencies": {
