@@ -25,23 +25,16 @@
 		<div role="main" class="ui-content">
 			<div id="home-main-content-container">
 				<div>
-					<div class="user-delivery-location-details">
-						<span id="deliver-now-txt">Deliver Now | </span>
-						<!-- 
-							https://css-tricks.com/flexbox-truncated-text/ 
-							TODO fix for longer display names
-						-->
-						<span style="flex: 0 0 12rem;" id="user-home-delivery-location">Delivery Location </span>
-						<!-- 
-						TODO if we set href here to set_location page it doesn't work. works for any other page.
-						Also, manual jQuery AJAX navigation works.
-					-->
+					<div
+						style="max-width: 90vw; display: flex; flex-direction: row; justify-content: space-evenly; align-items: center;">
+						<span style="max-width: 75vw; margin-right: 5px; overflow: auto; white-space: nowrap;">
+							Deliver Now |
+							<span id="user-home-delivery-location">
+								Delivery Location </span>
+						</span>
 						<a class="link-set-location-page ui-btn ui-shadow ui-corner-all ui-icon-navigation ui-btn-icon-notext"
 							style="margin-left: 5px;"></a>
 					</div>
-					<!-- <div>
-					<img style="margin-top: 0.50em; width: 100%;" src="../assets/main_page/carousel.jpg" alt="carousel">
-				</div> -->
 					<div class="carousel-container">
 
 						<div class="carousel-item fade">
