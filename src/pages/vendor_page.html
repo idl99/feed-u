@@ -118,8 +118,10 @@
             }
 
             .container {
-                display: flex;
-                flex-direction: column;
+                display: grid;
+                grid-template-columns: repeat(auto-fill, 350px);
+                column-gap: 15px;
+                row-gap: 15px;
             }
 
             .vendor-poi-item-container {
@@ -235,7 +237,9 @@
                 border-width: thin;
                 display: flex;
                 flex-direction: column;
-                padding: 10px 10px 10px 10px;
+                padding: 20px 15px;
+                justify-content: center;
+                width: fit-content;
             }
         </style>
         <div data-role="header" data-position="fixed" data-tap-toggle="false">
@@ -305,28 +309,33 @@
                 </a>
                 <!-- </div> -->
             </div>
-            <a href="#popup" data-rel="popup" data-position-to="window" data-transition="fade">
+            <a href="#popup" data-rel="popup" data-position-to="window" data-transition="fade"
+                style="display: flex; justify-content: center;">
                 <div class="vendor-page-reward-container-section">
                     <div style="display: flex; justify-content: space-evenly;">
                         <div style="display: flex; align-items: center;">
-                            <i class="fa fa-adjust" aria-hidden="true" style="color: #EB5757;"></i>
+                            <i class="fa fa-adjust" aria-hidden="true" style="color: #EB5757; font-size: x-large;"></i>
                         </div>
 
                         <div style="display:flex; flex-direction: column; margin-left: 1em;">
                             <h5 style="margin: 0;">3 orders earns a LKR 350 reward <br>LKR 750 minimum</h5>
+                            <!-- progress bar -->
+                            <div style="display: flex; margin-top: 0.5em; justify-content: center;">
+                                <div style="background-color: #EB5757; width: 60px; height: 6px;"></div>
+                                <div style="background-color: #C4C4C4; width: 50px; height: 6px; margin-left: 0.5em;">
+                                </div>
+                                <div style="background-color: #C4C4C4; width: 50px; height: 6px; margin-left: 0.5em;">
+                                </div>
+                                <div style="background-color: #C4C4C4; width: 50px; height: 6px; margin-left: 0.5em;">
+                                </div>
+                            </div>
                         </div>
 
-                        <div style="display: flex; align-items: center; margin-left: 1em;">
+                        <div style="display: flex; align-items: center; margin-left: 0.5em; font-size: xx-large;">
                             <i class="fa fa-angle-right" aria-hidden="true" style="color: #EB5757;"></i>
                         </div>
                     </div>
-                    <!-- progress bar -->
-                    <div style="display: flex; justify-content: center; margin-top: 0.5em;">
-                        <div style="background-color: #EB5757; width: 60px; height: 6px;"></div>
-                        <div style="background-color: #C4C4C4; width: 50px; height: 6px; margin-left: 0.5em;"></div>
-                        <div style="background-color: #C4C4C4; width: 50px; height: 6px; margin-left: 0.5em;"></div>
-                        <div style="background-color: #C4C4C4; width: 50px; height: 6px; margin-left: 0.5em;"></div>
-                    </div>
+
                 </div>
             </a>
             <br>
