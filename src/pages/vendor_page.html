@@ -304,7 +304,7 @@
                 $('#vendor-page-vendor-title').text(vendorName);
                 $('#vendor-page-vendor-location').text(location);
                 $('#vendor-page-vendor-delivery-time').text(`(${deliveryTime})`);
-                $('#vendor-page-vendor-rating-value').text(vendorRatings.vendorRatingValue);
+                $('#vendor-page-vendor-rating-value').text(vendorRatings.vendorRatingValue.toFixed(1));
                 $('#vendor-page-vendor-no-of-ratings').text(`(${vendorRatings.vendorNoOfRatings})`);
                 $('#vendor-page-vendor-image').attr('src', vendorImageLocation);
 

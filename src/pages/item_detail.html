@@ -285,7 +285,7 @@
             function setItemDetails({ itemTitle, itemDescription, itemRatings, itemImageLocation }) {
                 $('#item-detail-page-item-name').text(itemTitle)
                 $('#item-detail-page-item-description').text(itemDescription)
-                $('#item-detail-page-item-rating-value').text(itemRatings.itemRatingValue)
+                $('#item-detail-page-item-rating-value').text(itemRatings.itemRatingValue.toFixed(1))
                 $('#item-detail-page-item-no-of-ratings').text(`(${itemRatings.itemNoOfRatings})`)
                 $('#item-detail-page-item-img').attr("src", itemImageLocation)
             }
