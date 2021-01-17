@@ -66,7 +66,7 @@
                     <div style="margin-top: 0.75em;">
                         <select name="select-choice-1" id="select-choice-1">
                             <option value="sort" disabled selected="selected">Sort</option>
-                            <!-- <option value="a-z">A - Z</option> -->
+                            <option value="a-z">A - Z</option>
                             <option value="rating">Rating</option>
                             <option value="deliverytime">Delivery Time</option>
                         </select>
@@ -159,13 +159,6 @@
                 });
             });
 
-
-
-
-
-
-
-
             // var alphabeticallyOrderedDivs = $divs.sort(function (a, b) {
             //         return (ascendingname == $(a).find("p.poi_text").text().toLowerCase() < $(b).find("p.poi_text").text().toLowerCase()) ? 1 : -1;
             //     });
@@ -192,20 +185,38 @@
 
             //     });
 
-            function Ascending_sort(a, b) { 
-                return ($(b).text().toUpperCase()) <  
-                    ($(a).text().toUpperCase()) ? 1 : -1;  
-            } 
-            $('button').on('click', function() { 
-                $("ul li").sort(Ascending_sort).appendTo('ul'); 
-                $("#GFG_DOWN").text("sorted"); 
-            });         
+            function vendorNameSort(vendor_1, vendor_2) {
+                return ($(vendor_2).text().toUpperCase()) <
+                    ($(vendor_1).text().toUpperCase()) ? 1 : -1;
+            }
 
-            
+            function vendorRatingSort(vendor_1, vendor_2) {
+                return parseFloat($(vendor_2).find('#test').text()) >
+                    parseFloat($(vendor_1).find('#test').text()) ? 1 : -1;
+            }
 
+            function vendorDeliveryTimeSort(vendor_1, vendor_2) {
+                return parseInt($(vendor_2).find('#poi-delivery-time').text()) <
+                    parseInt($(vendor_1).find('#poi-delivery-time').text()) ? 1 : -1;
+            }
 
-
-
+            jQuery('#select-choice-1').on('change', function () {
+                var value = jQuery('#select-choice-1').val();
+                console.log(value);
+                if (value == 'a-z') {
+                    // Default sorting based on vendor names in the form of ascending order.
+                    console.log('Sorting vendors names in ascending order.');
+                    $(".poi-container").sort(vendorNameSort).appendTo('#vendor-list-container');
+                } else if (value == 'rating') {
+                    // Sorting based on vendor ratings in the form of higher to lower rating.
+                    console.log('Sorting vendors based on the rating of vendors (higher to lower rating)');
+                    $(".poi-container").sort(vendorRatingSort).appendTo('#vendor-list-container');
+                } else {
+                    // Sorting based on vendor's delivery time in the form of short to long.
+                    console.log('Sorting vendors based on the delivery time of vendors (short to long)');
+                    $(".poi-container").sort(vendorDeliveryTimeSort).appendTo('#vendor-list-container');
+                }
+            });
 
 
             $("#home-footer").on("click", function (event) {
@@ -227,7 +238,7 @@
                     }
                 });
             });
-    
+
             jQuery('#select-choice-3').on('change', function () {
                 var value1 = jQuery('#select-choice-3').val();
                 console.log(value1);
