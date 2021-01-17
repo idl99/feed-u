@@ -15,7 +15,7 @@ const data = Object.freeze({
                 "vendorNoOfRatings": 100
             },
             "location": "Colombo 3",
-            "deliveryTime": "25",
+            "deliveryTime": "25-30 mins",
             "items": [
                 {
                     "itemImageLocation": "../assets/vendor_page_images/tom_yum_soup.jpg",
@@ -66,7 +66,7 @@ const data = Object.freeze({
                 "vendorNoOfRatings": 99
             },
             "location": "Colombo 5",
-            "deliveryTime": "15",
+            "deliveryTime": "15-20 mins",
             "items": [
                 {
                     "itemImageLocation": "../assets/vendor_page_images/cheese_lovers_pizza.jpg",
@@ -116,7 +116,7 @@ const data = Object.freeze({
                 "vendorNoOfRatings": 150
             },
             "location": "Colombo 7",
-            "deliveryTime": "5",
+            "deliveryTime": "5-10 mins",
             "items": [
                 {
                     "itemImageLocation": "../assets/vendor_page_images/prawn_curry_and_rice.jpg",
@@ -166,7 +166,7 @@ const data = Object.freeze({
                 "vendorNoOfRatings": 82
             },
             "location": "Colombo 1",
-            "deliveryTime": "40",
+            "deliveryTime": "40-50 mins",
             "items": [
                 {
                     "itemImageLocation": "../assets/vendor_page_images/bruschetta_pasta.jpg",
@@ -217,7 +217,7 @@ const data = Object.freeze({
                 "vendorNoOfRatings": 29
             },
             "location": "Colombo 1",
-            "deliveryTime": "20",
+            "deliveryTime": "20-30 mins",
             "items": [
 
             ],
@@ -255,7 +255,7 @@ const data = Object.freeze({
                 "vendorNoOfRatings": 84
             },
             "location": "Colombo 1",
-            "deliveryTime": "35",
+            "deliveryTime": "35-40 mins",
             "items": [
 
             ],
@@ -274,7 +274,7 @@ const data = Object.freeze({
                 "vendorNoOfRatings": 97
             },
             "location": "Colombo 1",
-            "deliveryTime": "50",
+            "deliveryTime": "50-55 mins",
             "items": [
 
             ],
@@ -292,7 +292,7 @@ const data = Object.freeze({
                 "vendorNoOfRatings": 200
             },
             "location": "Colombo 1",
-            "deliveryTime": "45",
+            "deliveryTime": "45-50 mins",
             "items": [
 
             ],
@@ -330,7 +330,7 @@ const data = Object.freeze({
                 "vendorNoOfRatings": 55
             },
             "location": "Colombo 1",
-            "deliveryTime": "10",
+            "deliveryTime": "10-15 mins",
             "items": [
 
             ],
@@ -349,7 +349,7 @@ const data = Object.freeze({
                 "vendorNoOfRatings": 67
             },
             "location": "Colombo 1",
-            "deliveryTime": "55",
+            "deliveryTime": "55-60 mins",
             "items": [
 
             ],
