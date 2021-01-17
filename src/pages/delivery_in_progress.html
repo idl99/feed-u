@@ -218,43 +218,7 @@
                         }
                     });
 
-                    // geocoder = new google.maps.Geocoder();
-
-                    // marker.addListener("click", toggleBounce);
-
-                    // marker.addListener('dragend', function (ev) {
-                    //     console.log('Latitude: ' + marker.getPosition().lat() + ', Longitude: ' + marker.getPosition().lng());
-                    //     const latlng = {
-                    //         lat: parseFloat(marker.getPosition().lat()),
-                    //         lng: parseFloat(marker.getPosition().lng()),
-                    //     };
-                    //     geocoder.geocode({ location: latlng }, (results, status) => {
-                    //         if (status === "OK") {
-                    //             var location = results[0].formatted_address;
-                    //             $('#selected-location').text(location);
-                    //         } else {
-                    //             // Keep empty when everything is completed.
-                    //             console.log('Cannot fetch location details right now. Hence, setting a default location.');
-                    //             $('#selected-location').text("1600 Amphitheatre Parkway, Mountain View, CA 94043, USA");
-                    //         }
-                    //     });
-                    // });
                 }
-
-                // function calcRoute() {
-                //     var start = document.getElementById('start').value;
-                //     var end = document.getElementById('end').value;
-                //     var request = {
-                //         origin: start,
-                //         destination: end,
-                //         travelMode: 'DRIVING'
-                //     };
-                //     directionsService.route(request, function (result, status) {
-                //         if (status == 'OK') {
-                //             directionsRenderer.setDirections(result);
-                //         }
-                //     });
-                // }
 
                 function deliveryCompleted() {
                     const pointsForOrder = cart.getPointsForCart();
@@ -271,18 +235,6 @@
                         $(':mobile-pagecontainer').pagecontainer("change", "leaderboard.html"));
                 }
 
-
-
-                // $(document).bind('click', function () {
-
-                //         $("#delivery-complete-popup").popup();
-                //         $("#delivery-complete-popup").popup("open");
-
-                // });
-
-                // function deliverySuccessPopUpClose(){
-                //     $('#delivery-complete-popup').popup("close");
-                // }
             }
 
         </script>
