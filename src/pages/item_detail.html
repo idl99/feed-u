@@ -123,14 +123,8 @@
                 justify-content: center;
             }
 
-            #addToCartBtn {
-                width: 100%;
-                text-align: center;
+            #item-detail-footer {
                 background: #EB5757;
-                color: white;
-                margin: 0px;
-                padding: 0px;
-                border-radius: 0%;
             }
 
             .item-page-item-favourite {
@@ -246,10 +240,14 @@
 
             </div>
         </div>
-        <div data-role="footer">
-            <button id="addToCartBtn">
+        <!-- <div data-role="footer">
+            <button id="item-detail-footer">
                 <h4> Add to Cart</h4>
             </button>
+        </div> -->
+        <div id="item-detail-footer" data-role="footer" class="footer-full-width-btn" data-position="fixed"
+            data-tap-toggle="false">
+            <h4 id="item-detail-add-to-cart">Add to Cart</h4>
         </div>
 
         <script>
@@ -330,7 +328,7 @@
                 }
             })
 
-            $('#addToCartBtn').click(function (event) {
+            $('#item-detail-footer').click(function (event) {
                 const payload = { vendor, item: { ...item, quantity } };
                 const error = cart.addItemToCart(payload)
                 if (error) {
