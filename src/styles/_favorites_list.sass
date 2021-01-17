@@ -22,4 +22,8 @@ body
             background-color: transparent
             border: 2px solid map.get(variables.$feedU-theme, "primary-color")
             border-radius: 5px
-            width: 5em
+            // width: 3.5em
+
+        & #favorite-items-container
+            display: grid
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr))

@@ -96,8 +96,9 @@
 
         <script>
 
-            const { datastore } = app;
-            var leaderboard = datastore.getLeaderboard();
+            const { user, datastore } = app;
+            console.log(user.getDetails());
+            var leaderboard = datastore.getLeaderboard(user.getDetails().profile);
             var i = 1;
             var totPoints = 0;
             leaderboard.forEach(({ name, points }) => {
@@ -110,12 +111,11 @@
 
             });
 
-            const { user } = app;
             const userPoints = user.getDetails().profile.points;
             $('#tot-pnt').text(userPoints)
 
             var aboveUserPoints = 0;
-            var eachUserPoints = datastore.getLeaderboard();
+            var eachUserPoints = datastore.getLeaderboard(user.getDetails().profile);
             console.log(eachUserPoints)
             eachUserPoints.forEach(({ points }) => {
                 if (userPoints < points) {
