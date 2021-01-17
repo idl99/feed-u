@@ -49,7 +49,7 @@ const screenDimens = {
 }
 
 const navigationPanelBlockedScreens = ["landing", "vendor-stories", "vendor-rating", "item-rating",
-    "order-in-progress-page", "delivery-in-progress-page"];
+    "order-in-progress-page", "delivery-in-progress-page", "signin", "signup"];
 
 /**
  * This function opens the navigation panel programatically
