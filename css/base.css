@@ -5808,6 +5808,9 @@ body #favorites-list-page #favorite-items-container {
   float: right;
   margin-left: 5%;
 }
+.poi-details .poi-vendor-name {
+  font-weight: 700;
+}
 .poi-details .poi-catergory-container {
   display: flex;
   align-items: center;
@@ -5872,9 +5875,15 @@ body #favorites-list-page #favorite-items-container {
   text-justify: inter-word;
 }
 
+.vendor-page-vendor-introduction {
+  font-weight: 400;
+  margin-left: 1em;
+}
+
 #vendor-poi-item-title {
   margin: 0;
   font-size: 14px;
+  font-weight: 700;
 }
 
 #vendor-poi-item-description {
