@@ -18,8 +18,22 @@
             justify-content: center;
         }
     </style>
+
+
+    <script>
+        $(document).bind('pageinit', function () {
+            setTimeout(function () {
+                $("#deliver-complete-popup").popup();
+                $("#deliver-complete-popup").popup("open");
+            }, 4000);
+        });
+    </script>
+
+
+
     <!-- delivery success popup -->
-    <div data-role="popup" id="popup" data-overlay-theme="b" data-theme="b" data-corners="false" style="padding: 1em;">
+    <div data-role="popup" id="deliver-complete-popup" data-overlay-theme="b" data-theme="b" data-corners="false"
+        style="padding: 1em;">
         <h2 style="color:#27AE60">DELIVERY COMPLETED</h2>
         <br>
         <div class="success_popup_items">
@@ -52,19 +66,9 @@
         </a>
     </div>
 
-    
     <!--end of delivery sucess pop up  -->
 
     <!-- BUTTONS BUTTONS BUTTON BUTTONS BUTTONS BUTTONS BUTTONS BUTTONS -->
-
-    <a href="#popup" data-rel="popup" data-position-to="window" data-transition="fade">
-        <button id="submitFBBtn" class="submit-feedback-button"
-            style="width: 100%; text-align: center; background: #27AE60; color: white; border-width: 3px; border-radius: 100px; margin: 0px; padding: 0px; text-shadow: none;">
-            <h4> Delivery Success Popup</h4>
-        </button>
-    </a>
-
-
 
 
     <!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
@@ -77,63 +81,39 @@
             justify-content: center;
         }
     </style>
-    
+
     <script>
 
-    $(document).bind('pageinit', function () {
-        setTimeout(function () {
-            $("popup1").popup();
-            $("popup1").popup("open");
-        }, 3000);
-        setTimeout(function () {
-            $("popup1").popup("close");
-        }, 3000);
-        setTimeout(function () {
-            $("popup2").popup();
-            $("popup2").popup("open");
-        }, 3000);
-    });
+        function onInitialButtonClick(event) {
+            console.log("Initial button clicked");
+            $('#popup1').popup("open");
+        }
 
-    // $("#popup1").on("click", function () {
-    //         // openSecondPopup()
-    //         // onloadpopupOpen();
-    //         $('#popup1').popup("open");
-    //         $(emailBtn).popup("close");
-    // })
+        function onSecondaryButtonClick(event) {
+            console.log("Secondary button clicked");
+            $('#popup1').popup("close");
+            setTimeout(function () {
+                $('#popup2').popup('open');
+            }, 500);
+        }
 
-    // $("#popup1").on("popupafterclose", function () {
-    //     setTimeout(function()
-    //      {
-    //         $('#popup2').popup('open');
-    //      }, 1000);
+        function onNoButtonClick(event) {
+            console.log("yes button clicked");
+            $('#popup2').popup("close");
+        }
 
-    // })
+        function onYesButtonClick(event) {
+            console.log("yes button clicked");
+            $('#popup2').popup("close");
+            setTimeout(function () {
+                $('#popup3').popup('open');
+            }, 500);
+        }
 
-
-
-
-
-        // function openSecondPopup() {
-        //     // $('#popup1').popup();
-        //     // $("#popup1").popup("close")
-        //     // $('#popup2').popup("open", {
-        //     //     positionTo: "window"
-        //     // })
-
-        //     $(document).on("pageinit", function () {
-        //         $('.popup1').on({
-        //             popupafterclose: function () {
-        //                 setTimeout(function () { $('.popup2').popup('open') }, 100);
-        //             }
-        //         });
-        //     });
-        // }
-
-        // function hideFirstPopup() {
-        //     $('#popup1').popup();
-        //     $("#popup1").popup("close")
-        // }
-
+        function onOkButtonClick(event) {
+            console.log("yes button clicked");
+            $('#popup3').popup("close");
+        }
 
     </script>
 
@@ -148,72 +128,113 @@
             </div>
         </div>
 
-        <!-- <a href="#popup2" data-rel="popup" data-position-to="window" data-transition="fade"> -->
-            <button id="emailBtn"  class="email-button"
-                style="width: 100%; text-align: center; border-radius: 100px; border-width: 2px; background:#EB5757; color: white; border-color: #EB5757 ; margin: 0px; padding: 0px;  text-shadow: none;">
-                <h4>Send E-mail</h4>
-            </button>
 
-          
-<!-- 
-        </a> -->
+        <button id="emailBtn" class="email-button" onclick="onSecondaryButtonClick()"
+            style="width: 100%; text-align: center; border-radius: 100px; border-width: 2px; background:#EB5757; color: white; border-color: #EB5757 ; margin: 0px; padding: 0px;  text-shadow: none;">
+            <h4>Send E-mail</h4>
+        </button>
 
-            <!-- <div data-role="popup" id="popup2" data-overlay-theme="b" data-theme="b" data-corners="false" style="padding: 1em;">
-                <div>
-                    <h2 class="favourites-email-popup">Are you sure you want to</h2>
-                    <h2 class="favourites-email-popup">send the email?</h2>
-                    <input type="text" class="favourites-email-popup" name="recipient-email" id="rec-email" value=""
-                        placeholder="koshami@deshanwatte.lk">
-                </div>
-            </div> -->
-
-
-        <!-- </a> -->
-        
         <a href="#" data-rel="back"
             class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right"
             style="background-color: #EB5757;">Close</a>
         </a>
+
     </div>
 
     <div data-role="popup" id="popup2" data-overlay-theme="b" data-theme="b" data-corners="false" style="padding: 1em;">
         <div>
-            <h2 class="favourites-email-popup">Are you sure you want to</h2>
-            <h2 class="favourites-email-popup">send the email?</h2>
-            <input type="text" class="favourites-email-popup" name="recipient-email" id="rec-email" value=""
-                placeholder="koshami@deshanwatte.lk">
+            <h3 class="favourites-email-popup">Are you sure you want to</h3>
+            <h3 class="favourites-email-popup">send the email?</h3>
+            <button id="yesBtn" class="yes-button" onclick="onYesButtonClick()"
+                style="width: 100%; text-align: center; border-radius: 100px; border-width: 2px; background:#EB5757; color: white; border-color: #EB5757 ; padding: 0px;  text-shadow: none;">
+                <h4>Yes</h4>
+            </button>
+
+            <button id="noBtn" class="no-button" onclick="onNoButtonClick()"
+                style="width: 100%; text-align: center; border-radius: 100px; border-width: 2px; background:#EB5757; color: white; border-color: #EB5757 ; padding: 0px;  text-shadow: none;">
+                <h4>No</h4>
+            </button>
+
         </div>
     </div>
 
-
-
-    <!-- <div data-role="popup" id="popup2" data-overlay-theme="b" data-theme="b" data-corners="false" style="padding: 1em;">
+    <div data-role="popup" id="popup3" data-overlay-theme="b" data-theme="b" data-corners="false" style="padding: 1em;">
         <div>
-            <h2 class="favourites-email-popup">Are you sure you want to</h2>
-            <h2 class="favourites-email-popup">send the email?</h2>
-            <input type="text" class="favourites-email-popup" name="recipient-email" id="rec-email" value=""
-                placeholder="koshami@deshanwatte.lk">
+            <h3 class="favourites-email-popup">E-mail has been sent.</h3>
+
+            <button id="okBtn" class="ok-button" onclick="onOkButtonClick()"
+                style="width: 100%; text-align: center; border-radius: 100px; border-width: 2px; background:#EB5757; color: white; border-color: #EB5757 ; padding: 0px;  text-shadow: none;">
+                <h4>OK</h4>
+            </button>
+
         </div>
-    </div> -->
+    </div>
 
     <!-- BUTTONS BUTTONS BUTTON BUTTONS BUTTONS BUTTONS BUTTONS BUTTONS -->
 
     <a href="#popup1" data-rel="popup" data-position-to="window" data-transition="fade">
-        <button id="submitFBBtn" class="submit-feedback-button"
+        <button onclick="onInitialButtonClick()" id="submitFBBtn" class="submit-feedback-button"
             style="width: 100%; text-align: center; background: #EB5757; color: white; border-width: 3px; border-radius: 100px; margin: 0px; padding: 0px; text-shadow: none;">
             <h4> Send favourites</h4>
         </button>
     </a>
+
+
+
+
+
+
+
     
 
 
+
+    <style>
+
+        #phoneNumberPopUp{
+            padding: 1em;
+        }
+
+        #phoneOkButton{
+            width: 100%;
+                text-align: center;
+                background: #EB5757;
+                color: white;
+                margin: 0px;
+                padding: 0px;
+                border-radius: 0%;
+                text-shadow: none;
+        }
+
+    </style>
+
+    <a href="#phoneNumberPopUp" data-rel="popup" data-position-to="window" data-transition="fade">
+        <button onclick="phoneNumberPopUp()" id="submitFBBtn" class="phoneNumber"
+            style="width: 100%; text-align: center; background: #EB5757; color: white; border-width: 3px; border-radius: 100px; margin: 0px; padding: 0px; text-shadow: none;">
+            <h4> Phone Number</h4>
+        </button>
+    </a>
     
 
-
+    <div data-role="popup" id="phoneNumberPopUp" data-overlay-theme="b" data-theme="b" data-corners="false">
         
+        <h4 style="font-weight: inherit;">Why do we need your phone number?</h4>
+        <h5 style="margin-top: 15px; margin-bottom: 20px; font-weight: inherit;">Your number will only be visible to the vendor and  delivery partner for the duration of the order, so that </h5>
+        
+        <h5 style="margin-top: 15px; margin-bottom: 20px; font-weight: inherit;">1)  the vendor may contact you regarding the order</h5>
 
+        <h5 style="margin-top: 15px; margin-bottom: 20px; font-weight: inherit;">2) the delivery partner may contact you in case of trouble finding directions or to notify you once your order has reached your doorstep.</h5>
 
+        <!-- OK button with close action -->
+        <a data-rel="back">
+            <button id="phoneOkButton" style="margin-top: 25px;">
+                <h4> OK, got it!</h4>
+            </button>
+        </a>
+        <!-- </div> -->
+    </div>
 
 
 </body>
+
 </html>

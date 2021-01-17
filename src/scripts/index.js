@@ -17,14 +17,18 @@ var vendorlist = require('./vendorlist')
 
 var stripe = require('@stripe/stripe-js');
 
+var emailjs = require('emailjs-com');
+emailjs.init('user_9qHmfUChqBKT2SNghQ1v1');
+
 window.app = {
     cart,
     user,
     datastore,
     utils,
     payment,
+    stripe,
     vendorlist,
-    stripe
+    emailjs
 }
 
 /**

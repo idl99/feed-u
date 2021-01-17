@@ -33,14 +33,26 @@ body
             text-overflow: ellipsis
 
     #home-favourite-vendor-stories-container
-        display: flex
-        justify-content: flex-start
+        display: grid
+        grid-auto-flow: column
+        gap: 10px
         overflow: auto
 
-        .favourite-vendor-story
+        #favourite-vendor-story
             margin: 0.25em 0.25em
             width: 40px
             height: 40px
+
+    .home-categories-container
+        display: grid
+        grid-template-columns: repeat(auto-fill, 50px)
+        justify-items: center
+        column-gap: 25px
+        grid-auto-flow: column
+        overflow: auto
+
+        // #category-item
+        //     margin: 0em 0.50em
 
     .all-poi-container
         display: grid
@@ -126,10 +138,10 @@ body
             margin-left: 20px
 
         #home-favourite-vendor-stories-container
-            flex-direction: column
+            grid-auto-flow: row
 
-            .favourite-vendor-story
-                margin: 10px 0.25em
+            // .favourite-vendor-story
+            //     margin: 10px 0.25em
 
         #navigation-menu-hamburger
             display: none // Hide the hamburger icon on larger screens to make the panel non-collapsible

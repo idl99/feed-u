@@ -13,30 +13,27 @@
 </head>
 
 <body>
-	<div data-role="page" id="vendor-stories" class="feedU-page ui-responsive-panel">
+	<div data-role="page" id="vendor-stories" class="feedU-page ui-responsive-panel" style="touch-action: none;">
 		<script>
 			function onCloseBtnClick(event) {
-				console.log('Clicked close button. Navigating back to home.')
-
-				// refer https://jquerymobile.com/upgrade-guide/1.4/#navigation on how to navigate
-
-				// navigate user to Home screen when user submits their location
-				// refer https://stackoverflow.com/questions/24173871/what-is-the-mobile-pagecontainer-selector and
-				// https://api.jquerymobile.com/pagecontainer/ for more
+				console.log('Clicked close button. Navigating back to home.');
 				$(":mobile-pagecontainer").pagecontainer("change", "home.html");
 			};
 
-			// Navigate to the next page on swipeleft
+			// Navigate to the next vendor story page on swipeleft.
 			// $(document).on("swipeleft", "#vendor-stories", function (event) {
+			// 	$('.story-playback').remove();
+			// 	$('.vendor-details').remove();
 			// 	$(":mobile-pagecontainer").pagecontainer("change", "vendor_stories_2.html", {
 			// 		transition: "slide"
 			// 	});
 			// });
 
+			// Navigate to the next vendor story page after a certain timeout.
 			// $(document).on('pageshow', '#vendor-stories', function () {
-			// 	setTimeout(function () {
+			// 	timeOut = setTimeout(function () {
 			// 		$(":mobile-pagecontainer").pagecontainer("change", "home.html");
-			// 	}, 10000);
+			// 	}, 7000);
 			// });
 
 		</script>
@@ -44,7 +41,7 @@
 			<div class="vendor-details-container">
 				<div class="vendor-details">
 					<div class="story-header">
-						<img id="vendor-image" src="../assets/stories_images/story.png" alt="Story Outline">
+						<img id="vendor-image" src="../assets/stories_images/story_1.png" alt="Story Outline">
 						<div id="vendor-text">
 							<span>Home Cooking</span>
 							<span>1 hour ago</span>

@@ -31,14 +31,14 @@
 				</button>
 			</div>
 			<div data-role="tabs" id="tabs">
-				<div data-role="navbar">
+				<div data-role="navbar" style="margin-bottom: 2em;;">
 					<ul>
 						<li><a id="tab-item" href="#saved-locations" data-ajax="false" class="ui-btn-active">Saved
 								Locations</a></li>
 						<li><a id="tab-item" href="#previous-locations" data-ajax="false">Previous Locations</a></li>
 					</ul>
 				</div>
-				<div class=" ui-content" id="saved-locations">
+				<div id="saved-locations">
 					<ul data-role="listview">
 						<li class="set-location-saved-location-list-item">Delkanda, Nugegoda
 						</li>
@@ -47,7 +47,7 @@
 						<li class="set-location-saved-location-list-item">Attidiya, Dehiwala</li>
 					</ul>
 				</div>
-				<div class="ui-content" id="previous-locations">
+				<div id="previous-locations">
 					<ul data-role="listview">
 						<li class="set-location-previous-location-list-item">Makumbura, Kottawa</li>
 						<li class="set-location-previous-location-list-item">Piliyandala, Kottawa</li>
@@ -95,17 +95,15 @@
 						console.log('Failed to update the user location.');
 					} else {
 						console.log('Successfully updated the user location.');
-						$(":mobile-pagecontainer").pagecontainer("change", "home.html",);
-						// history.back();
+						$(":mobile-pagecontainer").pagecontainer("change", "home.html");
 					}
 				} else {
-					$(":mobile-pagecontainer").pagecontainer("change", "home.html",);
-					// history.back();
+					$(":mobile-pagecontainer").pagecontainer("change", "home.html");
 				}
 			});
 
 			$("#set-location-btn").click(function () {
-				$(":mobile-pagecontainer").pagecontainer("change", "location_search.html",);
+				$(":mobile-pagecontainer").pagecontainer("change", "location_search.html");
 			});
 
 			// $("#set-location-map").click(function () {

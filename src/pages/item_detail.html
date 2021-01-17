@@ -51,6 +51,7 @@
                 justify-content: space-between;
                 align-items: center;
                 padding: 0.25em 0;
+                font-weight: 700;
             }
 
             #item-detail-page-item-name {
@@ -114,6 +115,7 @@
                 background-color: #F2F2F2;
                 border-radius: 100px;
                 width: 50%;
+                font-weight: 700;
             }
 
             .item-detail-page-item-comments-container {
@@ -141,15 +143,20 @@
                 font-size: 25px;
             }
         </style>
-        <div data-role="header" id="checkout-header" data-position="fixed" data-tap-toggle="false">
+        <div data-role="header" data-toggle-on-tap="false" data-position="fixed">
+            <span class="ui-title"></span>
             <a class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-corner-all" href="#" data-rel="back"
                 data-icon="arrow-l" data-theme="c" data-role="button">Back</a>
-            <span class="ui-title"></span>
-            <img src="../assets/logo.png"></img>
+            <div data-enhance="false">
+                <a href="home.html">
+                    <img src="../assets/logo.png"></img>
+                </a>
+            </div>
         </div>
         <div role="main" class="ui-content">
             <div class="item-detail-page-item-image-section">
-                <img id="item-detail-page-item-img" src="../assets/vendor_page_images/tom_yum_soup.jpg">
+                <img id="item-detail-page-item-img" src="../assets/vendor_page_images/tom_yum_soup.jpg"
+                    style="height: 40vh; object-fit: cover;">
                 <div class="item-detail-page-item-img-txt-container">
                     <div class="item-detail-page-item-ratings-with-name">
                         <span id="item-detail-page-item-name">Item Name</span>
@@ -252,6 +259,29 @@
             var vendor = {};
             var quantity = 1;
 
+            const FAVORITE_ICON_STATES = {
+                FILLED: 'fa-heart',
+                UNFILLED: 'fa-heart-o',
+                FILLED_COLOR: '#EB5757',
+                UNFILLED_COLOR: '#F1F1F1',
+            }
+
+            $('#item-favourite-icon').on('click', function () {
+
+                const wasUnfilled = $('#item-favourite-icon').hasClass('fa-heart-o');
+                if (wasUnfilled) {
+                    $(this).css('color', FAVORITE_ICON_STATES.FILLED_COLOR);
+                    user.addFavorite(user.FAVORITE_TYPES.ITEM, item);
+                } else {
+                    $(this).css('color', FAVORITE_ICON_STATES.UNFILLED_COLOR);
+                    user.removeFavorite(user.FAVORITE_TYPES.ITEM, item);
+                }
+
+                $(this).toggleClass(FAVORITE_ICON_STATES.FILLED);
+                $(this).toggleClass(FAVORITE_ICON_STATES.UNFILLED);
+            });
+
+
             function setItemDetails({ itemTitle, itemDescription, itemRatings, itemImageLocation }) {
                 $('#item-detail-page-item-name').text(itemTitle)
                 $('#item-detail-page-item-description').text(itemDescription)
@@ -273,13 +303,6 @@
                 vendor = vendorDetails;
                 setItemDetails(itemDetails);
 
-                const FAVORITE_ICON_STATES = {
-                    FILLED: 'fa-heart',
-                    UNFILLED: 'fa-heart-o',
-                    FILLED_COLOR: '#EB5757',
-                    UNFILLED_COLOR: '#F1F1F1',
-                }
-
                 const itemIsFavorite = user.isItemFavorite(user.FAVORITE_TYPES.ITEM, item);
                 if (itemIsFavorite) {
                     $('#item-favourite-icon').addClass(FAVORITE_ICON_STATES.FILLED)
@@ -288,21 +311,6 @@
                     $('#item-favourite-icon').addClass(FAVORITE_ICON_STATES.UNFILLED)
                         .removeClass(FAVORITE_ICON_STATES.FILLED).css('color', FAVORITE_ICON_STATES.UNFILLED_COLOR);
                 }
-
-                $('#item-favourite-icon').on('click', function () {
-
-                    const wasUnfilled = $('#item-favourite-icon').hasClass('fa-heart-o');
-                    if (wasUnfilled) {
-                        $(this).css('color', FAVORITE_ICON_STATES.FILLED_COLOR);
-                        user.addFavorite(user.FAVORITE_TYPES.ITEM, item);
-                    } else {
-                        $(this).css('color', FAVORITE_ICON_STATES.UNFILLED_COLOR);
-                        user.removeFavorite(user.FAVORITE_TYPES.ITEM, item);
-                    }
-
-                    $(this).toggleClass(FAVORITE_ICON_STATES.FILLED);
-                    $(this).toggleClass(FAVORITE_ICON_STATES.UNFILLED);
-                });
 
             });
 

@@ -1,4 +1,4 @@
-const user = require('./user');
+// const user = require('./user');
 
 const data = Object.freeze({
     vendors: [
@@ -11,7 +11,7 @@ const data = Object.freeze({
                 "American"
             ],
             "vendorRatings": {
-                "vendorRatingValue": 2.6,
+                "vendorRatingValue": 4.6,
                 "vendorNoOfRatings": 100
             },
             "location": "Colombo 3",
@@ -62,7 +62,7 @@ const data = Object.freeze({
                 "Pizza"
             ],
             "vendorRatings": {
-                "vendorRatingValue": 3.8,
+                "vendorRatingValue": 4.8,
                 "vendorNoOfRatings": 99
             },
             "location": "Colombo 5",
@@ -112,7 +112,7 @@ const data = Object.freeze({
                 "Sri Lankan"
             ],
             "vendorRatings": {
-                "vendorRatingValue": 6.5,
+                "vendorRatingValue": 4.5,
                 "vendorNoOfRatings": 150
             },
             "location": "Colombo 7",
@@ -203,6 +203,157 @@ const data = Object.freeze({
                 },
             ],
         },
+        {
+            "vendorId": "v5",
+            "vendorImageLocation": "../assets/vendor_list_view_images/thai_tanic.jpg",
+            "vendorName": "Thai Tanic",
+            "vendorCatergories": [
+                "Soup",
+                "Salad",
+                "Thai"
+            ],
+            "vendorRatings": {
+                "vendorRatingValue": 4.9,
+                "vendorNoOfRatings": 29
+            },
+            "location": "Colombo 1",
+            "deliveryTime": "20-35 mins",
+            "items": [
+
+            ],
+        },
+        {
+            "vendorId": "v6",
+            "vendorImageLocation": "../assets/vendor_list_view_images/pita_pan.jpg",
+            "vendorName": "Pita Pan",
+            "vendorCatergories": [
+                "Burgers",
+                "Mediterrenean",
+                "Thai"
+            ],
+            "vendorRatings": {
+                "vendorRatingValue": 4.3,
+                "vendorNoOfRatings": 10
+            },
+            "location": "Colombo 1",
+            "deliveryTime": "12-15 mins",
+            "items": [
+
+            ],
+        },
+        {
+            "vendorId": "v7",
+            "vendorImageLocation": "../assets/vendor_list_view_images/hoppers_and_betrayals.jpg",
+            "vendorName": "Hoppers and Betrayals",
+            "vendorCatergories": [
+                "Hoppers",
+                "Sri Lankan",
+                "Indian"
+            ],
+            "vendorRatings": {
+                "vendorRatingValue": 3.9,
+                "vendorNoOfRatings": 84
+            },
+            "location": "Colombo 1",
+            "deliveryTime": "22-35 mins",
+            "items": [
+
+            ],
+        },
+        {
+            "vendorId": "v8",
+            "vendorImageLocation": "../assets/vendor_list_view_images/cutie_pies_and_cupcakes.jpg",
+            "vendorName": "Cutie Pies and Cupcakes",
+            "vendorCatergories": [
+                "Cupcakes",
+                "Sweet",
+                "Sour"
+            ],
+            "vendorRatings": {
+                "vendorRatingValue": 4.4,
+                "vendorNoOfRatings": 97
+            },
+            "location": "Colombo 1",
+            "deliveryTime": "35-50 mins",
+            "items": [
+
+            ],
+        },
+        {
+            "vendorId": "v9",
+            "vendorImageLocation": "../assets/vendor_list_view_images/tikka-k_inta.jpg",
+            "vendorName": "Tikka-k Inta",
+            "vendorCatergories": [
+                "Paratha",
+                "Indian"
+            ],
+            "vendorRatings": {
+                "vendorRatingValue": 4.9,
+                "vendorNoOfRatings": 200
+            },
+            "location": "Colombo 1",
+            "deliveryTime": "40-45 mins",
+            "items": [
+
+            ],
+        },
+        {
+            "vendorId": "v10",
+            "vendorImageLocation": "../assets/vendor_list_view_images/the_codfather.jpg",
+            "vendorName": "The Codfather",
+            "vendorCatergories": [
+                "Chips",
+                "Fried Fish",
+                "American"
+            ],
+            "vendorRatings": {
+                "vendorRatingValue": 3.5,
+                "vendorNoOfRatings": 73
+            },
+            "location": "Colombo 1",
+            "deliveryTime": "5-15 mins",
+            "items": [
+
+            ],
+        },
+        {
+            "vendorId": "v11",
+            "vendorImageLocation": "../assets/vendor_list_view_images/the_tipsy_cow.jpg",
+            "vendorName": "The Tipsy Cow",
+            "vendorCatergories": [
+                "Cocktails",
+                "Smoothies",
+                "Juice"
+            ],
+            "vendorRatings": {
+                "vendorRatingValue": 5.0,
+                "vendorNoOfRatings": 55
+            },
+            "location": "Colombo 1",
+            "deliveryTime": "10-30 mins",
+            "items": [
+
+            ],
+        },
+        {
+            "vendorId": "v12",
+            "vendorImageLocation": "../assets/vendor_list_view_images/the_dairy_godmother.jpg",
+            "vendorName": "The Dairy Godmother",
+            "vendorCatergories": [
+                "Dairy",
+                "Milk",
+                "Smoothies"
+            ],
+            "vendorRatings": {
+                "vendorRatingValue": 4.0,
+                "vendorNoOfRatings": 67
+            },
+            "location": "Colombo 1",
+            "deliveryTime": "20-50 mins",
+            "items": [
+
+            ],
+        },
     ],
     leaderboard: [
         {
@@ -240,8 +391,62 @@ module.exports = function () {
             const item = allVendorsItems.find(item => item.itemId === itemId);
             return item;
         },
-        getLeaderboard: function () {
-            const { points } = user.getDetails().profile;
+        getVendorIdFromVendorName: function (vendorName) {
+            const vendor = data.vendors.find(vendor => vendor.vendorName === vendorName);
+            return vendor.vendorId;
+        },
+        updateVendorAndItemRatings: function (vendorId, vendorRating, itemTitles, ratings) {
+            // Updates the vendor ratings and item ratings accordingly.
+
+            // Retrieve the vendor using the vendor Id so that it can be updated.
+            const vendor = data.vendors.find(vendor => vendor.vendorId === vendorId);
+
+            // Update the vendor ratings and increase the count of no: of rated people.
+            vendor.vendorRatings.vendorRatingValue = (parseFloat(vendor.vendorRatings.vendorRatingValue * vendor.vendorRatings.vendorNoOfRatings) + parseFloat(vendorRating)) / (vendor.vendorRatings.vendorNoOfRatings + 1);
+            vendor.vendorRatings.vendorNoOfRatings = vendor.vendorRatings.vendorNoOfRatings + 1;
+
+            // Update the ratings of the vendor's items.
+            var updatedVendorAndItemRatings = [];
+            for (var i = 0; i < itemTitles.length; i++) {
+                vendor.items.map(item => {
+                    // Update if the item names match.
+                    if (item.itemTitle.replace(/\s/g, "") === itemTitles[i]) {
+                        updatedVendorAndItemRatings.push({
+                            "itemImageLocation": item.itemImageLocation,
+                            "itemId": item.itemId,
+                            "itemTitle": item.itemTitle,
+                            "itemDescription": item.itemDescription,
+                            "itemRatings": {
+                                "itemRatingValue": (parseFloat(item.itemRatings.itemRatingValue * item.itemRatings.itemNoOfRatings) + parseFloat(ratings[i])) / (item.itemRatings.itemNoOfRatings + 1),
+                                "itemNoOfRatings": item.itemRatings.itemNoOfRatings + 1
+                            },
+                            "itemPrice": item.itemPrice
+                        });
+                    } else {
+                        // Else check if the item is already there and add it if it is not there.
+                        if (updatedVendorAndItemRatings.find(updatedItem => updatedItem.itemId === item.itemId) === undefined) {
+                            updatedVendorAndItemRatings.push({
+                                "itemImageLocation": item.itemImageLocation,
+                                "itemId": item.itemId,
+                                "itemTitle": item.itemTitle,
+                                "itemDescription": item.itemDescription,
+                                "itemRatings": {
+                                    "itemRatingValue": item.itemRatings.itemRatingValue,
+                                    "itemNoOfRatings": item.itemRatings.itemNoOfRatings
+                                },
+                                "itemPrice": item.itemPrice
+                            });
+                        }
+                    }
+                });
+            }
+            vendor.items = updatedVendorAndItemRatings;
+
+            // CHeck if the update was successfull.
+            var test = data.vendors.find(vendor => vendor.vendorId === vendorId);
+            console.log("Updated Vendor:", test);
+        },
+        getLeaderboard: function ({ points }) {
             const loggedInUser = { name: "You", points };
             const leaderboardWithLoggedInUser = [...data.leaderboard, loggedInUser];
             return leaderboardWithLoggedInUser.sort((user1, user2) => user2.points - user1.points)

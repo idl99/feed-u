@@ -32,17 +32,23 @@
             }
 
             #past-order-no-items-and-price {
-                margin-top: 0.25em;
+                display: flex;
+                align-items: center;
+                margin-top: 10px;
+                margin-bottom: 10px;
+                font-size: smaller;
             }
 
             #past-order-date-time-separator-icon {
+                margin-left: 5px;
+                margin-right: 5px;
                 color: #BDBDBD;
                 font-size: 8px;
             }
 
             #past-order-receipt {
-                margin-top: 0.25em;
                 margin-bottom: 0.25em;
+                font-size: smaller;
             }
 
             .past-order-item {
@@ -51,7 +57,7 @@
             }
 
             .past-order-item-count {
-                width: max-content;
+                /* width: 8px; */
                 height: max-content;
                 border-style: solid;
                 border-color: #EB5757;
@@ -64,10 +70,18 @@
                 display: flex;
                 align-items: center;
                 margin-left: 0.75em;
+                font-size: smaller;
             }
 
             #show-more-txt {
-                margin-top: 1em;
+                margin-top: 16px;
+                font-size: smaller;
+                font-weight: 700;
+            }
+
+            #show-more-icon {
+                margin-left: 2px;
+                font-size: large;
             }
 
             #reorder-btn {
@@ -94,7 +108,6 @@
 
             .past-order-rating-bar ul>li.star-icon {
                 display: inline-block;
-
             }
 
             .past-order-rating-bar ul>li.star-icon>i.fa {
@@ -107,7 +120,8 @@
             }
 
             #rate-your-order-txt {
-                margin-bottom: 1em;
+                margin-bottom: 16px;
+                font-size: smaller;
             }
         </style>
         <div data-role="header" id="checkout-header" data-position="fixed" data-tap-toggle="false">
@@ -170,7 +184,7 @@
                     }
 
                     var markup3 =
-                        `<span id="show-more-txt">Show more <i class="fa fa-angle-down"></i></span>
+                        `<span id="show-more-txt">Show more <i id="show-more-icon" class="fa fa-angle-down"></i></span>
                             <button id="reorder-btn" ${(vendorRating > 0) ? 'disabled' : ''}>${(vendorRating > 0) ? 'Closed' : 'Reorder'}</button>
                             <div class="past-order-rating-bar">
                                 <ul id="past-order-ratings">
