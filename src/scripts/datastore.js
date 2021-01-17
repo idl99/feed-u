@@ -1,4 +1,4 @@
-const user = require('./user');
+// const user = require('./user');
 
 const data = Object.freeze({
     vendors: [
@@ -446,8 +446,7 @@ module.exports = function () {
             var test = data.vendors.find(vendor => vendor.vendorId === vendorId);
             console.log("Updated Vendor:", test);
         },
-        getLeaderboard: function () {
-            const { points } = user.getDetails().profile;
+        getLeaderboard: function ({ points }) {
             const loggedInUser = { name: "You", points };
             const leaderboardWithLoggedInUser = [...data.leaderboard, loggedInUser];
             return leaderboardWithLoggedInUser.sort((user1, user2) => user2.points - user1.points)
