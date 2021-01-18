@@ -184,22 +184,18 @@
             }
 
             /* comments style */
-            .card {
+            #item-detail-page .card {
                 box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
                 transition: 0.3s;
                 width: 100%;
             }
 
-            .card:hover {
+            #item-detail-page .card:hover {
                 box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
             }
 
-            .container {
-                padding: 2px 16px;
-            }
-
             /* The Modal (background) */
-            .modal {
+            #item-detail-page .modal {
                 display: none;
                 /* Hidden by default */
                 position: fixed;
@@ -223,7 +219,7 @@
             }
 
             /* Modal Content */
-            .modal-content {
+            #item-detail-page .modal-content {
                 background-color: #fefefe;
                 margin: auto;
                 padding: 20px;
@@ -231,16 +227,25 @@
                 width: 100%;
             }
 
-            .avatar {
+            #item-detail-page .avatar {
                 vertical-align: middle;
                 width: 50px;
                 height: 50px;
                 border-radius: 50%;
             }
 
-            .comment-header-position {
+            #item-detail-page .comment-header-position {
                 margin-top: 16px;
                 margin-left: 5px;
+            }
+
+            #item-detail-page .card>div {
+                padding: 15px 15px;
+            }
+
+            #item-detail-page .hide-comments-btn {
+                display: flex;
+                margin-left: auto;
             }
         </style>
         <div data-role="header" data-tap-toggle="false" data-position="fixed">
@@ -362,11 +367,11 @@
                                     style="margin-left: 0.25em; color: #ffffff;"></i></span>
                         </div>
 
-                        <div class="container>">
-                            <div class="row"> </div>
-                            <a onclick="hideComments()"
-                                class="ui-btn ui-shadow ui-corner-all ui-icon-carat-u ui-btn-icon-notext">collapsible</a>
-                        </div>
+                        <!-- <div class="container>"> -->
+                        <!-- <div class="row"> </div> -->
+                        <a onclick="hideComments()"
+                            class="hide-comments-btn ui-btn ui-shadow ui-corner-all ui-icon-carat-u ui-btn-icon-notext">collapsible</a>
+                        <!-- </div> -->
 
                     </div>
                     <div class="container">
@@ -384,7 +389,7 @@
 
                 <div class="container" id="comment-submission">
                     <textarea
-                        style="display:block; height: 33px; padding-left: 25px; width: -webkit-fill-available; background-color: #F2F2F2; border-radius: 50px; box-shadow: none;"
+                        style="display:block; height: 33px; padding-left: 25px; padding-top: 13px; width: -webkit-fill-available; background-color: #F2F2F2; border-radius: 50px; box-shadow: none;"
                         placeholder="Type your reply here" id="comment"
                         onfocus="if(this.value == 'PLEASE ENTER A COMMENT FIRST') { this.value = ''; }"></textarea>
                     <div style="text-align: center;">
