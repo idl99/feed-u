@@ -122,7 +122,7 @@
             });
             // Handle Vendor POI click event
             // https://stackoverflow.com/questions/943987/add-jquery-click-handler-to-multiple-elements
-            $(".poi-container").click(function () {
+            $("#vendor-list-container .poi-container").click(function () {
                 var vendorId = $(this).attr("vendor-id"); // which vendor card was clicked
                 $(":mobile-pagecontainer").pagecontainer("change", "vendor_page.html", {
                     data: {
@@ -153,15 +153,15 @@
                 if (value == 'a-z') {
                     // Default sorting based on vendor names in the form of ascending order.
                     console.log('Sorting vendors names in ascending order.');
-                    $(".poi-container").sort(vendorNameSort).appendTo('#vendor-list-container');
+                    $("#vendor-list-container .poi-container").sort(vendorNameSort).appendTo('#vendor-list-container');
                 } else if (value == 'rating') {
                     // Sorting based on vendor ratings in the form of higher to lower rating.
                     console.log('Sorting vendors based on the rating of vendors (higher to lower rating)');
-                    $(".poi-container").sort(vendorRatingSort).appendTo('#vendor-list-container');
+                    $("#vendor-list-container .poi-container").sort(vendorRatingSort).appendTo('#vendor-list-container');
                 } else {
                     // Sorting based on vendor's delivery time in the form of short to long.
                     console.log('Sorting vendors based on the delivery time of vendors (short to long)');
-                    $(".poi-container").sort(vendorDeliveryTimeSort).appendTo('#vendor-list-container');
+                    $("#vendor-list-container .poi-container").sort(vendorDeliveryTimeSort).appendTo('#vendor-list-container');
                 }
             });
 
@@ -174,9 +174,9 @@
                 var value = $('#select-choice-2').val();
                 console.log(value);
 
-                $('.poi-container').hide();
+                $('#vendor-list-container .poi-container').hide();
 
-                $('.poi-container').each(function () {
+                $('#vendor-list-container .poi-container').each(function () {
                     var showDiv = parseFloat($(this).find('#test').text()) > value;
                     console.log(showDiv);
                     if (showDiv) {
@@ -190,9 +190,9 @@
                 var value1 = $('#select-choice-3').val();
                 console.log(value1);
 
-                $('.poi-container').hide();
+                $('#vendor-list-container .poi-container').hide();
 
-                $('.poi-container').each(function () {
+                $('#vendor-list-container .poi-container').each(function () {
                     var showDiv1 = parseFloat($(this).find('#poi-delivery-time').text()) > value1;
                     console.log(showDiv1);
                     if (showDiv1) {
