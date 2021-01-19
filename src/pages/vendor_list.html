@@ -60,10 +60,14 @@
                         <option value="0" selected>Any Rating</option>
                     </select>
                     <select name="select-choice-3" id="select-choice-3" data-native-menu="false">
-                        <option value="20">> 20 mins</option>
-                        <option value="30">> 30 mins</option>
-                        <option value="40">> 40 mins</option>
-                        <option value="50">> 50 mins</option>
+                        <option value="20">
+                            < 20 mins</option>
+                        <option value="30">
+                            < 30 mins</option>
+                        <option value="40">
+                            < 40 mins</option>
+                        <option value="50">
+                            < 50 mins</option>
                         <option value="0" selected>Any Delivery Time</option>
                     </select>
                 </div>
@@ -133,14 +137,14 @@
 
             const filterOptionValues = {
                 ratingGreaterThan: "0",
-                deliveryTimeGreaterThan: "0"
+                deliveryTimeLessThan: "0"
             }
 
             const filterCriteria = [
                 // Filter by rating value
                 (item) => parseFloat(item.find('#test').text()) > parseFloat(filterOptionValues.ratingGreaterThan),
                 // Filter by delivery time
-                (item) => parseFloat(item.find('#poi-delivery-time').text()) > parseFloat(filterOptionValues.deliveryTimeGreaterThan),
+                (item) => parseFloat(item.find('#poi-delivery-time').text()) < parseFloat(filterOptionValues.deliveryTimeGreaterThan),
             ]
 
             function vendorNameSort(vendor_1, vendor_2) {
