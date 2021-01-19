@@ -34,6 +34,9 @@ div[data-role="page"].feedU-page
         background-color: map.get(variables.$feedU-theme, "background-color")
         height: 100vh
 
+        .disabled-btn-text
+            color: map.get(variables.$feedU-theme, "gray")
+
     .ui-header
         background-color: map.get(variables.$feedU-theme, "primary-color")
         padding: 5px 0px
@@ -54,45 +57,3 @@ div[data-role="page"].feedU-page
             margin: 0
             border: none
             padding: 15px
-
-// .ui-slider-handle
-//     background-color: $primary-color
-//     border-color: 2px solid #B34040
-
-// .full-width-slider
-//     input
-//         display: none
-
-// .full-width-slider
-//     .ui-slider-track
-//         margin-left: 15px
-
-// @mixin my-controlgroup-controls
-//     background-color: $white
-//     border: none
-//     font-weight: 400
-//     // padding: 5px
-
-// @mixin my-checkbox-off
-//     &:after
-//         background-color: $white
-//         opacity: 1.0
-//         border: 2px solid $primary-color
-
-// @mixin my-checkbox-on
-//     &:after
-//         background-color: $primary-color
-//         border: 2px solid $primary-color
-
-// div[data-role="page"]
-//     div.ui-controlgroup-controls
-//         div
-//             label.ui-checkbox // This is the checkbox row
-//                 &-off, &-on
-//                     @include my-controlgroup-controls
-
-//                 &-off // Checkbox in the inactive state
-//                     @include my-checkbox-off
-
-//                 &-on // Checkbox in the active state
-//                     @include my-checkbox-on

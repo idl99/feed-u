@@ -14,7 +14,10 @@
 
 <body>
 	<div data-role="page" id="location_search" class="feedU-page ui-responsive-panel">
-		<div data-role="header" data-position="fixed" data-tap-toggle="false" data-add-back-btn="true">
+		<div data-role="header" id="checkout-header" data-position="fixed" data-tap-toggle="false">
+			<a class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-corner-all" href="#" data-rel="back"
+				data-icon="arrow-l" data-theme="c" data-role="button">Back</a>
+			<span class="ui-title"></span>
 			<img src="../assets/logo.png"></img>
 		</div>
 		<div class="ui-content" style="padding-top: 0%;">
@@ -53,10 +56,18 @@
 		<div id="update-location" data-role="footer" data-tap-toggle="false" data-position="fixed">
 			<h1>Set Location</h1>
 		</div>
+
+		<!-- TEST API KEY -->
+		<!-- <script
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4fxzjh0_9j9aIXCecrSeDxBztKU5Lzao&callback=initMap"
+                defer>
+                </script> -->
+
+		<!-- WORKING API KEY  -->
 		<script
-			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4fxzjh0_9j9aIXCecrSeDxBztKU5Lzao&callback=initMap"
-			defer></script>
-		<!-- AIzaSyDxXPSmnErfv7OFrzfG0q2BSRVAqa-N_Mc -->
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxXPSmnErfv7OFrzfG0q2BSRVAqa-N_Mc&callback=initMap"
+			defer>
+			</script>
 
 		<script>
 

@@ -12,7 +12,7 @@
 
 <body>
 
-    <div data-role="page" id="delivery-in-progress-page" class="ui-responsive-panel">
+    <div data-role="page" id="delivery-in-progress-page" class="feedU-page ui-responsive-panel">
 
         <div role="main" class="ui-content" style="padding: 0px">
 
@@ -26,8 +26,8 @@
             </div>
 
             <div id="delivery-in-progress-order-summary-container">
-                <h1>ETA</h1>
-                <h2>8:30 PM</h2>
+                <h2>ETA</h2>
+                <h1>8:30 PM</h1>
                 <p>Your Order is On The Way!</p>
 
                 <hr />
@@ -63,10 +63,17 @@
                 </div>
             </div>
 
-            <script
+            <!-- TEST API KEY -->
+            <!-- <script
                 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4fxzjh0_9j9aIXCecrSeDxBztKU5Lzao&callback=initMap"
-                defer></script>
-            <!-- AIzaSyDxXPSmnErfv7OFrzfG0q2BSRVAqa-N_Mc -->
+                defer>
+                </script> -->
+
+            <!-- WORKING API KEY  -->
+            <script
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxXPSmnErfv7OFrzfG0q2BSRVAqa-N_Mc&callback=initMap"
+                defer>
+                </script>
 
         </div>
 
@@ -91,29 +98,31 @@
                     style="color: #EB5757; margin-left: 6px;"></i></h2>
             <h5 class="success_popup_items">And here's a little reward for ordering</h5>
             <h5 class="success_popup_items">with us</h5>
-            <h2 class="success_popup_items">50 Points <i class="fa fa-database" aria-hidden="true"
-                    style="color: #F2C94C; margin-left: 10px;"></i></h2>
+            <h2 class="success_popup_items" id="delivery-completed-points-won">50 Points
+                <i class="fa fa-database" aria-hidden="true" style="color: #F2C94C; margin-left: 10px;"></i>
+            </h2>
             <h5 class="success_popup_items">credited to your account</h5>
             <br>
             <!-- redirect to leaderboard -->
             <!-- <a data-rel="back"> -->
-                <a href="../pages/leaderboard.html">
-                <button id="checkLBBtn" class="cLB-button" onclick="deliverySuccessPopUpClose()"
-                    style="width: 100%; text-align: center; border-radius: 100px; border-width: 2px; background: white; color: #EB5757; border-color: #EB5757 ; margin-bottom: 10px; margin-top: -5px; padding: 0px;  text-shadow: none;">
-                    <!-- <a href="../pages/leaderboard.html"></a> -->
-                    <h4> Check Leaderboard</h4>
-                </button>
-                </a>
-                <!-- redirect to support -->
-                <a href="../pages/help_and_support.html">
-                <button id="getSupBtn" class="get-Sup-button" onclick="deliverySuccessPopUpClose()"
-                    style="width: 100%; text-align: center; border-radius: 100px; border-width: 2px; background: white; color: #EB5757; border-color: #EB5757 ; margin: 0px; padding: 0px;  text-shadow: none;">
+            <!-- <a href="../pages/leaderboard.html"> -->
+            <button id="checkLBBtn" class="cLB-button" style=" width: 100%; text-align: center; border-width: 2px; background:
+                    white; color: #EB5757; border-color: #EB5757 ; margin-bottom: 10px; margin-top: -5px; padding: 0px;
+                    text-shadow: none;" onclick="redirectToLeaderboard()">
+                <!-- <a href="../pages/leaderboard.html"></a> -->
+                <h4> Check Leaderboard</h4>
+            </button>
+            <!-- </a> -->
+            <!-- redirect to support -->
+            <a href="../pages/help_and_support.html" style="text-decoration: none;">
+                <button id="getSupBtn" class="get-Sup-button" style=" width: 100%; text-align: center; border-width: 2px; background:
+                    white; color: #EB5757; border-color: #EB5757 ; margin: 0px; padding: 0px; text-shadow: none;">
                     <h4> Get support about order</h4>
                 </button>
-                </a>
+            </a>
             <!-- </a> -->
 
-            <a href="#" data-rel="back"
+            <a href="home.html"
                 class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right"
                 style="background-color: #EB5757;">Close</a>
             </a>
@@ -125,7 +134,7 @@
 
         <script>
             {
-                const { cart } = app;
+                const { user, cart } = app;
                 const summary = cart.summary();
 
                 $("#delivery-you-ordered-from")
@@ -216,65 +225,23 @@
                         }
                     });
 
-                    // geocoder = new google.maps.Geocoder();
-
-                    // marker.addListener("click", toggleBounce);
-
-                    // marker.addListener('dragend', function (ev) {
-                    //     console.log('Latitude: ' + marker.getPosition().lat() + ', Longitude: ' + marker.getPosition().lng());
-                    //     const latlng = {
-                    //         lat: parseFloat(marker.getPosition().lat()),
-                    //         lng: parseFloat(marker.getPosition().lng()),
-                    //     };
-                    //     geocoder.geocode({ location: latlng }, (results, status) => {
-                    //         if (status === "OK") {
-                    //             var location = results[0].formatted_address;
-                    //             $('#selected-location').text(location);
-                    //         } else {
-                    //             // Keep empty when everything is completed.
-                    //             console.log('Cannot fetch location details right now. Hence, setting a default location.');
-                    //             $('#selected-location').text("1600 Amphitheatre Parkway, Mountain View, CA 94043, USA");
-                    //         }
-                    //     });
-                    // });
-                }
-
-                // function calcRoute() {
-                //     var start = document.getElementById('start').value;
-                //     var end = document.getElementById('end').value;
-                //     var request = {
-                //         origin: start,
-                //         destination: end,
-                //         travelMode: 'DRIVING'
-                //     };
-                //     directionsService.route(request, function (result, status) {
-                //         if (status == 'OK') {
-                //             directionsRenderer.setDirections(result);
-                //         }
-                //     });
-                // }
-
-
-                function progressOrder() {
-
                 }
 
                 function deliveryCompleted() {
+                    const pointsForOrder = cart.getPointsForCart();
+                    $('#delivery-completed-points-won').contents()[0].data = `${pointsForOrder} Points`;
+                    user.addPointsToUser(pointsForOrder);
+                    cart.clearCart();
                     $('#delivery-complete-popup').popup("open", {
                         positionTo: "window"
                     })
                 }
-                                
-                // $(document).bind('click', function () {
-                    
-                //         $("#delivery-complete-popup").popup();
-                //         $("#delivery-complete-popup").popup("open");
-                    
-                // });
 
-                // function deliverySuccessPopUpClose(){
-                //     $('#delivery-complete-popup').popup("close");
-                // }
+                function redirectToLeaderboard() {
+                    $('#delivery-complete-popup').popup("close").one("popupafterclose", () =>
+                        $(':mobile-pagecontainer').pagecontainer("change", "leaderboard.html"));
+                }
+
             }
 
         </script>
