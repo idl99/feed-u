@@ -5857,6 +5857,11 @@ body #favorites-list-page #favorite-items-container {
   margin-bottom: 2.5%;
   width: 335px;
 }
+.vendor-poi-item-container div img {
+  width: 90px;
+  height: 95px;
+  object-fit: cover;
+}
 
 .vendor-poi-item-content {
   display: flex;
