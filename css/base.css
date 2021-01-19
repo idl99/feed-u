@@ -5875,9 +5875,9 @@ body #favorites-list-page #favorite-items-container {
 }
 
 .vendor-poi-item-title-description {
-  width: 92%;
+  width: 100%;
   text-align: justify;
-  text-justify: inter-word;
+  word-wrap: break-word;
 }
 
 .vendor-page-vendor-introduction {
