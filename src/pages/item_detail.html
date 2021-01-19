@@ -8,52 +8,6 @@
 
     <link rel="stylesheet" href="../css/base.css">
     <script src="../bundle.js"></script>
-
-    <script>
-        // scripts for the comments
-        var block_to_insert;
-        var comment_container_block;
-
-        function myScript() {
-            // presence check for the reply
-            var comment = document.getElementById("comment").value;
-            var commentCheckerPopUp = document.getElementById("comment-presence-checkup");
-            if (comment == "") {
-
-                // commentCheckerPopUp.style.display = "block";
-                console.log("no comment");
-                document.getElementById("comment").value = "PLEASE ENTER A COMMENT FIRST";
-
-            } else {
-                // commentCheckerPopUp.style.display = "none";
-                block_to_insert = document.createElement('div');
-                document.getElementById("display-comment").innerHTML = comment;
-                block_to_insert.innerHTML = document.getElementById("reply-section").innerHTML;
-                comment_container_block = document.getElementById('comment-submission');
-                comment_container_block.appendChild(block_to_insert);
-                document.getElementById("comment").value = "";
-            }
-        }
-
-        function hideComments() {
-            console.log("Icon clicked");
-            comment_container_block = document.getElementById('comment-submission');
-            if (comment_container_block.style.display != "none") {
-                comment_container_block.style.display = "none";
-            } else if (comment_container_block.style.display == "none") {
-                comment_container_block.style.display = "block"
-            }
-        }
-
-        function reportComment() {
-            console.log("Repport comment has been called");
-            document.getElementById("comment-report").style.display = "block";
-        }
-
-        function reportCommentReply() {
-            document.getElementById("comment-report2").style.display = "block";
-        }
-    </script>
 </head>
 
 <body>
@@ -434,6 +388,52 @@
             data-tap-toggle="false">
             <h4 id="item-detail-add-to-cart">Add to Cart</h4>
         </div>
+
+        <script>
+            // scripts for the comments
+            var block_to_insert;
+            var comment_container_block;
+
+            function myScript() {
+                // presence check for the reply
+                var comment = document.getElementById("comment").value;
+                var commentCheckerPopUp = document.getElementById("comment-presence-checkup");
+                if (comment == "") {
+
+                    // commentCheckerPopUp.style.display = "block";
+                    console.log("no comment");
+                    document.getElementById("comment").value = "PLEASE ENTER A COMMENT FIRST";
+
+                } else {
+                    // commentCheckerPopUp.style.display = "none";
+                    block_to_insert = document.createElement('div');
+                    document.getElementById("display-comment").innerHTML = comment;
+                    block_to_insert.innerHTML = document.getElementById("reply-section").innerHTML;
+                    comment_container_block = document.getElementById('comment-submission');
+                    comment_container_block.appendChild(block_to_insert);
+                    document.getElementById("comment").value = "";
+                }
+            }
+
+            function hideComments() {
+                console.log("Icon clicked");
+                comment_container_block = document.getElementById('comment-submission');
+                if (comment_container_block.style.display != "none") {
+                    comment_container_block.style.display = "none";
+                } else if (comment_container_block.style.display == "none") {
+                    comment_container_block.style.display = "block"
+                }
+            }
+
+            function reportComment() {
+                console.log("Repport comment has been called");
+                document.getElementById("comment-report").style.display = "block";
+            }
+
+            function reportCommentReply() {
+                document.getElementById("comment-report2").style.display = "block";
+            }
+        </script>
 
         <script>
             const {
