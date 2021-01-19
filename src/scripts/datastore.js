@@ -54,7 +54,7 @@ const data = Object.freeze({
         },
         {
             "vendorId": "v2",
-            "vendorImageLocation": "../assets/vendor_list_view_images/pizza_palpatha.jpg",
+            "vendorImageLocation": "../assets/vendor_page_images/pizza-uhd-4k-wallpaper.jpg",
             "vendorName": "Pizza Palpatha",
             "vendorCatergories": [
                 "Italian",
@@ -69,7 +69,7 @@ const data = Object.freeze({
             "deliveryTime": "15-20 mins",
             "items": [
                 {
-                    "itemImageLocation": "../assets/vendor_page_images/cheese_lovers_pizza.jpg",
+                    "itemImageLocation": "../assets/vendor_page_images/pizza-melted-cheese-tomatoes-wallpaper-preview.jpg",
                     "itemId": "v2i1",
                     "itemTitle": "Cheese Lovers Pizza",
                     "itemDescription": "Rich tomato sauce with a triple layer of mozzarella cheese.",
@@ -80,7 +80,7 @@ const data = Object.freeze({
                     "itemPrice": 500
                 },
                 {
-                    "itemImageLocation": "../assets/vendor_page_images/chicken_bacon_pizza.jpg",
+                    "itemImageLocation": "../assets/vendor_page_images/41-417283_596343-title-italian-pizza-food-pizza-meal-lunch.jpg",
                     "itemId": "v2i2",
                     "itemTitle": "Chicken Bacon Pizza",
                     "itemDescription": "Chicken bacon, onions & green chillies with a double layer of mozzarella cheese.",
@@ -91,7 +91,7 @@ const data = Object.freeze({
                     "itemPrice": 300
                 },
                 {
-                    "itemImageLocation": "../assets/vendor_page_images/devilled_chicken_pizza.jpg",
+                    "itemImageLocation": "../assets/vendor_page_images/istockphoto-489809469-612x612.jpg",
                     "itemId": "v2i3",
                     "itemTitle": "Devilled Chicken Pizza",
                     "itemDescription": "Devilled chicken in spicy sauce with a double layer of mozzarella cheese.",
