@@ -18,7 +18,7 @@ const data = Object.freeze({
             "deliveryTime": "25-30 mins",
             "items": [
                 {
-                    "itemImageLocation": "../assets/vendor_page_images/tom_yum_soup.jpg",
+                    "itemImageLocation": "../assets/vendor_page_images/tom_yum_soup_800x800.jpg",
                     "itemId": "v1i1",
                     "itemTitle": "Tom Yum Soup",
                     "itemDescription": "Picked from the fresh vegetables and fish from the with special Chicken Broth.",
@@ -29,7 +29,7 @@ const data = Object.freeze({
                     "itemPrice": 800
                 },
                 {
-                    "itemImageLocation": "../assets/vendor_page_images/crispy_chicken_burger.jpg",
+                    "itemImageLocation": "../assets/vendor_page_images/southern-chicken.jpg",
                     "itemId": "v1i2",
                     "itemTitle": "Crispy Chicken Burger",
                     "itemDescription": "Crispy, Chicky, Crispy Chicken Burger. It’s pretty much self-explanatory.",
@@ -40,7 +40,7 @@ const data = Object.freeze({
                     "itemPrice": 450
                 },
                 {
-                    "itemImageLocation": "../assets/vendor_page_images/hawaiian_burger.jpg",
+                    "itemImageLocation": "../assets/vendor_page_images/hawaiian_burger_pineapple.jpg",
                     "itemId": "v1i3",
                     "itemTitle": "Hawaiian Burger",
                     "itemDescription": "Yes! Pineapples go on burgers too. Don’t let others tell you otherwise.",
@@ -54,7 +54,7 @@ const data = Object.freeze({
         },
         {
             "vendorId": "v2",
-            "vendorImageLocation": "../assets/vendor_list_view_images/pizza_palpatha.jpg",
+            "vendorImageLocation": "../assets/vendor_page_images/pizza-uhd-4k-wallpaper.jpg",
             "vendorName": "Pizza Palpatha",
             "vendorCatergories": [
                 "Italian",
@@ -69,7 +69,7 @@ const data = Object.freeze({
             "deliveryTime": "15-20 mins",
             "items": [
                 {
-                    "itemImageLocation": "../assets/vendor_page_images/cheese_lovers_pizza.jpg",
+                    "itemImageLocation": "../assets/vendor_page_images/pizza-melted-cheese-tomatoes-wallpaper-preview.jpg",
                     "itemId": "v2i1",
                     "itemTitle": "Cheese Lovers Pizza",
                     "itemDescription": "Rich tomato sauce with a triple layer of mozzarella cheese.",
@@ -80,7 +80,7 @@ const data = Object.freeze({
                     "itemPrice": 500
                 },
                 {
-                    "itemImageLocation": "../assets/vendor_page_images/chicken_bacon_pizza.jpg",
+                    "itemImageLocation": "../assets/vendor_page_images/41-417283_596343-title-italian-pizza-food-pizza-meal-lunch.jpg",
                     "itemId": "v2i2",
                     "itemTitle": "Chicken Bacon Pizza",
                     "itemDescription": "Chicken bacon, onions & green chillies with a double layer of mozzarella cheese.",
@@ -91,7 +91,7 @@ const data = Object.freeze({
                     "itemPrice": 300
                 },
                 {
-                    "itemImageLocation": "../assets/vendor_page_images/devilled_chicken_pizza.jpg",
+                    "itemImageLocation": "../assets/vendor_page_images/istockphoto-489809469-612x612.jpg",
                     "itemId": "v2i3",
                     "itemTitle": "Devilled Chicken Pizza",
                     "itemDescription": "Devilled chicken in spicy sauce with a double layer of mozzarella cheese.",
@@ -105,7 +105,7 @@ const data = Object.freeze({
         },
         {
             "vendorId": "v3",
-            "vendorImageLocation": "../assets/vendor_list_view_images/bathui_pol_sambolai.jpg",
+            "vendorImageLocation": "../assets/vendor_page_images/YAMU_rice_image.jpg",
             "vendorName": "Bathui Pol Sambolai",
             "vendorCatergories": [
                 "Rice",
@@ -119,7 +119,7 @@ const data = Object.freeze({
             "deliveryTime": "5-10 mins",
             "items": [
                 {
-                    "itemImageLocation": "../assets/vendor_page_images/prawn_curry_and_rice.jpg",
+                    "itemImageLocation": "../assets/vendor_page_images/prawns_with_race.jpg",
                     "itemId": "v3i1",
                     "itemTitle": "Prawn Curry and Rice",
                     "itemDescription": "Prawn curry prepared to special Goa recipe with thick coconut gravy.",
@@ -130,7 +130,7 @@ const data = Object.freeze({
                     "itemPrice": 575
                 },
                 {
-                    "itemImageLocation": "../assets/vendor_page_images/fish_rice_and_curry.jpg",
+                    "itemImageLocation": "../assets/vendor_page_images/fish-curry-6-850x1275.jpg",
                     "itemId": "v3i2",
                     "itemTitle": "Fish Rice and Curry",
                     "itemDescription": "Thalapath Fish, 4 curries and papadam enhriched with the Sri Lankan taste.",
@@ -141,7 +141,7 @@ const data = Object.freeze({
                     "itemPrice": 575
                 },
                 {
-                    "itemImageLocation": "../assets/vendor_page_images/chicken_rice_and_curry.jpg",
+                    "itemImageLocation": "../assets/vendor_page_images/Coconut-Chicken-Curry.jpg",
                     "itemId": "v3i3",
                     "itemTitle": "Chicken Rice and Curry",
                     "itemDescription": "With 4 curries and papadam mixed with Sri Lankan spices.",
@@ -155,7 +155,7 @@ const data = Object.freeze({
         },
         {
             "vendorId": "v4",
-            "vendorImageLocation": "../assets/vendor_list_view_images/the_impasta.jpg",
+            "vendorImageLocation": "../assets/vendor_page_images/pasta_with_sauce.jpeg",
             "vendorName": "The Impasta",
             "vendorCatergories": [
                 "Pasta",
@@ -169,7 +169,7 @@ const data = Object.freeze({
             "deliveryTime": "25-40 mins",
             "items": [
                 {
-                    "itemImageLocation": "../assets/vendor_page_images/bruschetta_pasta.jpg",
+                    "itemImageLocation": "../assets/vendor_page_images/new_brushchetta_pasta.jpg",
                     "itemId": "v4i1",
                     "itemTitle": "Brushcetta Pasta",
                     "itemDescription": "This Bruschetta Pasta with fresh tomatoes, basil, garlic, and olive oil.",
@@ -180,7 +180,7 @@ const data = Object.freeze({
                     "itemPrice": 375
                 },
                 {
-                    "itemImageLocation": "../assets/vendor_page_images/cheese_pasta.jpg",
+                    "itemImageLocation": "../assets/vendor_page_images/mac_and_cheese.jpg",
                     "itemId": "v4i2",
                     "itemTitle": "Cheese Pasta",
                     "itemDescription": "Just remember that a single is a double and a double is a triple at Chicago’s Au Cheval.",
@@ -191,7 +191,7 @@ const data = Object.freeze({
                     "itemPrice": 200
                 },
                 {
-                    "itemImageLocation": "../assets/vendor_page_images/creamy_tomato_and_spinach_pasta.jpg",
+                    "itemImageLocation": "../assets/vendor_page_images/spinach-gorgonzola-pasta.jpg",
                     "itemId": "v4i3",
                     "itemTitle": "Creamy Tomato and Spinach Pasta",
                     "itemDescription": "With special pesto sauce and mozzarella cheese.",
