@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Feed U - Home Page - Vendor List Page</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="../css/base.css" />
+    <script src="../bundle.js"></script>
+
+</head>
+
+<body>
+    <div data-role="page" id="vendor-list-page" class="feedU-page ui-responsive-panel">
+        <style>
+            #vendor-list-page .filter .ui-select {
+                margin-right: 10px;
+            }
+
+            #vendor-list-page .filter .ui-select a {
+                border-radius: 20px;
+                background-color: #EB5757;
+                color: white;
+            }
+
+            #vendor-list-page #vendor-list-container .poi-details :first-child {
+                font-weight: 700;
+            }
+        </style>
+
+        <div data-role="header" data-toggle-on-tap="false" data-position="fixed">
+            <span class="ui-title"></span>
+            <a class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-corner-all" href="#" data-rel="back"
+                data-icon="arrow-l" data-theme="c" data-role="button">Back</a>
+            <div data-enhance="false">
+                <a href="home.html">
+                    <img src="../assets/logo.png"></img>
+                </a>
+            </div>
+        </div>
+
+        <div role="main" class="ui-content">
+            <div>
+                <div class="filter"
+                    style="display: flex; margin: 5px 0 25px 0; align-items: center; overflow: auto; background: #F2F2F2; border-radius: 50px 0px 0px 50px;">
+                    <i class="fa fa-filter" aria-hidden="true"
+                        style="margin: 0px 16px; color: #EB5757; font-size: 2em;"></i>
+                    <select name="select-choice-1" id="select-choice-1" data-native-menu="false">
+                        <option value="a-z" selected>A - Z</option>
+                        <option value="rating">Rating</option>
+                        <option value="deliverytime">Delivery Time</option>
+                    </select>
+                    <select name="select-choice-2" id="select-choice-2" data-native-menu="false">
+                        <option value="1" selected>> 1</option>
+                        <option value="2">> 2</option>
+                        <option value="3">> 3</option>
+                        <option value="4">> 4</option>
+                        <option value="5">> 5</option>
+                        <option value="0">Any</option>
+                    </select>
+                    <select name="select-choice-3" id="select-choice-3" data-native-menu="false">
+                        <option value="20" selected>> 20 mins</option>
+                        <option value="30">> 30 mins</option>
+                        <option value="40">> 40 mins</option>
+                        <option value="50">> 50 mins</option>
+                        <option value="0">Any</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="vendor-list-container" class="all-poi-container"></div>
+
+        </div>
+        <script>
+            const { datastore } = app;
+
+            var vendors = datastore.getAllVendors(); // TODO refactor this once mock data is removed
+
+            // render items in order summary
+            vendors.forEach(({ vendorId, vendorImageLocation, vendorName, vendorCatergories, vendorRatings, deliveryTime }) => {
+                var markupP1 = `<div class="poi-container" vendor-id="${vendorId}">
+                    <img src=${vendorImageLocation} class="poi-image">
+                    <div class="poi-details">
+                        <div>${vendorName}</div>
+                        <div class="poi-catergory-container">`
+                var markupP2 = ``
+                var i = 0;
+                vendorCatergories.forEach((category) => {
+                    if (i === 0) {
+                        markupP2 = markupP2 + `<i class="fa fa-circle" id="poi-catergory"></i>${category}`
+                    } else {
+                        markupP2 = markupP2 + `<i class="fa fa-circle" id="poi-catergory" style="margin-left: 2em;"></i>${category}`
+                    }
+                    i = i + 1;
+                });
+                var markupP3 =
+                    `</div>
+                        <div class="poi-rating-bar-container">
+                            <div class="poi-rating-bar">
+                                <span id="test"><i class='fa fa-star fa-fw' id="poi-rate-star-icon"></i> ${vendorRatings.vendorRatingValue} 
+                                </span>
+                                <small id="poi-no-of-rated-customers">(${vendorRatings.vendorNoOfRatings})</small>
+                            </div>
+                            <div id="poi-delivery-time">${deliveryTime}</div>
+                        </div>
+                    </div>
+                </div>`
+                var markup = markupP1 + markupP2 + markupP3;
+                $('#vendor-list-container').append(markup)
+            });
+
+            $('body').on("pagecontainershow", function (event, ui) {
+                // This event will get fired each time the pagecontainershow event fires,
+                // that means it'll fire even when loading another page (other than home.html)
+
+                var activePage = ui.toPage[0].id;
+                if (activePage === 'home') {
+                    // Retrieve user location from cookie and set to label
+                    $("#user-home-delivery-location").text(user.getDetails().location.display);
+                }
+            });
+            // Handle Vendor POI click event
+            // https://stackoverflow.com/questions/943987/add-jquery-click-handler-to-multiple-elements
+            $("#vendor-list-container .poi-container").click(function () {
+                var vendorId = $(this).attr("vendor-id"); // which vendor card was clicked
+                $(":mobile-pagecontainer").pagecontainer("change", "vendor_page.html", {
+                    data: {
+                        vendorId
+                    }
+                });
+            });
+
+
+            function vendorNameSort(vendor_1, vendor_2) {
+                return ($(vendor_2).text().toUpperCase()) <
+                    ($(vendor_1).text().toUpperCase()) ? 1 : -1;
+            }
+
+            function vendorRatingSort(vendor_1, vendor_2) {
+                return parseFloat($(vendor_2).find('#test').text()) >
+                    parseFloat($(vendor_1).find('#test').text()) ? 1 : -1;
+            }
+
+            function vendorDeliveryTimeSort(vendor_1, vendor_2) {
+                return parseInt($(vendor_2).find('#poi-delivery-time').text()) <
+                    parseInt($(vendor_1).find('#poi-delivery-time').text()) ? 1 : -1;
+            }
+
+            $('#select-choice-1').on('change', function () {
+                var value = $('#select-choice-1').val();
+                console.log(value);
+                if (value == 'a-z') {
+                    // Default sorting based on vendor names in the form of ascending order.
+                    console.log('Sorting vendors names in ascending order.');
+                    $("#vendor-list-container .poi-container").sort(vendorNameSort).appendTo('#vendor-list-container');
+                } else if (value == 'rating') {
+                    // Sorting based on vendor ratings in the form of higher to lower rating.
+                    console.log('Sorting vendors based on the rating of vendors (higher to lower rating)');
+                    $("#vendor-list-container .poi-container").sort(vendorRatingSort).appendTo('#vendor-list-container');
+                } else {
+                    // Sorting based on vendor's delivery time in the form of short to long.
+                    console.log('Sorting vendors based on the delivery time of vendors (short to long)');
+                    $("#vendor-list-container .poi-container").sort(vendorDeliveryTimeSort).appendTo('#vendor-list-container');
+                }
+            });
+
+
+            $("#home-footer").on("click", function (event) {
+                $(":mobile-pagecontainer").pagecontainer("change", "checkout.html");
+            });
+
+            $('#select-choice-2').on('change', function () {
+                var value = $('#select-choice-2').val();
+                console.log(value);
+
+                $('#vendor-list-container .poi-container').hide();
+
+                $('#vendor-list-container .poi-container').each(function () {
+                    var showDiv = parseFloat($(this).find('#test').text()) > value;
+                    console.log(showDiv);
+                    if (showDiv) {
+                        console.log("Ratings values")
+                        $(this).show();
+                    }
+                });
+            });
+
+            $('#select-choice-3').on('change', function () {
+                var value1 = $('#select-choice-3').val();
+                console.log(value1);
+
+                $('#vendor-list-container .poi-container').hide();
+
+                $('#vendor-list-container .poi-container').each(function () {
+                    var showDiv1 = parseFloat($(this).find('#poi-delivery-time').text()) > value1;
+                    console.log(showDiv1);
+                    if (showDiv1) {
+                        console.log("Delivery time values")
+                        $(this).show();
+                    }
+                });
+            });
+
+        </script>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="../css/base.css" />
+    <script src="../bundle.js"></script>
+</head>
+
+<body>
+
+    <div data-role="page" id="add-new-payment-method-page" class="feedU-page">
+        <div data-role="header" data-position="fixed" id="home-header" data-tap-toggle="false">
+            <a class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-corner-all" href="#" data-rel="back"
+                data-icon="arrow-l" data-theme="c" data-role="button">Back</a>
+            <span class="ui-title"></span>
+            <img src="../assets/logo.png"></img>
+        </div>
+        <div role="main" class="ui-content">
+            <h2>Add New Payment Method</h2>
+            <ul class="ui-nodisc-icon ui-alt-icon" data-role="listview" style="margin: 7vh 0 0 0;">
+                <li class="add-new-payment-method-card-option ui-btn-icon-right ui-icon-carat-r">Credit Card</li>
+                <li class="add-new-payment-method-card-option ui-btn-icon-right ui-icon-carat-r">Debit Card</li>
+                <li class="disabled-btn-text ui-btn-icon-right ui-icon-carat-r">PayPal (COMING SOON)</li>
+                <li class="disabled-btn-text ui-btn-icon-right ui-icon-carat-r">Apple Pay (COMING SOON)</li>
+            </ul>
+        </div>
+
+        <script>
+
+            const { user, payment } = app
+            const { stripe_customer_id } = user.getPaymentDetails();
+
+            // https://stackoverflow.com/questions/14468659/jquery-mobile-document-ready-vs-page-events
+            $('#add-new-payment-method-page').on('pagecreate', function (event) {
+
+                console.log('Add new payment method page created');
+
+                $.getScript("https://js.stripe.com/v3/", function () { // Code dependent on Stripe goes in here
+
+                    var stripeJS = Stripe('pk_test_51I3c8WBYsXgRXg4sHaDeNTSCG8lvZNnN4c8tUydiuqUwArCXylLnE8poGx5UapOqEhR2cEGlHLM1V8J8ecat0SEB00fopbAHm7');
+
+                    /**
+                     * Redirects the user to the Stripe checkout flow
+                     * Refer https://stripe.com/docs/payments/save-and-reuse#redirect-checkout for more
+                    */
+                    const redirectToStripeCheckout = (checkoutSessionResponse) => {
+                        const { id } = checkoutSessionResponse;
+                        stripeJS.redirectToCheckout({
+                            sessionId: id,
+                        }).then(function (err) {
+                            // this handler will get triggered if the redirect fails
+                            console.log(err);
+                        })
+                    }
+
+                    const handleCheckoutSessionCreationError = (err) => {
+                        console.log(err);
+                        console.log(err.responseJSON);
+                    }
+
+                    // Refer https://stripe.com/docs/testing for dummy card details
+                    $('.add-new-payment-method-card-option').click(function (event) {
+                        const checkoutSessionOptions = {
+                            customer: stripe_customer_id,
+                            // https://stripe.com/docs/payments/checkout/custom-success-page
+                            success_url: 'https://idl99.github.io/feed-u/pages/payment_methods.html?session_id={CHECKOUT_SESSION_ID}',
+                            cancel_url: 'https://idl99.github.io/feed-u/pages/add_new_payment_method.html',
+                        };
+                        payment.createSessionToSaveCardDetails(checkoutSessionOptions, redirectToStripeCheckout, handleCheckoutSessionCreationError)
+                    });
+
+                })
+
+            })
+
+        </script>
+
+    </div>
+
+</body>
+
+</html>

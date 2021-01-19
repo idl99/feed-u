@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>QR Code Scanner</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <link rel="stylesheet" href="../css/base.css" />
+    <script src="../bundle.js"></script>
+</head>
+
+<body>
+
+    <div data-role="page" id="qr-scanner-page" style="font-family: 'Poppins';">
+
+        <style>
+            #qr-scanner-page {
+                height: 100%;
+                background: black;
+                margin: 0;
+            }
+
+            #qr-scanner-page-content {
+                display: flex;
+                height: 100%;
+                justify-content: center;
+            }
+
+            #qr-scanner-page h1 {
+                color: white;
+                margin: 0;
+                padding: 15px;
+            }
+
+            #qr-scanner-page h4 {
+                color: white;
+                text-align: center;
+                text-shadow: none;
+            }
+
+            #container {
+                text-align: center;
+                margin: 0;
+                align-self: center;
+            }
+
+            #btn-scan-qr {
+                cursor: pointer;
+            }
+
+            #btn-scan-qr img {
+                height: 10em;
+                padding: 15px;
+                margin: 15px;
+                background: white;
+            }
+
+            #qr-overlay-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+            }
+
+            .qr-popup-container {
+                padding: 2px 16px;
+                background-color: #f1f1f1;
+                text-align: center;
+            }
+        </style>
+
+        <div style="position: absolute; z-index: 1; right: 0; margin: 0.5em 1em;">
+            <span id="close-qr-scanner"
+                class="ui-btn ui-shadow ui-corner-all ui-icon-delete ui-btn-icon-notext">Delete</span>
+        </div>
+        <div id="qr-scanner-page-content">
+            <div id="qr-overlay-container" style="width: 80%;">
+                <h1 id="qr-scan-instrucion-title">Scan the QR</h1>
+                <a id="btn-scan-qr">
+                    <img
+                        src="https://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2017/07/1499401426qr_icon.svg"></img>
+                </a>
+                <h4 id="qr-scan-instrucion-detail">Click on the QR code to start scanning. Aim the QR code at the
+                    camera.</h4>
+                <canvas hidden="" id="qr-canvas"></canvas>
+                <div id="qr-result" hidden=""></div>
+            </div>
+        </div>
+
+        <div id="qr-result-popup" class="coupon ui-popup ui-body-inherit ui-overlay-shadow" data-dismissible="false"
+            data-role="popup" style="font-family: 'Poppins'; border-radius: 0;">
+            <a onclick="closePopup()"
+                class="ui-btn ui-btn-inline ui-corner-all ui-shadow ui-btn-icon-notext ui-icon-delete" style="position: absolute;
+                right: 0;"></a>
+            <div style="text-align: center; background-color: white; margin-top: 7vh;">
+                <img src="../assets/images/undraw_gift_card.svg" alt="Avatar" style="width:40%;">
+            </div>
+            <div class="qr-popup-container" style="background-color:white; text-align: center;">
+                <h2 style="color: #F2C94C;"><b>CONGRATULATIONS</b></h2>
+                <span>YOU JUST WON A</span>
+                <span style="color: #EB5757;">30% OFF DISCOUNT</span>
+                <p>FROM YOUR PURCHASE</p><br>
+                <p>SIGN UP NOW TO CLAIM YOUR DISCOUNT</p>
+            </div>
+            <div class="qr-popup-container" style="background-color: #EB5757;" onclick="redirectToSignUp()">
+                <h4>
+                    SIGN UP
+                </h4>
+            </div>
+        </div>
+
+        <script>
+
+            const video = document.createElement("video");
+            const canvasElement = document.getElementById("qr-canvas");
+            const canvas = canvasElement.getContext("2d");
+
+            const qrResult = document.getElementById("qr-result");
+            const btnScanQR = document.getElementById("btn-scan-qr");
+
+            let scanning = false;
+
+            $.getScript("https://rawgit.com/sitepoint-editors/jsqrcode/master/src/qr_packed.js", function () {
+                const myQRCode = window.qrcode;
+
+                qrcode.callback = res => {
+                    if (res) {
+                        scanning = false;
+                        $("#close-qr-scanner").hide();
+
+                        video.srcObject.getTracks().forEach(track => {
+                            track.stop();
+                        });
+
+                        // qrResult.hidden = false;
+                        $('#qr-result-popup').popup("open")
+                        canvasElement.hidden = true;
+                        btnScanQR.hidden = false;
+                    }
+                };
+
+                btnScanQR.onclick = () => {
+
+                    navigator.mediaDevices
+                        .getUserMedia({
+                            video: {
+                                facingMode: "environment"
+                            }
+                        })
+                        .then(function (stream) {
+                            scanning = true;
+                            qrResult.hidden = true;
+                            btnScanQR.hidden = true;
+                            canvasElement.hidden = false;
+                            video.setAttribute("playsinline",
+                                true); // required to tell iOS safari we don't want fullscreen
+                            video.srcObject = stream;
+                            $('#qr-scan-instrucion-title').hide()
+                            $('#qr-scan-instrucion-detail').hide()
+                            video.play();
+                            tick();
+                            scan();
+                        });
+                };
+
+                function tick() {
+                    canvasElement.height = video.videoHeight;
+                    canvasElement.width = video.videoWidth;
+                    canvas.drawImage(video, 0, 0, canvasElement.width, canvasElement.height);
+
+                    scanning && requestAnimationFrame(tick);
+                }
+
+                function scan() {
+                    try {
+                        qrcode.decode();
+                    } catch (e) {
+                        setTimeout(scan, 300);
+                    }
+                }
+            })
+
+            function closePopup() {
+                // $('#qr-result-popup').popup("close");
+                $(':mobile-pagecontainer').pagecontainer("change", "landing.html");
+            }
+
+            function redirectToSignUp() {
+                $('#qr-result-popup').popup("close").on("popupafterclose", function (event, ui) {
+                    $(':mobile-pagecontainer').pagecontainer("change", "sign_up.html");
+                });
+            }
+
+            $('body').on("pagecontainerbeforechange", function (event, ui) {
+                var pageId = $('body').pagecontainer('getActivePage').prop('id');
+                if (pageId === 'qr-scanner-page') {
+                    video.srcObject.getTracks().forEach(track => {
+                        track.stop();
+                    });
+                }
+            });
+
+            $(window).on("navigate", function () {
+                console.log("navigated!");
+
+            });
+
+        </script>
+    </div>
+
+</body>
+
+</html>

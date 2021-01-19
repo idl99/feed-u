@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Feed U - Vendor Comment Rating Overlay</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../css/base.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="../libs/jquery/jquery-1.11.1/jquery-1.11.1.min.js"></script>
+        <script src="../libs/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
+        <style>
+            #vendor-comment-header {
+            background-color: transparent;
+            border-color: initial;
+            border: none;
+        }
+        .checked {
+            color: orange;
+        }
+        .continue-button-style{
+            background-color: #EB5757 !important;
+            width: auto !important;
+            border-radius: 0px !important;
+        }
+        </style>
+    </head>
+
+    <body>
+        <div style="text-align: center; background-color: white;" data-role="page" id="">
+            <div data-role="header" id="vendor-comment-header">
+                <span>Insert logo</span>
+                <br> <br>
+                <div class="ui-btn-right">
+                <a href="#" class="ui-btn ui-icon-delete ui-btn-icon-notext ui-corner-all" style="background-color: #EB5757;">No text</a>
+                </div>
+            </div>
+            <div role="main">
+                <span id="">How was burgers Ahoy !?</span>
+                <br><br>
+                <span id="">They'll get your feedback along with <span>your name and phone</span></span>
+                <br>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+                <!-- <form> -->
+                <textarea style="height: auto; width: auto; display: block; margin-left: auto; margin-right: auto; text-align: center;" placeholder="Leave your thoughts about the vendor here"></textarea>   
+                <!-- </form> -->
+                <a href="#" class="ui-btn ui-btn-b ui-btn-inline ui-mini ui-corner-all ui-btn-active continue-button-style">Continue</a>
+            </div>
+
+        </div>
+    </body>
+    </html>

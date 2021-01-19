@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feed U - Item Detail Page</title>
+
+    <link rel="stylesheet" href="../css/base.css">
+    <script src="../bundle.js"></script>
+
+    <script>
+        // scripts for the comments
+        var block_to_insert;
+        var comment_container_block;
+
+        function myScript() {
+            // presence check for the reply
+            var comment = document.getElementById("comment").value;
+            var commentCheckerPopUp = document.getElementById("comment-presence-checkup");
+            if (comment == "") {
+
+                // commentCheckerPopUp.style.display = "block";
+                console.log("no comment");
+                document.getElementById("comment").value = "PLEASE ENTER A COMMENT FIRST";
+
+            } else {
+                // commentCheckerPopUp.style.display = "none";
+                block_to_insert = document.createElement('div');
+                document.getElementById("display-comment").innerHTML = comment;
+                block_to_insert.innerHTML = document.getElementById("reply-section").innerHTML;
+                comment_container_block = document.getElementById('comment-submission');
+                comment_container_block.appendChild(block_to_insert);
+                document.getElementById("comment").value = "";
+            }
+        }
+
+        function hideComments() {
+            console.log("Icon clicked");
+            comment_container_block = document.getElementById('comment-submission');
+            if (comment_container_block.style.display != "none") {
+                comment_container_block.style.display = "none";
+            } else if (comment_container_block.style.display == "none") {
+                comment_container_block.style.display = "block"
+            }
+        }
+
+        function reportComment() {
+            console.log("Repport comment has been called");
+            document.getElementById("comment-report").style.display = "block";
+        }
+
+        function reportCommentReply() {
+            document.getElementById("comment-report2").style.display = "block";
+        }
+    </script>
+</head>
+
+<body>
+
+    <div data-role="page" id="item-detail-page" class="feedU-page ui-responsive-panel">
+        <style>
+            body {
+                font-family: "Poppins";
+            }
+
+            .item-detail-page-item-image-section {
+                position: relative;
+                margin-bottom: 1em;
+                background-color: white;
+                color: black;
+            }
+
+            #item-detail-page-item-img {
+                display: block;
+                width: 100%;
+                height: auto;
+                margin: 0;
+            }
+
+            .item-detail-page-item-img-txt-container {
+                position: absolute;
+                bottom: 0;
+                padding-top: 0.25em;
+                padding-bottom: 0.25em;
+                font-weight: 100;
+                background: rgba(0, 0, 0, 0.5);
+                /* Black see-through */
+                color: #f1f1f1;
+                width: 100%;
+                opacity: 1;
+                text-align: left;
+            }
+
+            .item-detail-page-item-ratings-with-name {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0.25em 0;
+                font-weight: 700;
+            }
+
+            #item-detail-page-item-name {
+                margin-left: 1em;
+                font-size: 18px;
+            }
+
+            .item-detail-page-item-rating-bar {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 20px;
+                width: 70px;
+                font-size: 11px;
+                background: #F2F2F2;
+                border-radius: 25px;
+                color: black;
+                margin-right: 1em;
+            }
+
+            #item-detail-page-item-rate-star-icon {
+                color: #F2C94C;
+            }
+
+            #item-detail-page-item-no-of-ratings {
+                margin-bottom: 1em;
+            }
+
+            #item-detail-page-item-description {
+                text-align: justify;
+                text-justify: inter-word;
+            }
+
+            .item-detail-page-item-customize-container {
+                display: flex;
+                justify-content: flex-start;
+                overflow: auto;
+            }
+
+            .item-detail-page-item-customize-container>div {
+                margin: 10px;
+                font-size: 12px;
+            }
+
+            #item-detail-page-item-special-instructions {
+                margin: 0;
+                padding: 0;
+            }
+
+            .item-detail-page-item-quantity-change-container {
+                display: flex;
+                justify-content: center;
+                padding: 1em 1em 1em 1em;
+            }
+
+            .item-detail-page-item-quantity-change {
+                display: flex;
+                justify-content: center;
+                display: flex;
+                justify-content: space-evenly;
+                background-color: #F2F2F2;
+                border-radius: 100px;
+                width: 50%;
+                font-weight: 700;
+            }
+
+            .item-detail-page-item-comments-container {
+                display: flex;
+                justify-content: center;
+            }
+
+            #item-detail-footer {
+                background: #EB5757;
+            }
+
+            .item-page-item-favourite {
+                display: flex;
+                align-items: center;
+                margin-right: 1em;
+            }
+
+            #item-favourite-icon {
+                font-size: 25px;
+            }
+
+            /* comments style */
+            #item-detail-page .card {
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+                transition: 0.3s;
+                width: 100%;
+            }
+
+            #item-detail-page .card:hover {
+                box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+            }
+
+            /* The Modal (background) */
+            #item-detail-page .modal {
+                display: none;
+                /* Hidden by default */
+                position: fixed;
+                /* Stay in place */
+                z-index: 1;
+                /* Sit on top */
+                padding-top: 100px;
+                /* Location of the box */
+                left: 0;
+                top: 0;
+                width: 100%;
+                /* Full width */
+                height: 100%;
+                /* Full height */
+                overflow: auto;
+                /* Enable scroll if needed */
+                background-color: rgb(0, 0, 0);
+                /* Fallback color */
+                background-color: rgba(0, 0, 0, 0.4);
+                /* Black w/ opacity */
+            }
+
+            /* Modal Content */
+            #item-detail-page .modal-content {
+                background-color: #fefefe;
+                margin: auto;
+                padding: 20px;
+                border: 1px solid #888;
+                width: 100%;
+            }
+
+            #item-detail-page .avatar {
+                vertical-align: middle;
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+            }
+
+            #item-detail-page .comment-header-position {
+                margin-top: 16px;
+                margin-left: 5px;
+            }
+
+            #item-detail-page .card>div {
+                padding: 15px 15px;
+            }
+
+            #item-detail-page .hide-comments-btn {
+                display: flex;
+                margin-left: auto;
+            }
+        </style>
+        <div data-role="header" data-tap-toggle="false" data-position="fixed">
+            <span class="ui-title"></span>
+            <a class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-corner-all" href="#" data-rel="back"
+                data-icon="arrow-l" data-theme="c" data-role="button">Back</a>
+            <div data-enhance="false">
+                <a href="home.html">
+                    <img src="../assets/logo.png"></img>
+                </a>
+            </div>
+        </div>
+        <div role="main" class="ui-content">
+            <div class="item-detail-page-item-image-section">
+                <img id="item-detail-page-item-img" src="../assets/vendor_page_images/tom_yum_soup.jpg"
+                    style="height: 40vh; object-fit: cover;">
+                <div class="item-detail-page-item-img-txt-container">
+                    <div class="item-detail-page-item-ratings-with-name">
+                        <span id="item-detail-page-item-name">Item Name</span>
+                        <!-- rating bar next to item name -->
+                        <div style="display: flex; align-items: center;">
+                            <div class="item-detail-page-item-rating-bar">
+                                <p>
+                                    <i class='fa fa-star fa-fw' id="item-detail-page-item-rate-star-icon"></i>
+                                    <span id="item-detail-page-item-rating-value">0.0</span>
+                                    <small id="item-detail-page-item-no-of-ratings">(0)</small>
+                                </p>
+                            </div>
+                            <!-- ---end of rating bar------- -->
+                            <div class="item-page-item-favourite">
+                                <i id="item-favourite-icon" class="fa fa-heart-o"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p id="item-detail-page-item-description">This soup
+                is a special
+                dish
+                prepared by world renowned chef Gonagala Ramsey, made to a secret recipe that has been passed on
+                from
+                his Chinese ancestors.</p>
+            <!-- Customization options container -->
+            <div class="item-detail-page-item-customize-container">
+                <div>
+                    <form>
+                        <p>Choice of Size</p>
+                        <input type="radio" id="small-size" name="item-detail-page-item-customization-size"
+                            value="small-size">
+                        <label for="small-size">Small</label><br>
+                        <input type="radio" id="regular-size" name="item-detail-page-item-customization-size"
+                            value="regular-size">
+                        <label for="regular-size">Regular</label><br>
+                        <input type="radio" id="large-size" name="item-detail-page-item-customization-size"
+                            value="large-size">
+                        <label for="large-size">Large</label>
+                    </form>
+                </div>
+                <div>
+                    <form>
+                        <p>Level of Salt</p>
+                        <input type="radio" id="no-salt" name="item-detail-page-item-customization-salt"
+                            value="no-salt">
+                        <label for="no-salt">No Salt</label><br>
+                        <input type="radio" id="less-salt" name="item-detail-page-item-customization-salt"
+                            value="less-salt">
+                        <label for="less-salt">Less</label><br>
+                        <input type="radio" id="normal-salt" name="item-detail-page-item-customization-salt"
+                            value="normal-salt">
+                        <label for="normal-salt">Normal</label>
+                    </form>
+                </div>
+                <div>
+                    <form>
+                        <p>Level of Spice</p>
+                        <input type="radio" id="no-spice" name="item-detail-page-item-customization-spice"
+                            value="no-spice">
+                        <label for="no-spice">None</label><br>
+                        <input type="radio" id="mild-spice" name="item-detail-page-item-customization-spice"
+                            value="mild-spice">
+                        <label for="mild-spice">Mild</label><br>
+                        <input type="radio" id="hot-spice" name="item-detail-page-item-customization-spice"
+                            value="hot-spice">
+                        <label for="hot-spice">Hot</label>
+                    </form>
+                </div>
+            </div>
+            <div>
+                <!--end of customization container ----->
+                     <p id="item-detail-page-item-special-instructions">Special Instructions</p>
+                     <input type="text" name="sp-instr" id="sp-instr" value=""
+                    placeholder="Add a note (extra salt, no onions, etc.)">
+            </div>
+            <div class="item-detail-page-item-quantity-change-container">
+                <div class="item-detail-page-item-quantity-change">
+                    <p id="item-detail-page-decr-item-qty">-</p>
+                    <p id="item-detail-page-item-qty">1</p>
+                    <p id="item-detail-page-incr-item-qty">+</p>
+                </div>
+            </div>
+            <h1 style="margin: 5px 0px; margin-bottom: 15px;">Comments</h1>
+
+            <div class="card ui-block-solo">
+                <div style="background-color: #F2F2F2;">
+                    <div style="display: flex;">
+                        <img src="../assets/team/ihan.jpg" class="avatar" alt="Profile photo">
+                        <span style="font-weight: bold;" class="comment-header-position">Ihan Lelwala </span>
+                        <span style="font-weight: 400; color: darkgrey;" class="comment-header-position">1 month
+                            ago</span>
+                        <div style="display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: 20px;
+                    width: 50px;
+                    font-size: 11px;
+                    background: #FFD77C;
+                    border-radius: 25px;" class="comment-header-position">
+                            <span style="font-size: 12px;">4.5<i class='fa fa-star fa-fw'
+                                    style="margin-left: 0.25em; color: #ffffff;"></i></span>
+                        </div>
+
+                        <!-- <div class="container>"> -->
+                        <!-- <div class="row"> </div> -->
+                        <a onclick="hideComments()"
+                            class="hide-comments-btn ui-btn ui-shadow ui-corner-all ui-icon-carat-u ui-btn-icon-notext">collapsible</a>
+                        <!-- </div> -->
+
+                    </div>
+                    <div class="container">
+                        <p>This item is absolutely... delicious. “World-renowned Chef Gonagala Ramsey” - perfect. No one
+                            can cook better.</p>
+                        <span>
+                            <p id="comment-report" style="color: #EB5757; display: none">This comment has been reported.
+                            </p>
+                        </span>
+                        <a href="#report-comment-popup" onclick="reportComment()" data-rel="popup"
+                            data-transition="flow" style="text-decoration: underline; color: #EB5757;">Report
+                            Comment</a>
+                    </div>
+                </div>
+
+                <div class="container" id="comment-submission">
+                    <textarea
+                        style="display:block; height: 33px; padding-left: 25px; padding-top: 13px; width: -webkit-fill-available; background-color: #F2F2F2; border-radius: 50px; box-shadow: none;"
+                        placeholder="Type your reply here" id="comment"
+                        onfocus="if(this.value == 'PLEASE ENTER A COMMENT FIRST') { this.value = ''; }"></textarea>
+                    <div style="text-align: center;">
+                        <button onclick="myScript()"
+                            style="width: auto; height: auto; margin-inline-start: auto;background-color: #EB5757; color: white;">Submit</button>
+
+                    </div>
+
+                </div>
+                <!-- Comments reply section -->
+                <div id="reply-section" style="display: none;" class="collapsible">
+                    <img src="../assets/images//profile_photos/thenuka-dp.jpg" class="avatar" width="100%"
+                        alt="Profile photo">
+                    <span style="font-weight: bold;">Cheif Gonagala</span>
+                    <span style="font-weight: 400; color: darkgrey;">1 month ago</span>
+
+
+                    <div class="container" style="margin-bottom: 5px;">
+                        <p id="display-comment">Teeheehee. *wink wink*</p>
+                        <span>
+                            <p id="comment-report2" style="color: #EB5757; display: none">This comment has been
+                                reported.</p>
+                        </span>
+                        <a href="#report-comment-popup" onclick="reportCommentReply()" data-rel="popup"
+                            data-transition="flow" style="text-decoration: underline; color: #EB5757;">Report
+                            Comment</a>
+                        <br>
+                    </div>
+                </div>
+
+            </div>
+            <!-- comments reply section ends -->
+
+
+        </div>
+        <!-- <div data-role="footer">
+            <button id="item-detail-footer">
+                <h4> Add to Cart</h4>
+            </button>
+        </div> -->
+        <div id="item-detail-footer" data-role="footer" class="footer-full-width-btn" data-position="fixed"
+            data-tap-toggle="false">
+            <h4 id="item-detail-add-to-cart">Add to Cart</h4>
+        </div>
+
+        <script>
+            const {
+                utils,
+                datastore,
+                cart,
+                user
+            } = app;
+            var item = {};
+            var vendor = {};
+            var quantity = 1;
+
+            const FAVORITE_ICON_STATES = {
+                FILLED: 'fa-heart',
+                UNFILLED: 'fa-heart-o',
+                FILLED_COLOR: '#EB5757',
+                UNFILLED_COLOR: '#F1F1F1',
+            }
+
+            $('#item-favourite-icon').on('click', function () {
+
+                const wasUnfilled = $('#item-favourite-icon').hasClass('fa-heart-o');
+                if (wasUnfilled) {
+                    $(this).css('color', FAVORITE_ICON_STATES.FILLED_COLOR);
+                    user.addFavorite(user.FAVORITE_TYPES.ITEM, item);
+                } else {
+                    $(this).css('color', FAVORITE_ICON_STATES.UNFILLED_COLOR);
+                    user.removeFavorite(user.FAVORITE_TYPES.ITEM, item);
+                }
+
+                $(this).toggleClass(FAVORITE_ICON_STATES.FILLED);
+                $(this).toggleClass(FAVORITE_ICON_STATES.UNFILLED);
+            });
+
+
+            function setItemDetails({
+                itemTitle,
+                itemDescription,
+                itemRatings,
+                itemImageLocation
+            }) {
+                $('#item-detail-page-item-name').text(itemTitle)
+                $('#item-detail-page-item-description').text(itemDescription)
+                $('#item-detail-page-item-rating-value').text(itemRatings.itemRatingValue.toFixed(1))
+                $('#item-detail-page-item-no-of-ratings').text(`(${itemRatings.itemNoOfRatings})`)
+                $('#item-detail-page-item-img').attr("src", itemImageLocation)
+            }
+
+            $('body').on('pagebeforeshow', "#item-detail-page", function (event, {
+                toPage
+            }) {
+                // The pageshow event is deprecated from 1.4.0 and removed in 1.6.0 but then jQuery Mobile itself is deprecated
+                // and 1.6.0 will never come
+
+                // console.log($(':mobile-pagecontainer').pagecontainer("getActivePage"))
+                const url = toPage[0].baseURI;
+                const queryParams = utils.parseUrlForQueryParams(url);
+                const itemDetails = datastore.getSpecificItem(queryParams.itemId);
+                const vendorDetails = datastore.getSpecificVendor(queryParams.vendorId);
+                item = itemDetails;
+                vendor = vendorDetails;
+                setItemDetails(itemDetails);
+
+                const itemIsFavorite = user.isItemFavorite(user.FAVORITE_TYPES.ITEM, item);
+                if (itemIsFavorite) {
+                    $('#item-favourite-icon').addClass(FAVORITE_ICON_STATES.FILLED)
+                        .removeClass(FAVORITE_ICON_STATES.UNFILLED).css('color', FAVORITE_ICON_STATES
+                            .FILLED_COLOR);
+                } else {
+                    $('#item-favourite-icon').addClass(FAVORITE_ICON_STATES.UNFILLED)
+                        .removeClass(FAVORITE_ICON_STATES.FILLED).css('color', FAVORITE_ICON_STATES
+                            .UNFILLED_COLOR);
+                }
+
+            });
+
+            $('#item-detail-page-incr-item-qty').click(function (event) {
+                if (quantity < 9) {
+                    // Can only add upto 9 nos. of an item
+                    quantity += 1;
+                    $('#item-detail-page-item-qty').text(quantity)
+                }
+            })
+
+            $('#item-detail-page-decr-item-qty').click(function (event) {
+                if (quantity > 1) {
+                    // Have to at least add 1 nos. of an item
+                    quantity -= 1;
+                    $('#item-detail-page-item-qty').text(quantity)
+                }
+            })
+
+            $('#item-detail-footer').click(function (event) {
+                const payload = { vendor, item: { ...item, quantity } };
+                const error = cart.addItemToCart(payload)
+                if (error) {
+                    console.log('Add to cart failed');
+                    $('#item-detail-popup-msg').text(error);
+                    $('#item-detail-popup').popup("open");
+                } else {
+                    console.log('Add to cart successsful');
+                    history.back();
+                }
+            })
+        </script>
+    </div>
+</body>
+<!-- markup for the comments popup -->
+<div data-role="popup" id="report-comment-popup" data-overlay-theme="a">
+    <p>Comment has been reported successfully.
+    </p>
+</div>
+
+</html>

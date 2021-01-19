@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Feed U - Home Page</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="../css/base.css" />
+
+	<script src="../bundle.js"></script>
+
+</head>
+
+<body>
+	<div data-role="page" id="home" class="feedU-page ui-responsive-panel">
+
+		<div data-role="header" data-position="fixed" id="home-header" data-tap-toggle="false">
+			<a id="navigation-menu-hamburger" href="#navigation-menu"
+				class="ui-btn ui-shadow ui-corner-all ui-icon-bars ui-btn-icon-notext">Delete</a>
+			<a href="vendor_list.html" class="ui-btn ui-shadow ui-corner-all ui-icon-search ui-btn-icon-notext"
+				style="position: absolute; right: 15px; top: 15px;">search</a>
+			<span class="ui-title"></span>
+			<img src="../assets/logo.png"></img>
+		</div>
+
+		<div role="main" class="ui-content">
+			<div id="home-main-content-container">
+				<div>
+					<div
+						style="max-width: 100vw; display: flex; flex-direction: row; justify-content: center; align-items: center;">
+						<span
+							style="max-width: 75vw; margin-right: 5px; overflow: auto; white-space: nowrap; font-weight: 500;">
+							Deliver Now |
+							<span id="user-home-delivery-location">
+								Delivery Location </span>
+						</span>
+						<a class="link-set-location-page ui-btn ui-shadow ui-corner-all ui-icon-navigation ui-btn-icon-notext"
+							style="margin-left: 5px;"></a>
+					</div>
+					<div class="carousel-container">
+
+						<div class="carousel-item fade">
+							<img style="margin-top: 0.50em; width: 100%;" src="../assets/main_page/carousel_1.jpg"
+								alt="carousel-1">
+						</div>
+
+						<div class="carousel-item fade">
+							<img style="margin-top: 0.50em; width: 100%;" src="../assets/main_page/carousel_2.jpg"
+								alt="carousel-2">
+						</div>
+
+						<div class="carousel-item fade">
+							<img style="margin-top: 0.50em; width: 100%;" src="../assets/main_page/carousel_3.jpg"
+								alt="carousel-3">
+						</div>
+
+						<a class="prev home-carousel-btn" onclick="nextCarouselItem(-1)">&#10094;</a>
+						<a class="next home-carousel-btn" onclick="nextCarouselItem(1)">&#10095;</a>
+
+					</div>
+				</div>
+				<div id="home-favourite-stories-section">
+					<p style="font-weight: 500;">Stories</p>
+					<div id="home-favourite-vendor-stories-container">
+						<img id="favourite-vendor-story" src="../assets/stories_images/story_1.png"
+							onclick="onStoryClick()">
+						<img id="favourite-vendor-story" src="../assets/stories_images/story_2.jpg">
+						<img id="favourite-vendor-story" src="../assets/stories_images/story_3.jpg">
+						<img id="favourite-vendor-story" src="../assets/stories_images/story_4.jpg">
+						<img id="favourite-vendor-story" src="../assets/stories_images/story_5.jpg">
+						<img id="favourite-vendor-story" src="../assets/stories_images/story_6.jpg">
+						<img id="favourite-vendor-story" src="../assets/stories_images/story_7.jpg">
+						<img id="favourite-vendor-story" src="../assets/stories_images/story_8.jpg">
+						<img id="favourite-vendor-story" src="../assets/stories_images/story_9.jpg">
+						<img id="favourite-vendor-story" src="../assets/stories_images/story_10.jpg">
+					</div>
+				</div>
+				<div id="home-pois-section">
+
+					<div id="home-categories-section">
+						<p style="font-weight: 500;">Categories</p>
+						<div class="home-categories-container">
+							<img id="category-item" src="../assets/food_categories/banana.jpg">
+							<img id="category-item" src="../assets/food_categories/bread.jpg">
+							<img id="category-item" src="../assets/food_categories/burgers.jpg">
+							<img id="category-item" src="../assets/food_categories/cakes.jpg">
+							<!-- <img id="category-item" src="../assets/food_categories/ice_cream.jpg"> -->
+							<img id="category-item" src="../assets/food_categories/meat.jpg">
+							<img id="category-item" src="../assets/food_categories/mexican.jpg">
+							<img id="category-item" src="../assets/food_categories/pizza.jpg">
+							<img id="category-item" src="../assets/food_categories/sushi.jpg">
+							<img id="category-item" src="../assets/food_categories/veges.jpg">
+						</div>
+					</div>
+
+					<p style="font-weight: 500;">Vendors</p>
+					<div id="home-container" class="all-poi-container"></div>
+
+				</div>
+			</div>
+		</div>
+
+		<div id="home-footer" data-role="footer" class="footer-full-width-btn" data-position="fixed"
+			data-tap-toggle="false">
+			<h4>View Basket</h4>
+		</div>
+
+		<style>
+			* {
+				box-sizing: border-box
+			}
+
+			body {
+				margin: 0
+			}
+
+			.carousel-item {
+				display: none
+			}
+
+			img {
+				vertical-align: middle;
+			}
+
+			.carousel-container {
+				max-width: 1000px;
+				position: relative;
+				margin: auto;
+			}
+
+			.prev,
+			.next {
+				cursor: pointer;
+				position: absolute;
+				top: 50%;
+				width: auto;
+				padding: 16px;
+				margin-top: -22px;
+				color: white;
+				font-weight: bold;
+				font-size: 18px;
+				transition: 0.6s ease;
+				border-radius: 0 3px 3px 0;
+				user-select: none;
+			}
+
+			.next {
+				right: 0;
+				border-radius: 3px 0 0 3px;
+			}
+
+			.prev,
+			.next {
+				background-color: rgba(0, 0, 0, 0.3);
+			}
+
+			/* .active {
+				background-color: #717171;
+			} */
+
+			.fade {
+				-webkit-animation-name: fade;
+				-webkit-animation-duration: 1.5s;
+				animation-name: fade;
+				animation-duration: 1.5s;
+			}
+
+			@-webkit-keyframes fade {
+				from {
+					opacity: .4
+				}
+
+				to {
+					opacity: 1
+				}
+			}
+
+			@keyframes fade {
+				from {
+					opacity: .4
+				}
+
+				to {
+					opacity: 1
+				}
+			}
+
+			@media only screen and (max-width: 300px) {
+
+				.prev,
+				.next {
+					font-size: 11px
+				}
+			}
+		</style>
+
+		<script>
+
+			const { user, cart } = app;
+
+			$(".link-set-location-page").click(function (event) {
+				event.preventDefault();
+				$.mobile.navigate("set_location.html");
+			})
+
+			function onStoryClick(event) {
+				console.log('Clicked a story. Opening the story.');
+
+				// refer https://jquerymobile.com/upgrade-guide/1.4/#navigation on how to navigate
+
+				// navigate user to Home screen when user submits their location
+				// refer https://stackoverflow.com/questions/24173871/what-is-the-mobile-pagecontainer-selector and
+				// https://api.jquerymobile.com/pagecontainer/ for more
+				$(":mobile-pagecontainer").pagecontainer("change", "vendor_stories.html", { transition: "slide" });
+			};
+			// The code below uses ES6 syntax since modern browsers support it (Chrome / Edge versions released after 2016)
+			// Refer https://www.w3schools.com/js/js_versions.asp for more
+
+			const { datastore } = app;
+
+			var vendors = datastore.getAllVendors(); // TODO refactor this once mock data is removed
+
+			// render items in order summary
+			vendors.forEach(({ vendorId, vendorImageLocation, vendorName, vendorCatergories, vendorRatings, deliveryTime }) => {
+				var markupP1 = `<div class="poi-container" vendor-id="${vendorId}">
+					<img src=${vendorImageLocation} class="poi-image">
+					<div class="poi-details">
+						<div class="poi-vendor-name">${vendorName}</div>
+						<div class="poi-catergory-container">`
+				var markupP2 = ``
+				var i = 0;
+				vendorCatergories.forEach((category) => {
+					if (i === 0) {
+						markupP2 = markupP2 + `<i class="fa fa-circle" id="poi-catergory"></i>${category}`
+					} else {
+						markupP2 = markupP2 + `<i class="fa fa-circle" id="poi-catergory" style="margin-left: 2em;"></i>${category}`
+					}
+					i = i + 1;
+				});
+				var markupP3 =
+					`</div>
+						<div class="poi-rating-bar-container">
+							<div class="poi-rating-bar">
+								<span>
+									<i class='fa fa-star fa-fw' id="poi-rate-star-icon"></i> ${(vendorRatings.vendorRatingValue).toFixed(1)}
+									<small id="poi-no-of-rated-customers">(${vendorRatings.vendorNoOfRatings})</small> 
+								</span>
+							</div>
+							<div id="poi-delivery-time">${deliveryTime}</div>
+						</div>
+					</div>
+				</div>`
+				var markup = markupP1 + markupP2 + markupP3;
+				$('#home-container').append(markup)
+			});
+
+			$('body').on("pagecontainershow", function (event, ui) {
+				// This event will get fired each time the pagecontainershow event fires,
+				// that means it'll fire even when loading another page (other than home.html)
+
+				var activePage = ui.toPage[0].id;
+				if (activePage === 'home') {
+					// Retrieve user location from cookie and set to label
+					$("#user-home-delivery-location").text(user.getDetails().location.display);
+
+					const thereAreNoItemsInCart = cart.summary().items.length == 0;
+					if (thereAreNoItemsInCart) {
+						$("#home-footer").hide();
+					} else {
+						$("#home-footer").show();
+					}
+
+				}
+			});
+
+			// Handle Vendor POI click event
+			// https://stackoverflow.com/questions/943987/add-jquery-click-handler-to-multiple-elements
+			$(".poi-container").click(function () {
+				var vendorId = $(this).attr("vendor-id"); // which vendor card was clicked
+				$(":mobile-pagecontainer").pagecontainer("change", "vendor_page.html", {
+					data: {
+						vendorId
+					}
+				});
+			});
+
+			$("#home-footer").on("click", function (event) {
+				$(":mobile-pagecontainer").pagecontainer("change", "checkout.html");
+			});
+
+
+			var carouselItemIndex = 1;
+			showCarouselSlideshow(carouselItemIndex);
+
+			function nextCarouselItem(n) {
+				showCarouselSlideshow(carouselItemIndex += n);
+			}
+
+			function currentCarouselItem(n) {
+				showCarouselSlideshow(carouselItemIndex = n);
+			}
+
+			function showCarouselSlideshow(n) {
+				var i;
+				var carouselItems = document.getElementsByClassName("carousel-item");
+				if (n > carouselItems.length) { carouselItemIndex = 1 }
+				if (n < 1) { carouselItemIndex = carouselItems.length }
+				for (i = 0; i < carouselItems.length; i++) {
+					carouselItems[i].style.display = "none";
+				}
+				carouselItems[carouselItemIndex - 1].style.display = "block";
+			}
+		</script>
+	</div>
+
+</body>
+
+</html>

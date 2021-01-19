@@ -1,0 +1,59 @@
+@use "../themes/custom-jquery-mobile-theme.css"
+@use "../themes/jquery.mobile.icons.min.css" as jquery-mobile-icons
+@use "../../vendor/jquery.mobile-1.4.5/jquery.mobile.structure-1.4.5.min.css" as jquery-mobile-structure
+
+@use "sass:map"
+
+// IMPORT OTHER CUSTOM STYLESHEETS
+@use "landing"
+@use "home"
+@use "vendor_stories"
+@use "location_search"
+@use "set_location"
+@use "vendor_rating"
+@use "checkout"
+@use "order_in_progress"
+@use "delivery_in_progress"
+@use "favorites_list"
+@use "shared_components"
+@use "variables"
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap')
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css")
+
+div[data-role="page"].feedU-page
+    * :not(.fa)
+        font-family: variables.$font-family
+        text-shadow: none
+
+    .ui-title
+        margin-left: 0px
+        margin-right: 0px
+
+    .ui-content
+        background-color: map.get(variables.$feedU-theme, "background-color")
+        height: 100vh
+
+        .disabled-btn-text
+            color: map.get(variables.$feedU-theme, "gray")
+
+    .ui-header
+        background-color: map.get(variables.$feedU-theme, "primary-color")
+        padding: 5px 0px
+        display: flex
+        justify-content: center
+
+        a[data-rel="back"]
+            left: 10px
+            top: 15px
+
+    .ui-footer
+
+        .full-width-btn
+            background-color: map.get(variables.$feedU-theme, "primary-color")
+            color: map.get(variables.$feedU-theme, "background-color")
+            text-transform: uppercase
+            min-width: 100%
+            margin: 0
+            border: none
+            padding: 15px

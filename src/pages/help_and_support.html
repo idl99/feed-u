@@ -1,0 +1,157 @@
+<!-- Author : Vinula Uthsara Buthgamumudalige | 2016088 | W1673611 -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Help</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../css/base.css" />
+    <script src="../bundle.js"></script>
+</head>
+
+<body>
+
+    <!-- <div data-role="page" class="feedU-page ui-responsive-panel"></div>
+
+    <div data-role="header" data-position="fixed" data-add-back-btn="true" data-tap-toggle="false">
+
+        <img src="../assets/logo.png"></img>
+    </div> -->
+
+
+    <!-- <div role="main" class="ui-content"> -->
+    <!-- <div data-role="page" id="Page1" class="ui-responsive-panel"> -->
+
+
+
+    <style>
+        .help_and_sup_container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-left: 1em;
+            padding-right: 1em;
+            padding-bottom: 1em;
+        }
+
+        .hotlines-container {
+            display: block;
+            justify-content: center;
+            width: 335px;
+            margin-bottom: 5%;
+            margin-block-start: 1px;
+            margin-block-end: 1px;
+            margin-inline-start: 1px;
+            margin-inline-end: 1px;
+        }
+
+        .ok-button {
+            width: 100%;
+            text-align: center;
+            background: #EB5757;
+            color: white;
+            margin:
+                0px;
+            padding: 0px;
+            border-radius: 0%;
+            text-shadow: none;
+
+        }
+
+        .submit-feedback-button {
+            width: 100%;
+            text-align: center;
+            background: #27AE60;
+            color: white;
+            margin: 0px;
+            padding: 0px;
+            border-radius: 0%;
+            text-shadow: none;
+        }
+    </style>
+
+    <!-- <div data-role="header" data-position="fixed" data-add-back-btn="true">
+            <span class="ui-title"></span>
+        </div> -->
+
+    <div data-role="page" class="feedU-page ui-responsive-panel">
+        <div data-role="header" id="checkout-header" data-position="fixed" data-tap-toggle="false">
+            <a class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-corner-all" href="#" data-rel="back"
+                data-icon="arrow-l" data-theme="c" data-role="button">Back</a>
+            <span class="ui-title"></span>
+            <img src="../assets/logo.png"></img>
+        </div>
+
+
+        <div role="main" class="ui-content">
+            <!-- First container for customer hotlines  -->
+            <div class="help_and_sup_container ">
+                <h1 style="margin: 5px 0px;">Help and Support</h1>
+                <h3><i class="fa fa-headphones" aria-hidden="true" style="color: red;"></i>
+                    Customer Hotlines</h3>
+                <div class="hotlines-container">
+                    <p><i class="fa fa-phone" aria-hidden="true" style="color: green;"></i>
+                        +94778656775</p>
+                    <p><i class="fa fa-phone" aria-hidden="true" style="color: green;"></i>
+                        +947775847568</p>
+                    <p><i class="fa fa-phone" aria-hidden="true" style="color: green;"></i>
+                        +947708623485</p>
+                </div>
+            </div>
+            <!-- Second container for feedback text fields -->
+            <div class="help_and_sup_container ">
+                <h3><i class="fa fa-commenting" aria-hidden="true" style="color: cornflowerblue;"></i>
+                    Give us feedback</h3>
+                <!-- Text fields with place holders -->
+                <input type="text" name="feedback-type" id="feedback-type" value="" placeholder="Feedback Type">
+
+                <!-- drop down list elements cannot be left aligned -->
+
+                <!-- <select id="foo" name="foo" style="display: flex; align-items: flex-start; ">
+                    <option value="sort" disabled selected="selected" >Feedback Type</option>
+                    <option value="a">A</option>
+                    <option value="b">B</option>
+                    <option value="c">C</option>
+                    <option value="custom">Custom</option>
+                </select> -->
+
+                <!-- requires drop down for selecting type of feedback -->
+                <input type="text" name="title" id="title" value="" placeholder="Title">
+                <input type="text" name="feedback-msg" id="feedback-msg" value="" placeholder="Feedback Message">
+                <br>
+                <!--Submit feedback button with success pop up-->
+                <div data-role="popup" id="popup" data-overlay-theme="b" data-theme="b" data-corners="false"
+                    style="padding: 1em;">
+                    <h5 style="margin-top: 15px; margin-bottom: 20px; font-weight: inherit;">Feedback submitted
+                        successfully!</h5>
+                    <h5 style="margin-top: 15px; margin-bottom: 20px; font-weight: inherit;">Thankyou for your valuable
+                        feedback.</h5>
+                    <a data-rel="back">
+                        <button id="okBtn" class="ok-button"
+                            style="width: 100%; text-align: center; background: #EB5757; color: white; margin: 0px; padding: 0px; text-shadow: none;">
+                            <h4> OK</h4>
+                        </button>
+                    </a>
+                </div>
+                <a href="#popup" data-rel="popup" data-position-to="window" data-transition="fade">
+                    <button id="submitFBBtn" class="submit-feedback-button"
+                        style="width: 100%; text-align: center; background: #27AE60; color: white; border-width: 3px; margin: 0px; padding: 0px; text-shadow: none;">
+                        <h4> Submit Feedback</h4>
+                    </button>
+                </a>
+            </div>
+        </div>
+
+        <script>
+            $('#foo').change(function () {
+                if ($(this).val() === 'custom') {
+                    $(this).replaceWith('<input name="foo" type="text" />');
+                }
+            });
+        </script>
+    </div>
+
+    <!-- </div> -->
+</body>
+
+</html>

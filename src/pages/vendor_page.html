@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Feed U - Vendor Page</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="../css/base.css" />
+    <script src="../bundle.js"></script>
+
+</head>
+
+<body>
+    <div data-role="page" id="vendor-page" class="feedU-page ui-responsive-panel">
+        <style>
+            body {
+                font-family: "Poppins";
+            }
+
+            .vendor-page-top-section {
+                position: relative;
+                margin-bottom: 1em;
+            }
+
+            #vendor-page-vendor-image {
+                display: block;
+                width: 100%;
+                height: 40vh;
+                object-fit: cover;
+                margin: 0;
+            }
+
+            .vendor-page-vendor-details-container {
+                position: absolute;
+                bottom: 0;
+                padding-top: 0.25em;
+                padding-bottom: 0.25em;
+                font-weight: 100;
+                background: rgba(0, 0, 0, 0.5);
+                /* Black see-through */
+                color: #f1f1f1;
+                width: 100%;
+                opacity: 1;
+                text-align: left;
+            }
+
+            .vendor-page-vendor-details {
+                display: flex;
+                justify-content: space-between;
+                text-shadow: none;
+            }
+
+            #vendor-page-vendor-title {
+                font-size: 18px;
+                font-weight: 700;
+            }
+
+            #vendor-page-vendor-location {
+                font-size: 12px;
+            }
+
+            #vendor-page-vendor-delivery-time {
+                font-size: 12px;
+            }
+
+            .vendor-page-vendor-favourite {
+                display: flex;
+                align-items: center;
+                margin-right: 1em;
+            }
+
+            #vendor-favourite-icon {
+                font-size: 25px;
+            }
+
+            .vendor-page-vendor-food-categories-section {
+                display: flex;
+                align-items: center;
+                font-size: 12px;
+            }
+
+            #vendor-food-categories-bullet {
+                margin-right: 1em;
+                color: #C4C4C4;
+                font-size: 7px;
+            }
+
+            .vendor-page-vendor-ratings-section {
+                display: flex;
+                align-items: center;
+                margin-top: 0.50em;
+                margin-bottom: 1em;
+                font-size: 12px;
+            }
+
+            .vendor-page-vendor-rating-bar {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            #vendor-rate-star-icon {
+                color: #F2C94C;
+            }
+
+            #vendor-page-vendor-no-of-ratings {
+                margin-top: 0.25em;
+                margin-left: 0.25em;
+                font-size: 8px;
+            }
+
+            #vendor-page-vendor-comments {
+                margin-left: 1.25em;
+            }
+
+            .container {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, 350px);
+                column-gap: 15px;
+                row-gap: 15px;
+            }
+
+            a:link {
+                text-decoration: none;
+                color: #333333;
+            }
+
+            /* visited link */
+            a:visited {
+                text-decoration: none;
+                color: #333333;
+            }
+
+            /* mouse over link */
+            a:hover {
+                text-decoration: none;
+                color: #333333;
+            }
+
+            /* selected link */
+            a:active {
+                text-decoration: none;
+                color: #333333;
+            }
+
+            #popup {
+                padding: 1em;
+            }
+
+            #okBtn {
+                width: 100%;
+                text-align: center;
+                background: #EB5757;
+                color: white;
+                margin: 0px;
+                padding: 0px;
+                border-radius: 0%;
+                text-shadow: none;
+            }
+
+            .vendor-page-reward-container-section {
+                border: 1px solid #bdbdbd;
+                border-width: thin;
+                display: flex;
+                flex-direction: column;
+                padding: 20px 15px;
+                justify-content: center;
+                width: fit-content;
+            }
+        </style>
+        <div data-role="header" data-toggle-on-tap="false" data-position="fixed">
+            <span class="ui-title"></span>
+            <a class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-corner-all" href="#" data-rel="back"
+                data-icon="arrow-l" data-theme="c" data-role="button">Back</a>
+            <div data-enhance="false">
+                <a href="home.html">
+                    <img src="../assets/logo.png"></img>
+                </a>
+            </div>
+        </div>
+        <div role="main" class="ui-content">
+            <div class="vendor-page-top-section">
+                <img id="vendor-page-vendor-image" src="../assets/vendor_page_images/burgers_ahouy.jpg">
+                <div class="vendor-page-vendor-details-container">
+                    <div class="vendor-page-vendor-details">
+                        <div class="vendor-page-vendor-introduction">
+                            <span id="vendor-page-vendor-title">Burgers Ahouy!</span><br>
+                            <span id="vendor-page-vendor-location">COLOMBO 3 </span>
+                            <span id="vendor-page-vendor-delivery-time">(25 - 30 MIN)</span>
+                        </div>
+                        <div class="vendor-page-vendor-favourite">
+                            <i id="vendor-favourite-icon" class="fa fa-heart-o"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="vendor-page-vendor-food-categories-section">
+                <i class="fa fa-circle" id="vendor-food-categories-bullet"></i>
+                Burgers
+                <i class="fa fa-circle" id="vendor-food-categories-bullet" style="margin-left: 1em;"></i>
+                American
+            </div>
+
+            <div class="vendor-page-vendor-ratings-section">
+                <p>
+                <div class="vendor-page-vendor-rating-bar">
+                    <i class='fa fa-star fa-fw' id="vendor-rate-star-icon"></i>
+                    <span id="vendor-page-vendor-rating-value">0.0</span>
+                    <small id="vendor-page-vendor-no-of-ratings">(0)</small>
+                </div>
+                <a id="vendor-page-vendor-comments" href="comments_list.html">View Comments</a>
+                </p>
+            </div>
+            <!-- Gamification process section  -->
+            <div data-role="popup" id="popup" data-overlay-theme="b" data-theme="b" data-corners="false">
+                <p style="font-weight: inherit;"> Rewards Offered </p>
+                <hr style="color: #bdbdbd; margin-bottom: 15px; margin-left: 5px; margin-right: 5px;">
+                <h4 style=" font-weight: inherit;">How obtain a reward</h4>
+                <h5 style="margin-top: 15px; margin-bottom: 20px; font-weight: inherit;">3 orders earns a LKR 350 reward
+                </h5>
+                <h4 style="font-weight: inherit;">Reward At</h4>
+                <h5 style="margin-top: 15px; margin-bottom: 20px; font-weight: inherit;">Burgers Ahoy!</h5>
+                <h4 style="font-weight: inherit;">Details</h4>
+                <h5 style="margin-top: 15px; margin-bottom: 15px; text-align: justify;
+                text-justify: inter-word; font-weight: inherit;">
+                    Rewards expire 60 days after you earn them. They can be used only once, on a single order, and
+                    cannot be combined with any other offer.
+
+                    <!-- If a restaurant cancels this programme after you started earning rewards, you’ll have 30 days to
+                    finish earning the reward and 60 days to use any rewards you’ve earned at that restaurant. -->
+                </h5>
+                <h5 style="margin-top: 5px; margin-bottom: 5px; text-align: justify;
+                text-justify: inter-word; font-weight: inherit;">
+                    If a restaurant cancels this programme after you started earning rewards, you’ll have 30 days to
+                    finish earning the reward and 60 days to use any rewards you’ve earned at that restaurant.
+                </h5>
+                <!-- OK button with close action -->
+                <a data-rel="back">
+                    <button id="okBtn" style="margin-top: 25px;">
+                        <h4> OK</h4>
+                    </button>
+                </a>
+                <!-- </div> -->
+            </div>
+            <a href="#popup" data-rel="popup" data-position-to="window" data-transition="fade"
+                style="display: flex; justify-content: center;">
+                <div class="vendor-page-reward-container-section">
+                    <div style="display: flex; justify-content: space-evenly; align-items: flex-start;">
+                        <div style="display: flex; align-items: center;">
+                            <i class="fa fa-adjust" aria-hidden="true" style="color: #EB5757; font-size: x-large;"></i>
+                        </div>
+
+                        <div style="display:flex; flex-direction: column; margin-left: 1em;">
+                            <h5 style="margin: 0;">3 orders earns a LKR 350 reward <br>LKR 750 minimum</h5>
+                            <!-- progress bar -->
+                            <div style="display: flex; margin-top: 0.5em; justify-content: center;">
+                                <div style="background-color: #EB5757; width: 60px; height: 6px;"></div>
+                                <div style="background-color: #C4C4C4; width: 50px; height: 6px; margin-left: 0.5em;">
+                                </div>
+                                <div style="background-color: #C4C4C4; width: 50px; height: 6px; margin-left: 0.5em;">
+                                </div>
+                                <div style="background-color: #C4C4C4; width: 50px; height: 6px; margin-left: 0.5em;">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; align-items: center; margin-left: 0.5em; font-size: xx-large;">
+                            <i class="fa fa-angle-right" aria-hidden="true" style="color: #EB5757;"></i>
+                        </div>
+                    </div>
+
+                </div>
+            </a>
+            <br>
+            <div id="vendor-page-container" class="container">
+            </div>
+        </div>
+        <!--
+            PROBLEM: this footer seems to overlay
+            the footer (Add To Cart button) in the next page (Item Detail page)
+         -->
+        <!-- <div data-role="footer" data-position="fixed">
+            <h4 style="text-align:center;">I'm the footer</h4>
+            <div style="display: flex;">
+
+            </div>
+        </div> -->
+        <script>
+            const { utils, datastore, user } = app;
+            const FAVORITE_ICON_STATES = {
+                FILLED: 'fa-heart',
+                UNFILLED: 'fa-heart-o',
+                FILLED_COLOR: '#EB5757',
+                UNFILLED_COLOR: '#F1F1F1',
+            }
+
+            var vendor = {};
+
+            function setVendorDetails(vendor) {
+                const { vendorName, vendorImageLocation, location, deliveryTime, vendorRatings, items } = vendor;
+
+                $('#vendor-page-vendor-title').text(vendorName);
+                $('#vendor-page-vendor-location').text(location);
+                $('#vendor-page-vendor-delivery-time').text(`(${deliveryTime})`);
+                $('#vendor-page-vendor-rating-value').text(vendorRatings.vendorRatingValue.toFixed(1));
+                $('#vendor-page-vendor-no-of-ratings').text(`(${vendorRatings.vendorNoOfRatings})`);
+                $('#vendor-page-vendor-image').attr('src', vendorImageLocation);
+
+                const itemIsFavorite = user.isItemFavorite(user.FAVORITE_TYPES.VENDOR, vendor);
+                if (itemIsFavorite) {
+                    $('#vendor-favourite-icon').addClass(FAVORITE_ICON_STATES.FILLED)
+                        .removeClass(FAVORITE_ICON_STATES.UNFILLED).css('color', FAVORITE_ICON_STATES.FILLED_COLOR);
+                } else {
+                    $('#vendor-favourite-icon').addClass(FAVORITE_ICON_STATES.UNFILLED)
+                        .removeClass(FAVORITE_ICON_STATES.FILLED).css('color', FAVORITE_ICON_STATES.UNFILLED_COLOR);
+                }
+
+                // render items in order summary
+                const itemCards = items.map(({ itemId, itemImageLocation, itemTitle, itemDescription, itemRatings, itemPrice }) => {
+                    var markup =
+                        `<div class="vendor-poi-item-container" item-id="${itemId}">
+                            <div>
+                                <img src=${itemImageLocation}>
+                            </div>
+                            <div class="vendor-poi-item-content">
+                                <div class="vendor-poi-item-details">
+                                    <div class="vendor-poi-item-title-description">
+                                        <p id="vendor-poi-item-title">${itemTitle}</p>
+                                        <p id="vendor-poi-item-description">${itemDescription}</p>
+                                    </div>
+                                    <div class="vendor-poi-item-rating-bar">
+                                        <span>
+                                            <i class='fa fa-star fa-fw' id="vendor-poi-item-rate-star-icon"></i> 
+                                            ${(itemRatings.itemRatingValue).toFixed(1)}
+                                            <small id="vendor-poi-item-no-of-rated-customers">(${itemRatings.itemNoOfRatings})</small> 
+								        </span>
+                                    </div>
+                                </div>
+                                <div class="vendor-poi-item-price-tag">
+                                    <p id="vendor-poi-item-price">LKR ${itemPrice}</p>
+                                </div>
+                            </div>
+                        </div>`;
+                    return markup;
+                });
+
+                // Concatenate the item cards markup
+                if (itemCards.length > 0) {
+                    const allItemCardsMarkup = itemCards.reduce((markup, card) => markup + card);
+
+                    // Replace instead of appending to container
+                    // because jQuery Mobile caches pages
+                    $('#vendor-page-container').html(allItemCardsMarkup)
+
+                    // IMPORTANT: NOTE WHEN YOU REPLACE HTML THE LISTENERS ALSO BECOME OBSOLETE
+                    // THAT'S WHY THE LOGIC TO BIND TO THE CLICK LISTENER HAS BEEN ADDED HERE
+                    $(".vendor-poi-item-container").click(function () {
+                        // Handle Item POI click event
+                        var itemId = $(this).attr("item-id"); // which vendor card was clicked
+                        $(":mobile-pagecontainer").pagecontainer("change", "item_detail.html", {
+                            data: {
+                                itemId,
+                                vendorId: vendor.vendorId,
+                            }
+                        });
+                    });
+                }
+
+            }
+
+            $('#vendor-favourite-icon').on('click', function () {
+
+                const wasUnfilled = $('#vendor-favourite-icon').hasClass('fa-heart-o');
+                if (wasUnfilled) {
+                    $(this).css('color', FAVORITE_ICON_STATES.FILLED_COLOR);
+                    user.addFavorite(user.FAVORITE_TYPES.VENDOR, vendor);
+                } else {
+                    $(this).css('color', FAVORITE_ICON_STATES.UNFILLED_COLOR);
+                    user.removeFavorite(user.FAVORITE_TYPES.VENDOR, vendor);
+                }
+
+                $(this).toggleClass(FAVORITE_ICON_STATES.FILLED);
+                $(this).toggleClass(FAVORITE_ICON_STATES.UNFILLED);
+            });
+
+            $('body').on('pagebeforeshow', "#vendor-page", function (event, { toPage }) {
+                const url = toPage[0].baseURI;
+                const queryParams = utils.parseUrlForQueryParams(url);
+                const vendorDetails = datastore.getSpecificVendor(queryParams.vendorId);
+                vendor = vendorDetails;
+                setVendorDetails(vendor);
+            });
+        </script>
+    </div>
+</body>
+
+</html>

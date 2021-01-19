@@ -1,0 +1,38 @@
+@use '_variables'
+
+#order-in-progress-page
+    display: flex
+    flex-direction: column
+
+    #order-in-progress-order-summary-container
+        padding: 0em 1em
+
+        #order-in-progress-order-summary
+            display: flex
+            flex-direction: column
+            margin: 3vh 3vw
+
+            #order-items-grid
+                margin: 2em 0em
+                display: grid
+                grid-row-gap: 20px
+
+            .order-item
+                display: grid
+                grid-template-columns: 1fr 6fr 3fr
+                align-content: stretch
+                overflow-wrap: anywhere
+
+                .order-item-quantity
+                    text-align: left
+
+                .order-item-price
+                    text-align: right
+
+            .order-payment-detail
+                display: flex
+                justify-content: space-between
+                margin: 0.5em 0em
+                align-items: center
+
+    // @media screen and ( max-width >= variables.$dimens_ipad)
