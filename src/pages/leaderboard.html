@@ -101,7 +101,7 @@
         <script>
 
             const { user, datastore } = app;
-            console.log(user.getDetails());
+            // console.log(user.getDetails());
             var leaderboard = datastore.getLeaderboard(user.getDetails().profile);
             var i = 1;
             var totPoints = 0;
@@ -121,7 +121,7 @@
             var aboveUserPoints = 0;
             var eachUserPoints = datastore.getLeaderboard(user.getDetails().profile);
             const isLoggedInUserTop = eachUserPoints[0].name === "You";
-            console.log(eachUserPoints, isLoggedInUserTop);
+            // console.log(eachUserPoints, isLoggedInUserTop);
 
             let pointsToNext;
             if (!isLoggedInUserTop) {
