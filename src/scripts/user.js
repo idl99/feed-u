@@ -5,7 +5,7 @@ const USER = "user";
 
 const DEFAULT_USER = {
     profile: {
-        name: "John Doe",
+        name: "Ihan Dilnath",
         points: 270,
     },
     payment: {
