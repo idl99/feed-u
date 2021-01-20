@@ -144,7 +144,13 @@
                 // Filter by rating value
                 (item) => parseFloat(item.find('#test').text()) > parseFloat(filterOptionValues.ratingGreaterThan),
                 // Filter by delivery time
-                (item) => parseFloat(item.find('#poi-delivery-time').text()) < parseFloat(filterOptionValues.deliveryTimeGreaterThan),
+                (item) => {
+                    const parsedDeliveryTimeOptionValue = parseFloat(filterOptionValues.deliveryTimeLessThan);
+                    if (parsedDeliveryTimeOptionValue !== 0) {
+                        return parseFloat(item.find('#poi-delivery-time').text()) < parsedDeliveryTimeOptionValue
+                    }
+                    return true;
+                },
             ]
 
             function vendorNameSort(vendor_1, vendor_2) {
@@ -210,7 +216,7 @@
             });
 
             $('#select-choice-3').on('change', function () {
-                filterOptionValues.deliveryTimeGreaterThan = $('#select-choice-3').val();
+                filterOptionValues.deliveryTimeLessThan = $('#select-choice-3').val();
                 console.log(filterOptionValues);
 
                 $('#vendor-list-container .poi-container').hide();
