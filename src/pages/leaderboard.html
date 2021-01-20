@@ -20,7 +20,11 @@
             <a class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-corner-all" href="#" data-rel="back"
                 data-icon="arrow-l" data-theme="c" data-role="button">Back</a>
             <span class="ui-title"></span>
-            <img src="../assets/logo.png"></img>
+            <div data-enhance="false">
+                <a href="home.html">
+                    <img src="../assets/logo.png"></img>
+                </a>
+            </div>
         </div>
         <style>
             .leaderboard-items {
@@ -97,7 +101,7 @@
         <script>
 
             const { user, datastore } = app;
-            console.log(user.getDetails());
+            // console.log(user.getDetails());
             var leaderboard = datastore.getLeaderboard(user.getDetails().profile);
             var i = 1;
             var totPoints = 0;
@@ -117,7 +121,7 @@
             var aboveUserPoints = 0;
             var eachUserPoints = datastore.getLeaderboard(user.getDetails().profile);
             const isLoggedInUserTop = eachUserPoints[0].name === "You";
-            console.log(eachUserPoints, isLoggedInUserTop);
+            // console.log(eachUserPoints, isLoggedInUserTop);
 
             let pointsToNext;
             if (!isLoggedInUserTop) {

@@ -224,7 +224,8 @@
                     var markup =
                         `<div class="vendor-poi-item-container" style="display: flex; font-family: 'Poppins';">
                         <div>
-                            <img src=${itemImageLocation.replace("../", baseUrlForImages)} style="margin-right: 1em;">
+                            <img src=${itemImageLocation.replace("../", baseUrlForImages)} 
+                                style="margin-right: 1em; width: 90px; height: 95px; object-fit: cover">
                         </div>
                         <div class="vendor-poi-item-content">
                             <div class="vendor-poi-item-details">
@@ -269,6 +270,9 @@
 
                     itemCards = processFavoriteItemsMarkup();
                     updateFavoriteItemListUI(itemCards);
+
+                    $("#favorites-list-invalid-email-input-message").hide()
+                    $("#rec-email").val("");
                 }
             });
         </script>
@@ -286,17 +290,35 @@
             let emailType;
             let recipientEmailAddress;
 
+            function emailIsValid(emailAddress) {
+                return /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+                    .test(emailAddress);
+            }
+
+
             function openEmailAddressInputPopup(type) {
                 emailType = type;
                 $("#email-favorites-list-email-addr-popup").popup("open");
             }
 
             function openConfirmationPopup() {
-                recipientEmailAddress = $("#rec-email").val();
-                $('#email-favorites-list-email-addr-popup').popup("close");
-                setTimeout(function () {
-                    $('#email-favorites-list-confirmation-popup').popup('open');
-                }, 500);
+                const inputEmailAddress = $("#rec-email").val();
+                if (emailIsValid(inputEmailAddress)) {
+
+                    recipientEmailAddress = inputEmailAddress;
+
+                    // Remove the error message is displaying previously and reset text field
+                    $("#favorites-list-invalid-email-input-message").hide()
+                    $("#rec-email").val("");
+
+                    // Close email input popup
+                    $('#email-favorites-list-email-addr-popup').popup("close");
+                    setTimeout(function () {
+                        $('#email-favorites-list-confirmation-popup').popup('open');
+                    }, 500);
+                } else {
+                    $("#favorites-list-invalid-email-input-message").show()
+                }
             }
 
             function cancelEmail(event) {
@@ -327,8 +349,11 @@
         <div data-role="popup" id="email-favorites-list-email-addr-popup" data-corners="false" style="padding: 1em;">
             <div>
                 <h2 class="favourites-email-popup">Enter the recipient's email address</h2>
-                <input type="text" class="favourites-email-popup" name="recipient-email" id="rec-email" value=""
+                <input type="email" class="favourites-email-popup" name="recipient-email" id="rec-email" value=""
                     placeholder="Email Address">
+                <span style="display: none; color: #EB5757" id="favorites-list-invalid-email-input-message">Please enter
+                    a valid email
+                    address</span>
                 <div class="favourites-email-popup">
                     <h4><i class="fa fa-paperclip" aria-hidden="true" style="margin-right: 5px;"></i>Your Favourites
                     </h4>

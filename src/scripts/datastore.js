@@ -357,7 +357,7 @@ const data = Object.freeze({
     ],
     leaderboard: [
         {
-            name: "Ihan Lelwala",
+            name: "John Doe",
             points: 250
         },
         {

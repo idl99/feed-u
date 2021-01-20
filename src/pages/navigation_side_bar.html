@@ -19,7 +19,23 @@
 
         .navigation-menu-container {
             display: grid;
-            row-gap: 2.25em;
+            row-gap: 1em;
+        }
+
+        .navigation-menu-container>div {
+            padding: 10px 0px
+        }
+
+        .navigation-menu-container>div.nav-active-page {
+            background-color: #EB5757;
+        }
+
+        #navigation-menu .navigation-menu-container>div.nav-active-page>a>#navigation-menu-icon {
+            color: white;
+        }
+
+        #navigation-menu .navigation-menu-container>div.nav-active-page>a>span {
+            color: white;
         }
 
         #navigation-menu-icon {
@@ -106,5 +122,29 @@
                 <span>About Us</span>
             </a>
         </div>
+
+        <script>
+            function setActiveLink() {
+                const activePageUrl = $('body').pagecontainer("getActivePage")[0].baseURI.split("/").reverse()[0];
+                const currentActivePageElement = $("#navigation-menu .nav-active-page>a")
+                const currentActivePageUrl = currentActivePageElement.attr("href") || "";
+
+                const pagesSet = currentActivePageUrl != undefined && activePageUrl != undefined;
+                const navigatedToADifferentPage = currentActivePageUrl !== activePageUrl;
+
+                if (pagesSet && navigatedToADifferentPage) {
+                    currentActivePageElement.parent().removeClass("nav-active-page");
+                    const activePageElement = $(`#navigation-menu a[href="${activePageUrl}"]`);
+                    console.log('Active page element', activePageElement);
+                    activePageElement.parent().addClass("nav-active-page");
+                }
+            };
+
+            setActiveLink();
+
+            $(window).on("pagecontainershow", function (event, ui) {
+                setActiveLink();
+            })
+        </script>
     </div>
 </div>
