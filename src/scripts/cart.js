@@ -2,22 +2,6 @@ var cookie = require('js-cookie')
 
 const CART_STORAGE_KEY = 'cart';
 
-// TODO remove mock data
-// const INITIAL_CART_STATE = {
-//     vendor: {
-//         vendorName: 'Burgers Ahoy!',
-//         deliveryTime: '30 - 40 mins'
-//     },
-//     items: [
-//         {
-//             itemName: 'Tom Yump Soup',
-//             itemPrice: 400,
-//             quantity: 1,
-//             notes: "Less spicy",
-//         }
-//     ]
-// };
-
 const INITIAL_CART_STATE = Object.freeze({
     vendor: {
     },
@@ -43,6 +27,11 @@ module.exports = function () {
         summary: function () {
             /**
              * JSON structure of summary
+             * 
+             * vendor: {
+             *      vendorName: 'name of the vendors',
+             *      deliveryTime: 'delivery time range',
+             * },
              * 
              * items: [
              *      {
