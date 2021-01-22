@@ -79,7 +79,7 @@
         <script>
             const { datastore, user } = app;
 
-            var vendors = datastore.getAllVendors(); // TODO refactor this once mock data is removed
+            var vendors = datastore.getAllVendors();
 
             // render items in order summary
             vendors.forEach(({ vendorId, vendorImageLocation, vendorName, vendorCatergories, vendorRatings, deliveryTime }) => {
