@@ -1,5 +1,7 @@
 # Feed U
 
+You can find the app hosted [here](https://idl99.github.io/feed-u/pages/home.html).
+
 ## Prerequisites
 - Node.js
 
