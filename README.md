@@ -1,5 +1,7 @@
 # Feed U
 
+FeedU is a fully-featured Mobile Web app for Home Cooked Food Delivery developed primarily using jQuery Mobile, jQuery and Javascript, as part of a course taken in Mobile User Experience. It also involves other developer features such as Live Reload and Task Automation using the Grunt Task Runner.
+
 You can find the app hosted [here](https://idl99.github.io/feed-u/pages/home.html).
 
 ## Prerequisites
