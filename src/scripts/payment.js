@@ -1,6 +1,6 @@
 const $ = require('jquery');
 
-const SECRET_KEY = 'sk_test_51I3c8WBYsXgRXg4suIS6WCRMMcfMsNgopWokzuqiKXSo6pmVX00zIk7Up6ukdjZLEY6YfpclJ1lAUCBKpl6Y4fe600CfNE584P';
+const SECRET_KEY = '<INSERT STRIPE SECRET KEY HERE>';
 
 const postToStripeAPI = function ({ url, data, success, error }) {
     return $.ajax({
