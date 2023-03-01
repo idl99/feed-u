@@ -42,7 +42,7 @@
     "js-cookie": "^2.2.1"
   },
   "devDependencies": {
-    "browserify": "~2.36.1",
+    "browserify": "~17.0.0",
     "browserify-shim": "~3.0.0",
     "connect-livereload": "^0.6.1",
     "grunt": "^1.5.3",
